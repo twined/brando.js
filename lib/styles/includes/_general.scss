@@ -98,6 +98,20 @@ body#registration {}
   opacity: 0;
 }
 
+.fade-move-enter-active,
+.fade-move-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-move-enter,
+.fade-move-leave-to {
+  opacity: 0;
+}
+
+.fade-move-move {
+  transition: transform 1s;
+}
+
 .v-spinner-outer {
   background-color: #fff;
   height: 100%;

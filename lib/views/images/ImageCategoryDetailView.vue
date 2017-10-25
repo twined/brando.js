@@ -45,55 +45,25 @@
       <div class="row">
         <div class="col-md-12">
           <transition-group name="fade">
-            <div class="card-wrapper mb-4" v-for="s in currentImageCategory.image_series" :key="s.id">
-              <ModalImageUpload
-                :showModal="selectedImageSeriesForUpload === s.id"
-                :imageSeries="s"
-                @close="closeUploadModal"
-              />
-              <ModalSortImageSeries
-                :showModal="selectedImageSeriesForSorting === s.id"
-                :imageSeries="s"
-                @close="closeImageSeriesSortModal"
-              />
-              <div class="card-header-tab">
-                <b-dropdown variant="trans">
-                  <button @click.prevent="uploadToSeries(s)" class="dropdown-item">
-                    <i class="fal fa-fw mr-3 subtle fa-cloud"></i>
-                    Last opp bilder til denne bildeserien
-                  </button>
-                  <button @click.prevent="sortSeries(s)" class="dropdown-item">
-                    <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"></i>
-                    Sortér bilder i serien
-                  </button>
-                  <button class="dropdown-item">
-                    <i class="fal fa-fw mr-3 subtle fa-cog"></i>
-                    Konfigurér bildeserie
-                  </button>
-                  <button @click.prevent="deleteSeries(s)" class="dropdown-item">
-                    <i class="fal fa-fw mr-3 subtle fa-trash"></i>
-                    Slett bildeserie
-                  </button>
-                </b-dropdown>
-                <h5>{{ s.name }}</h5>
-              </div>
-              <div class="card">
-                <div class="card-body" v-if="s.images.length">
-                  <transition-group name="fade">
-                    <template v-for="i in s.images">
-                      <BaseImage :image="i" :key="i.id" :selectedImages="selectedImages" />
-                    </template>
-                  </transition-group>
-                </div>
-                <div class="card-body" v-else>
-                  Ingen bilder i bildeserien
-                </div>
-              </div>
-            </div>
+            <ImageSeries
+              :imageSeries="s"
+              :selectedImages="selectedImages"
+              v-for="s in currentImageCategory.image_series" :key="s.id"
+            />
           </transition-group>
           <div v-if="currentImageCategory.image_series.length">
-            <button @click.prevent="previousPage" class="btn btn-outline-secondary">&larr; Forrige side</button>
-            <button @click.prevent="nextPage" class="btn btn-outline-secondary">Neste side &rarr;</button>
+            <button
+              v-if="queryVars.imageSeriesOffset !== 0"
+              @click.prevent="previousPage"
+              class="btn btn-outline-secondary">
+              &larr; Forrige side
+            </button>
+            <button
+              v-if="queryVars.imageSeriesOffset + queryVars.imageSeriesLimit < currentImageCategory.image_series_count"
+              @click.prevent="nextPage"
+              class="btn btn-outline-secondary">
+              Neste side &rarr;
+            </button>
           </div>
         </div>
       </div>
@@ -108,28 +78,24 @@ import nprogress from 'nprogress'
 import { alertConfirm } from '../../utils/alerts'
 
 import BaseImage from '../../components/images/BaseImage'
+import ImageSeries from '../../components/images/ImageSeries'
 import ImageSelection from '../../components/images/ImageSelection'
-import ModalImageUpload from '../../components/images/modals/ModalImageUpload'
 import ModalCreateImageSeries from '../../components/images/modals/ModalCreateImageSeries'
 import ModalCreateImageCategory from '../../components/images/modals/ModalCreateImageCategory'
-import ModalSortImageSeries from '../../components/images/modals/ModalSortImageSeries'
 
 export default {
   components: {
     BaseImage,
     ImageSelection,
+    ImageSeries,
     ModalCreateImageSeries,
-    ModalCreateImageCategory,
-    ModalImageUpload,
-    ModalSortImageSeries
+    ModalCreateImageCategory
   },
 
   data () {
     return {
       showModalImageCreateSeries: false,
       showModalImageCreateCategory: false,
-      selectedImageSeriesForUpload: null,
-      selectedImageSeriesForSorting: null,
       selectedImages: [],
       loading: 0,
       queryVars: {
@@ -170,18 +136,6 @@ export default {
       this.showModalImageCreateCategory = true
     },
 
-    uploadToSeries (series) {
-      this.selectedImageSeriesForUpload = series.id
-    },
-
-    sortSeries (series) {
-      this.selectedImageSeriesForSorting = series.id
-    },
-
-    closeUploadModal () {
-      this.selectedImageSeriesForUpload = null
-    },
-
     closeCreateImageSeriesModal () {
       this.showModalImageCreateSeries = false
     },
@@ -190,14 +144,11 @@ export default {
       this.showModalImageCreateCategory = false
     },
 
-    closeImageSeriesSortModal () {
-      this.selectedImageSeriesForSorting = null
-    },
-
     async getData () {
       this.loading++
       nprogress.start()
       await this.fetchImageCategory({categoryId: this.categoryId, queryVars: this.queryVars})
+      console.log(this.currentImageCategory)
       this.loading--
       nprogress.done()
     },
@@ -209,16 +160,6 @@ export default {
         }
 
         this.deleteImageCategory(this.currentImageCategory)
-      })
-    },
-
-    deleteSeries (series) {
-      alertConfirm('OBS', 'Er du sikker på at du vil slette denne bildeserien?', (data) => {
-        if (!data) {
-          return
-        }
-
-        this.deleteImageSeries(series)
       })
     },
 
@@ -236,7 +177,6 @@ export default {
 
     ...mapActions('images', [
       'fetchImageCategory',
-      'deleteImageSeries',
       'deleteImageCategory'
     ])
   }

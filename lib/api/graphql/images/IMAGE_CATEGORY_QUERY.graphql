@@ -8,6 +8,7 @@ query ImageCategory ($categoryId: ID!, $imageSeriesLimit: Int, $imageSeriesOffse
       id
       full_name
     }
+    image_series_count
     image_series (limit: $imageSeriesLimit, offset: $imageSeriesOffset) {
       id
       name
@@ -26,6 +27,7 @@ query ImageCategory ($categoryId: ID!, $imageSeriesLimit: Int, $imageSeriesOffse
           medium: url(size: "medium")
         }
         image_series_id
+        sequence
       }
     }
   }
