@@ -1,0 +1,24 @@
+h1.wide {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 1.25rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+.centered-link-list {
+  align-content: space-around;
+  display: flex;
+  justify-content: center;
+
+  a {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin: 0 1rem;
+    text-transform: uppercase;
+
+    &.active {
+      border-bottom: 2px solid map-get($theme-colors, "secondary");
+    }
+  }
+}

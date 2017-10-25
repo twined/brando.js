@@ -1,0 +1,40 @@
+// border-bottom: 2px solid #feca1a;
+// color: #000;
+// font-size: 0.8rem;
+// letter-spacing: 1px;
+// margin-bottom: 0.75rem;
+// margin-left: 0;
+// padding: 0.3rem 0;
+// text-transform: uppercase;
+button:focus {
+  outline: none;
+}
+
+.btn {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+
+  outline: none;
+  text-transform: uppercase;
+  white-space: normal !important;
+  word-break: normal;
+  word-wrap: break-word;
+
+  &.btn-circle {
+    background-color: #eee;
+    border-color: #fff;
+    border-radius: 50% !important;
+    height: 25px;
+    padding: 0.5rem;
+    width: 25px;
+
+    &.dropdown-toggle {
+      &:after {
+        border-top: 0.3em solid map-get($theme-colors, "secondary");
+        left: 7px;
+        position: absolute;
+        top: 9.5px;
+      }
+    }
+  }
+}

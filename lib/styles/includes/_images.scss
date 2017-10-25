@@ -1,0 +1,61 @@
+.image-wrapper {
+  border: 1px solid #feca1a;
+  cursor: pointer;
+  height: 125px;
+  padding: 2px;
+  position: relative;
+  width: 125px;
+
+  &.selected {
+    background-color: map-get($theme-colors, "overlay");
+    border: 3px solid map-get($theme-colors, "overlay");
+    padding: 0;
+
+    img {
+      opacity: 0.50;
+    }
+  }
+
+  .overlay {
+    align-items: center;
+    background-color: map-get($theme-colors, "overlay");
+    border-radius: 15px;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    opacity: 0.5;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    transition: all 500ms ease;
+    width: 30px;
+
+    &:hover {
+      opacity: 1;
+      transition: all 250ms ease;
+    }
+
+    i {
+      color: #fff;
+      text-align: center;
+      transition: all 500ms ease;
+    }
+  }
+
+  img {
+    opacity: 1;
+    // transition: opacity 300ms ease;
+  }
+}
+
+.image-selection {
+  background-color: #fff;
+  border-top: 5px solid map-get($theme-colors, "primary");
+  bottom: 0;
+  display: block;
+  left: 0;
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+  z-index: 100000;
+}

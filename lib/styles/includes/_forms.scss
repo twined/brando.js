@@ -1,0 +1,131 @@
+label.control-label {
+  border-bottom: 2px solid map-get($theme-colors, "primary");
+  color: #000;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+  margin-left: 0.5rem;
+  padding: 0.3rem 0;
+  text-transform: uppercase;
+}
+
+/*
+color: #000;
+font-size: 0.8rem;
+letter-spacing: 1px;
+margin-bottom: 0;
+padding: 0.5rem 0rem;
+text-transform: uppercase;
+border-bottom: 2px solid #94003e;
+margin-left: 0.75rem;
+margin-bottom: .75rem;
+*/
+
+// label.control-label + .form-check {
+//   margin-top: 0.5rem;
+// }
+
+.control-label span {
+  opacity: 0;
+
+  i {
+    display: none;
+  }
+}
+
+.has-danger .control-label span {
+  color: gray;
+  letter-spacing: normal;
+  margin-left: 9px;
+  opacity: 1;
+  padding-left: 1rem;
+  position: absolute;
+  text-transform: none;
+  transition: all 350ms ease;
+
+  i {
+    display: inline;
+    margin-right: 1rem;
+  }
+}
+
+.form-control {
+  background-clip: padding-box;
+  background-color: #f7f7f7;
+  background-image: none;
+  border: none;
+  border-bottom: none;
+
+  border-radius: 0;
+  color: #495057;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.25;
+  padding: 0.5rem 0.75rem;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  width: 100%;
+
+  &:focus {
+    background-color: map-get($theme-colors, "primary");
+    border-bottom: none;
+    color: #000;
+    outline: none;
+
+    &:-moz-placeholder {
+      color: transparent;
+    }
+
+    &:-ms-input-placeholder {
+      color: transparent;
+    }
+
+    &::-moz-placeholder {
+      color: transparent;
+    }
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+}
+
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+:-moz-placeholder {
+  color: #999;
+}
+
+::-moz-placeholder {
+  color: #999;
+}
+
+:-ms-input-placeholder {
+  color: #999;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.form-check {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-left: 1.25rem;
+  position: relative;
+}
+
+.form-check-label {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  padding-left: 1.25rem;
+  text-transform: uppercase;
+}
+
+.input-group-addon {
+  border: none;
+}

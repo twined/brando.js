@@ -1,0 +1,14 @@
+.sort-container {
+  .sort-handle {
+    display: inline-block;
+
+    img {
+      border: 1px solid #000;
+      height: 119px;
+      margin: 0.2rem;
+      transition: all 500ms ease;
+      width: 119px;
+    }
+  }
+
+}
