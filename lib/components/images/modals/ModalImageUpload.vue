@@ -14,17 +14,17 @@
       <div class="card-body">
         <div class="example-drag">
           <div class="upload">
-            <table class="table table-bordered" v-if="files.length">
+            <table class="table table-bordered text-small" v-if="files.length">
               <tr v-for="(file, index) in files" :key="file.id">
-                <td>
+                <td class="fit">
                   <img v-if="file.thumb" :src="file.thumb" width="40" height="auto" />
                 </td>
-                <td>{{file.name}}</td>
+                <td class="ws-normal">{{file.name}}</td>
                 <td>{{file.size | formatSize}}</td>
-                <td v-if="file.error === 'denied'"><i class="fal fa-fw fa-exclamation-circle text-danger"></i> 404</td>
-                <td v-else-if="file.success"><i class="fal fa-fw fa-check text-success"></i></td>
-                <td v-else-if="file.active"><i class="fal fa-fw fa-cog fa-spin"></i></td>
-                <td v-else></td>
+                <td class="fit" v-if="file.error === 'denied'"><i class="fal fa-fw fa-exclamation-circle text-danger"></i> 404</td>
+                <td class="fit" v-else-if="file.success"><i class="fal fa-fw fa-check text-success"></i></td>
+                <td class="fit" v-else-if="file.active"><i class="fal fa-fw fa-cog fa-spin"></i></td>
+                <td class="fit" v-else>—</td>
               </tr>
             </table>
             <div
@@ -93,6 +93,11 @@ export default {
     imageSeries: {
       type: Object,
       required: true
+    },
+
+    uploadCallback: {
+      type: Function,
+      default: null
     }
   },
 
@@ -117,8 +122,11 @@ export default {
         // Uploaded successfully
         if (newFile.success !== oldFile.success) {
           if (newFile.response.status === '200') {
-            this.storeImage(newFile.response.image)
-            console.log('success', newFile.success, newFile)
+            if (this.uploadCallback) {
+              this.uploadCallback(newFile.response.image)
+            } else {
+              this.storeImage(newFile.response.image)
+            }
           }
         }
         // Upload error

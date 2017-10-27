@@ -49,6 +49,11 @@ export default {
     imageSeries: {
       type: Object,
       required: true
+    },
+
+    sequenceCallback: {
+      type: Function,
+      default: null
     }
   },
 
@@ -68,7 +73,11 @@ export default {
         .push('images:sequence_images', { ids: this.sortedArray })
         .receive('ok', payload => {
           this.closeModal()
-          this.sequenceImages({ imageSeriesId: this.imageSeries.id, ids: this.sortedArray })
+          if (this.sequenceCallback) {
+            this.sequenceCallback({ imageSeries: this.imageSeries, ids: this.sortedArray })
+          } else {
+            this.sequenceImages({ imageSeries: this.imageSeries, ids: this.sortedArray })
+          }
         })
     },
 

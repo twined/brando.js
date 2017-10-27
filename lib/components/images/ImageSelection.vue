@@ -6,58 +6,30 @@
           <button class="btn btn-outline-secondary" @click.prevent="clearSelection">
             Avbryt
           </button>
-          <button class="btn btn-secondary" @click.prevent="showConfirm = true">
+          <button class="btn btn-secondary" @click.prevent="deleteImages">
             Slett <strong>{{ selectedImages.length }}</strong> <template v-if="selectedImages.length === 1">valgt bilde</template><template v-else>valgte bilder</template>
           </button>
         </div>
       </div>
-      <modal
-        :chrome="false"
-        :large="true"
-        :show="showConfirm"
-        @cancel="showConfirm = false"
-        @ok="showConfirm = false"
-        v-if="showConfirm"
-      >
-        <div class="card mb-3">
-          <div class="card-header text-center">
-            <h5 class="section mb-0">Bekreft sletting</h5>
-          </div>
-          <div class="card-body">
-            <div
-              class="image-wrapper d-inline-block m-1"
-              v-for="(i, idx) in selectedImages"
-              :key="idx">
-              <img :src="i.image.image.thumb" class="img-fluid" />
-            </div>
-            <div class="mt-3">
-              <button @click.prevent="deleteImages" class="btn btn-secondary">
-                Slett bilder
-              </button>
-              <button @click.prevent="showConfirm = false" class="btn btn-outline-secondary">
-                Avbryt
-              </button>
-            </div>
-          </div>
-        </div>
-      </modal>
     </div>
   </transition>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import Modal from '../Modal'
 
 export default {
-  components: {
-    Modal
-  },
+  components: {},
 
   props: {
     selectedImages: {
       required: true,
       default: () => []
+    },
+
+    deleteCallback: {
+      type: Function,
+      default: null
     }
   },
 
@@ -67,7 +39,7 @@ export default {
 
   data () {
     return {
-      showConfirm: false
+      showModal: false
     }
   },
 
@@ -84,12 +56,17 @@ export default {
         .receive('ok', payload => {
           for (let i of this.selectedImages) {
             const {id, image_series_id: imageSeriesId} = i.image
-            this.deleteImage({id, imageSeriesId})
+            if (this.deleteCallback) {
+              this.deleteCallback({id, imageSeriesId})
+            } else {
+              this.deleteImage({id, imageSeriesId})
+            }
           }
           this.clearSelection()
           this.showConfirm = false
         })
     },
+
     ...mapActions('images', [
       'deleteImage'
     ])

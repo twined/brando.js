@@ -32,11 +32,9 @@
 
 export default {
   props: {
-    'user': {
+    user: {
       type: Object,
-      default: () => {
-        return {full_name: 'Name Nameson', avatar: 'https://sivbo.no/images/avatar.png', role: 'admin'}
-      }
+      default: () => {}
     }
   },
 

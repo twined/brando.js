@@ -34,7 +34,7 @@
                         Deaktivér bruker
                       </button>
                       <router-link
-                        :to="{ name: 'users-edit', params: { userId: user.id } }"
+                        :to="{ name: 'user-edit', params: { userId: user.id } }"
                         tag="button"
                         :class="{'dropdown-item': true}"
                       >
@@ -45,7 +45,7 @@
                 </tr>
               </tbody>
             </table>
-            <router-link :to="{ name: 'users-create' }" class="btn btn-secondary mt-2" exact v-if="['admin', 'superuser'].includes(me.role)">
+            <router-link :to="{ name: 'user-create' }" class="btn btn-secondary mt-2" exact v-if="['admin', 'superuser'].includes(me.role)">
               Legg til bruker
             </router-link>
           </div>

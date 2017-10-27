@@ -2,7 +2,9 @@
   <transition name="fade" appear>
     <spinner v-if="loading" />
     <div class="image-category-detail" v-if="!loading">
-      <ImageSelection :selectedImages="selectedImages" />
+      <ImageSelection
+        :selectedImages="selectedImages"
+      />
       <div class="row">
         <div class="col-md-12">
           <h1 class="wide text-center">{{ currentImageCategory.name }}</h1>
@@ -16,7 +18,10 @@
             @close="closeCreateImageCategoryModal"
           />
           <div class="centered-link-list mb-5">
-            <b-dropdown variant="trans btn-lg">
+            <b-dropdown variant="white btn-lg" no-caret>
+              <template slot="button-content">
+                <i class="k-dropdown-icon"></i>
+              </template>
               <button @click.prevent="createImageCategory" class="dropdown-item">
                 <i class="fal fa-fw mr-3 subtle fa-plus-circle"></i>
                 Opprett ny bildekategori
@@ -148,7 +153,6 @@ export default {
       this.loading++
       nprogress.start()
       await this.fetchImageCategory({categoryId: this.categoryId, queryVars: this.queryVars})
-      console.log(this.currentImageCategory)
       this.loading--
       nprogress.done()
     },

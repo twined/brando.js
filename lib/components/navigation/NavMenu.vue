@@ -29,26 +29,22 @@
           </router-link>
         </div>
 
-        <!-- <template v-for="(entry, idx) in entries">
-          <NavMenuItem :key="idx" :text="entry.text" :icon="entry.icon">
-            <router-link v-for="(child, idx) in entry.children" :key="idx" @click.native="close" :to="child.to">
+        <NavMenuItem text="Brukere" @expanding="expanding" icon="fal fa-fw fa-user-circle">
+          <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'users' }" exact>Oversikt</router-link>
+          <router-link data-index="2" key="2" @click.native="close" :to="{ name: 'user-create' }">Opprett ny bruker</router-link>
+        </NavMenuItem>
+
+        <NavMenuItem text="Bilder" @expanding="expanding" icon="fal fa-fw fa-image">
+          <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'images' }" exact>Oversikt</router-link>
+        </NavMenuItem>
+
+        <template v-for="(entry, idx) in entries">
+          <NavMenuItem :key="idx" @expanding="expanding" :text="entry.text" :icon="entry.icon">
+            <router-link v-for="(child, idx) in entry.children" :key="idx" @click.native="close" :to="child.to" exact>
               {{ child.text }}
             </router-link>
           </NavMenuItem>
-        </template> -->
-        <NavMenuItem text="Brukere" @expanding="expanding" icon="fal fa-user-circle">
-          <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'users' }" exact>Oversikt</router-link>
-          <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'users' }">Opprett ny bruker</router-link>
-        </NavMenuItem>
-
-        <!-- <div class="menu-line-main">
-          <router-link @click.native="close" :to="{ name: 'search' }">
-            <span class="nav-icon">
-              <i class="bi_interface-search"></i>
-            </span>
-            Avansért søk
-          </router-link>
-        </div> -->
+        </template>
       </div>
     </div>
   </div>

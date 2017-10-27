@@ -1,3 +1,36 @@
+.label-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    border-bottom: 2px solid #000;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+    margin-right: -40px;
+    opacity: 0;
+    padding: 0.3rem 0;
+
+    i {
+      display: none;
+    }
+  }
+}
+
+.has-danger .label-wrapper span {
+  border-bottom: 2px solid #f00;
+  color: gray;
+  letter-spacing: normal;
+  margin-right: 0;
+  opacity: 1;
+  text-transform: none;
+  transition: all 350ms ease;
+
+  i {
+    display: inline;
+    margin-right: 1rem;
+  }
+}
+
 label.control-label {
   border-bottom: 2px solid map-get($theme-colors, "primary");
   color: #000;
@@ -7,46 +40,6 @@ label.control-label {
   margin-left: 0.5rem;
   padding: 0.3rem 0;
   text-transform: uppercase;
-}
-
-/*
-color: #000;
-font-size: 0.8rem;
-letter-spacing: 1px;
-margin-bottom: 0;
-padding: 0.5rem 0rem;
-text-transform: uppercase;
-border-bottom: 2px solid #94003e;
-margin-left: 0.75rem;
-margin-bottom: .75rem;
-*/
-
-// label.control-label + .form-check {
-//   margin-top: 0.5rem;
-// }
-
-.control-label span {
-  opacity: 0;
-
-  i {
-    display: none;
-  }
-}
-
-.has-danger .control-label span {
-  color: gray;
-  letter-spacing: normal;
-  margin-left: 9px;
-  opacity: 1;
-  padding-left: 1rem;
-  position: absolute;
-  text-transform: none;
-  transition: all 350ms ease;
-
-  i {
-    display: inline;
-    margin-right: 1rem;
-  }
 }
 
 .form-control {

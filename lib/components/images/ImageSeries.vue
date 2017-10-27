@@ -3,15 +3,20 @@
     <ModalImageUpload
       :showModal="selectedImageSeriesForUpload === imageSeries.id"
       :imageSeries="imageSeries"
+      :uploadCallback="uploadCallback"
       @close="closeUploadModal"
     />
     <ModalSortImageSeries
       :showModal="selectedImageSeriesForSorting === imageSeries.id"
       :imageSeries="imageSeries"
+      :sequenceCallback="sequenceCallback"
       @close="closeImageSeriesSortModal"
     />
     <div class="card-header-tab">
-      <b-dropdown variant="trans">
+      <b-dropdown variant="white" no-caret>
+        <template slot="button-content">
+          <i class="k-dropdown-icon"></i>
+        </template>
         <button @click.prevent="uploadToSeries(imageSeries)" class="dropdown-item">
           <i class="fal fa-fw mr-3 subtle fa-cloud"></i>
           Last opp bilder til denne bildeserien
@@ -70,6 +75,16 @@ export default {
     selectedImages: {
       required: true,
       type: Array
+    },
+
+    sequenceCallback: {
+      type: Function,
+      default: null
+    },
+
+    uploadCallback: {
+      type: Function,
+      default: null
     }
   },
 

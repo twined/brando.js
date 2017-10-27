@@ -1,0 +1,20 @@
+.multiselect__tag {
+  background: map-get($theme-colors, "secondary");
+}
+
+.multiselect__option--highlight {
+  background: map-get($theme-colors, "secondary");
+}
+
+.multiselect__tag-icon:after {
+  color: map-get($theme-colors, "primary");
+}
+
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+  background: black;
+}
+
+.multiselect__option--highlight:after {
+  background: map-get($theme-colors, "secondary");
+}

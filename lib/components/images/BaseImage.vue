@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{selected: this.selected}"
-    class="image-wrapper d-inline-block m-1"
+    class="image-wrapper float-left m-1"
     @mouseover="mouseOver"
     @mouseout="mouseOut"
     @click.prevent="click">

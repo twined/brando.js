@@ -1,0 +1,23 @@
+query ImageSeries ($seriesId: ID!) {
+  image_series (seriesId: $seriesId) {
+    id
+    name
+    slug
+
+    images {
+      id
+      image {
+        path
+        credits
+        title
+        optimized
+        width
+        height
+        thumb: url(size: "thumb")
+        medium: url(size: "medium")
+      }
+      image_series_id
+      sequence
+    }
+  }
+}
