@@ -1,7 +1,8 @@
 .sort-container {
-  .sort-handle {
-    display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
 
+  .sort-handle {
     img {
       border: 1px solid #000;
       height: 119px;

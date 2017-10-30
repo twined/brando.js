@@ -1,10 +1,7 @@
 <template lang="html">
   <div :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
-      <label
-        class="control-label"
-        :for="id"
-      >
+      <label class="control-label" :for="id">
         {{ label }}
       </label>
       <span>
@@ -13,34 +10,38 @@
       </span>
     </div>
 
-    <picture-input
-      ref="pictureInput"
-      @change="onChange"
-      width="600"
-      height="600"
-      margin="16"
+    <Flatpickr
+      v-model="innerValue"
+      :placeholder="placeholder"
       :id="id"
-      :name="name"
-      accept="image/jpeg,image/png,image/gif"
-      size="10"
-      buttonClass="btn btn-secondary"
-      :customStrings="{
-        upload: '<h1>Bummer!</h1>',
-        drag: 'Drag a 😺 GIF or GTFO'
-      }"
+      class="form-control"
+      :options="dateTimeOptions"
     />
   </div>
 </template>
 
 <script>
-import PictureInput from 'vue-picture-input'
+import moment from 'moment-timezone'
+
+import { no } from 'flatpickr/dist/l10n/no'
 
 export default {
-  components: {
-    PictureInput
-  },
-
   props: {
+    dateTimeOptions: {
+      type: Object,
+      default: () => {
+        return {
+          enableTime: true,
+          minuteIncrement: 15,
+          time_24hr: true,
+          locale: no,
+          altInput: true,
+          altFormat: 'l j F, Y @ H:i',
+          dateFormat: 'Z'
+        }
+      }
+    },
+
     hasError: {
       type: Boolean,
       default: false
@@ -68,12 +69,18 @@ export default {
     type: {
       type: String,
       required: true
+    },
+
+    value: {
+      default: () => {
+        console.log(moment.tz('Europe/Oslo').format())
+        return moment.tz('Europe/Oslo').format()
+      }
     }
   },
 
   created () {
-    console.log(this.$validator)
-    console.log(this.errors)
+    this.innerValue = this.value
   },
 
   data () {
@@ -95,12 +102,6 @@ export default {
 
     value (value) {
       this.innerValue = value
-    }
-  },
-
-  methods: {
-    onChange () {
-      this.innerValue = this.$refs.pictureInput.file
     }
   }
 }

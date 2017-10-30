@@ -10,14 +10,11 @@
       </span>
     </div>
 
-    <input
-      v-model="innerValue"
-      :placeholder="placeholder"
-      :id="id"
-      class="form-control form-control-danger"
-      :name="name"
-      type="text"
-    >
+    <select v-model="innerValue" class="form-control" :id="id" :name="name">
+      <option :value="o.value" v-for="o in options" :key="o.value">
+        {{ o.name }}
+      </option>
+    </select>
   </div>
 </template>
 
@@ -38,9 +35,12 @@ export default {
       required: true
     },
 
-    placeholder: {
-      type: String,
-      required: false
+    /**
+     * [ { name: 'Option name', value: 1 }]
+     */
+    options: {
+      type: Array,
+      required: true
     },
 
     name: {
@@ -48,12 +48,8 @@ export default {
       required: true
     },
 
-    type: {
-      type: String,
-      required: true
-    },
-
     value: {
+      required: false,
       default: ''
     }
   },

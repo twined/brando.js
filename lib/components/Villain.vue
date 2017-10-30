@@ -1,20 +1,12 @@
 <template>
   <div class="villain-component">
-    <div class="form-group">
-      <label :for="name" class="control-label">
-        {{ label }}
-      </label>
-      <textarea class="post" :id="name">
-        [
-          {
-            "type": "text",
-            "data": {
-              "text": "Text",
-              "type": "paragraph"
-            }
-          }
-        ]
-      </textarea>
+    <div :class="{'form-group': true}">
+      <div class="label-wrapper">
+        <label class="control-label" :for="name">
+          {{ label }}
+        </label>
+      </div>
+      <textarea v-model="innerValue" class="post" :id="name"></textarea>
     </div>
   </div>
 </template>
@@ -33,9 +25,31 @@ export default {
       type: String,
       required: true
     },
+
     imageSeries: {
       type: String,
       required: true
+    },
+
+    value: {
+      type: String,
+      default: `
+      [
+        {
+          "type": "text",
+          "data": {
+            "text": "Text",
+            "type": "paragraph"
+          }
+        }
+      ]
+      `
+    }
+  },
+
+  data () {
+    return {
+      innerValue: ''
     }
   },
 
@@ -44,6 +58,16 @@ export default {
       const randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26))
       const uniqid = randLetter + Date.now()
       return 'villain' + uniqid
+    }
+  },
+
+  watch: {
+    innerValue (value) {
+      this.$emit('input', value)
+    },
+
+    value (value) {
+      this.innerValue = value
     }
   },
 
@@ -56,10 +80,12 @@ export default {
     })
   },
 
+  created () {
+    this.innerValue = this.value
+  },
+
   methods: {
-    created () {
-      console.log(this)
-    }
+
   }
 }
 </script>

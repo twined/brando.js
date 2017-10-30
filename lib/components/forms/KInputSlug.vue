@@ -12,9 +12,9 @@
 
     <input
       v-model="innerValue"
-      :placeholder="placeholder"
+      placeholder="url"
       :id="id"
-      class="form-control form-control-danger"
+      class="form-control form-control-danger text-mono"
       :name="name"
       type="text"
     >
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import slug from 'url-slug'
+
 export default {
   props: {
     hasError: {
@@ -53,7 +55,13 @@ export default {
       required: true
     },
 
+    from: {
+      type: String,
+      required: true
+    },
+
     value: {
+      required: false,
       default: ''
     }
   },
@@ -77,6 +85,10 @@ export default {
   watch: {
     innerValue (value) {
       this.$emit('input', value)
+    },
+
+    from (value) {
+      this.innerValue = slug(value)
     },
 
     value (value) {

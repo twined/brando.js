@@ -10,8 +10,8 @@
           <h1 class="wide text-center">{{ currentImageCategory.name }}</h1>
           <ModalCreateImageSeries
             :imageCategory="currentImageCategory"
-            :showModal="showModalImageCreateSeries"
             @close="closeCreateImageSeriesModal"
+            v-if="showModalImageCreateSeries"
           />
           <ModalCreateImageCategory
             :showModal="showModalImageCreateCategory"

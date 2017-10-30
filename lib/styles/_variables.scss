@@ -30,11 +30,12 @@ $kurtz-purple: #94003e;
 
 $colors: ( blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan, white: $white, gray: $gray-600, gray-dark: $gray-800 ) !default;
 
-$theme-colors: ( primary: $kurtz-yellow, secondary: $kurtz-purple, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-100, dark: $gray-800, overlay: $blue );
+$theme-colors: ( primary: $kurtz-yellow, secondary: $kurtz-purple, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-300, dark: $gray-800, overlay: $blue );
 
 $hover-color: mix(map-get($theme-colors, "primary"), white, 25%);
 
 $font-family-sans-serif: "Robotox", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+$font-family-monospace: "SF Mono", "Menlo", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
 
 $link-color: map-get($theme-colors, "secondary");
 $link-hover-decoration: none;

@@ -1,9 +1,19 @@
 .multiselect__tag {
-  background: map-get($theme-colors, "secondary");
+  background: #fff;
+  border: 1px solid;
+  border-radius: 0;
+  color: map-get($theme-colors, "secondary");
+  font-size: 0.8rem;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .multiselect__option--highlight {
   background: map-get($theme-colors, "secondary");
+}
+
+.multiselect__tag-icon {
+  border-radius: 0;
 }
 
 .multiselect__tag-icon:after {
@@ -12,7 +22,9 @@
 
 .multiselect__tag-icon:focus,
 .multiselect__tag-icon:hover {
-  background: black;
+  background: map-get($theme-colors, "secondary");
+  border-radius: 0;
+  color: map-get($theme-colors, "primary");
 }
 
 .multiselect__option--highlight:after {

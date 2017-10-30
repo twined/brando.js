@@ -10,14 +10,13 @@
       </span>
     </div>
 
-    <input
+    <textarea
       v-model="innerValue"
-      :placeholder="placeholder"
       :id="id"
       class="form-control form-control-danger"
+      :rows="rows"
       :name="name"
-      type="text"
-    >
+    />
   </div>
 </template>
 
@@ -38,9 +37,9 @@ export default {
       required: true
     },
 
-    placeholder: {
-      type: String,
-      required: false
+    rows: {
+      type: Number,
+      default: 3
     },
 
     name: {
@@ -48,12 +47,8 @@ export default {
       required: true
     },
 
-    type: {
-      type: String,
-      required: true
-    },
-
     value: {
+      required: false,
       default: ''
     }
   },

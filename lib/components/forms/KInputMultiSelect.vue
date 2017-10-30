@@ -1,7 +1,7 @@
 <template lang="html">
   <div :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
-      <label class="control-label" :for="id">
+      <label class="control-label">
         {{ label }}
       </label>
       <span>
@@ -10,20 +10,36 @@
       </span>
     </div>
 
-    <input
+    <multiselect
       v-model="innerValue"
-      :placeholder="placeholder"
-      :id="id"
-      class="form-control form-control-danger"
-      :name="name"
-      type="text"
-    >
+      :options="options"
+      :track-by="optionValueKey"
+      :label="optionLabelKey"
+      :multiple="multiple"
+    />
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    optionValueKey: {
+      type: String,
+      required: true,
+      default: 'value'
+    },
+
+    optionLabelKey: {
+      type: String,
+      required: true,
+      default: 'name'
+    },
+
+    multiple: {
+      type: Boolean,
+      default: true
+    },
+
     hasError: {
       type: Boolean,
       default: false
@@ -38,22 +54,16 @@ export default {
       required: true
     },
 
-    placeholder: {
-      type: String,
-      required: false
-    },
-
-    name: {
-      type: String,
-      required: true
-    },
-
-    type: {
-      type: String,
+    /**
+     * [ { name: 'Option name', value: 1 }]
+     */
+    options: {
+      type: Array,
       required: true
     },
 
     value: {
+      required: false,
       default: ''
     }
   },

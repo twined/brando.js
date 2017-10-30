@@ -100,7 +100,7 @@ export default {
     async submitForm () {
       try {
         await this.storeUser(this.user)
-        this.$iziToast.success({ message: 'La til ny bruker' })
+        this.$toast.success({ message: 'La til ny bruker' })
         this.user = {
           full_name: '',
           email: '',

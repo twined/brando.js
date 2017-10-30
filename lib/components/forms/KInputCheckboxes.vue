@@ -10,14 +10,18 @@
       </span>
     </div>
 
-    <input
-      v-model="innerValue"
-      :placeholder="placeholder"
-      :id="id"
-      class="form-control form-control-danger"
-      :name="name"
-      type="text"
-    >
+    <div class="form-check" v-for="o in options" :key="o.value">
+      <label class="form-check-label">
+        <input
+          v-model="innerValue"
+          class="form-check-input"
+          :name="name"
+          type="checkbox"
+          :value="o.value"
+        />
+        {{ o.name }}
+      </label>
+    </div>
   </div>
 </template>
 
@@ -38,9 +42,12 @@ export default {
       required: true
     },
 
-    placeholder: {
-      type: String,
-      required: false
+    /**
+     * [ { name: 'Option name', value: 1 }]
+     */
+    options: {
+      type: Array,
+      required: true
     },
 
     name: {
@@ -48,12 +55,8 @@ export default {
       required: true
     },
 
-    type: {
-      type: String,
-      required: true
-    },
-
     value: {
+      required: false,
       default: ''
     }
   },

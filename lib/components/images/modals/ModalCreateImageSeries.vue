@@ -1,10 +1,9 @@
 <template>
   <modal
     :chrome="false"
-    :show="showModal"
+    :show="true"
     @cancel="closeModal"
     @ok="closeModal"
-    v-if="showModal"
   >
     <div class="card mb-3">
       <div class="card-header text-center">
@@ -33,6 +32,7 @@
 </template>
 
 <script>
+import { imageAPI } from '../../../api/image'
 import { mapActions } from 'vuex'
 import Modal from '../../Modal'
 import { showError } from '../../../utils'
@@ -51,6 +51,11 @@ export default {
     imageCategory: {
       type: Object,
       required: true
+    },
+
+    saveCallback: {
+      type: Function,
+      default: null
     }
   },
 
@@ -66,8 +71,12 @@ export default {
   methods: {
     async save () {
       try {
-        const is = await this.createImageSeries({ ...this.series, image_category_id: this.imageCategory.id })
-        console.log(is)
+        if (this.saveCallback) {
+          const series = await imageAPI.createImageSeries({ ...this.series, image_category_id: this.imageCategory.id })
+          this.saveCallback(series)
+        } else {
+          await this.createImageSeries({ ...this.series, image_category_id: this.imageCategory.id })
+        }
         // scroll to it?
         this.closeModal()
       } catch (err) {

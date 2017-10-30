@@ -1,23 +1,18 @@
 <template lang="html">
   <div :class="{'form-group': true, 'has-danger': hasError }">
-    <div class="label-wrapper">
-      <label class="control-label" :for="id">
-        {{ label }}
-      </label>
-      <span>
-        <i class="fa fa-exclamation-circle text-danger"></i>
-        {{ errorText }}
-      </span>
+    <div class="form-check">
+      <div class="label-wrapper">
+        <label class="form-check-label">
+          <input
+            v-model="innerValue"
+            class="form-check-input"
+            :name="name"
+            type="checkbox"
+          />
+          {{ label }}
+        </label>
+      </div>
     </div>
-
-    <input
-      v-model="innerValue"
-      :placeholder="placeholder"
-      :id="id"
-      class="form-control form-control-danger"
-      :name="name"
-      type="text"
-    >
   </div>
 </template>
 
@@ -38,22 +33,13 @@ export default {
       required: true
     },
 
-    placeholder: {
-      type: String,
-      required: false
-    },
-
     name: {
       type: String,
       required: true
     },
 
-    type: {
-      type: String,
-      required: true
-    },
-
     value: {
+      required: false,
       default: ''
     }
   },

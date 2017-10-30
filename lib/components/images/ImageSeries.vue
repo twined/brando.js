@@ -47,6 +47,27 @@
       <div class="card-body" v-else>
         Ingen bilder i bildeserien
       </div>
+
+      <div class="card-footer bg-white pt-0" v-if="modal">
+        <div class="w-50">
+          <button @click.prevent="uploadToSeries(imageSeries)" class="btn btn-outline-secondary text-left">
+            <i class="fal fa-fw mr-3 subtle fa-cloud"></i>
+            Last opp bilder
+          </button>
+          <button @click.prevent="sortSeries(imageSeries)" class="btn btn-outline-secondary text-left">
+            <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"></i>
+            Sortér bilder
+          </button>
+          <button @click.prevent="deleteSeries(imageSeries)" class="btn btn-outline-secondary text-left">
+            <i class="fal fa-fw mr-3 subtle fa-trash"></i>
+            Slett bildeserie
+          </button>
+          <button @click.prevent="$emit('close')" class="btn btn-outline-secondary text-left">
+            <i class="fal fa-fw mr-3 subtle fa-window-close"></i>
+            Lukk vindu
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -58,6 +79,7 @@ import BaseImage from './BaseImage'
 import ModalImageUpload from './modals/ModalImageUpload'
 import ModalSortImageSeries from './modals/ModalSortImageSeries'
 import { alertConfirm } from '../../utils/alerts'
+import { imageAPI } from '../../api/image'
 
 export default {
   components: {
@@ -85,6 +107,19 @@ export default {
     uploadCallback: {
       type: Function,
       default: null
+    },
+
+    deleteCallback: {
+      type: Function,
+      default: null
+    },
+
+    /**
+     * If true, will show buttons at bottom of series
+     */
+    modal: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -119,12 +154,16 @@ export default {
     },
 
     deleteSeries (series) {
-      alertConfirm('OBS', 'Er du sikker på at du vil slette denne bildeserien?', (data) => {
+      alertConfirm('OBS', 'Er du sikker på at du vil slette denne bildeserien?', async (data) => {
         if (!data) {
           return
         }
-
-        this.deleteImageSeries(series)
+        if (this.deleteCallback) {
+          await imageAPI.deleteImageSeries(series.id)
+          this.deleteCallback(series)
+        } else {
+          this.deleteImageSeries(series)
+        }
       })
     },
 

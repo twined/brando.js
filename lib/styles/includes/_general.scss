@@ -33,6 +33,10 @@ h5 {
   width: 40px;
 }
 
+.avatar-sm {
+  width: 100px;
+}
+
 .avatar-md {
   width: 135px;
 
@@ -56,6 +60,17 @@ h5 {
 
 #content {
   margin-bottom: 6rem;
+}
+
+dt {
+  font-size: 0.8rem;
+}
+
+dd {
+  margin-bottom: 0.5rem;
+  margin-left: 0;
+  white-space: initial;
+  word-wrap: normal;
 }
 
 .table td.fit,

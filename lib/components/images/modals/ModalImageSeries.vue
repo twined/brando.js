@@ -1,17 +1,20 @@
 <template>
   <modal
     :chrome="false"
-    :show="showModal"
+    :show="true"
     :large="true"
     @cancel="closeModal"
     @ok="closeModal"
-    v-if="showModal && !loading"
+    v-if="!loading"
   >
     <ImageSeries
       :imageSeries="imageSeries"
       :selectedImages="selectedImages"
       :sequenceCallback="sortCallback"
       :uploadCallback="uploadCallback"
+      :deleteCallback="deleteCallback"
+      :modal="true"
+      @close="closeModal"
     />
   </modal>
 </template>
@@ -35,7 +38,6 @@ export default {
     },
 
     imageSeriesId: {
-      type: String,
       required: true
     },
 
@@ -92,6 +94,11 @@ export default {
 
     uploadCallback (image) {
       this.imageSeries.images = [...this.imageSeries.images, image]
+    },
+
+    deleteCallback (imageSeries) {
+      this.closeModal()
+      this.$emit('delete', imageSeries)
     },
 
     closeModal () {

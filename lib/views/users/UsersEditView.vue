@@ -108,7 +108,7 @@ export default {
     async submitForm () {
       try {
         await this.updateUser(this.user)
-        this.$iziToast.success({ message: 'Bruker oppdatert' })
+        this.$toast.success({ message: 'Bruker oppdatert' })
         this.$router.push({ name: 'users' })
       } catch (err) {
         throw err
