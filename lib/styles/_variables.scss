@@ -24,13 +24,16 @@ $green: #28a745 !default;
 $teal: #20c997 !default;
 $cyan: #17a2b8 !default;
 $primary: #94003e;
+$overlay: #0000ff;
 
 $kurtz-yellow: #feca1a;
 $kurtz-purple: #94003e;
 
+$overlay: $kurtz-purple;
+
 $colors: ( blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan, white: $white, gray: $gray-600, gray-dark: $gray-800 ) !default;
 
-$theme-colors: ( primary: $kurtz-yellow, secondary: $kurtz-purple, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-300, dark: $gray-800, overlay: $blue );
+$theme-colors: ( primary: $kurtz-yellow, secondary: $kurtz-purple, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-300, dark: $gray-800, overlay: $overlay );
 
 $hover-color: mix(map-get($theme-colors, "primary"), white, 25%);
 

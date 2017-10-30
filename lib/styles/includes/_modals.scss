@@ -29,7 +29,7 @@ body.modal-open {
 
 .modal-backdrop {
   // background-color: rgba(98, 79, 160, 0.75);
-  background-color: rgba(0, 20, 165, 0.85);
+  background-color: transparentize(map-get($theme-colors, 'overlay'), 0.1);
   height: 100%;
   left: 0;
   overflow-y: scroll;
