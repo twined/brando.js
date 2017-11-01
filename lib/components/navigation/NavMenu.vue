@@ -68,7 +68,7 @@ export default {
 
   methods: {
     onClickOutside () {
-      console.log('click outside')
+      console.log('click outside!')
       if (this.status) {
         this.hide()
       }

@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" appear>
     <div class="image-selection" v-if="selectedImages.length">
-      <div class="container">
+      <div class="container-fluid">
         <div class="float-right">
           <button class="btn btn-outline-secondary" @click.prevent="clearSelection">
             Avbryt

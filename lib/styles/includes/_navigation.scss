@@ -14,15 +14,16 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 @include scrollbars(0.75rem, mix(map-get($theme-colors, "secondary"), white, 50%));
 
 #app {
-  height: 100%;
+  left: 0;
+  overflow-x: hidden;
   position: relative;
 
-  transition: transform 500ms ease-out;
+  transition: all 500ms ease-out;
   width: 100%;
 
   &.menu-open {
-    transform: translateX(300px);
-    transition: transform 500ms ease-out;
+    left: 300px;
+    transition: all 500ms ease-out;
   }
 }
 
@@ -53,13 +54,12 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 .menu-backdrop {
   background-color: map-get($theme-colors, "secondary");
   height: 100%;
-  left: 0;
+  left: -300px;
   overflow-x: hidden;
   overflow-y: scroll;
   position: fixed;
   top: 0;
-  transform: translateX(-100%);
-  transition: transform 500ms ease-out;
+  transition: all 500ms ease-out;
   width: 300px;
   z-index: 2000;
 
@@ -102,8 +102,6 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
     }
 
     .menu-line-main {
-
-      // border-top: 5px solid transparent;
       background-color: $sidenav-menu-bg-color;
       font-weight: 200;
       padding-bottom: $sidenav-menu-padding;
@@ -142,7 +140,7 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
     .menu-line-wrapper .menu-line .caption {
       &:hover {
         background-color: $sidenav-menu-bg-hover-color;
-        transition: background 300ms ease;
+        transition: background 500ms ease;
       }
     }
 
@@ -157,7 +155,7 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 
         .menu-line-sub {
           max-height: 600px;
-          transition: max-height 450ms;
+          transition: max-height 750ms;
         }
       }
 
@@ -174,14 +172,14 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
         position: absolute;
         right: 20px;
         top: 9px;
-        transition: transform 0.7s ease;
+        transition: transform 750ms ease;
       }
 
       .menu-line-sub {
         display: block;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 250ms;
+        transition: max-height 500ms;
         width: 100%;
 
         a {
@@ -204,7 +202,7 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
             background-color: $sidenav-submenu-bg-hover-color;
             color: #fff;
             text-decoration: none;
-            transition: background 300ms ease;
+            transition: background 500ms ease;
           }
         }
 
@@ -214,8 +212,6 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
       }
 
       div.caption {
-
-        // border-top: 5px solid transparent;
         background-color: $sidenav-menu-bg-color;
         color: #fff;
         cursor: pointer;
@@ -250,7 +246,7 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 }
 
 .menu-open .menu-backdrop {
-  transform: translateX(-300px);
+  left: 0;
 }
 
 .nav.sub-nav {

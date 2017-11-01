@@ -1,5 +1,5 @@
 <template>
-  <div class="users container" v-if="!loading" appear>
+  <div class="users container-fluid" v-if="!loading" appear>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
