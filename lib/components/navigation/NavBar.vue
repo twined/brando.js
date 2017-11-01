@@ -1,10 +1,10 @@
 <template>
   <header>
     <section class="container">
-      <transition name="fade" appear>
+      <transition name="slide-fade-top-slow" appear>
         <NavMenu />
       </transition>
-      <transition name="fade" appear>
+      <transition name="slide-fade-top-slow" appear>
         <nav class="navbar navbar-toggleable-xxl">
           <div class="logo-wrapper">
             byHands admin
@@ -27,9 +27,11 @@
 </template>
 
 <script>
+
 import { mapGetters } from 'vuex'
-import NavMenu from './NavMenu'
-import CurrentUser from '../CurrentUser'
+import NavMenu from './NavMenu.vue'
+import CurrentUser from '../CurrentUser.vue'
+
 export default {
   components: {
     CurrentUser,

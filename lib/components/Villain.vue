@@ -49,7 +49,7 @@ export default {
 
   data () {
     return {
-      innerValue: ''
+      innerValue: null
     }
   },
 
@@ -67,6 +67,7 @@ export default {
     },
 
     value (value) {
+      this.$villain.setData(value)
       this.innerValue = value
     }
   },
@@ -81,6 +82,7 @@ export default {
   },
 
   created () {
+    console.log('villain this.value', this.value)
     this.innerValue = this.value
   },
 

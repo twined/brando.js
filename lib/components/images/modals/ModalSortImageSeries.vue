@@ -32,8 +32,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Modal from '../../Modal'
-// import { showError } from '../../../utils'
+import Modal from '../../Modal.vue'
 
 export default {
   components: {

@@ -78,7 +78,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import imagesLoaded from 'vue-images-loaded'
 import nprogress from 'nprogress'
 import { alertConfirm } from '../../utils/alerts'
 
@@ -108,10 +107,6 @@ export default {
         imageSeriesLimit: 20
       }
     }
-  },
-
-  directives: {
-    imagesLoaded
   },
 
   props: {

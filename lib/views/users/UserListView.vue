@@ -7,7 +7,10 @@
             <h5 class="section mb-0">Brukere</h5>
           </div>
           <div class="card-body">
-            <table class="table table-bordered" v-if="allUsers.length">
+            <router-link :to="{ name: 'user-create' }" class="btn btn-secondary mb-4" exact v-if="['admin', 'superuser'].includes(me.role)">
+              Legg til bruker
+            </router-link>
+            <table class="table table-airy" v-if="allUsers.length">
               <tbody>
                 <tr :key="user.id" v-for="user in allUsers">
                   <td class="fit">
@@ -16,18 +19,19 @@
                     </div>
                   </td>
                   <td>
-                    {{ user.full_name }}
+                    {{ user.full_name }}<br>
+                    <span class="text-muted text-small">{{ user.email }}</span>
                   </td>
                   <td class="fit">
-                    {{ user.email }}
-                  </td>
-                  <td class="fit">
-                    <span class="badge badge-white badge-md mr-1">
+                    <span class="badge badge-outline-primary badge-sm mr-1 text-uppercase badge-block">
                       {{ user.role }}
                     </span>
                   </td>
                   <td class="text-center fit" v-if="['superuser'].includes(me.role)">
-                    <b-dropdown variant="circle" v-if="user.id !== me.id">
+                    <b-dropdown variant="white" no-caret v-if="user.id !== me.id">
+                      <template slot="button-content">
+                        <i class="k-dropdown-icon"></i>
+                      </template>
                       <button
                         @click.prevent="setDeactivated(user)"
                         :class="{'dropdown-item': true, 'disabled': ['superuser'].includes(me.role)}">
@@ -45,9 +49,6 @@
                 </tr>
               </tbody>
             </table>
-            <router-link :to="{ name: 'user-create' }" class="btn btn-secondary mt-2" exact v-if="['admin', 'superuser'].includes(me.role)">
-              Legg til bruker
-            </router-link>
           </div>
         </div>
       </div>
@@ -66,7 +67,7 @@ export default {
   },
 
   async created () {
-    console.debug('created <UsersListView />')
+    console.debug('created <UserListView />')
     this.loading++
     await this.storeUsers()
     this.loading--

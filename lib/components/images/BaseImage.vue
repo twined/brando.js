@@ -11,14 +11,14 @@
     <modal
       :chrome="false"
       :large="true"
-      :show="showEdit"
+      :show="true"
       @cancel="closeEdit"
       @ok="closeEdit"
       v-if="showEdit"
     >
       <div class="card">
         <div class="card-header">
-          Endre bildedetaljer
+          Bildedetaljer
         </div>
         <div class="card-body">
           <div class="row">
@@ -47,6 +47,7 @@
               <dd>
                 <CheckOrX :val="image.image.optimized" />
               </dd>
+              <button @click.prevent="closeEdit" class="btn btn-outline-secondary btn-block">Lukk</button>
             </div>
           </div>
         </div>
@@ -59,8 +60,8 @@
 
 <script>
 
-import CheckOrX from '../CheckOrX'
-import Modal from '../Modal'
+import CheckOrX from '../CheckOrX.vue'
+import Modal from '../Modal.vue'
 
 export default {
   components: {

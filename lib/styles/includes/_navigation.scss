@@ -1,0 +1,263 @@
+@import "../../styles/variables";
+
+$sidenav-font-size: 1rem;
+$sidenav-menu-padding: 1rem;
+$sidenav-menu-bg-color: transparent;
+$sidenav-submenu-bg-color: mix(map-get($theme-colors, "secondary"), black, 70%);
+$sidenav-submenu-bg-hover-color: mix(map-get($theme-colors, "secondary"), black, 60%);
+$sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90%);
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@include scrollbars(0.75rem, mix(map-get($theme-colors, "secondary"), white, 50%));
+
+.menu-open #app {
+  transform: translateX(90px);
+  transition: all 1200ms ease;
+}
+
+#app {
+  transition: all 1200ms ease;
+}
+
+.menu-content h6 a {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: border 1200ms ease;
+
+  &:hover {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+    color: #fff;
+    text-decoration: none;
+    transition: border 200ms ease;
+  }
+}
+
+.toggle-button {
+  color: map-get($theme-colors, "secondary");
+  position: fixed;
+  width: 90px;
+  z-index: 2050;
+}
+
+.menu-open .toggle-button {
+  color: #fff;
+}
+
+.menu-backdrop {
+  background-color: map-get($theme-colors, "secondary");
+  height: 100%;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  transform: translateX(-100%);
+  transition: transform 250ms ease-out;
+  width: 300px;
+  z-index: 2000;
+
+  @include media-breakpoint-down(xs) {
+    width: 100%;
+  }
+
+  .avatar {
+    margin-bottom: 1.5rem;
+    width: 150px;
+
+    img {
+      border: 4px solid #fff;
+    }
+  }
+
+  .menu-content {
+    margin-bottom: 1.5rem;
+    z-index: 2010;
+
+    .info {
+      h4 {
+        a {
+          border-bottom: 2px solid transparent;
+          color: #fff;
+
+          &:hover {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+          }
+        }
+      }
+
+      h5 {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 12px;
+        font-weight: 100;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+    }
+
+    .menu-line-main {
+
+      // border-top: 5px solid transparent;
+      background-color: $sidenav-menu-bg-color;
+      font-weight: 200;
+      padding-bottom: $sidenav-menu-padding;
+      padding-top: $sidenav-menu-padding;
+      width: 100%;
+
+      a,
+      span {
+        color: #fff;
+        display: block;
+        font-size: $sidenav-font-size;
+        letter-spacing: 1px;
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+
+        &:hover {
+          border-bottom: none;
+          text-decoration: none;
+        }
+      }
+
+      span.nav-icon {
+        color: rgba(255, 255, 255, 0.22);
+        display: block;
+        font-size: 1rem;
+        left: 27px;
+        padding-top: 5px;
+        position: absolute;
+        text-align: center;
+        top: -5px;
+      }
+    }
+
+    .menu-line-main,
+    .menu-line-wrapper .menu-line .caption {
+      &:hover {
+        background-color: $sidenav-menu-bg-hover-color;
+        transition: background 300ms ease;
+      }
+    }
+
+    .menu-line-wrapper {
+      position: relative;
+      width: 100%;
+
+      &.open {
+        &:after {
+          transform: rotate(450deg);
+        }
+
+        .menu-line-sub {
+          max-height: 600px;
+          transition: max-height 450ms;
+        }
+      }
+
+      &:after {
+        -webkit-font-smoothing: antialiased;
+        color: rgba(255, 255, 255, 0.22);
+        content: "\F343";
+        font-family: "Font Awesome 5 light";
+        font-size: $sidenav-font-size;
+        font-weight: 300;
+        line-height: 1;
+        padding: 0.6rem;
+        pointer-events: none;
+        position: absolute;
+        right: 20px;
+        top: 9px;
+        transition: transform 0.7s ease;
+      }
+
+      .menu-line-sub {
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 250ms;
+        width: 100%;
+
+        a {
+          background-color: $sidenav-submenu-bg-color;
+          border-bottom: 0 solid $sidenav-menu-bg-color;
+          color: rgba(255,255,255,.8);
+          display: block;
+          font-size: 0.8rem;
+          font-weight: 200;
+          letter-spacing: 1px;
+          padding: 1rem 0;
+          text-align: center;
+          text-transform: uppercase;
+
+          &.router-link-exact-active {
+            font-weight: bold;
+          }
+
+          &:hover {
+            background-color: $sidenav-submenu-bg-hover-color;
+            color: #fff;
+            text-decoration: none;
+            transition: background 300ms ease;
+          }
+        }
+
+        span {
+          font-size: 1rem;
+        }
+      }
+
+      div.caption {
+
+        // border-top: 5px solid transparent;
+        background-color: $sidenav-menu-bg-color;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        font-size: $sidenav-font-size;
+        font-weight: 200;
+        letter-spacing: 1px;
+        padding-bottom: $sidenav-menu-padding;
+        padding-top: $sidenav-menu-padding;
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+
+        span.nav-icon {
+          color: rgba(255, 255, 255, 0.22);
+          display: block;
+          font-size: 1rem;
+          left: 27px;
+          position: absolute;
+          text-align: center;
+        }
+      }
+    }
+
+    .top {
+      background-color: rgba(0, 0, 0, 0.05);
+      padding-bottom: 0.5rem;
+      padding-top: 1.5rem;
+      width: 100%;
+    }
+  }
+}
+
+.menu-open .menu-backdrop {
+  transform: translateX(0);
+}
+
+.nav.sub-nav {
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+
+    li a {
+      background-color: #fff;
+      display: block;
+      margin: 3px !important;
+      padding: 5px 15px !important;
+    }
+  }
+}

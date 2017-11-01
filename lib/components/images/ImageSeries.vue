@@ -75,9 +75,9 @@
 <script>
 
 import { mapActions } from 'vuex'
-import BaseImage from './BaseImage'
-import ModalImageUpload from './modals/ModalImageUpload'
-import ModalSortImageSeries from './modals/ModalSortImageSeries'
+import BaseImage from './BaseImage.vue'
+import ModalImageUpload from './modals/ModalImageUpload.vue'
+import ModalSortImageSeries from './modals/ModalSortImageSeries.vue'
 import { alertConfirm } from '../../utils/alerts'
 import { imageAPI } from '../../api/image'
 

@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import PictureInput from '../PictureInput'
+import PictureInput from '../PictureInput.vue'
 
 export default {
   components: {

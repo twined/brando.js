@@ -1,39 +1,34 @@
 <template>
   <div class="login">
-    <div class="container-fluid" id="content" style="margin-top: 4rem;">
+    <div class="container-fluid fixed-full-content">
       <div class="d-flex justify-content-center flex-wrap align-items-center" style="height: 100%;">
-        <div class="col-md-4 offset-md-1">
-          <div class="card-group">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="section mb-0">Logg inn</h5>
+        <transition name="slide-fade-top-slow" appear>
+          <div class="col-md-3 offset-md-1" v-if="!loading">
+            <h5 class="section mb-0">Logg inn</h5>
+            <div>
+              <div class="input-group mb-3">
+                <span class="input-group-addon">
+                  <i class="fa fa-user"></i>
+                </span>
+                <input v-model="user.email" class="form-control" name="email" type="email" placeholder="Epost">
               </div>
-              <div class="card-body">
-                <p class="text-muted">Logg inn med epost og passord</p>
-                <div class="input-group mb-3">
-                  <span class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                  </span>
-                  <input v-model="user.email" class="form-control" name="email" type="email" placeholder="Epost">
-                </div>
-                <div class="input-group mb-4">
-                  <span class="input-group-addon">
-                    <i class="fa fa-lock"></i>
-                  </span>
-                  <input v-model="user.password" class="form-control" name="password" type="password" placeholder="Passord" @keyup.13="login">
-                </div>
+              <div class="input-group mb-4">
+                <span class="input-group-addon">
+                  <i class="fa fa-lock"></i>
+                </span>
+                <input v-model="user.password" class="form-control" name="password" type="password" placeholder="Passord" @keyup.13="login">
               </div>
-              <div class="card-footer text-muted">
-                <button @click.prevent="login" class="btn btn-secondary">
-                  Logg inn
-                </button>
-                <div class="col-sm-6 float-right text-xs-right">
-                  <button type="button" class="btn btn-link px-0 text-small text-primary float-right">Glemt passord?</button>
-                </div>
+            </div>
+            <div>
+              <button @click.prevent="login" class="btn btn-secondary">
+                Logg inn
+              </button>
+              <div class="col-sm-6 float-right text-xs-right">
+                <button type="button" class="btn btn-link px-0 text-small text-primary float-right">Glemt passord?</button>
               </div>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -51,32 +46,37 @@ export default {
       user: {
         email: '',
         password: ''
-      }
+      },
+      loading: 0
     }
   },
 
   computed: {
-    ...mapGetters([
-      'me'
-    ])
+    ...mapGetters('users', ['me'])
   },
 
   created () {
+    this.loading++
     console.debug('created <login />')
     if (this.checkExpired()) {
       alertInfo('Utløpt', 'Brukerøkten din er utløpt. Vennligst logg inn på nytt')
     } else {
-      let token = localStorage.getItem('token')
+      let token = this.$store.getters['users/token']
 
       if (token && this.me) {
-        this.$router.push({ name: 'company-overview', params: { companyHash: this.me.active_company.hash } })
+        this.$router.push({ name: 'dashboard' })
       }
     }
+  },
+
+  mounted () {
+    this.loading--
   },
 
   methods: {
     async login () {
       const fmData = new FormData()
+
       fmData.append('email', this.user.email)
       fmData.append('password', this.user.password)
 
@@ -94,8 +94,8 @@ export default {
             break
           case 201:
             if (json) {
-              localStorage.setItem('token', json.jwt)
-              window.location = '/admin'
+              this.$store.commit('users/STORE_TOKEN', json.jwt)
+              this.$router.push({ name: 'dashboard' })
             }
             break
           case 423:

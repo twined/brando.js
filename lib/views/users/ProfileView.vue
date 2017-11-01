@@ -87,7 +87,7 @@ export default {
 
   created () {
     console.debug('created <ProfileView />')
-    this.token = localStorage.getItem('token')
+    this.token = this.$store.getters['users/token']
 
     this.profile = {
       email: this.me.email,

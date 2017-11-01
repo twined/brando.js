@@ -29,7 +29,8 @@ export default {
     },
 
     errorText: {
-      type: String
+      type: String,
+      default: ''
     },
 
     label: {

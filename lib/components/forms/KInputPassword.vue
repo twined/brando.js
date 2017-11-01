@@ -16,7 +16,7 @@
       :id="id"
       class="form-control form-control-danger"
       :name="name"
-      type="text"
+      type="password"
     >
   </div>
 </template>

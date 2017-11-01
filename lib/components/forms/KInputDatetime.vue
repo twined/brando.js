@@ -23,7 +23,7 @@
 <script>
 import moment from 'moment-timezone'
 
-import { no } from 'flatpickr/dist/l10n/no'
+import no from 'flatpickr/dist/l10n/no'
 
 export default {
   props: {

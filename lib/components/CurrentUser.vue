@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade" mode="out-in" appear>
+  <transition name="slide-fade-top-slow" mode="out-in" appear>
     <li id="nav-profile-dropdown" class="dropdown" v-click-outside="onClickOutside">
       <a @click.stop="toggle"
         class="d-inline-flex align-items-center dropdown-toggle user-box"
@@ -62,9 +62,11 @@ export default {
     },
 
     async logout () {
-      let token = localStorage.getItem('token')
+      let token = this.$store.getters['users/token']
       let fmData = new FormData()
+
       fmData.append('jwt', token)
+
       try {
         const response = await fetch('/admin/auth/logout', {
           method: 'post',
@@ -75,8 +77,8 @@ export default {
           case 200:
             const json = await response.json()
             if (json) {
-              localStorage.removeItem('token')
-              window.location = '/admin'
+              this.$store.commit('users/REMOVE_TOKEN')
+              this.$router.push({ name: 'login' })
             }
         }
       } catch (err) {

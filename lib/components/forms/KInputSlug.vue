@@ -56,7 +56,6 @@ export default {
     },
 
     from: {
-      type: String,
       required: true
     },
 

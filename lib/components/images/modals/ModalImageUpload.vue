@@ -20,7 +20,7 @@
                   <img v-if="file.thumb" :src="file.thumb" width="40" height="auto" />
                 </td>
                 <td class="ws-normal">{{file.name}}</td>
-                <td>{{file.size | formatSize}}</td>
+                <td class="fit">{{file.size | formatSize}}</td>
                 <td class="fit" v-if="file.error === 'denied'"><i class="fal fa-fw fa-exclamation-circle text-danger"></i> 404</td>
                 <td class="fit" v-else-if="file.success"><i class="fal fa-fw fa-check text-success"></i></td>
                 <td class="fit" v-else-if="file.active"><i class="fal fa-fw fa-cog fa-spin"></i></td>
@@ -77,7 +77,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Modal from '../../Modal'
+import Modal from '../../Modal.vue'
 
 export default {
   components: {
@@ -114,7 +114,8 @@ export default {
     },
 
     getToken () {
-      return `Bearer: ${localStorage.getItem('token')}`
+      const token = this.$store.getters['users/token']
+      return `Bearer: ${token}`
     },
 
     inputFile (newFile, oldFile) {

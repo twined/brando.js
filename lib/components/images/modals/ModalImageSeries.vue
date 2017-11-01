@@ -22,8 +22,8 @@
 <script>
 import nprogress from 'nprogress'
 import { imageAPI } from '../../../api/image'
-import Modal from '../../Modal'
-import ImageSeries from '../ImageSeries'
+import Modal from '../../Modal.vue'
+import ImageSeries from '../ImageSeries.vue'
 
 export default {
   components: {

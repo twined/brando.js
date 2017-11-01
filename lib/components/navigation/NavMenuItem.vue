@@ -29,12 +29,6 @@ export default {
     }
   },
 
-  // computed: {
-  //   ...mapGetters([
-  //     'me'
-  //   ])
-  // },
-
   created () {
     console.debug('created <NavMenuItem />')
   },

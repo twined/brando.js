@@ -28,6 +28,13 @@ h5 {
   }
 }
 
+.fixed-full-content {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+}
+
 .avatar-xs {
   border: 2px solid #fff;
   width: 40px;
@@ -101,6 +108,54 @@ body#registration {}
 .slide-fade-leave-to {
   opacity: 0;
   transform: translateX(10px);
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-top-slow-enter-active {
+  transition: all 750ms ease-out;
+}
+
+.slide-fade-top-slow-leave-active {
+  transition: all 750ms cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-top-slow-enter,
+.slide-fade-top-slow-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-left-slow-enter-active {
+  transition: all 750ms ease-out;
+}
+
+.slide-fade-left-slow-leave-active {
+  transition: all 750ms cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-left-slow-enter,
+.slide-fade-left-slow-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-right-slow-enter-active {
+  transition: all 750ms ease-out;
+}
+
+.slide-fade-right-slow-leave-active {
+  transition: all 750ms cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-right-slow-enter,
+.slide-fade-right-slow-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 
 .fade-enter-active,
