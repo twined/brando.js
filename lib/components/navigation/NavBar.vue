@@ -1,8 +1,8 @@
 <template>
   <header>
-    <section class="container">
+    <section class="container-fluid">
       <transition name="slide-fade-top-slow" appear>
-        <NavMenu />
+        <Hamburger />
       </transition>
       <transition name="slide-fade-top-slow" appear>
         <nav class="navbar navbar-toggleable-xxl">
@@ -29,13 +29,13 @@
 <script>
 
 import { mapGetters } from 'vuex'
-import NavMenu from './NavMenu.vue'
+import Hamburger from './Hamburger.vue'
 import CurrentUser from '../CurrentUser.vue'
 
 export default {
   components: {
     CurrentUser,
-    NavMenu
+    Hamburger
   },
 
   computed: {

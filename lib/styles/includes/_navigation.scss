@@ -13,13 +13,17 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 
 @include scrollbars(0.75rem, mix(map-get($theme-colors, "secondary"), white, 50%));
 
-.menu-open #app {
-  transform: translateX(90px);
-  transition: all 1200ms ease;
-}
-
 #app {
-  transition: all 1200ms ease;
+  height: 100%;
+  position: relative;
+
+  transition: transform 500ms ease-out;
+  width: 100%;
+
+  &.menu-open {
+    transform: translateX(300px);
+    transition: transform 500ms ease-out;
+  }
 }
 
 .menu-content h6 a {
@@ -55,7 +59,7 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
   position: fixed;
   top: 0;
   transform: translateX(-100%);
-  transition: transform 250ms ease-out;
+  transition: transform 500ms ease-out;
   width: 300px;
   z-index: 2000;
 
@@ -246,7 +250,7 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 }
 
 .menu-open .menu-backdrop {
-  transform: translateX(0);
+  transform: translateX(-300px);
 }
 
 .nav.sub-nav {
