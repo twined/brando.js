@@ -1,7 +1,7 @@
 <template>
   <div class="image-categories">
     <div class="bg-white p-4">
-      <div class="container-fluid">
+      <div class="container">
         <div class="row">
           <div class="col-md-12">
             <h5 class="section mb-3 text-center">BILDEKATEGORIER</h5>
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
+    <div class="container">
       <transition name="fade" :key="categoryId" mode="out-in">
         <router-view :key="categoryId" class="mt-4 view"></router-view>
       </transition>

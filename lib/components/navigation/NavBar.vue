@@ -1,6 +1,6 @@
 <template>
   <header>
-    <section class="container-fluid">
+    <section class="container">
       <transition name="slide-fade-top-slow" appear>
         <Hamburger />
       </transition>

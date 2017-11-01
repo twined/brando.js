@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="dashboard">
     <transition name="fade">
-      <div class="container-fluid" id="content">
+      <div class="container" id="content">
         Hei, hei!
       </div>
     </transition>

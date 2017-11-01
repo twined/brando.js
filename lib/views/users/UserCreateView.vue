@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" mode="out-in" appear>
     <div class="users-create">
-      <div class="container-fluid" id="content">
+      <div class="container" id="content">
         <div class="cards">
           <div class="card w-50 mx-auto">
             <div class="card-header">

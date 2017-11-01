@@ -7,6 +7,8 @@ $sidenav-submenu-bg-color: mix(map-get($theme-colors, "secondary"), black, 70%);
 $sidenav-submenu-bg-hover-color: mix(map-get($theme-colors, "secondary"), black, 60%);
 $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90%);
 
+$pull-ease-type: ease;
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
@@ -14,17 +16,18 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 @include scrollbars(0.75rem, mix(map-get($theme-colors, "secondary"), white, 50%));
 
 #app {
-  left: 0;
+  height: 100%;
   overflow-x: hidden;
   position: relative;
-
-  transition: all 500ms ease-out;
   width: 100%;
+}
 
-  &.menu-open {
-    left: 300px;
-    transition: all 500ms ease-out;
-  }
+.container {
+  transition: all 500ms $pull-ease-type;
+}
+
+.menu-open .container {
+  transform: translateX(300px);
 }
 
 .menu-content h6 a {
@@ -54,12 +57,12 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 .menu-backdrop {
   background-color: map-get($theme-colors, "secondary");
   height: 100%;
-  left: -300px;
   overflow-x: hidden;
   overflow-y: scroll;
   position: fixed;
   top: 0;
-  transition: all 500ms ease-out;
+  transform: translateX(-300px);
+  transition: all 500ms $pull-ease-type;
   width: 300px;
   z-index: 2000;
 
@@ -246,7 +249,7 @@ $sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90
 }
 
 .menu-open .menu-backdrop {
-  left: 0;
+  transform: translateX(0);
 }
 
 .nav.sub-nav {

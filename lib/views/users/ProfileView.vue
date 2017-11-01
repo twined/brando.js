@@ -1,7 +1,7 @@
 <template>
   <!-- overview tab -->
   <div class="profile-form">
-    <div class="container-fluid">
+    <div class="container">
       <div class="row" v-show="!loading">
         <div class="col-md-3">
           <div class="card">
