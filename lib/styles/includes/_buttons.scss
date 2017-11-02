@@ -99,3 +99,15 @@ button:focus {
     }
   }
 }
+
+.btn {
+  cursor: pointer;
+}
+
+.btn-outline-primary {
+  color: #000;
+
+  &:hover {
+    color: #000;
+  }
+}

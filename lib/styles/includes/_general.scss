@@ -32,11 +32,14 @@ h5 {
   padding: 2.5rem 2rem;
 }
 
-.fixed-full-content {
-  height: 100%;
-  left: 0;
+.twined-versioning {
+  bottom: 0;
+  font-size: 0.6rem;
+  padding-left: 4vh;
   position: fixed;
-  top: 0;
+  text-align: center;
+  transform: rotate(-90deg);
+  transform-origin: 0 100% 0;
 }
 
 .avatar-xs {

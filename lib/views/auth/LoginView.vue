@@ -1,37 +1,31 @@
 <template>
-  <div class="login">
-    <div class="container-fluid fixed-full-content">
-      <div class="d-flex justify-content-center flex-wrap align-items-center" style="height: 100%;">
-        <transition name="slide-fade-top-slow" appear>
-          <div class="col-md-3 offset-md-1" v-if="!loading">
-            <h5 class="section mb-0">Logg inn</h5>
-            <div>
-              <div class="input-group mb-3">
-                <span class="input-group-addon">
-                  <i class="fa fa-user"></i>
-                </span>
-                <input v-model="user.email" class="form-control" name="email" type="email" placeholder="Epost">
-              </div>
-              <div class="input-group mb-4">
-                <span class="input-group-addon">
-                  <i class="fa fa-lock"></i>
-                </span>
-                <input v-model="user.password" class="form-control" name="password" type="password" placeholder="Passord" @keyup.13="login">
-              </div>
-            </div>
-            <div>
-              <button @click.prevent="login" class="btn btn-secondary">
-                Logg inn
-              </button>
-              <div class="col-sm-6 float-right text-xs-right">
-                <button type="button" class="btn btn-link px-0 text-small text-primary float-right">Glemt passord?</button>
+  <transition name="login">
+    <div class="login">
+      <div class="container-fluid fixed-full-content" :class="{'logging-in': loggingIn}">
+        <div class="twined-versioning">
+          <i class="fa fa-fw fa-adjust"></i> KURTZ V &copy; TWINED 2007 - 2017
+        </div>
+        <div class="d-flex justify-content-center flex-wrap align-items-center text-center" style="height: 100%;">
+          <transition name="slide-fade-top-slow" appear>
+            <div class="login-box">
+              <img src="/ico/favicon-196x196.png" class="rounded-circle avatar-sm mb-5" />
+              <div class="" v-if="!loading">
+                <div class="text-center">
+                  <input v-model="user.email" class="form-control text-center mb-4" name="email" type="email" placeholder="Epost">
+                  <input v-model="user.password" class="form-control text-center mb-5" name="password" type="password" placeholder="Passord" @keyup.13="login">
+                </div>
+                <div>
+                  <button @click.prevent="login" class="btn btn-outline-dark">
+                    Logg inn
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </transition>
+          </transition>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -43,10 +37,12 @@ export default {
 
   data () {
     return {
+      loggingIn: false,
       user: {
         email: '',
         password: ''
       },
+      kurtzVersion: '',
       loading: 0
     }
   },
@@ -58,11 +54,11 @@ export default {
   created () {
     this.loading++
     console.debug('created <login />')
-    if (this.checkExpired()) {
+    let token = this.$store.getters['users/token']
+
+    if (token && this.checkExpired()) {
       alertInfo('Utløpt', 'Brukerøkten din er utløpt. Vennligst logg inn på nytt')
     } else {
-      let token = this.$store.getters['users/token']
-
       if (token && this.me) {
         this.$router.push({ name: 'dashboard' })
       }
@@ -94,8 +90,11 @@ export default {
             break
           case 201:
             if (json) {
-              this.$store.commit('users/STORE_TOKEN', json.jwt)
-              this.$router.push({ name: 'dashboard' })
+              this.loggingIn = true
+              setTimeout(async () => {
+                await this.$store.commit('users/STORE_TOKEN', json.jwt)
+                this.$router.push({ name: 'dashboard' })
+              }, 1500)
             }
             break
           case 423:
