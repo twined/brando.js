@@ -5,26 +5,10 @@
       <div class="row" v-show="!loading">
         <div class="col-md-3">
           <div class="card">
-            <img class="card-img-top img-fluid" :src="me.avatar" alt="Avatar">
-            <div class="card-body">
-              <h4 class="card-title text-center mb-3 text-strong">{{ me.full_name }}</h4>
-              <h6 class="card-subtitle mb-3 text-muted text-center">administrator</h6>
-              <VueCoreImageUpload
-                text="Last opp profilbilde"
-                class="btn btn-outline-secondary btn-block"
-                :crop="false"
-                :maxFileSize="5242880"
-                extensions="png,gif,jpeg,jpg"
-                :headers="{'authorization': `Bearer ${token}`}"
-                :url="'/admin/api/upload/users/' + this.me.id + '/avatar/upload'"
-
-                @errorhandle="uploadError"
-                @imageuploading="uploading"
-                @imageuploaded="uploadComplete">
-              </VueCoreImageUpload>
-              <button @click="changePassword" class="btn btn-outline-secondary btn-block">
-                Skift passord
-              </button>
+            <img class="card-img-top img-fluid" :src="me.avatar_medium" alt="Avatar">
+            <div class="card-body text-center">
+              <h4 class="card-title mb-3">{{ me.full_name }}</h4>
+              <span class="badge badge-outline-primary badge-sm text-uppercase">administrator</span>
             </div>
           </div>
         </div>
@@ -35,22 +19,87 @@
               <h5 class="section mb-0">Endre brukerinformasjon</h5>
             </div>
             <div class="card-body">
-              <div :class="{'form-group': true, 'has-danger': errors.has('profile[full_name]') }">
-                <label class="control-label" for="profile_full_name">Navn</label>
-                <input v-model="profile.full_name" v-validate="'required'" class="form-control form-control-danger" id="profile_full_name" name="profile[full_name]" type="text">
-                <div class="form-control-feedback">{{ errors.first('profile[full_name]') }}</div>
-              </div>
+              <KInput
+                v-model="profile.full_name"
+                :value="profile.full_name"
+                name="profile[full_name]"
+                label="Navn"
+                placeholder="Navn"
+                v-validate="'required'"
+                data-vv-name="profile[full_name]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('profile[full_name]')"
+                :error-text="errors.first('profile[full_name]')"
+              />
 
-              <div class="row">
-                <div class="col">
-                  <div :class="{'form-group': true, 'has-danger': errors.has('profile[email]') }">
-                    <label class="control-label" for="profile_email">Epost</label>
-                    <input v-model="profile.email" v-validate="'required|email'" class="form-control form-control-danger" id="profile_email" name="profile[email]" type="text">
-                    <div class="form-control-feedback">{{ errors.first('profile[email]') }}</div>
-                  </div>
-                </div>
-              </div>
-              <button @click.prevent="validateBeforeSubmit" class="btn btn-outline-secondary" type="submit">Lagre</button>
+              <KInputEmail
+                v-model="profile.email"
+                :value="profile.email"
+                name="profile[email]"
+                label="Epost"
+                placeholder="Epost"
+                v-validate="'required|email'"
+                data-vv-name="profile[email]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('profile[email]')"
+                :error-text="errors.first('profile[email]')"
+              />
+
+              <KInputSelect
+                v-model="profile.language"
+                :value="profile.language"
+                :options="[
+                  { name: 'Norsk', value: 'nb' },
+                  { name: 'Engelsk', value: 'en' }
+                ]"
+                name="profile[language]"
+                label="Språk"
+                v-validate="'required'"
+                data-vv-name="profile[language]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('profile[language]')"
+                :error-text="errors.first('profile[language]')"
+              />
+
+              <KInputPassword
+                v-model="profile.password"
+                :value="profile.password"
+                name="profile[password]"
+                label="Passord"
+                placeholder="Passord"
+                v-validate="'min:6|confirmed:profile[password_confirm]'"
+                data-vv-name="profile[password]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('profile[password]')"
+                :error-text="errors.first('profile[password]')"
+              />
+              <KInputPassword
+                v-model="profile.password_confirm"
+                :value="profile.password_confirm"
+                name="profile[password_confirm]"
+                label="Bekreft passord"
+                placeholder="Bekreft passord"
+                data-vv-name="profile[password_confirm]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('profile[password_confirm]')"
+                :error-text="errors.first('profile[password_confirm]')"
+              />
+
+              <KInputImage
+                v-model="profile.avatar"
+                :value="profile.avatar"
+                :width="100"
+                :height="100"
+                name="profile[avatar]"
+                label="Profilbilde"
+                v-validate="'required'"
+                data-vv-name="profile[avatar]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('profile[avatar]')"
+                :error-text="errors.first('profile[avatar]')"
+              />
+
+              <button @click.prevent="validate" class="btn btn-outline-secondary" type="submit">Lagre</button>
               <router-link :to="{ name: 'dashboard' }" class="btn btn-outline-secondary" exact>
                 Tilbake
               </router-link>
@@ -65,6 +114,8 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { alertError, alertSuccess } from '../../utils/alerts.js'
+import { userAPI } from '../../api/user'
+import { showError } from '../../utils/showError'
 
 import VueCoreImageUpload from 'vue-core-image-upload'
 
@@ -79,7 +130,7 @@ export default {
       profile: {
         'name': '',
         'email': '',
-        'phone': '',
+        'language': '',
         'avatar': ''
       }
     }
@@ -92,7 +143,8 @@ export default {
     this.profile = {
       email: this.me.email,
       full_name: this.me.full_name,
-      avatar: this.me.avatar
+      avatar: this.me.avatar,
+      language: this.me.language
     }
 
     this.loading = false
@@ -113,44 +165,7 @@ export default {
       console.info('uploading')
     },
 
-    uploadComplete (res) {
-      if (res.error) {
-        let reason = ''
-        switch (res.error) {
-          case 'Unauthenticated':
-            reason = 'Ingen tilgang til API'
-            break
-        }
-
-        alertError('Feil', 'Feil ved opplasting<br/ ><br/ >&rarr; ' + reason)
-
-        return
-      }
-
-      switch (res.status) {
-        case 200:
-          this.profile.avatar = res.avatar
-          this.$root.$refs.toast.showToast('Profilbilde oppdatert', {theme: 'success'})
-          this.storeMe()
-          break
-        default:
-          alertError('Feil', 'Serverfeil ved opplasting<br/ >')
-      }
-
-      console.log(res)
-    },
-
-    uploadError (err) {
-      switch (err) {
-        case 'FILE IS TOO LARGER MAX FILE IS 5.00MB':
-          alertError('Feil', 'Filen er for stor. Max 5mb!')
-          break
-        default:
-          alertError('Feil', 'Ukjent feil ved opplasting')
-      }
-    },
-
-    validateBeforeSubmit (e) {
+    validate (e) {
       this.$validator.validateAll().then(() => {
         this.submitForm()
       }).catch((e) => {
@@ -159,25 +174,15 @@ export default {
       })
     },
 
-    submitForm () {
+    async submitForm () {
       console.log('-- submitForm()')
-      this.userChannel.channel
-        .push('profile:update', { profile: this.profile })
-        .receive('ok', () => {
-          this.storeMe().then(() => {
-            this.$root.$refs.toast.showToast('Lagret endringer', {theme: 'success'})
-            this.$router.push({ name: 'profile' })
-          })
-        })
-        .receive('error', payload => alertError('Feil', payload.msg))
-    },
-
-    changePassword () {
-      this.userChannel.channel
-        .push('change_password')
-        .receive('ok', payload => {
-          alertSuccess('Mail sendt', 'Vi har sendt deg en mail med link for å skifte passordet ditt')
-        })
+      try {
+        await userAPI.updateUser(this.me.id, this.profile)
+        this.storeMe()
+        this.$toast.success({message: 'Lagret profilinformasjon'})
+      } catch (err) {
+        showError(err)
+      }
     },
 
     ...mapActions('users', [

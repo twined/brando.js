@@ -8,58 +8,89 @@
               <h5 class="section mb-0">Ny bruker</h5>
             </div>
             <div class="card-body">
-              <div :class="{'form-group': true, 'has-danger': errors.has('user[role]') }">
-                <label class="control-label" for="user_type">Rolle</label>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input v-model="user.role" class="form-check-input" value="superuser" type="checkbox">
-                    Superbruker
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input v-model="user.role" class="form-check-input" value="admin" type="checkbox">
-                    Admin
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input v-model="user.role" class="form-check-input" value="staff" type="checkbox">
-                    Stab
-                  </label>
-                </div>
-                <div class="form-control-feedback">{{ errors.first('role') }}</div>
-              </div>
+              <KInputRadios
+                v-model="user.role"
+                :value="user.role"
+                :options="[
+                  { name: 'Superbruker', value: 'superuser' },
+                  { name: 'Admin', value: 'admin' },
+                  { name: 'Stab', value: 'staff' }
+                ]"
+                name="user[role]"
+                label="Rolle"
+                v-validate="'required'"
+                data-vv-name="user[role]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('user[role]')"
+                :error-text="errors.first('user[role]')"
+              />
 
-              <div :class="{'form-group': true, 'has-danger': errors.has('user[language]') }">
-                <label class="control-label" for="user_type">Språk</label>
-                <select v-model="user.language" v-validate="'required'" class="form-control" id="language" name="language">
-                  <option value="nb">Norsk</option>
-                  <option disabled value="en">English</option>
-                </select>
-                <div class="form-control-feedback">{{ errors.first('language') }}</div>
-              </div>
+              <KInputSelect
+                v-model="user.language"
+                :value="user.language"
+                :options="[
+                  { name: 'Norsk', value: 'nb' },
+                  { name: 'Engelsk', value: 'en' }
+                ]"
+                name="user[language]"
+                label="Språk"
+                v-validate="'required'"
+                data-vv-name="user[language]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('user[language]')"
+                :error-text="errors.first('user[language]')"
+              />
 
-              <div :class="{'form-group': true, 'has-danger': errors.has('user[full_name]') }">
-                <label class="control-label" for="profile_full_name">Navn<span><i class="fa fa-exclamation-circle text-danger"></i>{{ errors.first('user[full_name]') }}</span></label>
-                <input v-model="user.full_name" v-validate="'required'" class="form-control form-control-danger" id="user_full_name" name="user[full_name]" type="text">
-              </div>
+              <KInput
+                v-model="user.full_name"
+                :value="user.full_name"
+                name="user[full_name]"
+                label="Navn"
+                placeholder="Navn"
+                v-validate="'required'"
+                data-vv-name="user[full_name]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('user[full_name]')"
+                :error-text="errors.first('user[full_name]')"
+              />
 
-              <div :class="{'form-group': true, 'has-danger': errors.has('user[email]') }">
-                <label class="control-label" for="user_email">Epost<span><i class="fa fa-exclamation-circle text-danger"></i>{{ errors.first('user[email]') }}</span></label>
-                <input v-model="user.email" v-validate="'required|email'" class="form-control form-control-danger" id="user_email" name="user[email]" type="text">
-              </div>
+              <KInputEmail
+                v-model="user.email"
+                :value="user.email"
+                name="user[email]"
+                label="Epost"
+                placeholder="Epost"
+                v-validate="'required'"
+                data-vv-name="user[email]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('user[email]')"
+                :error-text="errors.first('user[email]')"
+              />
+              <KInputPassword
+                v-model="user.password"
+                :value="user.password"
+                name="user[password]"
+                label="Passord"
+                placeholder="Passord"
+                v-validate="'min:6|confirmed:user[password_confirm]'"
+                data-vv-name="user[password]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('user[password]')"
+                :error-text="errors.first('user[password]')"
+              />
+              <KInputPassword
+                v-model="user.password_confirm"
+                :value="user.password_confirm"
+                name="user[password_confirm]"
+                label="Bekreft passord"
+                placeholder="Bekreft passord"
+                data-vv-name="user[password_confirm]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('user[password_confirm]')"
+                :error-text="errors.first('user[password_confirm]')"
+              />
 
-              <div :class="{'form-group': true, 'has-danger': errors.has('user[password]') }">
-                <label class="control-label" for="user_password">Passord<span><i class="fa fa-exclamation-circle text-danger"></i>{{ errors.first('user[password]') }}</span></label>
-                <input v-model="user.password" v-validate="'required|confirmed:user[password_confirm]'" class="form-control form-control-danger" id="user_password" name="user[password]" type="password">
-              </div>
-
-              <div :class="{'form-group': true, 'has-danger': errors.has('user[password_confirm]') }">
-                <label class="control-label" for="user_password_confirm">Bekreft passord<span><i class="fa fa-exclamation-circle text-danger"></i>{{ errors.first('user[password_confirm]') }}</span></label>
-                <input v-model="user.password_confirm" v-validate="'required'" class="form-control form-control-danger" id="user_password_confirm" name="user[password_confirm]" type="password">
-              </div>
-              <button @click.prevent="validateBeforeSubmit" class="btn btn-secondary">
+              <button @click.prevent="validateBeforeSubmit" class="btn btn-secondary mt-4">
                 Lagre ny bruker
               </button>
             </div>

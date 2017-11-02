@@ -10,16 +10,30 @@
         <h5 class="section mb-0">Ny bildeserie</h5>
       </div>
       <div class="card-body">
-        <div :class="{'form-group': true, 'has-danger': errors.has('image_series[name]') }">
-          <label class="control-label" for="profile_full_name">Navn</label>
-          <input v-model="series.name" v-validate="'required'" class="form-control form-control-danger" id="image_series_name" name="image_series[name]" type="text">
-          <div class="form-control-feedback">{{ errors.first('image_series[name]') }}</div>
-        </div>
-        <div :class="{'form-group': true, 'has-danger': errors.has('image_series[credits]') }">
-          <label class="control-label" for="profile_full_name">Krediteringer</label>
-          <input v-model="series.credits" class="form-control form-control-danger" id="image_series_credits" name="image_series[credits]" type="text">
-          <div class="form-control-feedback">{{ errors.first('image_series[credits]') }}</div>
-        </div>
+        <KInput
+          v-model="series.name"
+          :value="series.name"
+          name="series[name]"
+          label="Seriens navn"
+          placeholder="Seriens navn"
+          v-validate="'required'"
+          data-vv-name="series[name]"
+          data-vv-value-path="innerValue"
+          :has-error="errors.has('series[name]')"
+          :error-text="errors.first('series[name]')"
+        />
+        <KInput
+          v-model="series.credits"
+          :value="series.credits"
+          name="series[credits]"
+          label="Evt. krediteringer"
+          placeholder="Evt. krediteringer"
+          data-vv-name="series[credits]"
+          data-vv-value-path="innerValue"
+          :has-error="errors.has('series[credits]')"
+          :error-text="errors.first('series[credits]')"
+        />
+
         <button @click.prevent="save" class="btn btn-secondary">
           Lagre bildeserie
         </button>

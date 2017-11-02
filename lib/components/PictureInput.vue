@@ -554,7 +554,7 @@ export default {
   line-height: 1.5;
 }
 button {
-  margin: 1em .25em;
+  margin: 1em 0;
   cursor: pointer;
 }
 input[type=file] {

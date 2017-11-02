@@ -11,11 +11,18 @@
         <h5 class="section mb-0">Ny bildekategori</h5>
       </div>
       <div class="card-body">
-        <div :class="{'form-group': true, 'has-danger': errors.has('image_category[name]') }">
-          <label class="control-label" for="profile_full_name">Navn</label>
-          <input v-model="category.name" v-validate="'required'" class="form-control form-control-danger" id="image_category_name" name="image_category[name]" type="text">
-          <div class="form-control-feedback">{{ errors.first('image_category[name]') }}</div>
-        </div>
+        <KInput
+          v-model="category.name"
+          :value="category.name"
+          name="category[name]"
+          label="Kategoriens navn"
+          placeholder="Kategoriens navn"
+          v-validate="'required'"
+          data-vv-name="category[name]"
+          data-vv-value-path="innerValue"
+          :has-error="errors.has('category[name]')"
+          :error-text="errors.first('category[name]')"
+        />
         <button @click.prevent="save" class="btn btn-secondary">
           Lagre bildekategori
         </button>

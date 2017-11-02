@@ -17,6 +17,17 @@
   }
 }
 
+.help-text {
+  color: #666;
+
+  font-size: 0.8rem;
+  padding: 0.5rem;
+
+  i {
+    color: map-get($theme-colors, 'info');
+  }
+}
+
 .label-wrapper {
   display: flex;
   justify-content: space-between;

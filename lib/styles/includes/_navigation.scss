@@ -1,11 +1,12 @@
 @import "../../styles/variables";
 
-$sidenav-font-size: 1rem;
+$sidenav-font-size: 0.85rem;
 $sidenav-menu-padding: 1rem;
 $sidenav-menu-bg-color: transparent;
-$sidenav-submenu-bg-color: mix(map-get($theme-colors, "secondary"), black, 70%);
-$sidenav-submenu-bg-hover-color: mix(map-get($theme-colors, "secondary"), black, 60%);
-$sidenav-menu-bg-hover-color: mix(map-get($theme-colors, "secondary"), white, 90%);
+$sidenav-main-color: mix(map-get($theme-colors, 'secondary'), black, 70%);
+$sidenav-submenu-bg-color: mix($sidenav-main-color, black, 70%);
+$sidenav-submenu-bg-hover-color: mix($sidenav-main-color, black, 60%);
+$sidenav-menu-bg-hover-color: mix($sidenav-main-color, white, 90%);
 
 $pull-ease-type: ease;
 
@@ -13,7 +14,7 @@ $pull-ease-type: ease;
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-@include scrollbars(0.75rem, mix(map-get($theme-colors, "secondary"), white, 50%));
+@include scrollbars(0.75rem, mix($sidenav-main-color, white, 50%));
 
 #app {
   height: 100%;
@@ -45,7 +46,7 @@ $pull-ease-type: ease;
 }
 
 .toggle-button {
-  color: map-get($theme-colors, "secondary");
+  color: $sidenav-main-color;
   position: fixed;
   width: 90px;
   z-index: 2050;
@@ -56,7 +57,7 @@ $pull-ease-type: ease;
 }
 
 .menu-backdrop {
-  background-color: map-get($theme-colors, "secondary");
+  background-color: $sidenav-main-color;
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -154,7 +155,8 @@ $pull-ease-type: ease;
 
       &.open {
         &:after {
-          transform: rotate(450deg);
+          transform: rotate(90deg);
+          transition: transform 250ms ease;
         }
 
         .menu-line-sub {
@@ -176,7 +178,7 @@ $pull-ease-type: ease;
         position: absolute;
         right: 20px;
         top: 9px;
-        transition: transform 750ms ease;
+        transition: transform 250ms ease;
       }
 
       .menu-line-sub {
@@ -189,7 +191,7 @@ $pull-ease-type: ease;
         a {
           background-color: $sidenav-submenu-bg-color;
           border-bottom: 0 solid $sidenav-menu-bg-color;
-          color: rgba(255,255,255,.8);
+          color: #fff;
           display: block;
           font-size: 0.8rem;
           font-weight: 200;
@@ -206,7 +208,7 @@ $pull-ease-type: ease;
             background-color: $sidenav-submenu-bg-hover-color;
             color: #fff;
             text-decoration: none;
-            transition: background 500ms ease;
+            transition: background 250ms ease;
           }
         }
 
@@ -241,7 +243,6 @@ $pull-ease-type: ease;
     }
 
     .top {
-      background-color: rgba(0, 0, 0, 0.05);
       padding-bottom: 0.5rem;
       padding-top: 1.5rem;
       width: 100%;

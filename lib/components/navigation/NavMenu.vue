@@ -3,7 +3,7 @@
     <div class="menu-content d-flex flex-column align-items-center">
       <div class="top">
         <div class="avatar mx-auto">
-          <img :src="me.avatar" alt="Profilbilde" class="rounded-circle img-fluid">
+          <img :src="me.avatar_medium" alt="Profilbilde" class="rounded-circle img-fluid">
         </div>
         <div class="info text-center mb-3 text-white">
           <h6>

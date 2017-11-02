@@ -18,6 +18,10 @@
       :name="name"
       type="text"
     >
+    <p class="help-text" v-if="helpText">
+      <i class="fa fa-fw fa-arrow-alt-circle-up mr-1"></i>
+      <span v-html="helpText" />
+    </p>
   </div>
 </template>
 
@@ -30,6 +34,10 @@ export default {
     },
 
     errorText: {
+      type: String
+    },
+
+    helpText: {
       type: String
     },
 

@@ -14,7 +14,7 @@
     </div>
 
     <div class="image-preview-wrapper">
-      <picture-input
+      <PictureInput
         :crop="crop"
         ref="pictureInput"
         @change="onChange"
@@ -91,9 +91,12 @@ export default {
   },
 
   created () {
-    console.log('created value', this.value)
     this.innerValue = this.value
-    this.prefill = this.value ? this.value.thumb : null
+    if (typeof this.value === 'string') {
+      this.prefill = this.value
+    } else {
+      this.prefill = this.value ? this.value.thumb : null
+    }
   },
 
   data () {

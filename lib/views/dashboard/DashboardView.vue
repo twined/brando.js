@@ -7,7 +7,7 @@
           <p class="lead">byHands administrasjonsområde</p>
           <hr class="my-4">
           <p class="lead">
-
+            <slot></slot>
           </p>
         </div>
       </div>

@@ -90,7 +90,7 @@
                 :error-text="errors.first('user[password_confirm]')"
               />
 
-              <button @click.prevent="validateBeforeSubmit" class="btn btn-secondary">
+              <button @click.prevent="validateBeforeSubmit" class="btn btn-secondary mt-4">
                 Oppdatér bruker
               </button>
             </div>

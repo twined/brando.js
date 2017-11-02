@@ -4,6 +4,7 @@ query Me {
     full_name
     email
     avatar
+    avatar_medium: avatar(type: "medium")
     role
     language
     active
