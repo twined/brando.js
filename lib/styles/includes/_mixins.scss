@@ -6,10 +6,12 @@
 
   ::-webkit-scrollbar-thumb {
     background: $foreground-color;
+    transition: all 0.7s ease-in-out;
   }
 
   ::-webkit-scrollbar-track {
     background: $background-color;
+    transition: all 0.7s ease-in-out;
   }
 
   // For Internet Explorer

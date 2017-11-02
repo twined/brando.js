@@ -2,7 +2,14 @@
   <div class="dashboard">
     <transition name="fade">
       <div class="container" id="content">
-        Hei, hei!
+        <div class="jumbotron text-center">
+          <h1 class="display-1 text-uppercase text-strong">Velkommen</h1>
+          <p class="lead">byHands administrasjonsområde</p>
+          <hr class="my-4">
+          <p class="lead">
+
+          </p>
+        </div>
       </div>
     </transition>
   </div>

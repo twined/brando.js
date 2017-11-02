@@ -7,9 +7,17 @@
             <h5 class="section mb-0">Brukere</h5>
           </div>
           <div class="card-body">
-            <router-link :to="{ name: 'user-create' }" class="btn btn-secondary mb-4" exact v-if="['admin', 'superuser'].includes(me.role)">
-              Legg til bruker
-            </router-link>
+            <div class="jumbotron text-center">
+              <h1 class="display-1 text-uppercase text-strong">Brukere</h1>
+              <p class="lead">Administrér brukere i backenden.</p>
+              <hr class="my-4">
+              <p class="lead">
+                <router-link :to="{ name: 'user-create' }" class="btn btn-secondary mb-4" exact v-if="['admin', 'superuser'].includes(me.role)">
+                  Legg til bruker
+                </router-link>
+              </p>
+            </div>
+
             <table class="table table-airy" v-if="allUsers.length">
               <tbody>
                 <tr :key="user.id" v-for="user in allUsers">
@@ -35,14 +43,14 @@
                       <button
                         @click.prevent="setDeactivated(user)"
                         :class="{'dropdown-item': true, 'disabled': ['superuser'].includes(me.role)}">
-                        Deaktivér bruker
+                        <i class="fal fa-fw fa-window-close mr-4"></i>Deaktivér bruker
                       </button>
                       <router-link
                         :to="{ name: 'user-edit', params: { userId: user.id } }"
                         tag="button"
                         :class="{'dropdown-item': true}"
                       >
-                        Endre brukerdata
+                        <i class="fal fa-fw fa-pencil mr-4"></i>Endre brukerdata
                       </router-link>
                     </b-dropdown>
                   </td>
