@@ -7,18 +7,9 @@
       />
       <div class="row">
         <div class="col-md-12">
-          <h1 class="wide text-center">{{ currentImageCategory.name }}</h1>
-          <ModalCreateImageSeries
-            :imageCategory="currentImageCategory"
-            @close="closeCreateImageSeriesModal"
-            v-if="showModalImageCreateSeries"
-          />
-          <ModalCreateImageCategory
-            :showModal="showModalImageCreateCategory"
-            @close="closeCreateImageCategoryModal"
-          />
-          <div class="centered-link-list mb-5">
-            <b-dropdown variant="white btn-lg" no-caret>
+          <h1 class="wide text-center">
+            {{ currentImageCategory.name }}
+            <b-dropdown variant="white btn-lg ml-3" no-caret>
               <template slot="button-content">
                 <i class="k-dropdown-icon"></i>
               </template>
@@ -43,7 +34,17 @@
                 Slett bildekategori
               </button>
             </b-dropdown>
-          </div>
+          </h1>
+
+          <ModalCreateImageSeries
+            :imageCategory="currentImageCategory"
+            @close="closeCreateImageSeriesModal"
+            v-if="showModalImageCreateSeries"
+          />
+          <ModalCreateImageCategory
+            :showModal="showModalImageCreateCategory"
+            @close="closeCreateImageCategoryModal"
+          />
         </div>
       </div>
 
@@ -159,6 +160,7 @@ export default {
         }
 
         this.deleteImageCategory(this.currentImageCategory)
+        this.$router.push({ name: 'images' })
       })
     },
 

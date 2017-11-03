@@ -1,7 +1,11 @@
 h1.wide {
+  align-content: center;
+  align-items: center;
+  display: flex;
   font-size: 3.5rem;
   font-weight: bold;
-  margin-bottom: 1.25rem;
+  justify-content: center;
+  margin-bottom: 1.75rem;
   margin-top: 1rem;
   text-transform: uppercase;
 }
@@ -12,13 +16,20 @@ h1.wide {
   justify-content: center;
 
   a {
+    border: 2px solid transparent;
     font-size: 0.8rem;
     letter-spacing: 1px;
     margin: 0 1rem;
+    padding: 0.2rem 0.4rem;
     text-transform: uppercase;
 
     &.active {
-      border-bottom: 2px solid map-get($theme-colors, "secondary");
+      border: 2px solid map-get($theme-colors, "secondary");
+    }
+
+    &:hover {
+      background-color: #94003e;
+      color: white;
     }
   }
 }
