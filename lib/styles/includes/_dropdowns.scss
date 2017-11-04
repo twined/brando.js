@@ -13,6 +13,7 @@
 .dropdown-item {
   background: none;
   border: none;
+  border-bottom: none;
   clear: both;
   color: map-get($theme-colors, "secondary");
   display: block;
@@ -27,6 +28,7 @@
 
   &:hover {
     background-color: map-get($theme-colors, "secondary");
+    border-bottom: none;
     color: #fff;
   }
 

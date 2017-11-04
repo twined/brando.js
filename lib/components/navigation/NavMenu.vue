@@ -32,6 +32,11 @@
         <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'images' }" exact>Oversikt</router-link>
       </NavMenuItem>
 
+      <NavMenuItem text="Sider" @expanding="expanding" icon="fal fa-fw fa-file-alt">
+        <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'pages' }" exact>Oversikt</router-link>
+        <router-link data-index="2" key="2" @click.native="close" :to="{ name: 'page-create' }" exact>Opprett ny side</router-link>
+      </NavMenuItem>
+
       <template v-for="(entry, idx) in entries">
         <NavMenuItem :key="idx" @expanding="expanding" :text="entry.text" :icon="entry.icon">
           <router-link v-for="(child, idx) in entry.children" :key="idx" @click.native="close" :to="child.to" exact>

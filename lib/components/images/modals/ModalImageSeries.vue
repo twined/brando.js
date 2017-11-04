@@ -102,7 +102,7 @@ export default {
     },
 
     closeModal () {
-      this.$emit('close')
+      this.$emit('close', this.imageSeries)
     }
   }
 }

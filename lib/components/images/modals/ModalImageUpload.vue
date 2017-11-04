@@ -14,7 +14,7 @@
       <div class="card-body">
         <div class="example-drag">
           <div class="upload">
-            <table class="table table-bordered text-small" v-if="files.length">
+            <table class="table table-bordered text-sm" v-if="files.length">
               <tr v-for="(file, index) in files" :key="file.id">
                 <td class="fit">
                   <img v-if="file.thumb" :src="file.thumb" width="40" height="auto" />
@@ -35,7 +35,7 @@
             </div>
             <div class="d-flex justify-content-center">
               <div class="example-btn">
-                <file-upload
+                <FileUpload
                   class="btn btn-primary"
                   :post-action="`/admin/api/images/upload/image_series/${imageSeries.id}`"
                   :headers="{'authorization': getToken()}"
@@ -49,7 +49,7 @@
                   ref="upload">
                   <i class="fa fa-plus"></i>
                   Velg filer
-                </file-upload>
+                </FileUpload>
                 <button type="button" :disabled="!files.length" class="btn btn-success" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.active = true">
                   <i class="fa fa-arrow-up" aria-hidden="true"></i>
                   Start opplasting

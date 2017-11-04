@@ -50,7 +50,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <transition-group name="fade">
+          <transition-group name="slide-fade-top-slow" appear>
             <ImageSeries
               :imageSeries="s"
               :selectedImages="selectedImages"

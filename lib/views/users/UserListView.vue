@@ -12,14 +12,14 @@
               <p class="lead">Administrér brukere i backenden.</p>
               <hr class="my-4">
               <p class="lead">
-                <router-link :to="{ name: 'user-create' }" class="btn btn-secondary mb-4" exact v-if="['admin', 'superuser'].includes(me.role)">
+                <router-link :to="{ name: 'user-create' }" class="btn btn-secondary" exact v-if="['admin', 'superuser'].includes(me.role)">
                   Legg til bruker
                 </router-link>
               </p>
             </div>
 
             <table class="table table-airy" v-if="allUsers.length">
-              <tbody>
+              <tbody name="slide-fade-top-slow" is="transition-group">
                 <tr :key="user.id" v-for="user in allUsers">
                   <td class="fit">
                     <div class="avatar">
@@ -27,8 +27,10 @@
                     </div>
                   </td>
                   <td>
-                    {{ user.full_name }}<br>
-                    <span class="text-muted text-small">{{ user.email }}</span>
+                    <router-link :to="{ name: 'user-edit', params: { userId: user.id } }">
+                      {{ user.full_name }}<br>
+                    </router-link>
+                    <span class="text-muted text-sm">{{ user.email }}</span>
                   </td>
                   <td class="fit">
                     <span class="badge badge-outline-primary badge-sm mr-1 text-uppercase badge-block">
@@ -48,8 +50,7 @@
                       <router-link
                         :to="{ name: 'user-edit', params: { userId: user.id } }"
                         tag="button"
-                        :class="{'dropdown-item': true}"
-                      >
+                        :class="{'dropdown-item': true}">
                         <i class="fal fa-fw fa-pencil mr-4"></i>Endre brukerdata
                       </router-link>
                     </b-dropdown>

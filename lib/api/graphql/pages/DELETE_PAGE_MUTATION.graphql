@@ -1,0 +1,8 @@
+mutation DeletePage($pageId: ID!) {
+  delete_user(
+    pageId: $pageId
+  ) {
+    id
+    key
+  }
+}

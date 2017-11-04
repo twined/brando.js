@@ -10,7 +10,7 @@
       </span>
     </div>
 
-    <multiselect
+    <Multiselect
       v-model="innerValue"
       :options="options"
       :track-by="optionValueKey"

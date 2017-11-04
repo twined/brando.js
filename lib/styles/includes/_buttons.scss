@@ -79,6 +79,10 @@ button:focus {
       }
     }
   }
+
+  &:hover {
+    border: 1px solid map-get($theme-colors, "secondary");
+  }
 }
 
 .dropdown.show {

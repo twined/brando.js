@@ -1,0 +1,21 @@
+query Pages {
+  pages {
+    id
+    key
+    title
+    slug
+    parent {
+      id
+      key
+      title
+      slug
+    }
+    children {
+      id
+      key
+      title
+      slug
+    }
+    inserted_at
+  }
+}

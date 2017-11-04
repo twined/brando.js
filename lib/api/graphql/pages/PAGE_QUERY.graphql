@@ -1,0 +1,34 @@
+query Page ($pageId: ID!) {
+  page (pageId: $pageId) {
+    id
+    key
+    language
+    title
+    slug
+    data
+    status
+    css_classes
+    creator {
+      id
+      full_name
+    }
+    parent_id
+    parent {
+      id
+      key
+      title
+      slug
+    }
+
+    children {
+      id
+      key
+      title
+      slug
+    }
+    meta_description
+    meta_keywords
+
+    inserted_at
+  }
+}
