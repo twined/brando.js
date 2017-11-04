@@ -7,7 +7,7 @@
       <transition name="slide-fade-top-slow" appear>
         <nav class="navbar navbar-toggleable-xxl">
           <div class="logo-wrapper">
-            byHands admin
+            {{ siteName }}
             <img class="logo img-fluid" src="/images/logo-circle.png">
           </div>
 
@@ -41,6 +41,9 @@ export default {
   computed: {
     ...mapGetters('users', [
       'me'
+    ]),
+    ...mapGetters('config', [
+      'siteName'
     ])
   },
 

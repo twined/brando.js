@@ -24,6 +24,9 @@
                     <td class="fit">
                       <i class="fa fa-fw fa-angle-right"></i>
                     </td>
+                    <td class="fit">
+                      <Flag :value="page.language" />
+                    </td>
                     <td class="text-mono text-sm text-left">
                       {{ page.key }}
                     </td>
@@ -64,6 +67,9 @@
                   <tr v-for="subpage in page.children" :key="subpage.id" class="page-subrow">
                     <td class="">
                       <i class="fa fa-fw fa-angle-double-right"></i>
+                    </td>
+                    <td class="fit">
+                      <Flag :value="subpage.language" />
                     </td>
                     <td class="text-mono text-sm text-left">
                       {{ subpage.key }}
@@ -161,7 +167,7 @@ export default {
         this.adminChannel.channel
           .push('page:delete', { id: page.id })
           .receive('ok', payload => {
-            this.$store.commit('pages/DELETE_POST', page.id)
+            this.$store.commit('pages/DELETE_PAGE', page.id)
           })
       })
     },

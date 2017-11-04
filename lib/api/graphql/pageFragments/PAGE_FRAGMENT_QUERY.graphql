@@ -1,0 +1,14 @@
+query PageFragment ($pageFragmentId: ID!) {
+  page_fragment (pageFragmentId: $pageFragmentId) {
+    id
+    parent_key
+    key
+    language
+    data
+    creator {
+      id
+      full_name
+    }
+    inserted_at
+  }
+}

@@ -35,6 +35,8 @@
       <NavMenuItem text="Sider" @expanding="expanding" icon="fal fa-fw fa-file-alt">
         <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'pages' }" exact>Oversikt</router-link>
         <router-link data-index="2" key="2" @click.native="close" :to="{ name: 'page-create' }" exact>Opprett ny side</router-link>
+        <router-link data-index="3" key="3" @click.native="close" :to="{ name: 'pagefragments' }" exact>Sidefragmenter</router-link>
+        <router-link data-index="4" key="4" @click.native="close" :to="{ name: 'pagefragment-create' }" exact>Opprett nytt fragment</router-link>
       </NavMenuItem>
 
       <template v-for="(entry, idx) in entries">

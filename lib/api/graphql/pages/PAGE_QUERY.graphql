@@ -16,6 +16,7 @@ query Page ($pageId: ID!) {
     parent {
       id
       key
+      language
       title
       slug
     }
@@ -23,6 +24,7 @@ query Page ($pageId: ID!) {
     children {
       id
       key
+      language
       title
       slug
     }

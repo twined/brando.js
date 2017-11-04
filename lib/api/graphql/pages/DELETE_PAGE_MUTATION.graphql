@@ -1,6 +1,6 @@
 mutation DeletePage($pageId: ID!) {
-  delete_user(
-    pageId: $pageId
+  delete_page(
+    pageId: $pageId,
   ) {
     id
     key

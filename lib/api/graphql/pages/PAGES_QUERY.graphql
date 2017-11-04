@@ -4,15 +4,18 @@ query Pages {
     key
     title
     slug
+    language
     parent {
       id
       key
+      language
       title
       slug
     }
     children {
       id
       key
+      language
       title
       slug
     }

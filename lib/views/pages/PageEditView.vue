@@ -150,7 +150,6 @@ export default {
 
   async created () {
     this.getParents()
-    console.log(this.pageId)
     const p = await pageAPI.getPage(this.pageId)
     this.page = {...p}
   },
@@ -180,17 +179,13 @@ export default {
     },
 
     async save () {
-      this.loading++
-      console.log(this.page)
       try {
         nprogress.start()
         await pageAPI.updatePage(this.pageId, this.page)
         nprogress.done()
-        this.loading--
         this.$toast.success({message: 'Side opprettet'})
         this.$router.push({ name: 'pages' })
       } catch (err) {
-        this.loading--
         showError(err)
       }
     },

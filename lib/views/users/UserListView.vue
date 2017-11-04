@@ -33,6 +33,9 @@
                     <span class="text-muted text-sm">{{ user.email }}</span>
                   </td>
                   <td class="fit">
+                    <Flag :value="user.language" />
+                  </td>
+                  <td class="fit">
                     <span class="badge badge-outline-primary badge-sm mr-1 text-uppercase badge-block">
                       {{ user.role }}
                     </span>

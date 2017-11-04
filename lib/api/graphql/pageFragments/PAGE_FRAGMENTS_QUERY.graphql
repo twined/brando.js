@@ -1,0 +1,14 @@
+query PageFragments {
+  page_fragments {
+    id
+    parent_key
+    key
+    language
+    data
+    creator {
+      id
+      full_name
+    }
+    inserted_at
+  }
+}
