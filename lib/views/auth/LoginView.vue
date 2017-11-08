@@ -8,7 +8,7 @@
         <div class="d-flex justify-content-center flex-wrap align-items-center text-center" style="height: 100%;">
           <transition name="slide-fade-top-slow" appear>
             <div class="login-box">
-              <img src="/logo.svg" class="rounded-circle avatar-sm mb-5" />
+              <img src="/images/logo.svg" class="rounded-circle avatar-sm mb-5" />
               <div class="" v-if="!loading">
                 <div class="text-center">
                   <input v-model="user.email" class="form-control text-center mb-4" name="email" type="email" placeholder="Epost">
