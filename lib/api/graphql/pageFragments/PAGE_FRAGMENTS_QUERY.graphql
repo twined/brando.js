@@ -10,5 +10,6 @@ query PageFragments {
       full_name
     }
     inserted_at
+    updated_at
   }
 }
