@@ -23,7 +23,8 @@ export default {
 
     baseURL: {
       type: String,
-      required: true
+      required: true,
+      default: '/admin/api/'
     },
 
     imageSeries: {

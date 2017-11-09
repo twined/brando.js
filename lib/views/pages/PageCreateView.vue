@@ -65,7 +65,7 @@
             :value="page.data"
             label="Innhold"
             ref="villain"
-            baseURL="/admin/api/villain"
+            baseURL="/admin/api/"
             imageSeries="post"
           />
 
