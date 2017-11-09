@@ -36,7 +36,7 @@
             <div class="d-flex justify-content-center">
               <div class="example-btn">
                 <FileUpload
-                  class="btn btn-primary"
+                  class="btn btn-primary mb-0"
                   :post-action="`/admin/api/images/upload/image_series/${imageSeries.id}`"
                   :headers="{'authorization': getToken()}"
                   :multiple="true"
