@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { Editor } from 'villainjs'
 
 export default {
@@ -29,7 +30,7 @@ export default {
 
     imageSeries: {
       type: String,
-      required: true
+      default: 'post'
     },
 
     value: {
@@ -59,7 +60,8 @@ export default {
       const randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26))
       const uniqid = randLetter + Date.now()
       return 'villain' + uniqid
-    }
+    },
+    ...mapGetters('users', ['token'])
   },
 
   watch: {
@@ -78,7 +80,8 @@ export default {
     this.$villain = new Editor({
       textArea: id,
       baseURL: this.baseURL,
-      imageSeries: this.imageSeries
+      imageSeries: this.imageSeries,
+      extraHeaders: {'authorization': `Bearer ${this.token}`}
     })
   },
 
