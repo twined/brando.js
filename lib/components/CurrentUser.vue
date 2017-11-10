@@ -38,6 +38,10 @@ export default {
     }
   },
 
+  inject: [
+    'adminChannel'
+  ],
+
   created () {
     console.log('created <CurrentUser />')
   },
@@ -78,6 +82,7 @@ export default {
             const json = await response.json()
             if (json) {
               this.$store.commit('users/REMOVE_TOKEN')
+              this.adminChannel.channel.leave()
               this.$router.push({ name: 'login' })
             }
         }

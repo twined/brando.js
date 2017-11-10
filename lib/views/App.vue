@@ -112,6 +112,7 @@ export default {
       this.connectSocket()
       try {
         await this.storeMe()
+        await this.storeUsers()
         this.joinAdminChannel()
         this.joinUserChannel()
         this.loading = false
@@ -150,10 +151,26 @@ export default {
           this.loading = false
         })
         .receive('error', resp => { console.error('!! Kunne ikke påmeldes ', resp) })
+
+      // receive initial presence data from server, sent after join
+      this.adminChannel.on('admin:presence_state', state => {
+        this.storeLobbyPresences(state)
+      })
+
+      // receive 'presence_diff' from server, containing join/leave events
+      this.adminChannel.on('presence_diff', diff => {
+        this.storeLobbyPresencesDiff(diff)
+      })
+
+      // request presences
+      this.adminChannel.push('admin:list_presence')
     },
 
     ...mapActions('users', [
-      'storeMe'
+      'storeMe',
+      'storeUsers',
+      'storeLobbyPresencesDiff',
+      'storeLobbyPresences'
     ])
   }
 }
