@@ -8,15 +8,10 @@
         <nav class="navbar navbar-toggleable-xxl">
           <div class="logo-wrapper">
             {{ siteName }}
-            <img class="logo img-fluid" src="/images/logo-circle.png">
           </div>
 
           <div class="align-items-center" id="navbar-collapse">
             <ul class="nav navbar-right ml-auto">
-              <!-- <QuickSearch />
-              <MessageNotifications />
-              <Notifications />
-              -->
               <CurrentUser :user="me" />
             </ul>
           </div>
