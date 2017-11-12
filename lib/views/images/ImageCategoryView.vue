@@ -13,7 +13,7 @@
 
     <p class="mt-5">
       <div class="centered-link-list">
-        <router-link :to="{ name: 'image-category-detail', params: { categoryId: c.id } }" class="" v-for="c in allImageCategories" :key="c.id" exact>
+        <router-link :to="{ name: 'image-category-detail', params: { categoryId: c.id } }" class="" v-for="c in allImageCategories" :key="c.id">
           {{ c.name }}
         </router-link>
       </div>

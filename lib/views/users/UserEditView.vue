@@ -105,6 +105,7 @@
 import { mapActions } from 'vuex'
 import { userAPI } from '../../api/user'
 import { alertError } from '../../utils/alerts'
+import { pick } from '../../utils'
 
 export default {
   data () {
@@ -137,8 +138,12 @@ export default {
 
   methods: {
     async submitForm () {
+      const params = pick(
+        this.user,
+        'full_name', 'email', 'password', 'role', 'language', 'username'
+      )
       try {
-        await this.updateUser(this.user)
+        await this.updateUser({userId: this.user.id, userParams: params})
         this.$toast.success({ message: 'Bruker oppdatert' })
         this.$router.push({ name: 'users' })
       } catch (err) {

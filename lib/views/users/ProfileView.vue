@@ -112,10 +112,12 @@
 </template>
 
 <script>
+import nprogress from 'nprogress'
 import { mapActions, mapGetters } from 'vuex'
 import { alertError, alertSuccess } from '../../utils/alerts.js'
 import { userAPI } from '../../api/user'
-import { showError } from '../../utils/showError'
+import showError from '../../utils/showError'
+import { pick } from '../../utils'
 
 import VueCoreImageUpload from 'vue-core-image-upload'
 
@@ -175,13 +177,21 @@ export default {
     },
 
     async submitForm () {
+      nprogress.start()
       console.log('-- submitForm()')
+      const params = pick(
+        this.profile,
+        'full_name', 'email', 'password', 'role', 'language', 'username', 'avatar'
+      )
+
       try {
-        await userAPI.updateUser(this.me.id, this.profile)
+        await userAPI.updateUser(this.me.id, params)
         this.storeMe()
         this.$toast.success({message: 'Lagret profilinformasjon'})
+        nprogress.done()
       } catch (err) {
         showError(err)
+        nprogress.done()
       }
     },
 

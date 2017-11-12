@@ -25,10 +25,10 @@
                 <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"></i>
                 Sortér bildeserier i kategorien
               </button>
-              <button class="dropdown-item">
+              <router-link :to="{ name: 'image-category-config', params: { categoryId: currentImageCategory.id } }" tag="button" class="dropdown-item">
                 <i class="fal fa-fw mr-3 subtle fa-cog"></i>
-                Konfigurér bildekategori
-              </button>
+                Konfigurér bildekategorien
+              </router-link>
               <button @click.prevent="deleteCategory" class="dropdown-item">
                 <i class="fal fa-fw mr-3 subtle fa-trash"></i>
                 Slett bildekategori

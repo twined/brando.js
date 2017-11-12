@@ -1,18 +1,18 @@
 <template>
   <header>
-    <section class="container">
-      <transition name="slide-fade-top-slow" appear>
-        <div class="presences" v-if="lobbyPresences !== {}">
-          <span class="text-uppercase text-xs">online &rarr; </span>
-          <transition-group class="d-inline-flex justify-content-center" tag="div" name="fade">
-            <div :key="id" class="user-presence" v-for="(p, id) in lobbyPresences">
-              <div class="avatar">
-                <img :src="userById(id).avatar" class="rounded-circle avatar-xxs">
-              </div>
+    <transition name="slide-fade-top-slow" appear>
+      <div class="presences" v-if="lobbyPresences !== {}">
+        <span class="text-uppercase text-xs">online &rarr; </span>
+        <transition-group class="d-inline-flex justify-content-center" tag="div" name="fade">
+          <div :key="id" class="user-presence" v-for="(p, id) in lobbyPresences">
+            <div class="avatar">
+              <img :src="userById(id).avatar" class="rounded-circle avatar-xxs">
             </div>
-          </transition-group>
-        </div>
-      </transition>
+          </div>
+        </transition-group>
+      </div>
+    </transition>
+    <section class="container">
       <transition name="slide-fade-top-slow" appear>
         <Hamburger />
       </transition>

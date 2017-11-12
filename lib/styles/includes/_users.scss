@@ -50,7 +50,12 @@
   bottom: 0;
   font-size: 12px;
   left: 0px;
-  transform: rotate(-90deg);
+  transform: translateX(0) rotate(-90deg);
   transform-origin: 0 0% 0;
   margin-left: 5px;
+  transition: transform 2s ease;
+}
+
+.menu-open .presences {
+  transform: translateX(-1000px)
 }
