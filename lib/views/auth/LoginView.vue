@@ -57,7 +57,7 @@ export default {
     let token = this.$store.getters['users/token']
 
     if (token && this.checkExpired()) {
-      alertInfo('Utløpt', 'Brukerøkten din er utløpt. Vennligst logg inn på nytt')
+      //
     } else {
       if (token && this.me) {
         this.$router.push({ name: 'dashboard' })
