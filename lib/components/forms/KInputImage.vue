@@ -57,6 +57,11 @@ export default {
       default: false
     },
 
+    previewKey: {
+      type: String,
+      default: 'thumb'
+    },
+
     errorText: {
       type: String
     },
@@ -95,7 +100,7 @@ export default {
     if (typeof this.value === 'string') {
       this.prefill = this.value
     } else {
-      this.prefill = this.value ? this.value.thumb : null
+      this.prefill = this.value ? this.value[this.previewKey] : null
     }
   },
 
@@ -137,7 +142,7 @@ export default {
         this.preCheck = true
         return
       }
-      console.log('theres been a change, and we either have no prefill, or weve triggered the prefill check:')
+      console.log('theres been a change, and we either have no prefill, or we have triggered the prefill check:')
       // there's been a change, and we either have no prefill, or we've triggered the prefill check:
       this.innerValue = this.$refs.pictureInput.file
     }
