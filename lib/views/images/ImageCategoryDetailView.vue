@@ -21,9 +21,13 @@
                 <i class="fal fa-fw mr-3 subtle fa-plus"></i>
                 Opprett ny bildeserie
               </button>
-              <button class="dropdown-item">
+              <button class="dropdown-item" disabled>
                 <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"></i>
                 Sortér bildeserier i kategorien
+              </button>
+              <button class="dropdown-item" disabled>
+                <i class="fal fa-fw mr-3 subtle fa-refresh"></i>
+                Gjenskap bilder i kategorien
               </button>
               <router-link :to="{ name: 'image-category-config', params: { categoryId: currentImageCategory.id } }" tag="button" class="dropdown-item">
                 <i class="fal fa-fw mr-3 subtle fa-cog"></i>

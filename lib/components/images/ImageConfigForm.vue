@@ -38,6 +38,13 @@
 
     <h5 class="pull-out">Størrelsesnøkler</h5>
 
+    <button @click.prevent="addKey" class="btn btn-primary">
+      Ny nøkkel
+    </button>
+    <button @click.prevent="addMultiGeoKey" class="btn btn-primary">
+      Ny liggende/stående nøkkel
+    </button>
+
     <div v-for="(size, key) in config.sizes" :key="key">
       <hr>
       <div class="form-group">
@@ -48,51 +55,139 @@
         </div>
         <input class="form-control" :value="key" type="text" @change="changeKey($event, key)">
       </div>
-      <div class="row">
-        <div class="col">
-          <KInput
-            v-model="size.size"
-            :value="size.size"
-            name="size[size]"
-            label="Størrelsesgeometri (WxH)"
-            placeholder="Beskrivelse"
-            v-validate="'required'"
-            data-vv-name="size[size]"
-            data-vv-value-path="innerValue"
-            :has-error="errors.has('size[size]')"
-            :error-text="errors.first('size[size]')"
-          />
+      <template v-if="isMultiGeo(size)">
+        <div class="row">
+          <div class="col">
+            <KInput
+              v-model="size.portrait.size"
+              :value="size.portrait.size"
+              name="size[portrait][size]"
+              label="Stående størrelsesgeometri (WxH)"
+              placeholder="WxH"
+              v-validate="'required'"
+              data-vv-name="size[portrait][size]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[portrait][size]')"
+              :error-text="errors.first('size[portrait][size]')"
+            />
+          </div>
+          <div class="col">
+            <KInput
+              v-model="size.portrait.quality"
+              :value="size.portrait.quality"
+              name="size[portrait][quality]"
+              label="Kvalitetsprosent (0-100)"
+              placeholder="Kvalitetsprosent (0-100)"
+              v-validate="'required'"
+              data-vv-name="size[portrait][quality]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[portrait][quality]')"
+              :error-text="errors.first('size[portrait][quality]')"
+            />
+          </div>
+          <div class="col">
+            <KInputCheckbox
+              v-model="size.portrait.crop"
+              :value="size.portrait.crop"
+              name="size[portrait][crop]"
+              label="Bildebeskjæring"
+              data-vv-name="size[portrait][crop]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[portrait][crop]')"
+              :error-text="errors.first('size[portrait][crop]')"
+            />
+          </div>
         </div>
-        <div class="col">
-          <KInput
-            v-model="size.quality"
-            :value="size.quality"
-            name="size[quality]"
-            label="Kvalitetsprosent (0-100)"
-            placeholder="Kvalitetsprosent (0-100)"
-            v-validate="'required'"
-            data-vv-name="size[quality]"
-            data-vv-value-path="innerValue"
-            :has-error="errors.has('size[quality]')"
-            :error-text="errors.first('size[quality]')"
-          />
+        <div class="row">
+          <div class="col">
+            <KInput
+              v-model="size.landscape.size"
+              :value="size.landscape.size"
+              name="size[landscape][size]"
+              label="Liggende størrelsesgeometri (WxH)"
+              placeholder="WxH"
+              v-validate="'required'"
+              data-vv-name="size[landscape][size]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[landscape][size]')"
+              :error-text="errors.first('size[landscape][size]')"
+            />
+          </div>
+          <div class="col">
+            <KInput
+              v-model="size.landscape.quality"
+              :value="size.landscape.quality"
+              name="size[landscape][quality]"
+              label="Kvalitetsprosent (0-100)"
+              placeholder="Kvalitetsprosent (0-100)"
+              v-validate="'required'"
+              data-vv-name="size[landscape][quality]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[landscape][quality]')"
+              :error-text="errors.first('size[landscape][quality]')"
+            />
+          </div>
+          <div class="col">
+            <KInputCheckbox
+              v-model="size.landscape.crop"
+              :value="size.landscape.crop"
+              name="size[landscape][crop]"
+              label="Bildebeskjæring"
+              data-vv-name="size[landscape][crop]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[landscape][crop]')"
+              :error-text="errors.first('size[landscape][crop]')"
+            />
+          </div>
         </div>
-        <div class="col">
-          <KInputCheckbox
-            v-model="size.crop"
-            :value="size.crop"
-            name="size[crop]"
-            label="Bildebeskjæring"
-            data-vv-name="size[crop]"
-            data-vv-value-path="innerValue"
-            :has-error="errors.has('size[crop]')"
-            :error-text="errors.first('size[crop]')"
-          />
+      </template>
+      <template v-else>
+        <div class="row">
+          <div class="col">
+            <KInput
+              v-model="size.size"
+              :value="size.size"
+              name="size[size]"
+              label="Størrelsesgeometri (WxH)"
+              placeholder="Beskrivelse"
+              v-validate="'required'"
+              data-vv-name="size[size]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[size]')"
+              :error-text="errors.first('size[size]')"
+            />
+          </div>
+          <div class="col">
+            <KInput
+              v-model="size.quality"
+              :value="size.quality"
+              name="size[quality]"
+              label="Kvalitetsprosent (0-100)"
+              placeholder="Kvalitetsprosent (0-100)"
+              v-validate="'required'"
+              data-vv-name="size[quality]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[quality]')"
+              :error-text="errors.first('size[quality]')"
+            />
+          </div>
+          <div class="col">
+            <KInputCheckbox
+              v-model="size.crop"
+              :value="size.crop"
+              name="size[crop]"
+              label="Bildebeskjæring"
+              data-vv-name="size[crop]"
+              data-vv-value-path="innerValue"
+              :has-error="errors.has('size[crop]')"
+              :error-text="errors.first('size[crop]')"
+            />
+          </div>
         </div>
-      </div>
-      <button class="btn btn-outline-secondary" @click.prevent="delKey(key)">Slett nøkkel</button>
+        <button class="btn btn-outline-secondary" @click.prevent="delKey(key)">Slett nøkkel</button>
+      </template>
     </div>
-
+    <hr>
     <button class="btn btn-secondary" @click.prevent="save">
       Lagre konfigurasjon
     </button>
@@ -121,6 +216,36 @@ export default {
   },
 
   methods: {
+    addKey () {
+      this.$set(this.config.sizes, 'navn', {
+        size: 'WxH',
+        crop: false,
+        quality: '80'
+      })
+    },
+
+    addMultiGeoKey () {
+      this.$set(this.config.sizes, 'navn', {
+        portrait: {
+          size: 'WxH',
+          crop: false,
+          quality: '80'
+        },
+        landscape: {
+          size: 'WxH',
+          crop: false,
+          quality: '80'
+        }
+      })
+    },
+
+    isMultiGeo (size) {
+      if ('portrait' in size) {
+        return true
+      }
+      return false
+    },
+
     save () {
       this.$emit('save', this.config)
     },

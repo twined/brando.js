@@ -25,10 +25,10 @@
           <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"></i>
           Sortér bilder i serien
         </button>
-        <button class="dropdown-item">
+        <router-link :to="{ name: 'image-series-config', params: { seriesId: imageSeries.id } }" tag="button" class="dropdown-item">
           <i class="fal fa-fw mr-3 subtle fa-cog"></i>
           Konfigurér bildeserie
-        </button>
+        </router-link>
         <button @click.prevent="deleteSeries(imageSeries)" class="dropdown-item">
           <i class="fal fa-fw mr-3 subtle fa-trash"></i>
           Slett bildeserie

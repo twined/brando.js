@@ -54,6 +54,10 @@
   transform-origin: 0 0% 0;
   margin-left: 5px;
   transition: transform 2s ease;
+
+  div {
+    transform: rotateZ(270deg);
+  }
 }
 
 .menu-open .presences {
