@@ -1,12 +1,8 @@
-mutation CreateUser($user_params: CreateUserParams) {
-  create_user(
-    user_params: $user_params,
+mutation CreatePage($pageParams: PageParams) {
+  create_page(
+    pageParams: $pageParams,
   ) {
     id
-    language
-    full_name
-    email
-    avatar
-    role
+    key
   }
 }
