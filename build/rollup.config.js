@@ -54,7 +54,7 @@ const externalExcludes = [
 ]
 
 var external = Object.keys(dependencies).filter(dep => externalExcludes.indexOf(dep) === -1);
-external.push('villainjs');
+// external.push('villainjs');
 
 module.exports = {
     input: path.resolve(lib, "index.js"),

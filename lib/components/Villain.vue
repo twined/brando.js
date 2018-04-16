@@ -2,30 +2,41 @@
   <div class="villain-component">
     <div :class="{'form-group': true}">
       <div class="label-wrapper">
-        <label class="control-label" :for="name">
+        <label :for="name" class="control-label" >
           {{ label }}
         </label>
       </div>
-      <textarea v-model="innerValue" class="post" :id="name"></textarea>
+
+      <VillainEditor
+        ref="villain"
+        :json="innerValue"
+        :extra-headers="{'authorization': `Bearer ${this.token}`}"
+        @input="$emit('input', $event)"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { Editor } from 'villainjs'
+import VillainEditor from 'villain-editor'
 
 export default {
+  components: {
+    VillainEditor
+  },
+
   props: {
     label: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
 
     baseURL: {
       type: String,
       required: true,
-      default: '/admin/api/'
+      default: '/admin/api/villain/'
     },
 
     imageSeries: {
@@ -65,33 +76,13 @@ export default {
   },
 
   watch: {
-    innerValue (value) {
-      this.$emit('input', value)
-    },
-
     value (value) {
-      this.$villain.setData(value)
       this.innerValue = value
     }
   },
 
-  mounted () {
-    const id = '#' + this.name
-    this.$villain = new Editor({
-      textArea: id,
-      baseURL: this.baseURL,
-      imageSeries: this.imageSeries,
-      extraHeaders: {'authorization': `Bearer ${this.token}`}
-    })
-  },
-
   created () {
-    console.log('villain this.value', this.value)
     this.innerValue = this.value
-  },
-
-  methods: {
-
   }
 }
 </script>
