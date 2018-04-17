@@ -1,11 +1,13 @@
-<template lang="html">
+<template>
   <div :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
-      <label class="control-label" :for="id">
+      <label
+        :for="id"
+        class="control-label">
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"></i>
+        <i class="fa fa-exclamation-circle text-danger"/>
         {{ errorText }}
       </span>
     </div>
@@ -13,10 +15,10 @@
     <textarea
       v-model="innerValue"
       :id="id"
-      class="form-control form-control-danger"
       :rows="rows"
       :name="name"
-    />
+      class="form-control form-control-danger">
+    </textarea>
   </div>
 </template>
 
@@ -49,13 +51,10 @@ export default {
     },
 
     value: {
+      type: String,
       required: false,
       default: ''
     }
-  },
-
-  created () {
-    this.innerValue = this.value
   },
 
   data () {
@@ -78,6 +77,10 @@ export default {
     value (value) {
       this.innerValue = value
     }
+  },
+
+  created () {
+    this.innerValue = this.value
   }
 }
 </script>

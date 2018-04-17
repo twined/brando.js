@@ -49,6 +49,7 @@ const externalExcludes = [
   'vue-multiselect',
   'vue-picture-input',
   'vue-upload-component',
+  'vuex',
   'vuex-router-sync',
   'flatpickr/dist/l10n/no'
 ]
