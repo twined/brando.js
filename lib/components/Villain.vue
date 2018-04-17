@@ -2,7 +2,9 @@
   <div class="villain-component">
     <div :class="{'form-group': true}">
       <div class="label-wrapper">
-        <label :for="name" class="control-label" >
+        <label
+          :for="name"
+          class="control-label" >
           {{ label }}
         </label>
       </div>
@@ -10,7 +12,7 @@
       <VillainEditor
         ref="villain"
         :json="innerValue"
-        :extra-headers="{'authorization': `Bearer ${this.token}`}"
+        :extra-headers="{'authorization': `Bearer ${token}`}"
         @input="$emit('input', $event)"
       />
     </div>
@@ -35,7 +37,6 @@ export default {
 
     baseURL: {
       type: String,
-      required: true,
       default: '/admin/api/villain/'
     },
 
@@ -46,17 +47,7 @@ export default {
 
     value: {
       type: String,
-      default: `
-      [
-        {
-          "type": "text",
-          "data": {
-            "text": "Text",
-            "type": "paragraph"
-          }
-        }
-      ]
-      `
+      default: '[]'
     }
   },
 
