@@ -4,9 +4,9 @@
     <div class="container">
       <div class="row" v-show="!loading">
         <div class="col-md-3">
-          <div class="card">
+          <div class="card p-4">
             <img class="card-img-top img-fluid" :src="me.avatar_medium" alt="Avatar">
-            <div class="card-body text-center">
+            <div class="card-body text-center p-0 pt-3">
               <h4 class="card-title mb-3">{{ me.full_name }}</h4>
               <span class="badge badge-outline-primary badge-sm text-uppercase">administrator</span>
             </div>
