@@ -64,9 +64,7 @@
           <Villain
             :value="page.data"
             label="Innhold"
-            ref="villain"
-            baseURL="/admin/api/"
-            imageSeries="post"
+            @input="page.data = $event"
           />
 
           <div class="row">
@@ -167,8 +165,6 @@ export default {
     },
 
     validate () {
-      this.inject()
-
       this.$validator.validateAll().then(() => {
         this.save()
       }).catch(err => {
@@ -188,10 +184,6 @@ export default {
       } catch (err) {
         showError(err)
       }
-    },
-
-    inject () {
-      this.page.data = this.$refs.villain.$villain.getJSON()
     }
   }
 }
