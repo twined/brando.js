@@ -79,7 +79,7 @@ export default {
     return {
       loading: 0,
       parents: [],
-      page: {}
+      page: null
     }
   },
 

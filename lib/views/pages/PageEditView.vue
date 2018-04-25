@@ -5,7 +5,8 @@
         <div class="card-header">
           <h5 class="section mb-0">Endre side</h5>
         </div>
-        <div class="card-body">
+        <div
+          class="card-body">
           <KInputSelect
             v-model="page.parent_id"
             :value="page.parent_id"
@@ -131,7 +132,7 @@ export default {
   data () {
     return {
       loading: 0,
-      page: {},
+      page: null,
       parents: []
     }
   },
