@@ -5595,7 +5595,7 @@ vex-js@^4.1.0:
 
 villain-editor@twined/villain-editor:
   version "0.5.0"
-  resolved "https://codeload.github.com/twined/villain-editor/tar.gz/c6fa8b70401339578af442a70e81896c9a6c6ecc"
+  resolved "https://codeload.github.com/twined/villain-editor/tar.gz/62c36a4c533aabefd36d4a80c763b0b21b8cce8c"
   dependencies:
     autosize "^4.0.1"
     lodash.clonedeep "^4.5.0"
