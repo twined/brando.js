@@ -329,8 +329,8 @@ atob@^2.0.0:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.0.tgz#ab2b150e51d7b122b9efc8d7340c06b6c41076bc"
 
 autosize@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/autosize/-/autosize-4.0.1.tgz#4e2f89d00e290dd98e1f95555a8ccb91e9c7a41a"
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/autosize/-/autosize-4.0.2.tgz#073cfd07c8bf45da4b9fd153437f5bafbba1e4c9"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -1179,8 +1179,8 @@ cliui@^3.2.0:
     wrap-ansi "^2.0.0"
 
 clone@^2.1.1:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.1.tgz#d217d1e961118e3ac9a4b8bba3285553bf647cdb"
 
 co@^4.6.0:
   version "4.6.0"
@@ -5595,7 +5595,7 @@ vex-js@^4.1.0:
 
 villain-editor@twined/villain-editor:
   version "0.5.0"
-  resolved "https://codeload.github.com/twined/villain-editor/tar.gz/62c36a4c533aabefd36d4a80c763b0b21b8cce8c"
+  resolved "https://codeload.github.com/twined/villain-editor/tar.gz/cbf274e5df179ec33abbb94b7300ed7bd41654b7"
   dependencies:
     autosize "^4.0.1"
     lodash.clonedeep "^4.5.0"
