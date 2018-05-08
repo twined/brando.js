@@ -6,6 +6,7 @@
           <h5 class="section mb-0">Endre side</h5>
         </div>
         <div
+          v-if="page"
           class="card-body">
           <KInputSelect
             v-model="page.parent_id"

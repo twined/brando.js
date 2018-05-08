@@ -5,7 +5,9 @@
         <div class="card-header">
           <h5 class="section mb-0">Opprett fragment</h5>
         </div>
-        <div class="card-body">
+        <div
+          v-if="page"
+          class="card-body">
           <KInputSelect
             v-model="page.language"
             :value="page.language"
