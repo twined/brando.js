@@ -25,7 +25,7 @@
         :prefill="prefill"
         :id="id"
         :name="name"
-        accept="image/jpeg,image/png,image/gif"
+        accept="image/jpeg,image/jpg,image/png,image/gif"
         size="10"
         buttonClass="btn btn-outline-secondary"
         :customStrings="{

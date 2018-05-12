@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: 'picture-input',
+  name: 'PictureInput',
   props: {
     width: {
       type: [String, Number],
@@ -260,6 +260,8 @@ export default {
         }
       } else {
         if (this.fileTypes.indexOf(files[0].type) === -1) {
+          console.log(this.fileTypes)
+          console.log(files)
           alert(this.strings.fileType)
           return
         }
