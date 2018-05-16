@@ -122,11 +122,6 @@ export default {
       required: true
     },
 
-    type: {
-      type: String,
-      required: true
-    },
-
     value: {
       default: () => {
         console.log(moment.tz('Europe/Oslo').format())
