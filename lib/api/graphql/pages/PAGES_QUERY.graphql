@@ -20,5 +20,6 @@ query Pages {
       slug
     }
     inserted_at
+    updated_at
   }
 }

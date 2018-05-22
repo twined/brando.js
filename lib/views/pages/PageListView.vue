@@ -52,14 +52,21 @@
                           exact
                         >
                           <i class="fal fa-pencil fa-fw mr-2"></i>
-                          Endre page
+                          Endre side
                         </router-link>
+                        <button
+                          @click.prevent="duplicatePage(page)"
+                          :class="{'dropdown-item': true}"
+                        >
+                          <i class="fal fa-copy fa-fw mr-2"></i>
+                          Duplisér side
+                        </button>
                         <button
                           @click.prevent="deletePage(page)"
                           :class="{'dropdown-item': true}"
                         >
                           <i class="fal fa-trash fa-fw mr-2"></i>
-                          Slett page
+                          Slett side
                         </button>
                       </b-dropdown>
                     </td>
@@ -158,8 +165,16 @@ export default {
       this.loading--
     },
 
+    async duplicatePage (page) {
+      this.adminChannel.channel
+        .push('page:duplicate', { id: page.id })
+        .receive('ok', payload => {
+          this.$store.commit('pages/ADD_PAGE', payload.page)
+        })
+    },
+
     deletePage (page) {
-      alertConfirm('OBS', 'Er du sikker på at du vil slette denne pageen?', (data) => {
+      alertConfirm('OBS', 'Er du sikker på at du vil slette denne siden?', (data) => {
         if (!data) {
           return
         }
@@ -173,7 +188,8 @@ export default {
     },
 
     ...mapActions('pages', [
-      'getPages'
+      'getPages',
+      'getPage'
     ])
   }
 }

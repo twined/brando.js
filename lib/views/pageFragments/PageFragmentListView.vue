@@ -48,14 +48,21 @@
                           exact
                         >
                           <i class="fal fa-pencil fa-fw mr-2"></i>
-                          Endre page
+                          Endre fragment
                         </router-link>
+                        <button
+                          @click.prevent="duplicatePageFragment(page)"
+                          :class="{'dropdown-item': true}"
+                        >
+                          <i class="fal fa-copy fa-fw mr-2"></i>
+                          Duplisér fragment
+                        </button>
                         <button
                           @click.prevent="deletePageFragment(page)"
                           :class="{'dropdown-item': true}"
                         >
                           <i class="fal fa-trash fa-fw mr-2"></i>
-                          Slett page
+                          Slett fragment
                         </button>
                       </b-dropdown>
                     </td>
@@ -109,6 +116,14 @@ export default {
       this.loading++
       await this.getPageFragments()
       this.loading--
+    },
+
+    async duplicatePageFragment (page) {
+      this.adminChannel.channel
+        .push('page_fragment:duplicate', { id: page.id })
+        .receive('ok', payload => {
+          this.$store.commit('pageFragments/ADD_PAGE_FRAGMENT', payload.page_fragment)
+        })
     },
 
     deletePageFragment (page) {
