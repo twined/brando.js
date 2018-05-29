@@ -1,6 +1,6 @@
 {
   "name": "kurtz",
-  "version": "0.0.1-dev",
+  "version": "0.0.2",
   "description": "Brando frontend",
   "main": "dist/kurtz.esm.js",
   "web": "dist/kurtz.esm.js",
