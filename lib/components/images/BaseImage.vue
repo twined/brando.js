@@ -23,30 +23,61 @@
         <div class="card-body">
           <div class="row">
             <div class="col-6">
-              <img :src="image.image.medium" class="img-fluid" />
+              <img :src="img.image.medium" class="img-fluid" />
+
+              <div class="row mt-4">
+                <div class="col-md-6">
+                  <dt>
+                    Dimensjoner
+                  </dt>
+                  <dd v-if="img.image.width && img.image.height">
+                    {{ img.image.width }}x{{ img.image.height }}
+                  </dd>
+                  <dd v-else>
+                    Ingen dimensjoner
+                  </dd>
+                </div>
+                <div class="col-md-6">
+                  <dt>
+                    Optimalisert
+                  </dt>
+                  <dd>
+                    <CheckOrX :val="img.image.optimized" />
+                  </dd>
+                </div>
+              </div>
             </div>
             <div class="col-6">
+              <KInput
+                v-model="img.image.title"
+                :value="img.image.title"
+                name="img.image[title]"
+                label="Evt. beskrivelse"
+                placeholder="Evt. beskrivelse"
+                data-vv-name="img.image[title]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('img.image[title]')"
+                :error-text="errors.first('img.image[title]')"
+              />
+              <KInput
+                v-model="img.image.credits"
+                :value="img.image.credits"
+                name="img.image[credits]"
+                label="Evt. kreditering"
+                placeholder="Evt. kreditering"
+                data-vv-name="img.image[credits]"
+                data-vv-value-path="innerValue"
+                :has-error="errors.has('img.image[credits]')"
+                :error-text="errors.first('img.image[credits]')"
+              />
               <dt>
                 Filnavn
               </dt>
               <dd>
-                {{ image.image.path }}
+                {{ img.image.path }}
               </dd>
-              <dt>
-                Dimensjoner
-              </dt>
-              <dd v-if="image.image.width && image.image.height">
-                {{ image.image.width }}x{{ image.image.height }}
-              </dd>
-              <dd v-else>
-                Ingen dimensjoner
-              </dd>
-              <dt>
-                Optimalisert
-              </dt>
-              <dd>
-                <CheckOrX :val="image.image.optimized" />
-              </dd>
+
+              <button @click.prevent="saveEdit" class="btn btn-outline-secondary btn-block">Lagre</button>
               <button @click.prevent="closeEdit" class="btn btn-outline-secondary btn-block">Lukk</button>
             </div>
           </div>
@@ -54,7 +85,7 @@
       </div>
     </modal>
 
-    <img :src="image.image.thumb" class="img-fluid" />
+    <img :src="img.image.thumb" class="img-fluid" />
   </div>
 </template>
 
@@ -62,6 +93,8 @@
 
 import CheckOrX from '../CheckOrX.vue'
 import Modal from '../Modal.vue'
+
+import { clone } from '../../utils'
 
 export default {
   components: {
@@ -83,10 +116,20 @@ export default {
 
   data () {
     return {
+      img: {},
       selected: false,
       showEdit: false,
       showOverlay: false
     }
+  },
+
+  inject: [
+    'adminChannel'
+  ],
+
+  created () {
+    this.img = clone(this.image)
+    console.log(this.img)
   },
 
   methods: {
@@ -109,13 +152,24 @@ export default {
       this.showOverlay = false
     },
 
+    saveEdit () {
+      this.adminChannel.channel.push('image:update', this.img)
+
+      this.showEdit = false
+      this.selected = false
+      this.showOverlay = false
+    },
+
     click (img) {
-      this.selected = !this.selected
-      if (this.selected) {
-        this.selectedImages.push(this)
-      } else {
-        let idx = this.selectedImages.indexOf(this)
-        this.selectedImages.splice(idx, 1)
+      // don't select if modal is open.
+      if (!this.showEdit) {
+        this.selected = !this.selected
+        if (this.selected) {
+          this.selectedImages.push(this)
+        } else {
+          let idx = this.selectedImages.indexOf(this)
+          this.selectedImages.splice(idx, 1)
+        }
       }
     }
   }
