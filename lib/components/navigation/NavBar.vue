@@ -2,7 +2,7 @@
   <header>
     <transition name="slide-fade-top-slow" appear>
       <div class="presences" v-if="lobbyPresences !== {}">
-        <span class="text-uppercase text-xs">online &rarr; </span>
+        <span class="text-uppercase text-xs pr-2">online &rarr; </span>
         <transition-group class="d-inline-flex justify-content-center" tag="div" name="fade">
           <div :key="id" class="user-presence" v-for="(p, id) in lobbyPresences">
             <div class="avatar" v-b-popover.hover.right="userById(id).full_name">
