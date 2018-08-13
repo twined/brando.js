@@ -1,27 +1,63 @@
 <template>
-  <div ref="container" id="file-input" class="file-input">
-    <div v-if="!supportsUpload" v-html="strings.upload"></div>
+  <div
+    id="file-input"
+    ref="container"
+    class="file-input">
+    <div
+      v-if="!supportsUpload"
+      v-html="strings.upload"/>
     <div>
-      <button class="ml-2" v-if="!fileSelected && !existingFile" @click.prevent="selectFile" :class="buttonClass">{{ strings.select }}</button>
-      <div class="ml-2" v-if="!fileSelected && existingFile">
+      <button
+        v-if="!fileSelected && !existingFile"
+        :class="buttonClass"
+        class="ml-2"
+        @click.prevent="selectFile">
+        {{ strings.select }}
+      </button>
+      <div
+        v-if="!fileSelected && existingFile"
+        class="ml-2">
         <small>
-          <i class="fa fa-file"></i> <strong>{{ existingFile }}</strong>
+          <i class="fa fa-file mr-2"/> <strong>{{ existingFile }}</strong>
         </small>
         <br>
-        <button class="mt-2" @click.prevent="selectFile" :class="buttonClass">{{ strings.change }}</button>
+        <button
+          :class="buttonClass"
+          class="mt-2"
+          @click.prevent="selectFile">
+          {{ strings.change }}
+        </button>
       </div>
-      <div class="ml-2" v-else>
+      <div
+        v-else
+        class="ml-2">
         <template v-if="fileName">
           <small>
-            <i class="fa fa-file"></i> <strong>{{ fileName }}</strong> - {{ fileSize }}
+            <i class="fa fa-file mr-2"/> <strong>{{ fileName }}</strong> - {{ fileSize }}
           </small>
           <br>
-          <button class="mt-2" @click.prevent="selectFile" :class="buttonClass">{{ strings.change }}</button>
+          <button
+            :class="buttonClass"
+            class="mt-2"
+            @click.prevent="selectFile">
+            {{ strings.change }}
+          </button>
         </template>
-        <button v-if="removable" @click.prevent="removeFile" :class="removeButtonClass">{{ strings.remove }}</button>
+        <button
+          v-if="removable"
+          :class="removeButtonClass"
+          @click.prevent="removeFile">
+          {{ strings.remove }}
+        </button>
       </div>
     </div>
-    <input ref="fileInput" type="file" :name="name" :id="id" @change="onFileChange" style="display:none;">
+    <input
+      ref="fileInput"
+      :name="name"
+      :id="id"
+      type="file"
+      style="display:none;"
+      @change="onFileChange">
   </div>
 </template>
 
@@ -136,6 +172,28 @@ export default {
       }
     }
   },
+  computed: {
+    supportsUpload () {
+      if (navigator.userAgent.match(/(Android (1.0|1.1|1.5|1.6|2.0|2.1))|(Windows Phone (OS 7|8.0))|(XBLWP)|(ZuneWP)|(w(eb)?OSBrowser)|(webOS)|(Kindle\/(1.0|2.0|2.5|3.0))/)) {
+        return false
+      }
+      const el = document.createElement('input')
+      el.type = 'file'
+      return !el.disabled
+    },
+    supportsDragAndDrop () {
+      const div = document.createElement('div')
+      return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && !('ontouchstart' in window || navigator.msMaxTouchPoints)
+    },
+    computedClasses () {
+      const classObject = {}
+      classObject['dragging-over'] = this.draggingOver
+      return classObject
+    },
+    fontSize () {
+      return Math.min(0.04 * this.previewWidth, 21) + 'px'
+    }
+  },
   mounted () {
     this.updateStrings()
     console.log('mounted', this.prefill)
@@ -217,28 +275,6 @@ export default {
       this.file = null
       this.imageObject = null
       this.$emit('remove')
-    }
-  },
-  computed: {
-    supportsUpload () {
-      if (navigator.userAgent.match(/(Android (1.0|1.1|1.5|1.6|2.0|2.1))|(Windows Phone (OS 7|8.0))|(XBLWP)|(ZuneWP)|(w(eb)?OSBrowser)|(webOS)|(Kindle\/(1.0|2.0|2.5|3.0))/)) {
-        return false
-      }
-      const el = document.createElement('input')
-      el.type = 'file'
-      return !el.disabled
-    },
-    supportsDragAndDrop () {
-      const div = document.createElement('div')
-      return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && !('ontouchstart' in window || navigator.msMaxTouchPoints)
-    },
-    computedClasses () {
-      const classObject = {}
-      classObject['dragging-over'] = this.draggingOver
-      return classObject
-    },
-    fontSize () {
-      return Math.min(0.04 * this.previewWidth, 21) + 'px'
     }
   }
 }
