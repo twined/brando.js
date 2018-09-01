@@ -37,9 +37,6 @@
   "peerDependencies": {
     "vue": "^2.4.2"
   },
-  "dependencies": {
-    "villain-editor": "twined/villain-editor"
-  },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "babel-plugin-external-helpers": "^6.22.0",

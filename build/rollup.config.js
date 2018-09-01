@@ -26,71 +26,50 @@ if (!fs.existsSync(dist)) {
 // since they are expected to be provided later.
 // We want to include some of them in the build, so we exclude it here.
 
-const externalExcludes = [
-  '@jacobmischka/vue-flatpickr',
-  'apollo-absinthe-upload-client',
-  'apollo-client',
-  'bootstrap',
-  'bootstrap-vue',
-  'graphql-tag',
-  'izitoast',
-  'moment',
-  'moment-timezone',
-  'nprogress',
-  'phoenix',
-  'raven-js',
-  'sortablejs',
-  'url-slug',
-  'v-click-outside',
-  'vee-validate',
-  'vex-js',
-  'vex-dialog',
-  'vue-core-image-upload',
-  'vue-multiselect',
-  'vue-picture-input',
-  'vue-upload-component',
-  'vuex',
-  'vuex-router-sync',
-  'flatpickr/dist/l10n/no'
-]
-
-var external = Object.keys(dependencies).filter(dep => externalExcludes.indexOf(dep) === -1);
-
-module.exports = {
+export default {
     input: path.resolve(lib, "index.js"),
     // Libs in `external` will not be bundled to dist,
     // since they are expected to be provided later.
-    external,
-    name,
+    external: [ 
+      'moment-timezone', 
+      'url-slug', 
+      'apollo-client', 
+      'apollo-absinthe-upload-client', 
+      'nprogress', 
+      'villain-editor',
+      '@jacobmischka/vue-flatpickr', 
+      'vuex', 
+      'vue' 
+    ],
     plugins: [
-        alias({
-            '@': lib,
-            '~': nodeModules
-        }),
-        scss({
-          output: path.resolve(dist, name + ".css"),
-          insert: true,
-			    include: '**/*.scss',
-			    exclude: [],
-          includePaths: ['node_modules']
-        }),
-        graphql({ sourceMap: true }),
-        vue(),
-        resolve({
-          jsnext: true,
-          main: true,
-          external: ["vue", "vuex"]
-        }),
-        json(),
-        commonjs(),
-        babel()
+      alias({
+        '@': lib,
+        '~': nodeModules
+      }),
+      scss({
+        output: path.resolve(dist, name + ".css"),
+        insert: true,
+		    include: '**/*.scss',
+		    exclude: [],
+        includePaths: ['node_modules']
+      }),
+      graphql({ sourceMap: true }),
+      vue(),
+      resolve({
+        jsnext: true,
+        main: true
+      }),
+      json(),
+      commonjs(),
+      babel()
     ],
 
     output: [
-        {
-            format: "es",
-            file: path.resolve(dist, name + ".esm.js"),
-            sourcemap: true
-        }
+      {
+        name,
+        format: "es",
+        file: path.resolve(dist, name + ".esm.js"),
+        sourcemap: true
+      }
     ]
 };
