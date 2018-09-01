@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
       <label class="control-label">
