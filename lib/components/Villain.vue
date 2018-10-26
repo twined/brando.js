@@ -11,6 +11,8 @@
 
       <VillainEditor
         ref="villain"
+        :templates="templates"
+        :template-mode="templateMode"
         :json="innerValue"
         :extra-headers="{'authorization': `Bearer ${token}`}"
         @input="$emit('input', $event)"
@@ -48,6 +50,16 @@ export default {
     value: {
       type: String,
       default: '[]'
+    },
+
+    templateMode: {
+      type: Boolean,
+      default: false
+    },
+
+    templates: {
+      type: Array,
+      default: () => []
     }
   },
 
