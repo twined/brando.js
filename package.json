@@ -93,5 +93,8 @@
     "collectCoverageFrom": [
       "lib"
     ]
+  },
+  "dependencies": {
+    "autoprefixer": "^9.3.1"
   }
 }

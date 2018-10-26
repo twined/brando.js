@@ -1,20 +1,19 @@
 <template>
-    <div id="app" :class="{'loaded': !loading, 'menu-open': status}" v-if="token && !loading">
-      <NProgress />
-      <NavMenu />
-      <NavBar />
-      <div id="content">
-        <transition name="fade" mode="out-in" @after-leave="afterLeave" appear>
-          <router-view class="view"></router-view>
-        </transition>
-      </div>
+  <div id="app" :class="{'loaded': !loading, 'menu-open': status, 'fullscreen': fullScreen}" v-if="token && !loading">
+    <NProgress />
+    <NavMenu />
+    <NavBar />
+    <div id="content">
+      <transition name="fade" mode="out-in" @after-leave="afterLeave" appear>
+        <router-view class="view"></router-view>
+      </transition>
     </div>
-    <div v-else-if="!token">
-      <div id="content">
-        <transition name="fade" mode="out-in" @after-leave="afterLeave" appear>
-          <router-view class="view"></router-view>
-        </transition>
-      </div>
+  </div>
+  <div v-else-if="!token">
+    <div id="content">
+      <transition name="fade" mode="out-in" @after-leave="afterLeave" appear>
+        <router-view class="view"></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -36,7 +35,8 @@ export default {
 
   data () {
     return {
-      loading: 1
+      loading: 1,
+      fullScreen: false
     }
   },
 
@@ -72,11 +72,24 @@ export default {
       if (value) {
         this.initializeApp()
       }
+    },
+
+    '$route' () {
+      console.log(this.$route.meta)
+      if (this.$route.meta.fullScreen) {
+        this.fullScreen = true
+      } else {
+        this.fullScreen = false
+      }
     }
   },
 
   async created () {
     console.debug('created <App />')
+
+    if (this.$route.meta.fullScreen) {
+      this.fullScreen = true
+    }
 
     if (this.token) {
       // check if the token is valid — might be old

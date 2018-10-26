@@ -1,0 +1,27 @@
+#app {
+  &.fullscreen {
+    header {
+      .container {
+        padding-left: 35px;
+        max-width: 100%;
+      }
+    }
+
+    #content {
+      .container {
+        max-width: 100%;
+        padding-left: 35px;
+      }
+
+      .main {
+        width: 100%;
+      }
+
+      .aside {
+        max-width: 500px;
+        width: 500px;
+        margin-left: 15px;
+      }
+    }
+  }
+}
