@@ -7,7 +7,7 @@
             Avbryt
           </button>
           <button class="btn btn-secondary" @click.prevent="deleteImages">
-            Slett <strong>{{ selectedImages.length }}</strong> <template v-if="selectedImages.length === 1">valgt bilde</template><template v-else>valgte bilder</template>
+            Slett <strong>{{ selectedImages.length }}</strong><template v-if="selectedImages.length === 1"> valgt bilde</template><template v-else> valgte bilder</template>
           </button>
         </div>
       </div>
