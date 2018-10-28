@@ -23,7 +23,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-6">
-              <img :src="img.image.medium" class="img-fluid" />
+              <img :src="img.image.path" class="img-fluid" />
 
               <div class="row mt-4">
                 <div class="col-md-6">
