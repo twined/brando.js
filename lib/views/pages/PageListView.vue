@@ -1,5 +1,8 @@
 <template>
-  <div class="pages container" v-if="!loading" appear>
+  <div
+    v-if="!loading"
+    class="pages container"
+    appear>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -12,17 +15,24 @@
               <p class="lead">Administrér sideinnhold og fragmenter</p>
               <hr class="my-4">
               <p class="lead">
-                <router-link :to="{ name: 'page-create' }" class="btn btn-secondary" exact>
+                <router-link
+                  :to="{ name: 'page-create' }"
+                  class="btn btn-secondary"
+                  exact>
                   Ny side
                 </router-link>
               </p>
             </div>
             <div class="page-list">
               <table class="table table-airy">
-                <tbody name="slide-fade-top-slow" is="transition-group" v-for="page in allPages" :key="page.id">
+                <tbody
+                  is="transition-group"
+                  v-for="page in allPages"
+                  :key="page.id"
+                  name="slide-fade-top-slow">
                   <tr :key="page.id">
                     <td class="fit">
-                      <i class="fa fa-fw fa-angle-right"></i>
+                      <i class="fa fa-fw fa-angle-right" />
                     </td>
                     <td class="fit">
                       <Flag :value="page.language" />
@@ -41,39 +51,41 @@
                       {{ page.updated_at | datetime }}
                     </td>
                     <td class="fit">
-                      <b-dropdown variant="white" no-caret>
+                      <b-dropdown
+                        variant="white"
+                        no-caret>
                         <template slot="button-content">
-                          <i class="k-dropdown-icon"></i>
+                          <i class="k-dropdown-icon" />
                         </template>
                         <router-link
                           :to="{ name: 'page-edit', params: { pageId: page.id } }"
-                          tag="button"
                           :class="{'dropdown-item': true}"
-                          exact
-                        >
-                          <i class="fal fa-pencil fa-fw mr-2"></i>
+                          tag="button"
+                          exact>
+                          <i class="fal fa-pencil fa-fw mr-2" />
                           Endre side
                         </router-link>
                         <button
-                          @click.prevent="duplicatePage(page)"
                           :class="{'dropdown-item': true}"
-                        >
-                          <i class="fal fa-copy fa-fw mr-2"></i>
+                          @click.prevent="duplicatePage(page)">
+                          <i class="fal fa-copy fa-fw mr-2" />
                           Duplisér side
                         </button>
                         <button
-                          @click.prevent="deletePage(page)"
                           :class="{'dropdown-item': true}"
-                        >
-                          <i class="fal fa-trash fa-fw mr-2"></i>
+                          @click.prevent="deletePage(page)">
+                          <i class="fal fa-trash fa-fw mr-2" />
                           Slett side
                         </button>
                       </b-dropdown>
                     </td>
                   </tr>
-                  <tr v-for="subpage in page.children" :key="subpage.id" class="page-subrow">
+                  <tr
+                    v-for="subpage in page.children"
+                    :key="subpage.id"
+                    class="page-subrow">
                     <td class="">
-                      <i class="fa fa-fw fa-angle-double-right"></i>
+                      <i class="fa fa-fw fa-angle-double-right" />
                     </td>
                     <td class="fit">
                       <Flag :value="subpage.language" />
@@ -92,24 +104,24 @@
                       {{ subpage.updated_at | datetime }}
                     </td>
                     <td>
-                      <b-dropdown variant="white" no-caret>
+                      <b-dropdown
+                        variant="white"
+                        no-caret>
                         <template slot="button-content">
-                          <i class="k-dropdown-icon"></i>
+                          <i class="k-dropdown-icon" />
                         </template>
                         <router-link
                           :to="{ name: 'subpage-edit', params: { subpageId: subpage.id } }"
-                          tag="button"
                           :class="{'dropdown-item': true}"
-                          exact
-                        >
-                          <i class="fal fa-pencil fa-fw mr-2"></i>
+                          tag="button"
+                          exact>
+                          <i class="fal fa-pencil fa-fw mr-2" />
                           Endre subpage
                         </router-link>
                         <button
-                          @click.prevent="deletePage(subpage)"
                           :class="{'dropdown-item': true}"
-                        >
-                          <i class="fal fa-trash fa-fw mr-2"></i>
+                          @click.prevent="deletePage(subpage)">
+                          <i class="fal fa-trash fa-fw mr-2" />
                           Slett subpage
                         </button>
                       </b-dropdown>
@@ -140,11 +152,6 @@ export default {
     }
   },
 
-  created () {
-    console.log('created <PageListView />')
-    this.getData()
-  },
-
   computed: {
     ...mapGetters('users', [
       'me'
@@ -157,6 +164,11 @@ export default {
   inject: [
     'adminChannel'
   ],
+
+  created () {
+    console.log('created <PageListView />')
+    this.getData()
+  },
 
   methods: {
     async getData () {
