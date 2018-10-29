@@ -2,10 +2,15 @@
   <!-- overview tab -->
   <div class="profile-form">
     <div class="container">
-      <div class="row" v-show="!loading">
+      <div
+        v-show="!loading"
+        class="row">
         <div class="col-md-3">
           <div class="card p-4">
-            <img class="card-img-top img-fluid" :src="me.avatar_medium" alt="Avatar">
+            <img
+              :src="me.avatar_medium"
+              class="card-img-top img-fluid"
+              alt="Avatar">
             <div class="card-body text-center p-0 pt-3">
               <h4 class="card-title mb-3">{{ me.full_name }}</h4>
               <span class="badge badge-outline-primary badge-sm text-uppercase">administrator</span>
@@ -20,87 +25,95 @@
             </div>
             <div class="card-body">
               <KInput
+                v-validate="'required'"
                 v-model="profile.full_name"
                 :value="profile.full_name"
+                :has-error="errors.has('profile[full_name]')"
+                :error-text="errors.first('profile[full_name]')"
                 name="profile[full_name]"
                 label="Navn"
                 placeholder="Navn"
-                v-validate="'required'"
                 data-vv-name="profile[full_name]"
                 data-vv-value-path="innerValue"
-                :has-error="errors.has('profile[full_name]')"
-                :error-text="errors.first('profile[full_name]')"
               />
 
               <KInputEmail
+                v-validate="'required|email'"
                 v-model="profile.email"
                 :value="profile.email"
+                :has-error="errors.has('profile[email]')"
+                :error-text="errors.first('profile[email]')"
                 name="profile[email]"
                 label="Epost"
                 placeholder="Epost"
-                v-validate="'required|email'"
                 data-vv-name="profile[email]"
                 data-vv-value-path="innerValue"
-                :has-error="errors.has('profile[email]')"
-                :error-text="errors.first('profile[email]')"
               />
 
               <KInputSelect
+                v-validate="'required'"
                 v-model="profile.language"
                 :value="profile.language"
                 :options="[
                   { name: 'Norsk', value: 'nb' },
                   { name: 'Engelsk', value: 'en' }
                 ]"
-                name="profile[language]"
-                label="Språk"
-                v-validate="'required'"
-                data-vv-name="profile[language]"
-                data-vv-value-path="innerValue"
                 :has-error="errors.has('profile[language]')"
                 :error-text="errors.first('profile[language]')"
+                name="profile[language]"
+                label="Språk"
+                data-vv-name="profile[language]"
+                data-vv-value-path="innerValue"
               />
 
               <KInputPassword
+                v-validate="'min:6|confirmed:profile[password_confirm]'"
                 v-model="profile.password"
                 :value="profile.password"
+                :has-error="errors.has('profile[password]')"
+                :error-text="errors.first('profile[password]')"
                 name="profile[password]"
                 label="Passord"
                 placeholder="Passord"
-                v-validate="'min:6|confirmed:profile[password_confirm]'"
                 data-vv-name="profile[password]"
                 data-vv-value-path="innerValue"
-                :has-error="errors.has('profile[password]')"
-                :error-text="errors.first('profile[password]')"
               />
               <KInputPassword
                 v-model="profile.password_confirm"
                 :value="profile.password_confirm"
+                :has-error="errors.has('profile[password_confirm]')"
+                :error-text="errors.first('profile[password_confirm]')"
                 name="profile[password_confirm]"
                 label="Bekreft passord"
                 placeholder="Bekreft passord"
                 data-vv-name="profile[password_confirm]"
                 data-vv-value-path="innerValue"
-                :has-error="errors.has('profile[password_confirm]')"
-                :error-text="errors.first('profile[password_confirm]')"
               />
 
               <KInputImage
+                v-validate="'required'"
                 v-model="profile.avatar"
                 :value="profile.avatar"
                 :width="100"
                 :height="100"
-                name="profile[avatar]"
-                label="Profilbilde"
-                v-validate="'required'"
-                data-vv-name="profile[avatar]"
-                data-vv-value-path="innerValue"
                 :has-error="errors.has('profile[avatar]')"
                 :error-text="errors.first('profile[avatar]')"
+                name="profile[avatar]"
+                label="Profilbilde"
+                data-vv-name="profile[avatar]"
+                data-vv-value-path="innerValue"
               />
 
-              <button @click.prevent="validate" class="btn btn-outline-secondary" type="submit">Lagre</button>
-              <router-link :to="{ name: 'dashboard' }" class="btn btn-outline-secondary" exact>
+              <button
+                class="btn btn-outline-secondary"
+                type="submit"
+                @click.prevent="validate">
+                Lagre
+              </button>
+              <router-link
+                :to="{ name: 'dashboard' }"
+                class="btn btn-outline-secondary"
+                exact>
                 Tilbake
               </router-link>
             </div>
@@ -114,7 +127,7 @@
 <script>
 import nprogress from 'nprogress'
 import { mapActions, mapGetters } from 'vuex'
-import { alertError, alertSuccess } from '../../utils/alerts.js'
+import { alertError } from '../../utils/alerts.js'
 import { userAPI } from '../../api/user'
 import showError from '../../utils/showError'
 import { pick } from '../../utils'
@@ -138,6 +151,16 @@ export default {
     }
   },
 
+  inject: [
+    'userChannel'
+  ],
+
+  computed: {
+    ...mapGetters('users', [
+      'me'
+    ])
+  },
+
   created () {
     console.debug('created <ProfileView />')
     this.token = this.$store.getters['users/token']
@@ -150,16 +173,6 @@ export default {
     }
 
     this.loading = false
-  },
-
-  inject: [
-    'userChannel'
-  ],
-
-  computed: {
-    ...mapGetters('users', [
-      'me'
-    ])
   },
 
   methods: {

@@ -11,17 +11,23 @@
       </div>
     </div>
 
-    <p class="mt-5">
-      <div class="centered-link-list">
-        <router-link :to="{ name: 'image-category-detail', params: { categoryId: c.id } }" class="" v-for="c in allImageCategories" :key="c.id">
-          {{ c.name }}
-        </router-link>
-      </div>
-    </p>
+    <div class="centered-link-list mt-5">
+      <router-link
+        v-for="c in allImageCategories"
+        :key="c.id"
+        :to="{ name: 'image-category-detail', params: { categoryId: c.id } }">
+        {{ c.name }}
+      </router-link>
+    </div>
 
     <div class="container">
-      <transition name="fade" :key="categoryId" mode="out-in">
-        <router-view :key="categoryId" class="mt-3 view"></router-view>
+      <transition
+        :key="categoryId"
+        name="fade"
+        mode="out-in">
+        <router-view
+          :key="categoryId"
+          class="mt-3 view"/>
       </transition>
     </div>
   </div>
@@ -31,9 +37,6 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  data () {
-    return {}
-  },
 
   props: {
     categoryId: {
@@ -42,15 +45,18 @@ export default {
       default: ''
     }
   },
-
-  async created () {
-    await this.fetchImageCategories()
+  data () {
+    return {}
   },
 
   computed: {
     ...mapGetters('images', [
       'allImageCategories'
     ])
+  },
+
+  async created () {
+    await this.fetchImageCategories()
   },
 
   methods: {

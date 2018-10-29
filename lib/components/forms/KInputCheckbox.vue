@@ -8,7 +8,7 @@
             class="form-check-input"
             :name="name"
             type="checkbox"
-          />
+          >
           {{ label }}
         </label>
       </div>
@@ -39,13 +39,10 @@ export default {
     },
 
     value: {
+      type: [String, Number, Boolean],
       required: false,
       default: ''
     }
-  },
-
-  created () {
-    this.innerValue = this.value
   },
 
   data () {
@@ -58,6 +55,10 @@ export default {
     id () {
       return this.name.replace('[', '_').replace(']', '_')
     }
+  },
+
+  created () {
+    this.innerValue = this.value
   },
 
   watch: {

@@ -1,15 +1,21 @@
 <template>
-  <transition name="fade" appear>
+  <transition
+    name="fade"
+    appear>
     <div class="container">
       <spinner v-if="loading" />
-      <div class="card mt-5" v-if="!loading">
+      <div
+        v-if="!loading"
+        class="card mt-5">
         <div class="card-header">
           <h5 class="section mb-0">
             Konfigurer bildeserie
           </h5>
         </div>
         <div class="card-body">
-          <ImageConfigForm :config="config" @save="save" />
+          <ImageConfigForm
+            :config="config"
+            @save="save" />
         </div>
       </div>
     </div>
@@ -26,6 +32,13 @@ export default {
     ImageConfigForm
   },
 
+  props: {
+    seriesId: {
+      required: true,
+      type: String
+    }
+  },
+
   data () {
     return {
       loading: 0,
@@ -37,11 +50,10 @@ export default {
     'adminChannel'
   ],
 
-  props: {
-    seriesId: {
-      required: true,
-      type: String
-    }
+  computed: {
+    ...mapGetters('images', [
+      'currentImageCategory'
+    ])
   },
 
   async created () {
@@ -52,12 +64,6 @@ export default {
         this.config = payload.config
         this.loading--
       })
-  },
-
-  computed: {
-    ...mapGetters('images', [
-      'currentImageCategory'
-    ])
   },
 
   methods: {

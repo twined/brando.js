@@ -1,18 +1,29 @@
 <template>
-  <div id="app" :class="{'loaded': !loading, 'menu-open': status, 'fullscreen': fullScreen}" v-if="token && !loading">
+  <div
+    v-if="token && !loading"
+    id="app"
+    :class="{'loaded': !loading, 'menu-open': status, 'fullscreen': fullScreen}">
     <NProgress />
     <NavMenu />
     <NavBar />
     <div id="content">
-      <transition name="fade" mode="out-in" @after-leave="afterLeave" appear>
-        <router-view class="view"></router-view>
+      <transition
+        name="fade"
+        mode="out-in"
+        appear
+        @after-leave="afterLeave">
+        <router-view class="view"/>
       </transition>
     </div>
   </div>
   <div v-else-if="!token">
     <div id="content">
-      <transition name="fade" mode="out-in" @after-leave="afterLeave" appear>
-        <router-view class="view"></router-view>
+      <transition
+        name="fade"
+        mode="out-in"
+        appear
+        @after-leave="afterLeave">
+        <router-view class="view"/>
       </transition>
     </div>
   </div>

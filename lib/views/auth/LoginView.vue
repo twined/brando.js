@@ -1,21 +1,42 @@
 <template>
   <transition name="login">
     <div class="login">
-      <div class="container-fluid fixed-full-content" :class="{'logging-in': loggingIn}">
+      <div
+        :class="{'logging-in': loggingIn}"
+        class="container-fluid fixed-full-content">
         <div class="twined-versioning">
-          <i class="fa fa-fw fa-adjust"></i> KURTZ V &copy; TWINED 2007 - 2017
+          <i class="fa fa-fw fa-adjust"/> KURTZ V &copy; TWINED 2007 - 2017
         </div>
-        <div class="d-flex justify-content-center flex-wrap align-items-center text-center" style="height: 100%;">
-          <transition name="slide-fade-top-slow" appear>
+        <div
+          class="d-flex justify-content-center flex-wrap align-items-center text-center"
+          style="height: 100%;">
+          <transition
+            name="slide-fade-top-slow"
+            appear>
             <div class="login-box">
-              <img src="/images/logo.svg" class="rounded-circle avatar-sm mb-5" />
-              <div class="" v-if="!loading">
+              <img
+                src="/images/logo.svg"
+                class="rounded-circle avatar-sm mb-5" >
+              <div v-if="!loading">
                 <div class="text-center">
-                  <input v-model="user.email" class="form-control text-center mb-4" name="email" type="email" placeholder="Epost">
-                  <input v-model="user.password" class="form-control text-center mb-5" name="password" type="password" placeholder="Passord" @keyup.13="login">
+                  <input
+                    v-model="user.email"
+                    class="form-control text-center mb-4"
+                    name="email"
+                    type="email"
+                    placeholder="Epost">
+                  <input
+                    v-model="user.password"
+                    class="form-control text-center mb-5"
+                    name="password"
+                    type="password"
+                    placeholder="Passord"
+                    @keyup.13="login">
                 </div>
                 <div>
-                  <button @click.prevent="login" class="btn btn-outline-dark">
+                  <button
+                    class="btn btn-outline-dark"
+                    @click.prevent="login">
                     Logg inn
                   </button>
                 </div>
@@ -30,7 +51,7 @@
 
 <script>
 
-import { alertInfo, alertError } from '../../utils/alerts'
+import { alertError } from '../../utils/alerts'
 import { mapGetters } from 'vuex'
 
 export default {

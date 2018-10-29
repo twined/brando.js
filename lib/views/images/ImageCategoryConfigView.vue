@@ -1,14 +1,20 @@
 <template>
-  <transition name="fade" appear>
+  <transition
+    name="fade"
+    appear>
     <spinner v-if="loading" />
-    <div class="card mt-5" v-if="!loading">
+    <div
+      v-if="!loading"
+      class="card mt-5">
       <div class="card-header">
         <h5 class="section mb-0">
           Konfigurer bildekategori &rarr; {{ currentImageCategory.name }}
         </h5>
       </div>
       <div class="card-body">
-        <ImageConfigForm :config="config" @save="save" />
+        <ImageConfigForm
+          :config="config"
+          @save="save" />
       </div>
     </div>
   </transition>
@@ -18,11 +24,17 @@
 import { mapActions, mapGetters } from 'vuex'
 import nprogress from 'nprogress'
 import ImageConfigForm from '../../components/images/ImageConfigForm.vue'
-// import { alertConfirm } from '../../utils/alerts'
 
 export default {
   components: {
     ImageConfigForm
+  },
+
+  props: {
+    categoryId: {
+      required: true,
+      type: String
+    }
   },
 
   data () {
@@ -36,11 +48,10 @@ export default {
     'adminChannel'
   ],
 
-  props: {
-    categoryId: {
-      required: true,
-      type: String
-    }
+  computed: {
+    ...mapGetters('images', [
+      'currentImageCategory'
+    ])
   },
 
   async created () {
@@ -52,12 +63,6 @@ export default {
         this.config = payload.config
         this.loading--
       })
-  },
-
-  computed: {
-    ...mapGetters('images', [
-      'currentImageCategory'
-    ])
   },
 
   methods: {

@@ -1,52 +1,71 @@
 <template>
-  <transition name="fade" appear>
+  <transition
+    name="fade"
+    appear>
     <spinner v-if="loading" />
-    <div class="image-category-detail" v-if="!loading">
+    <div
+      v-if="!loading"
+      class="image-category-detail">
       <ImageSelection
-        :selectedImages="selectedImages"
+        :selected-images="selectedImages"
       />
       <div class="row">
         <div class="col-md-12">
           <h1 class="wide text-center">
             {{ currentImageCategory.name }}
-            <b-dropdown variant="white btn-lg ml-3" no-caret>
+            <b-dropdown
+              variant="white btn-lg ml-3"
+              no-caret>
               <template slot="button-content">
-                <i class="k-dropdown-icon"></i>
+                <i class="k-dropdown-icon"/>
               </template>
-              <button @click.prevent="createImageCategory" class="dropdown-item">
-                <i class="fal fa-fw mr-3 subtle fa-plus-circle"></i>
+              <button
+                class="dropdown-item"
+                @click.prevent="createImageCategory">
+                <i class="fal fa-fw mr-3 subtle fa-plus-circle"/>
                 Opprett ny bildekategori
               </button>
-              <button @click.prevent="createImageSeries" class="dropdown-item">
-                <i class="fal fa-fw mr-3 subtle fa-plus"></i>
+              <button
+                class="dropdown-item"
+                @click.prevent="createImageSeries">
+                <i class="fal fa-fw mr-3 subtle fa-plus"/>
                 Opprett ny bildeserie
               </button>
-              <button class="dropdown-item" disabled>
-                <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"></i>
+              <button
+                class="dropdown-item"
+                disabled>
+                <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"/>
                 Sortér bildeserier i kategorien
               </button>
-              <button class="dropdown-item" disabled>
-                <i class="fal fa-fw mr-3 subtle fa-refresh"></i>
+              <button
+                class="dropdown-item"
+                disabled>
+                <i class="fal fa-fw mr-3 subtle fa-refresh"/>
                 Gjenskap bilder i kategorien
               </button>
-              <router-link :to="{ name: 'image-category-config', params: { categoryId: currentImageCategory.id } }" tag="button" class="dropdown-item">
-                <i class="fal fa-fw mr-3 subtle fa-cog"></i>
+              <router-link
+                :to="{ name: 'image-category-config', params: { categoryId: currentImageCategory.id } }"
+                tag="button"
+                class="dropdown-item">
+                <i class="fal fa-fw mr-3 subtle fa-cog"/>
                 Konfigurér bildekategorien
               </router-link>
-              <button @click.prevent="deleteCategory" class="dropdown-item">
-                <i class="fal fa-fw mr-3 subtle fa-trash"></i>
+              <button
+                class="dropdown-item"
+                @click.prevent="deleteCategory">
+                <i class="fal fa-fw mr-3 subtle fa-trash"/>
                 Slett bildekategori
               </button>
             </b-dropdown>
           </h1>
 
           <ModalCreateImageSeries
-            :imageCategory="currentImageCategory"
-            @close="closeCreateImageSeriesModal"
             v-if="showModalImageCreateSeries"
+            :image-category="currentImageCategory"
+            @close="closeCreateImageSeriesModal"
           />
           <ModalCreateImageCategory
-            :showModal="showModalImageCreateCategory"
+            :show-modal="showModalImageCreateCategory"
             @close="closeCreateImageCategoryModal"
           />
         </div>
@@ -54,24 +73,27 @@
 
       <div class="row">
         <div class="col-md-12">
-          <transition-group name="slide-fade-top-slow" appear>
+          <transition-group
+            name="slide-fade-top-slow"
+            appear>
             <ImageSeries
-              :imageSeries="s"
-              :selectedImages="selectedImages"
-              v-for="s in currentImageCategory.image_series" :key="s.id"
+              v-for="s in currentImageCategory.image_series"
+              :key="s.id"
+              :image-series="s"
+              :selected-images="selectedImages"
             />
           </transition-group>
           <div v-if="currentImageCategory.image_series.length">
             <button
               v-if="queryVars.imageSeriesOffset !== 0"
-              @click.prevent="previousPage"
-              class="btn btn-outline-secondary">
+              class="btn btn-outline-secondary"
+              @click.prevent="previousPage">
               &larr; Forrige side
             </button>
             <button
               v-if="queryVars.imageSeriesOffset + queryVars.imageSeriesLimit < currentImageCategory.image_series_count"
-              @click.prevent="nextPage"
-              class="btn btn-outline-secondary">
+              class="btn btn-outline-secondary"
+              @click.prevent="nextPage">
               Neste side &rarr;
             </button>
           </div>
@@ -101,6 +123,14 @@ export default {
     ModalCreateImageCategory
   },
 
+  props: {
+    categoryId: {
+      required: false,
+      type: String,
+      default: ''
+    }
+  },
+
   data () {
     return {
       showModalImageCreateSeries: false,
@@ -114,22 +144,14 @@ export default {
     }
   },
 
-  props: {
-    categoryId: {
-      required: false,
-      type: String,
-      default: ''
-    }
-  },
-
-  created () {
-    this.getData()
-  },
-
   computed: {
     ...mapGetters('images', [
       'currentImageCategory'
     ])
+  },
+
+  created () {
+    this.getData()
   },
 
   methods: {

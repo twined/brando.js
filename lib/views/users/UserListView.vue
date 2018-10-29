@@ -1,5 +1,8 @@
 <template>
-  <div class="users container" v-if="!loading" appear>
+  <div
+    v-if="!loading"
+    class="users container"
+    appear>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -12,18 +15,31 @@
               <p class="lead">Administrér brukere i backenden.</p>
               <hr class="my-4">
               <p class="lead">
-                <router-link :to="{ name: 'user-create' }" class="btn btn-secondary" exact v-if="['admin', 'superuser'].includes(me.role)">
+                <router-link
+                  v-if="['admin', 'superuser'].includes(me.role)"
+                  :to="{ name: 'user-create' }"
+                  class="btn btn-secondary"
+                  exact>
                   Legg til bruker
                 </router-link>
               </p>
             </div>
 
-            <table class="table table-airy" v-if="allUsers.length">
-              <tbody name="slide-fade-top-slow" is="transition-group">
-                <tr :key="user.id" v-for="user in allUsers">
+            <table
+              v-if="allUsers.length"
+              class="table table-airy">
+              <tbody
+                is="transition-group"
+                name="slide-fade-top-slow">
+                <tr
+                  v-for="user in allUsers"
+                  :key="user.id">
                   <td class="fit">
                     <div class="avatar">
-                      <img :src="user.avatar" class="rounded-circle avatar-xs" alt="Avatar">
+                      <img
+                        :src="user.avatar"
+                        class="rounded-circle avatar-xs"
+                        alt="Avatar">
                     </div>
                   </td>
                   <td>
@@ -40,21 +56,26 @@
                       {{ user.role }}
                     </span>
                   </td>
-                  <td class="text-center fit" v-if="['superuser'].includes(me.role)">
-                    <b-dropdown variant="white" no-caret v-if="user.id !== me.id">
+                  <td
+                    v-if="['superuser'].includes(me.role)"
+                    class="text-center fit">
+                    <b-dropdown
+                      v-if="user.id !== me.id"
+                      variant="white"
+                      no-caret>
                       <template slot="button-content">
-                        <i class="k-dropdown-icon"></i>
+                        <i class="k-dropdown-icon"/>
                       </template>
                       <button
-                        @click.prevent="setDeactivated(user)"
-                        :class="{'dropdown-item': true, 'disabled': ['superuser'].includes(me.role)}">
-                        <i class="fal fa-fw fa-window-close mr-4"></i>Deaktivér bruker
+                        :class="{'dropdown-item': true, 'disabled': ['superuser'].includes(me.role)}"
+                        @click.prevent="setDeactivated(user)">
+                        <i class="fal fa-fw fa-window-close mr-4"/>Deaktivér bruker
                       </button>
                       <router-link
                         :to="{ name: 'user-edit', params: { userId: user.id } }"
-                        tag="button"
-                        :class="{'dropdown-item': true}">
-                        <i class="fal fa-fw fa-pencil mr-4"></i>Endre brukerdata
+                        :class="{'dropdown-item': true}"
+                        tag="button">
+                        <i class="fal fa-fw fa-pencil mr-4"/>Endre brukerdata
                       </router-link>
                     </b-dropdown>
                   </td>
@@ -78,13 +99,6 @@ export default {
     }
   },
 
-  async created () {
-    console.debug('created <UserListView />')
-    this.loading++
-    await this.storeUsers()
-    this.loading--
-  },
-
   computed: {
     ...mapGetters('users', [
       'me',
@@ -95,6 +109,13 @@ export default {
   inject: [
     'adminChannel'
   ],
+
+  async created () {
+    console.debug('created <UserListView />')
+    this.loading++
+    await this.storeUsers()
+    this.loading--
+  },
 
   methods: {
     setUser (e) {

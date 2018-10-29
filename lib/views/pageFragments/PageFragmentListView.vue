@@ -1,5 +1,8 @@
 <template>
-  <div class="pages container" v-if="!loading" appear>
+  <div
+    v-if="!loading"
+    class="pages container"
+    appear>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -12,24 +15,33 @@
               <p class="lead">Sidefragmenter er små dynamiske biter av nettsiden som kan tilpasses og endres</p>
               <hr class="my-4">
               <p class="lead">
-                <router-link :to="{ name: 'pagefragment-create' }" class="btn btn-secondary" exact>
+                <router-link
+                  :to="{ name: 'pagefragment-create' }"
+                  class="btn btn-secondary"
+                  exact>
                   Nytt sidefragment
                 </router-link>
               </p>
             </div>
             <div class="page-list">
               <table class="table table-airy">
-                <tbody name="slide-fade-top-slow" is="transition-group">
-                  <tr v-for="page in allPageFragments" :key="page.id">
+                <tbody
+                  is="transition-group"
+                  name="slide-fade-top-slow">
+                  <tr
+                    v-for="page in allPageFragments"
+                    :key="page.id">
                     <td class="fit">
-                      <i class="fa fa-fw fa-angle-right"></i>
+                      <i class="fa fa-fw fa-angle-right"/>
                     </td>
                     <td class="fit">
                       <Flag :value="page.language" />
                     </td>
                     <td class="text-mono text-sm text-left">
-                      {{ page.parent_key}} /
-                      <router-link :to="{ name: 'pagefragment-edit', params: { pageId: page.id } }" exact>
+                      {{ page.parent_key }} /
+                      <router-link
+                        :to="{ name: 'pagefragment-edit', params: { pageId: page.id } }"
+                        exact>
                         {{ page.key }}
                       </router-link>
                     </td>
@@ -37,31 +49,30 @@
                       {{ page.updated_at | datetime }}
                     </td>
                     <td class="fit">
-                      <b-dropdown variant="white" no-caret>
+                      <b-dropdown
+                        variant="white"
+                        no-caret>
                         <template slot="button-content">
-                          <i class="k-dropdown-icon"></i>
+                          <i class="k-dropdown-icon"/>
                         </template>
                         <router-link
                           :to="{ name: 'pagefragment-edit', params: { pageId: page.id } }"
-                          tag="button"
                           :class="{'dropdown-item': true}"
-                          exact
-                        >
-                          <i class="fal fa-pencil fa-fw mr-2"></i>
+                          tag="button"
+                          exact>
+                          <i class="fal fa-pencil fa-fw mr-2"/>
                           Endre fragment
                         </router-link>
                         <button
-                          @click.prevent="duplicatePageFragment(page)"
                           :class="{'dropdown-item': true}"
-                        >
-                          <i class="fal fa-copy fa-fw mr-2"></i>
+                          @click.prevent="duplicatePageFragment(page)">
+                          <i class="fal fa-copy fa-fw mr-2"/>
                           Duplisér fragment
                         </button>
                         <button
-                          @click.prevent="deletePageFragment(page)"
                           :class="{'dropdown-item': true}"
-                        >
-                          <i class="fal fa-trash fa-fw mr-2"></i>
+                          @click.prevent="deletePageFragment(page)">
+                          <i class="fal fa-trash fa-fw mr-2"/>
                           Slett fragment
                         </button>
                       </b-dropdown>
@@ -93,11 +104,6 @@ export default {
     }
   },
 
-  created () {
-    console.log('created <PageFragmentListView />')
-    this.getData()
-  },
-
   computed: {
     ...mapGetters('users', [
       'me'
@@ -110,6 +116,11 @@ export default {
   inject: [
     'adminChannel'
   ],
+
+  created () {
+    console.log('created <PageFragmentListView />')
+    this.getData()
+  },
 
   methods: {
     async getData () {
