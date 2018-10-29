@@ -1,27 +1,39 @@
 <template>
   <modal
+    v-if="showModal"
     :chrome="false"
     :show="showModal"
     :large="true"
     @cancel="closeModal"
     @ok="closeModal"
-    v-if="showModal"
   >
     <div class="card mb-3">
       <div class="card-header text-center">
         <h5 class="section mb-0">Sortér bildeserie</h5>
       </div>
       <div class="card-body">
-        <transition-group name="fade-move" tag="div" class="sort-container" v-sortable="{handle: '.sort-handle', animation: 0, store: {get: getOrder, set: storeOrder}}">
-          <div :data-id="i.id" class="sort-handle" v-for="i in imageSeries.images" :key="i.id">
-            <img :src="i.image.thumb" />
+        <transition-group
+          v-sortable="{handle: '.sort-handle', animation: 0, store: {get: getOrder, set: storeOrder}}"
+          name="fade-move"
+          tag="div"
+          class="sort-container">
+          <div
+            v-for="i in imageSeries.images"
+            :data-id="i.id"
+            :key="i.id"
+            class="sort-handle">
+            <img :src="i.image.thumb" >
           </div>
         </transition-group>
         <div class="mt-4">
-          <button @click.prevent="save" class="btn btn-secondary">
+          <button
+            class="btn btn-secondary"
+            @click.prevent="save">
             Lagre rekkefølge
           </button>
-          <button @click.prevent="closeModal" class="btn">
+          <button
+            class="btn"
+            @click.prevent="closeModal">
             Avbryt
           </button>
         </div>

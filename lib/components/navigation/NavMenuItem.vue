@@ -1,15 +1,19 @@
 <template>
-  <div class="menu-line-wrapper" ref="wrapper">
+  <div
+    ref="wrapper"
+    class="menu-line-wrapper">
     <div class="menu-line">
-      <div class="caption" @click.stop.prevent="toggle">
+      <div
+        class="caption"
+        @click.stop.prevent="toggle">
         <span class="nav-icon">
-          <i :class="icon ? icon : ''"></i>
+          <i :class="icon ? icon : ''"/>
         </span>
         {{ text }}
       </div>
     </div>
     <div class="menu-line-sub">
-      <slot></slot>
+      <slot/>
     </div>
   </div>
 </template>

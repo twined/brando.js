@@ -2,12 +2,12 @@
   <div class="navigation-menu">
     <button
       id="hamburger"
-      class="hamburger hamburger--spin"
       :class="{'is-active': status}"
+      class="hamburger hamburger--spin"
       type="button"
       @click.prevent.stop="toggleMenu">
       <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
+        <span class="hamburger-inner"/>
       </span>
     </button>
   </div>

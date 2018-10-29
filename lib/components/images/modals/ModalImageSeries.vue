@@ -1,18 +1,18 @@
 <template>
   <modal
+    v-if="!loading"
     :chrome="false"
     :show="true"
     :large="true"
     @cancel="closeModal"
     @ok="closeModal"
-    v-if="!loading"
   >
     <ImageSeries
-      :imageSeries="imageSeries"
-      :selectedImages="selectedImages"
-      :sequenceCallback="sortCallback"
-      :uploadCallback="uploadCallback"
-      :deleteCallback="deleteCallback"
+      :image-series="imageSeries"
+      :selected-images="selectedImages"
+      :sequence-callback="sortCallback"
+      :upload-callback="uploadCallback"
+      :delete-callback="deleteCallback"
       :modal="true"
       @close="closeModal"
     />
@@ -38,6 +38,7 @@ export default {
     },
 
     imageSeriesId: {
+      type: [String, Number],
       required: true
     },
 
@@ -47,17 +48,17 @@ export default {
     }
   },
 
-  created () {
-    console.log('created <ModalImageSeries />')
-    this.getData()
-  },
-
   data () {
     return {
       loading: 0,
       imageSeries: {},
       sortedArray: []
     }
+  },
+
+  created () {
+    console.log('created <ModalImageSeries />')
+    this.getData()
   },
 
   inject: [
@@ -69,7 +70,7 @@ export default {
       nprogress.start()
       this.loading++
       const imgSeries = await imageAPI.getImageSeries(this.imageSeriesId)
-      this.imageSeries = {...imgSeries}
+      this.imageSeries = { ...imgSeries }
       this.loading--
       nprogress.done()
     },
@@ -84,7 +85,7 @@ export default {
           ...imageSeries,
           images: [
             ...imageSeries.images.slice(0, imgIdx),
-            {...img, sequence: i},
+            { ...img, sequence: i },
             ...imageSeries.images.slice(imgIdx + 1)
           ]
         }

@@ -5,7 +5,7 @@
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"></i>
+        <i class="fa fa-exclamation-circle text-danger"/>
         {{ errorText }}
       </span>
     </div>
@@ -46,7 +46,8 @@ export default {
     },
 
     errorText: {
-      type: String
+      type: String,
+      default: ''
     },
 
     label: {
@@ -64,12 +65,9 @@ export default {
 
     value: {
       required: false,
-      default: ''
+      default: '',
+      type: null
     }
-  },
-
-  created () {
-    this.innerValue = this.value
   },
 
   data () {
@@ -92,6 +90,10 @@ export default {
     value (value) {
       this.innerValue = value
     }
+  },
+
+  created () {
+    this.innerValue = this.value
   }
 }
 </script>

@@ -1,13 +1,22 @@
 <template>
-  <div class="menu-backdrop" v-click-outside="onClickOutside">
+  <div
+    v-click-outside="onClickOutside"
+    class="menu-backdrop">
     <div class="menu-content d-flex flex-column align-items-center">
       <div class="top">
         <div class="avatar mx-auto">
-          <img :src="me.avatar_medium" alt="Profilbilde" class="rounded-circle img-fluid">
+          <img
+            :src="me.avatar_medium"
+            alt="Profilbilde"
+            class="rounded-circle img-fluid">
         </div>
         <div class="info text-center mb-3 text-white">
           <h6>
-            <router-link @click.stop.native="close" :to="{ name: 'profile' }" exact v-if="me">
+            <router-link
+              v-if="me"
+              :to="{ name: 'profile' }"
+              exact
+              @click.stop.native="close">
               {{ me.full_name }}
             </router-link>
           </h6>
@@ -15,33 +24,88 @@
       </div>
 
       <div class="menu-line-main">
-        <router-link @click.stop.native="close" :to="{ name: 'dashboard' }" exact>
+        <router-link
+          :to="{ name: 'dashboard' }"
+          exact
+          @click.stop.native="close">
           <span class="nav-icon">
-            <i class="fal fa-tachometer-alt"></i>
+            <i class="fal fa-tachometer-alt"/>
           </span>
           Mitt dashboard
         </router-link>
       </div>
 
-      <NavMenuItem text="Brukere" @expanding="expanding" icon="fal fa-fw fa-user-circle">
-        <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'users' }" exact>Oversikt</router-link>
-        <router-link data-index="2" key="2" @click.native="close" :to="{ name: 'user-create' }">Opprett ny bruker</router-link>
+      <NavMenuItem
+        text="Brukere"
+        icon="fal fa-fw fa-user-circle"
+        @expanding="expanding">
+        <router-link
+          key="1"
+          :to="{ name: 'users' }"
+          data-index="1"
+          exact
+          @click.native="close">Oversikt</router-link>
+        <router-link
+          key="2"
+          :to="{ name: 'user-create' }"
+          data-index="2"
+          @click.native="close">Opprett ny bruker</router-link>
       </NavMenuItem>
 
-      <NavMenuItem text="Bilder" @expanding="expanding" icon="fal fa-fw fa-image">
-        <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'images' }" exact>Oversikt</router-link>
+      <NavMenuItem
+        text="Bilder"
+        icon="fal fa-fw fa-image"
+        @expanding="expanding">
+        <router-link
+          key="1"
+          :to="{ name: 'images' }"
+          data-index="1"
+          exact
+          @click.native="close">Oversikt</router-link>
       </NavMenuItem>
 
-      <NavMenuItem text="Sider" @expanding="expanding" icon="fal fa-fw fa-file-alt">
-        <router-link data-index="1" key="1" @click.native="close" :to="{ name: 'pages' }" exact>Oversikt</router-link>
-        <router-link data-index="2" key="2" @click.native="close" :to="{ name: 'page-create' }" exact>Opprett ny side</router-link>
-        <router-link data-index="3" key="3" @click.native="close" :to="{ name: 'pagefragments' }" exact>Sidefragmenter</router-link>
-        <router-link data-index="4" key="4" @click.native="close" :to="{ name: 'pagefragment-create' }" exact>Opprett nytt fragment</router-link>
+      <NavMenuItem
+        text="Sider"
+        icon="fal fa-fw fa-file-alt"
+        @expanding="expanding">
+        <router-link
+          key="1"
+          :to="{ name: 'pages' }"
+          data-index="1"
+          exact
+          @click.native="close">Oversikt</router-link>
+        <router-link
+          key="2"
+          :to="{ name: 'page-create' }"
+          data-index="2"
+          exact
+          @click.native="close">Opprett ny side</router-link>
+        <router-link
+          key="3"
+          :to="{ name: 'pagefragments' }"
+          data-index="3"
+          exact
+          @click.native="close">Sidefragmenter</router-link>
+        <router-link
+          key="4"
+          :to="{ name: 'pagefragment-create' }"
+          data-index="4"
+          exact
+          @click.native="close">Opprett nytt fragment</router-link>
       </NavMenuItem>
 
       <template v-for="(entry, idx) in entries">
-        <NavMenuItem :key="idx" @expanding="expanding" :text="entry.text" :icon="entry.icon">
-          <router-link v-for="(child, idx) in entry.children" :key="idx" @click.native="close" :to="child.to" exact>
+        <NavMenuItem
+          :key="idx"
+          :text="entry.text"
+          :icon="entry.icon"
+          @expanding="expanding">
+          <router-link
+            v-for="(child, idx) in entry.children"
+            :key="idx"
+            :to="child.to"
+            exact
+            @click.native="close">
             {{ child.text }}
           </router-link>
         </NavMenuItem>
@@ -75,7 +139,6 @@ export default {
 
   methods: {
     onClickOutside () {
-      console.log('click outside!')
       if (this.status) {
         this.hide()
       }

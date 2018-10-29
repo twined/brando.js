@@ -1,14 +1,16 @@
 <template>
-  <div :class="{'form-group': true, 'has-danger': hasError }" v-if="!loading">
+  <div
+    v-if="!loading"
+    :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
       <label
-        class="control-label"
         :for="id"
+        class="control-label"
       >
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"></i>
+        <i class="fa fa-exclamation-circle text-danger"/>
         {{ errorText }}
       </span>
     </div>
@@ -54,7 +56,8 @@ export default {
     },
 
     errorText: {
-      type: String
+      type: String,
+      default: ''
     },
 
     label: {
@@ -69,17 +72,8 @@ export default {
 
     value: {
       required: false,
-      default: null
-    }
-  },
-
-  created () {
-    this.innerValue = this.value
-    console.log(this.value)
-    if (typeof this.value === 'string') {
-      this.prefill = this.value
-    } else {
-      this.prefill = this.value ? this.value['url'] : null
+      default: null,
+      type: null
     }
   },
 
@@ -105,6 +99,16 @@ export default {
 
     value (value) {
       this.innerValue = value
+    }
+  },
+
+  created () {
+    this.innerValue = this.value
+    console.log(this.value)
+    if (typeof this.value === 'string') {
+      this.prefill = this.value
+    } else {
+      this.prefill = this.value ? this.value['url'] : null
     }
   },
 

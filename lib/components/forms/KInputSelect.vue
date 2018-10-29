@@ -1,17 +1,26 @@
 <template>
   <div :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
-      <label class="control-label" :for="id">
+      <label
+        :for="id"
+        class="control-label">
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"></i>
+        <i class="fa fa-exclamation-circle text-danger"/>
         {{ errorText }}
       </span>
     </div>
 
-    <select v-model="innerValue" class="form-control" :id="id" :name="name">
-      <option :value="o.value" v-for="o in options" :key="o.value">
+    <select
+      v-model="innerValue"
+      :id="id"
+      :name="name"
+      class="form-control">
+      <option
+        v-for="o in options"
+        :value="o.value"
+        :key="o.value">
         {{ o.name }}
       </option>
     </select>
@@ -27,7 +36,8 @@ export default {
     },
 
     errorText: {
-      type: String
+      type: String,
+      default: ''
     },
 
     label: {
@@ -50,12 +60,9 @@ export default {
 
     value: {
       required: false,
-      default: ''
+      default: '',
+      type: null
     }
-  },
-
-  created () {
-    this.innerValue = this.value
   },
 
   data () {
@@ -78,6 +85,10 @@ export default {
     value (value) {
       this.innerValue = value
     }
+  },
+
+  created () {
+    this.innerValue = this.value
   }
 }
 </script>

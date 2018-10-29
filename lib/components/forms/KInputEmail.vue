@@ -1,11 +1,13 @@
 <template>
   <div :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
-      <label class="control-label" :for="id">
+      <label
+        :for="id"
+        class="control-label">
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"></i>
+        <i class="fa fa-exclamation-circle text-danger"/>
         {{ errorText }}
       </span>
     </div>
@@ -14,8 +16,8 @@
       v-model="innerValue"
       :placeholder="placeholder"
       :id="id"
-      class="form-control form-control-danger"
       :name="name"
+      class="form-control form-control-danger"
       type="email"
     >
   </div>
@@ -30,7 +32,8 @@ export default {
     },
 
     errorText: {
-      type: String
+      type: String,
+      default: ''
     },
 
     label: {
@@ -40,7 +43,8 @@ export default {
 
     placeholder: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
 
     name: {
@@ -49,12 +53,9 @@ export default {
     },
 
     value: {
+      type: String,
       default: ''
     }
-  },
-
-  created () {
-    this.innerValue = this.value
   },
 
   data () {
@@ -77,6 +78,10 @@ export default {
     value (value) {
       this.innerValue = value
     }
+  },
+
+  created () {
+    this.innerValue = this.value
   }
 }
 </script>

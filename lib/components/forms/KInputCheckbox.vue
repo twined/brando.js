@@ -5,8 +5,8 @@
         <label class="form-check-label">
           <input
             v-model="innerValue"
-            class="form-check-input"
             :name="name"
+            class="form-check-input"
             type="checkbox"
           >
           {{ label }}
@@ -25,7 +25,8 @@ export default {
     },
 
     errorText: {
-      type: String
+      type: String,
+      default: ''
     },
 
     label: {
@@ -57,10 +58,6 @@ export default {
     }
   },
 
-  created () {
-    this.innerValue = this.value
-  },
-
   watch: {
     innerValue (value) {
       this.$emit('input', value)
@@ -69,6 +66,10 @@ export default {
     value (value) {
       this.innerValue = value
     }
+  },
+
+  created () {
+    this.innerValue = this.value
   }
 }
 </script>

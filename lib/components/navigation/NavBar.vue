@@ -1,28 +1,48 @@
 <template>
   <header>
-    <transition name="slide-fade-top-slow" appear>
-      <div class="presences" v-if="lobbyPresences !== {}">
+    <transition
+      name="slide-fade-top-slow"
+      appear>
+      <div
+        v-if="lobbyPresences !== {}"
+        class="presences">
         <span class="text-uppercase text-xs pr-2">online &rarr; </span>
-        <transition-group class="d-inline-flex justify-content-center" tag="div" name="fade">
-          <div :key="id" class="user-presence" v-for="(p, id) in lobbyPresences">
-            <div class="avatar" v-b-popover.hover.right="userById(id).full_name">
-              <img :src="userById(id).avatar" class="rounded-circle avatar-xxs">
+        <transition-group
+          class="d-inline-flex justify-content-center"
+          tag="div"
+          name="fade">
+          <div
+            v-for="(p, id) in lobbyPresences"
+            :key="id"
+            class="user-presence">
+            <div
+              v-b-popover.hover.right="userById(id).full_name"
+              class="avatar">
+              <img
+                :src="userById(id).avatar"
+                class="rounded-circle avatar-xxs">
             </div>
           </div>
         </transition-group>
       </div>
     </transition>
     <section class="container">
-      <transition name="slide-fade-top-slow" appear>
+      <transition
+        name="slide-fade-top-slow"
+        appear>
         <Hamburger />
       </transition>
-      <transition name="slide-fade-top-slow" appear>
+      <transition
+        name="slide-fade-top-slow"
+        appear>
         <nav class="navbar navbar-toggleable-xxl">
           <div class="logo-wrapper">
             {{ siteName }}
           </div>
 
-          <div class="align-items-center" id="navbar-collapse">
+          <div
+            id="navbar-collapse"
+            class="align-items-center">
             <ul class="nav navbar-right ml-auto">
               <CurrentUser :user="me" />
             </ul>
@@ -54,13 +74,6 @@ export default {
     ...mapGetters('config', [
       'siteName'
     ])
-  },
-
-  data () {
-    return {}
-  },
-
-  methods: {
   }
 }
 </script>

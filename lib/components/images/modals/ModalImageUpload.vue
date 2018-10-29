@@ -1,11 +1,11 @@
 <template>
   <modal
+    v-if="showModal"
     :chrome="false"
     :large="true"
     :show="showModal"
     @cancel="closeModal"
     @ok="closeModal"
-    v-if="showModal"
   >
     <div class="card mb-3">
       <div class="card-header text-center">
@@ -14,58 +14,95 @@
       <div class="card-body">
         <div class="example-drag">
           <div class="upload">
-            <table class="table table-bordered text-sm" v-if="files.length">
-              <tr v-for="(file, index) in files" :key="file.id">
+            <table
+              v-if="files.length"
+              class="table table-bordered text-sm">
+              <tr
+                v-for="file in files"
+                :key="file.id">
                 <td class="fit">
-                  <img v-if="file.thumb" :src="file.thumb" width="40" height="auto" />
+                  <img
+                    v-if="file.thumb"
+                    :src="file.thumb"
+                    width="40"
+                    height="auto" >
                 </td>
-                <td class="ws-normal">{{file.name}}</td>
-                <td class="fit">{{file.size | formatSize}}</td>
-                <td class="fit" v-if="file.error === 'denied'"><i class="fal fa-fw fa-exclamation-circle text-danger"></i> 404</td>
-                <td class="fit" v-else-if="file.success"><i class="fal fa-fw fa-check text-success"></i></td>
-                <td class="fit" v-else-if="file.active"><i class="fal fa-fw fa-cog fa-spin"></i></td>
-                <td class="fit" v-else>—</td>
+                <td class="ws-normal">{{ file.name }}</td>
+                <td class="fit">{{ file.size | formatSize }}</td>
+                <td
+                  v-if="file.error === 'denied'"
+                  class="fit"><i class="fal fa-fw fa-exclamation-circle text-danger"/> 404</td>
+                <td
+                  v-else-if="file.success"
+                  class="fit"><i class="fal fa-fw fa-check text-success"/></td>
+                <td
+                  v-else-if="file.active"
+                  class="fit"><i class="fal fa-fw fa-cog fa-spin"/></td>
+                <td
+                  v-else
+                  class="fit">—</td>
               </tr>
             </table>
             <div
-              class="d-flex justify-content-center p-5 mt-0 mb-4 bg-light"
               v-else
+              class="d-flex justify-content-center p-5 mt-0 mb-4 bg-light"
             >
-              <h5 class="text-center">Slipp filene dine her for å laste opp<br/><br/>eller</h5>
+              <h5 class="text-center">Slipp filene dine her for å laste opp<br><br>eller</h5>
             </div>
             <div class="d-flex justify-content-center">
               <div class="example-btn">
                 <FileUpload
-                  class="btn btn-primary mb-0"
+                  ref="upload"
                   :post-action="`/admin/api/images/upload/image_series/${imageSeries.id}`"
                   :headers="{'authorization': getToken()}"
                   :multiple="true"
                   :drop="true"
+                  v-model="files"
+                  class="btn btn-primary mb-0"
                   name="image"
                   accept="image/*"
-                  v-model="files"
                   @input-filter="inputFilter"
-                  @input-file="inputFile"
-                  ref="upload">
-                  <i class="fa fa-plus"></i>
+                  @input-file="inputFile">
+                  <i class="fa fa-plus"/>
                   Velg filer
                 </FileUpload>
-                <button type="button" :disabled="!files.length" class="btn btn-success" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.active = true">
-                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                <button
+                  v-if="!$refs.upload || !$refs.upload.active"
+                  :disabled="!files.length"
+                  type="button"
+                  class="btn btn-success"
+                  @click.prevent="$refs.upload.active = true">
+                  <i
+                    class="fa fa-arrow-up"
+                    aria-hidden="true"/>
                   Start opplasting
                 </button>
-                <button type="button" class="btn btn-danger" @click.prevent="$refs.upload.active = false" v-else>
-                  <i class="fa fa-stop" aria-hidden="true"></i>
+                <button
+                  v-else
+                  type="button"
+                  class="btn btn-danger"
+                  @click.prevent="$refs.upload.active = false">
+                  <i
+                    class="fa fa-stop"
+                    aria-hidden="true"/>
                   Stopp opplasting
                 </button>
-                <button type="button" :disabled="$refs.upload && $refs.upload.active" class="btn btn-primary" @click.prevent="closeModal">
-                  <i class="fa fa-window-close" aria-hidden="true"></i>
+                <button
+                  :disabled="$refs.upload && $refs.upload.active"
+                  type="button"
+                  class="btn btn-primary"
+                  @click.prevent="closeModal">
+                  <i
+                    class="fa fa-window-close"
+                    aria-hidden="true"/>
                   Lukk vindu
                 </button>
               </div>
             </div>
 
-            <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
+            <div
+              v-show="$refs.upload && $refs.upload.dropActive"
+              class="drop-active">
               <h3>Slipp filene her for å laste opp</h3>
             </div>
           </div>

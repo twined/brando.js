@@ -4,7 +4,10 @@ import nprogress from 'nprogress'
 
 export default {
   props: {
-    parent: String
+    parent: {
+      type: String,
+      default: null
+    }
   },
   created () {
     if (this.parent) {

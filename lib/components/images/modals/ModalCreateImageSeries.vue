@@ -11,33 +11,37 @@
       </div>
       <div class="card-body">
         <KInput
+          v-validate="'required'"
           v-model="series.name"
           :value="series.name"
+          :has-error="errors.has('series[name]')"
+          :error-text="errors.first('series[name]')"
           name="series[name]"
           label="Seriens navn"
           placeholder="Seriens navn"
-          v-validate="'required'"
           data-vv-name="series[name]"
           data-vv-value-path="innerValue"
-          :has-error="errors.has('series[name]')"
-          :error-text="errors.first('series[name]')"
         />
         <KInput
           v-model="series.credits"
           :value="series.credits"
+          :has-error="errors.has('series[credits]')"
+          :error-text="errors.first('series[credits]')"
           name="series[credits]"
           label="Evt. krediteringer"
           placeholder="Evt. krediteringer"
           data-vv-name="series[credits]"
           data-vv-value-path="innerValue"
-          :has-error="errors.has('series[credits]')"
-          :error-text="errors.first('series[credits]')"
         />
 
-        <button @click.prevent="save" class="btn btn-secondary">
+        <button
+          class="btn btn-secondary"
+          @click.prevent="save">
           Lagre bildeserie
         </button>
-        <button @click.prevent="closeModal" class="btn">
+        <button
+          class="btn"
+          @click.prevent="closeModal">
           Avbryt
         </button>
       </div>

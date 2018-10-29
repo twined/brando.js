@@ -1,12 +1,20 @@
 <template>
-  <transition name="fade" appear>
-    <div class="image-selection" v-if="selectedImages.length">
+  <transition
+    name="fade"
+    appear>
+    <div
+      v-if="selectedImages.length"
+      class="image-selection">
       <div class="container">
         <div class="float-right">
-          <button class="btn btn-outline-secondary" @click.prevent="clearSelection">
+          <button
+            class="btn btn-outline-secondary"
+            @click.prevent="clearSelection">
             Avbryt
           </button>
-          <button class="btn btn-secondary" @click.prevent="deleteImages">
+          <button
+            class="btn btn-secondary"
+            @click.prevent="deleteImages">
             Slett <strong>{{ selectedImages.length }}</strong><template v-if="selectedImages.length === 1"> valgt bilde</template><template v-else> valgte bilder</template>
           </button>
         </div>
@@ -23,6 +31,7 @@ export default {
 
   props: {
     selectedImages: {
+      type: Array,
       required: true,
       default: () => []
     },
@@ -55,11 +64,11 @@ export default {
         .push('images:delete_images', { ids: this.selectedImages.map(i => i.image.id) })
         .receive('ok', payload => {
           for (let i of this.selectedImages) {
-            const {id, image_series_id: imageSeriesId} = i.image
+            const { id, image_series_id: imageSeriesId } = i.image
             if (this.deleteCallback) {
-              this.deleteCallback({id, imageSeriesId})
+              this.deleteCallback({ id, imageSeriesId })
             } else {
-              this.deleteImage({id, imageSeriesId})
+              this.deleteImage({ id, imageSeriesId })
             }
           }
           this.clearSelection()

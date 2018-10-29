@@ -1,10 +1,10 @@
 <template>
   <modal
+    v-if="showModal"
     :chrome="false"
     :show="showModal"
     @cancel="closeModal"
     @ok="closeModal"
-    v-if="showModal"
   >
     <div class="card mb-3">
       <div class="card-header text-center">
@@ -12,21 +12,25 @@
       </div>
       <div class="card-body">
         <KInput
+          v-validate="'required'"
           v-model="category.name"
           :value="category.name"
+          :has-error="errors.has('category[name]')"
+          :error-text="errors.first('category[name]')"
           name="category[name]"
           label="Kategoriens navn"
           placeholder="Kategoriens navn"
-          v-validate="'required'"
           data-vv-name="category[name]"
           data-vv-value-path="innerValue"
-          :has-error="errors.has('category[name]')"
-          :error-text="errors.first('category[name]')"
         />
-        <button @click.prevent="save" class="btn btn-secondary">
+        <button
+          class="btn btn-secondary"
+          @click.prevent="save">
           Lagre bildekategori
         </button>
-        <button @click.prevent="closeModal" class="btn">
+        <button
+          class="btn"
+          @click.prevent="closeModal">
           Avbryt
         </button>
       </div>

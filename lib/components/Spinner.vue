@@ -1,8 +1,15 @@
 <template>
-  <transition name="slide-fade-top-slow" appear>
+  <transition
+    name="slide-fade-top-slow"
+    appear>
     <div :class="{'vue-simple-spinner-container': overlay ? true : false, 'vue-simple-spinner-container-transparent': transparent ? true : false}">
-      <div class="vue-simple-spinner" :style="spinner_style"></div>
-      <div class="vue-simple-spinner-text" :style="text_style" v-if="message.length > 0">{{message}}</div>
+      <div
+        :style="spinner_style"
+        class="vue-simple-spinner"/>
+      <div
+        v-if="message.length > 0"
+        :style="text_style"
+        class="vue-simple-spinner-text">{{ message }}</div>
     </div>
   </transition>
 </template>
@@ -13,7 +20,7 @@ var isNumber = function (n) {
 }
 
 export default {
-  name: 'vue-simple-spinner',
+  name: 'VueSimpleSpinner',
   props: {
     'overlay': {
       type: Boolean,
@@ -28,6 +35,7 @@ export default {
     'size': {
       // either a number (pixel width/height) or 'tiny', 'small',
       // 'medium', 'large', 'huge', 'massive' for common sizes
+      type: Number,
       default: 32
     },
     'line-size': {

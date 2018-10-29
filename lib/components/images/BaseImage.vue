@@ -1,20 +1,23 @@
 <template>
   <div
-    :class="{selected: this.selected}"
+    :class="{selected: selected}"
     class="image-wrapper float-left m-1"
     @mouseover="mouseOver"
     @mouseout="mouseOut"
     @click.prevent="click">
-    <div @click.stop.prevent="editImage" class="overlay" v-show="showOverlay">
-      <i class="fa fa-search fa-fw"></i>
+    <div
+      v-show="showOverlay"
+      class="overlay"
+      @click.stop.prevent="editImage">
+      <i class="fa fa-search fa-fw"/>
     </div>
     <modal
+      v-if="showEdit"
       :chrome="false"
       :large="true"
       :show="true"
       @cancel="closeEdit"
       @ok="closeEdit"
-      v-if="showEdit"
     >
       <div class="card">
         <div class="card-header">
@@ -23,7 +26,9 @@
         <div class="card-body">
           <div class="row">
             <div class="col-6">
-              <img :src="img.image.path" class="img-fluid" />
+              <img
+                :src="img.image.path"
+                class="img-fluid" >
 
               <div class="row mt-4">
                 <div class="col-md-6">
@@ -51,24 +56,24 @@
               <KInput
                 v-model="img.image.title"
                 :value="img.image.title"
+                :has-error="errors.has('img.image[title]')"
+                :error-text="errors.first('img.image[title]')"
                 name="img.image[title]"
                 label="Evt. beskrivelse"
                 placeholder="Evt. beskrivelse"
                 data-vv-name="img.image[title]"
                 data-vv-value-path="innerValue"
-                :has-error="errors.has('img.image[title]')"
-                :error-text="errors.first('img.image[title]')"
               />
               <KInput
                 v-model="img.image.credits"
                 :value="img.image.credits"
+                :has-error="errors.has('img.image[credits]')"
+                :error-text="errors.first('img.image[credits]')"
                 name="img.image[credits]"
                 label="Evt. kreditering"
                 placeholder="Evt. kreditering"
                 data-vv-name="img.image[credits]"
                 data-vv-value-path="innerValue"
-                :has-error="errors.has('img.image[credits]')"
-                :error-text="errors.first('img.image[credits]')"
               />
               <dt>
                 Filnavn
@@ -77,15 +82,21 @@
                 {{ img.image.path }}
               </dd>
 
-              <button @click.prevent="saveEdit" class="btn btn-outline-secondary btn-block">Lagre</button>
-              <button @click.prevent="closeEdit" class="btn btn-outline-secondary btn-block">Lukk</button>
+              <button
+                class="btn btn-outline-secondary btn-block"
+                @click.prevent="saveEdit">Lagre</button>
+              <button
+                class="btn btn-outline-secondary btn-block"
+                @click.prevent="closeEdit">Lukk</button>
             </div>
           </div>
         </div>
       </div>
     </modal>
 
-    <img :src="img.image.thumb" class="img-fluid" />
+    <img
+      :src="img.image.thumb"
+      class="img-fluid" >
   </div>
 </template>
 
@@ -109,6 +120,7 @@ export default {
     },
 
     selectedImages: {
+      type: Array,
       required: true,
       default: () => []
     }

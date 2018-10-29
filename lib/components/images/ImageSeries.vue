@@ -1,69 +1,97 @@
 <template>
   <div class="card-wrapper mb-4">
     <ModalImageUpload
-      :showModal="selectedImageSeriesForUpload === imageSeries.id"
-      :imageSeries="imageSeries"
-      :uploadCallback="uploadCallback"
+      :show-modal="selectedImageSeriesForUpload === imageSeries.id"
+      :image-series="imageSeries"
+      :upload-callback="uploadCallback"
       @close="closeUploadModal"
     />
     <ModalSortImageSeries
-      :showModal="selectedImageSeriesForSorting === imageSeries.id"
-      :imageSeries="imageSeries"
-      :sequenceCallback="sequenceCallback"
+      :show-modal="selectedImageSeriesForSorting === imageSeries.id"
+      :image-series="imageSeries"
+      :sequence-callback="sequenceCallback"
       @close="closeImageSeriesSortModal"
     />
     <div class="card-header-tab">
-      <b-dropdown variant="white" no-caret>
+      <b-dropdown
+        variant="white"
+        no-caret>
         <template slot="button-content">
-          <i class="k-dropdown-icon"></i>
+          <i class="k-dropdown-icon"/>
         </template>
-        <button @click.prevent="uploadToSeries(imageSeries)" class="dropdown-item">
-          <i class="fal fa-fw mr-3 subtle fa-cloud"></i>
+        <button
+          class="dropdown-item"
+          @click.prevent="uploadToSeries(imageSeries)">
+          <i class="fal fa-fw mr-3 subtle fa-cloud"/>
           Last opp bilder til denne bildeserien
         </button>
-        <button @click.prevent="sortSeries(imageSeries)" class="dropdown-item">
-          <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"></i>
+        <button
+          class="dropdown-item"
+          @click.prevent="sortSeries(imageSeries)">
+          <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"/>
           Sortér bilder i serien
         </button>
-        <router-link :to="{ name: 'image-series-config', params: { seriesId: imageSeries.id } }" tag="button" class="dropdown-item">
-          <i class="fal fa-fw mr-3 subtle fa-cog"></i>
+        <router-link
+          :to="{ name: 'image-series-config', params: { seriesId: imageSeries.id } }"
+          tag="button"
+          class="dropdown-item">
+          <i class="fal fa-fw mr-3 subtle fa-cog"/>
           Konfigurér bildeserie
         </router-link>
-        <button @click.prevent="deleteSeries(imageSeries)" class="dropdown-item">
-          <i class="fal fa-fw mr-3 subtle fa-trash"></i>
+        <button
+          class="dropdown-item"
+          @click.prevent="deleteSeries(imageSeries)">
+          <i class="fal fa-fw mr-3 subtle fa-trash"/>
           Slett bildeserie
         </button>
       </b-dropdown>
       <h5>{{ imageSeries.name }}</h5>
     </div>
     <div class="card">
-      <div class="card-body" v-if="images.length">
+      <div
+        v-if="images.length"
+        class="card-body">
         <transition-group name="fade-move">
           <template v-for="i in images">
-            <BaseImage :image="i" :key="i.id" :selectedImages="selectedImages" />
+            <BaseImage
+              :image="i"
+              :key="i.id"
+              :selected-images="selectedImages" />
           </template>
         </transition-group>
       </div>
-      <div class="card-body" v-else>
+      <div
+        v-else
+        class="card-body">
         Ingen bilder i bildeserien
       </div>
 
-      <div class="card-footer bg-white pt-0" v-if="modal">
+      <div
+        v-if="modal"
+        class="card-footer bg-white pt-0">
         <div class="w-50">
-          <button @click.prevent="uploadToSeries(imageSeries)" class="btn btn-outline-secondary text-left">
-            <i class="fal fa-fw mr-3 subtle fa-cloud"></i>
+          <button
+            class="btn btn-outline-secondary text-left"
+            @click.prevent="uploadToSeries(imageSeries)">
+            <i class="fal fa-fw mr-3 subtle fa-cloud"/>
             Last opp bilder
           </button>
-          <button @click.prevent="sortSeries(imageSeries)" class="btn btn-outline-secondary text-left">
-            <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"></i>
+          <button
+            class="btn btn-outline-secondary text-left"
+            @click.prevent="sortSeries(imageSeries)">
+            <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"/>
             Sortér bilder
           </button>
-          <button @click.prevent="deleteSeries(imageSeries)" class="btn btn-outline-secondary text-left">
-            <i class="fal fa-fw mr-3 subtle fa-trash"></i>
+          <button
+            class="btn btn-outline-secondary text-left"
+            @click.prevent="deleteSeries(imageSeries)">
+            <i class="fal fa-fw mr-3 subtle fa-trash"/>
             Slett bildeserie
           </button>
-          <button @click.prevent="$emit('close')" class="btn btn-outline-secondary text-left">
-            <i class="fal fa-fw mr-3 subtle fa-window-close"></i>
+          <button
+            class="btn btn-outline-secondary text-left"
+            @click.prevent="$emit('close')">
+            <i class="fal fa-fw mr-3 subtle fa-window-close"/>
             Lukk vindu
           </button>
         </div>
@@ -123,16 +151,16 @@ export default {
     }
   },
 
-  computed: {
-    images () {
-      return [...this.imageSeries.images].sort((a, b) => parseInt(a.sequence) - parseInt(b.sequence))
-    }
-  },
-
   data () {
     return {
       selectedImageSeriesForUpload: null,
       selectedImageSeriesForSorting: null
+    }
+  },
+
+  computed: {
+    images () {
+      return [...this.imageSeries.images].sort((a, b) => parseInt(a.sequence) - parseInt(b.sequence))
     }
   },
 

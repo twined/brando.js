@@ -1,6 +1,8 @@
 <template>
   <button class="btn btn-white">
-    <i class="fa fa-circle" :class="getColor()"></i>
+    <i
+      :class="getColor()"
+      class="fa fa-circle"/>
   </button>
 </template>
 

@@ -1,14 +1,24 @@
 <template>
-  <transition name="slide-fade-top-slow" mode="out-in" appear>
-    <li id="nav-profile-dropdown" class="dropdown" v-click-outside="onClickOutside">
-      <a @click.stop="toggle"
-        class="d-inline-flex align-items-center dropdown-toggle user-box"
-        :class="(showDropdown ? 'active' : '')"
+  <transition
+    name="slide-fade-top-slow"
+    mode="out-in"
+    appear>
+    <li
+      v-click-outside="onClickOutside"
+      id="nav-profile-dropdown"
+      class="dropdown">
+      <a
         id="profile-dropdown-button"
+        :class="(showDropdown ? 'active' : '')"
+        class="d-inline-flex align-items-center dropdown-toggle user-box"
         aria-haspopup="true"
+        @click.stop="toggle"
       >
         <div class="avatar">
-          <img :src="user.avatar" class="rounded-circle avatar-xs" alt="Avatar">
+          <img
+            :src="user.avatar"
+            class="rounded-circle avatar-xs"
+            alt="Avatar">
         </div>
         <div class="userinfo hidden-sm-down">
           {{ user.full_name }}
@@ -17,12 +27,20 @@
           </span>
         </div>
       </a>
-      <div :class="'dropdown-menu dropdown-menu-right has-icons' + (showDropdown ? ' show' : '')" v-show="showDropdown">
-        <router-link @click.native="showDropdown = false" :to="{ name: 'profile' }" class="dropdown-item" exact>
-          <i class="fal fa-fw mr-2 fa-user"></i><span>Min profil</span>
+      <div
+        v-show="showDropdown"
+        :class="'dropdown-menu dropdown-menu-right has-icons' + (showDropdown ? ' show' : '')">
+        <router-link
+          :to="{ name: 'profile' }"
+          class="dropdown-item"
+          exact
+          @click.native="showDropdown = false">
+          <i class="fal fa-fw mr-2 fa-user"/><span>Min profil</span>
         </router-link>
-        <button @click.prevent="logout" class="dropdown-item">
-          <i class="fal fa-fw mr-2 fa-sign-out"></i><span>Logg ut</span>
+        <button
+          class="dropdown-item"
+          @click.prevent="logout">
+          <i class="fal fa-fw mr-2 fa-sign-out"/><span>Logg ut</span>
         </button>
       </div>
     </li>
@@ -42,14 +60,14 @@ export default {
     'adminChannel'
   ],
 
-  created () {
-    console.log('created <CurrentUser />')
-  },
-
   data () {
     return {
       showDropdown: false
     }
+  },
+
+  created () {
+    console.log('created <CurrentUser />')
   },
 
   methods: {

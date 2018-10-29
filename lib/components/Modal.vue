@@ -1,8 +1,21 @@
 <template>
-  <transition :duration="500" name="modal">
-    <div class="modal" style="display: block;" v-show="show">
-      <div @click.stop="cancel" class="modal-backdrop" key="backdrop"></div>
-      <div class="modal-dialog" :class="modalClass" ref="dialog" role="document" v-if="chrome === true">
+  <transition
+    :duration="500"
+    name="modal">
+    <div
+      v-show="show"
+      class="modal"
+      style="display: block;">
+      <div
+        key="backdrop"
+        class="modal-backdrop"
+        @click.stop="cancel"/>
+      <div
+        v-if="chrome === true"
+        ref="dialog"
+        :class="modalClass"
+        class="modal-dialog"
+        role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="section mb-0 modal-title">
@@ -12,19 +25,34 @@
             </h5>
           </div>
           <div class="modal-body">
-            <slot></slot>
+            <slot/>
           </div>
           <div class="modal-footer">
             <slot name="footer">
-              <button type="button" class="btn btn-outline-primary" @click="cancel" data-dismiss="modal" v-if="showCancelButton">{{ cancelText }}</button>
-              <button type="button" class="btn btn-primary" @click="ok" data-dismiss="modal">{{ okText }}</button>
+              <button
+                v-if="showCancelButton"
+                type="button"
+                class="btn btn-outline-primary"
+                data-dismiss="modal"
+                @click="cancel">{{ cancelText }}</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                @click="ok">{{ okText }}</button>
             </slot>
           </div>
         </div>
       </div>
-      <div class="modal-no-chrome" :class="modalClass" v-else>
-        <div class="modal-no-chrome-content" ref="dialog" role="document">
-          <slot></slot>
+      <div
+        v-else
+        :class="modalClass"
+        class="modal-no-chrome">
+        <div
+          ref="dialog"
+          class="modal-no-chrome-content"
+          role="document">
+          <slot/>
         </div>
       </div>
     </div>
@@ -38,6 +66,7 @@
  */
 
 export default {
+  name: 'Modal',
   props: {
     show: {
       type: Boolean,
@@ -105,7 +134,6 @@ export default {
       default: true
     }
   },
-  name: 'modal',
   data () {
     return {
       duration: null
@@ -119,14 +147,6 @@ export default {
         'modal-full': this.full
       }
     }
-  },
-  created () {
-    if (this.show) {
-      document.body.className += ' modal-open'
-    }
-  },
-  beforeDestroy () {
-    document.body.className = document.body.className.replace(/\s?modal-open/, '')
   },
   watch: {
     show (value) {
@@ -142,6 +162,14 @@ export default {
         }, this.duration || 0)
       }
     }
+  },
+  created () {
+    if (this.show) {
+      document.body.className += ' modal-open'
+    }
+  },
+  beforeDestroy () {
+    document.body.className = document.body.className.replace(/\s?modal-open/, '')
   },
   methods: {
     ok () {

@@ -1,34 +1,30 @@
 <template>
-  <div :class="{'form-group': true, 'has-danger': hasError }" v-if="!loading">
+  <div
+    v-if="!loading"
+    :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
       <label
-        class="control-label"
         :for="id"
+        class="control-label"
       >
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"></i>
+        <i class="fa fa-exclamation-circle text-danger"/>
         {{ errorText }}
       </span>
     </div>
 
     <div class="image-preview-wrapper">
       <PictureInput
-        :crop="crop"
         ref="pictureInput"
-        @change="onChange"
-        @click="onClick"
+        :crop="crop"
         :width="width"
         :height="height"
-        margin="16"
         :prefill="prefill"
         :id="id"
         :name="name"
-        accept="image/jpeg,image/jpg,image/png,image/gif"
-        size="10"
-        buttonClass="btn btn-outline-secondary"
-        :customStrings="{
+        :custom-strings="{
           upload: 'Dingsen du bruker støtter ikke filopplasting :(',
           drag: 'Klikk eller slipp bildet ditt her',
           tap: 'Tapp her for å velge et bilde fra galleriet ditt',
@@ -38,6 +34,12 @@
           fileSize: 'Fila er for stor!',
           fileType: 'Filtypen er ikke støttet'
         }"
+        margin="16"
+        accept="image/jpeg,image/jpg,image/png,image/gif"
+        size="10"
+        button-class="btn btn-outline-secondary"
+        @change="onChange"
+        @click="onClick"
       />
     </div>
   </div>
@@ -63,7 +65,8 @@ export default {
     },
 
     errorText: {
-      type: String
+      type: String,
+      default: ''
     },
 
     crop: {
@@ -72,10 +75,12 @@ export default {
     },
 
     width: {
+      type: Number,
       default: 300
     },
 
     height: {
+      type: Number,
       default: 300
     },
 
@@ -91,16 +96,8 @@ export default {
 
     value: {
       required: false,
-      default: null
-    }
-  },
-
-  created () {
-    this.innerValue = this.value
-    if (typeof this.value === 'string') {
-      this.prefill = this.value
-    } else {
-      this.prefill = this.value ? this.value[this.previewKey] : null
+      default: null,
+      type: null
     }
   },
 
@@ -126,6 +123,15 @@ export default {
 
     value (value) {
       this.innerValue = value
+    }
+  },
+
+  created () {
+    this.innerValue = this.value
+    if (typeof this.value === 'string') {
+      this.prefill = this.value
+    } else {
+      this.prefill = this.value ? this.value[this.previewKey] : null
     }
   },
 
