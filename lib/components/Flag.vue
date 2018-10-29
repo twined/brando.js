@@ -1,6 +1,6 @@
 <template>
   <div class="flag-wrapper">
-    <span :class="'flag' + ' ' + value"></span>
+    <span :class="'flag' + ' ' + value" />
   </div>
 </template>
 
