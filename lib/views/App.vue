@@ -6,6 +6,15 @@
     <NProgress />
     <NavMenu />
     <NavBar />
+    <transition
+      name="fade"
+      appear>
+      <KProgress
+        v-show="showProgress"
+        :status="progressStatus"
+        :percent="progressPercent"
+      />
+    </transition>
     <div id="content">
       <transition
         name="fade"
@@ -36,18 +45,23 @@ import apollo from 'kurtz/lib/api/apolloClient'
 import NavBar from 'kurtz/lib/components/navigation/NavBar.vue'
 import NavMenu from 'kurtz/lib/components/navigation/NavMenu.vue'
 import NProgress from 'kurtz/lib/components/navigation/NProgress.vue'
+import KProgress from 'kurtz/lib/components/navigation/KProgress.vue'
 
 export default {
   components: {
     NavMenu,
     NavBar,
-    NProgress
+    NProgress,
+    KProgress
   },
 
   data () {
     return {
       loading: 1,
-      fullScreen: false
+      fullScreen: false,
+      showProgress: false,
+      progressStatus: '',
+      progressPercent: null
     }
   },
 
@@ -86,7 +100,6 @@ export default {
     },
 
     '$route' () {
-      console.log(this.$route.meta)
       if (this.$route.meta.fullScreen) {
         this.fullScreen = true
       } else {
@@ -164,6 +177,18 @@ export default {
 
       this.userChannel.on('token:refresh', jwt => {
         this.$store.commit('users/STORE_TOKEN', jwt)
+      })
+      this.userChannel.on('progress:show', payload => {
+        this.showProgress = true
+      })
+      this.userChannel.on('progress:hide', payload => {
+        this.showProgress = false
+      })
+      this.userChannel.on('progress:update', payload => {
+        this.progressStatus = payload.status
+        if (payload.hasOwnProperty('percent')) {
+          this.progressPercent = payload.percent
+        }
       })
     },
 
