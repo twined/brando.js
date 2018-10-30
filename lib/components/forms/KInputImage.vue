@@ -22,6 +22,7 @@
         :width="width"
         :height="height"
         :prefill="prefill"
+        :removable="true"
         :id="id"
         :name="name"
         :custom-strings="{
@@ -40,6 +41,7 @@
         button-class="btn btn-outline-secondary"
         @change="onChange"
         @click="onClick"
+        @remove="onRemove"
       />
     </div>
   </div>
@@ -143,14 +145,16 @@ export default {
     onChange (a) {
       // we have a prefill, and preCheck is false
       if (this.value && !this.preCheck) {
-        console.log('we have prefill and preCheck is false')
         // do nothing except, set preCheck to true
         this.preCheck = true
         return
       }
-      console.log('theres been a change, and we either have no prefill, or we have triggered the prefill check:')
       // there's been a change, and we either have no prefill, or we've triggered the prefill check:
       this.innerValue = this.$refs.pictureInput.file
+    },
+
+    onRemove (a) {
+      this.innerValue = null
     }
   }
 }
