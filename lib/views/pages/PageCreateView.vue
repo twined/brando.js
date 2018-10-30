@@ -63,6 +63,8 @@
 
           <Villain
             :value="page.data"
+            :templates="templates"
+            :template-mode="templateMode"
             label="Innhold"
             @input="page.data = $event"
           />
@@ -132,6 +134,8 @@
 import nprogress from 'nprogress'
 import showError from 'kurtz/lib/utils/showError'
 import { pageAPI } from 'kurtz/lib/api/page'
+import { alertError } from 'kurtz/lib/utils/alerts'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -150,6 +154,12 @@ export default {
         meta_keywords: ''
       }
     }
+  },
+
+  computed: {
+    ...mapGetters('config', [
+      'templateMode', 'templates'
+    ])
   },
 
   inject: [
@@ -173,12 +183,15 @@ export default {
     },
 
     validate () {
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then(result => {
+        if (!result) {
+          alertError('Feil i skjema', 'Vennligst se over og rett feil i rødt')
+          this.loading = false
+          return
+        }
         this.save()
       }).catch(err => {
         console.log(err)
-        alert('Feil i skjema', 'Vennligst se over og rett feil i rødt')
-        this.loading = false
       })
     },
 
@@ -187,7 +200,7 @@ export default {
         nprogress.start()
         await pageAPI.createPage(this.page)
         nprogress.done()
-        this.$toast.success({message: 'Side opprettet'})
+        this.$toast.success({ message: 'Side opprettet' })
         this.$router.push({ name: 'pages' })
       } catch (err) {
         showError(err)

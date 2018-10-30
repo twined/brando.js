@@ -51,6 +51,8 @@
           />
 
           <Villain
+            :templates="templates"
+            :template-mode="templateMode"
             :value="page.data"
             label="Innhold"
             @input="page.data = $event"
@@ -77,9 +79,11 @@
 
 <script>
 
+import { mapGetters } from 'vuex'
 import nprogress from 'nprogress'
 import showError from 'kurtz/lib/utils/showError'
 import { pageFragmentAPI } from 'kurtz/lib/api/pageFragment'
+import { alertError } from 'kurtz/lib/utils/alerts'
 
 export default {
   data () {
@@ -94,18 +98,27 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters('config', [
+      'templateMode', 'templates'
+    ])
+  },
+
   inject: [
     'adminChannel'
   ],
 
   methods: {
     validate () {
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then(result => {
+        if (!result) {
+          alertError('Feil i skjema', 'Vennligst se over og rett feil i rødt')
+          this.loading = false
+          return
+        }
         this.save()
       }).catch(err => {
         console.log(err)
-        alert('Feil i skjema', 'Vennligst se over og rett feil i rødt')
-        this.loading = false
       })
     },
 
@@ -114,7 +127,7 @@ export default {
         nprogress.start()
         await pageFragmentAPI.createPageFragment(this.page)
         nprogress.done()
-        this.$toast.success({message: 'Fragment opprettet'})
+        this.$toast.success({ message: 'Fragment opprettet' })
         this.$router.push({ name: 'pagefragments' })
       } catch (err) {
         showError(err)

@@ -54,6 +54,8 @@
 
           <Villain
             :value="page.data"
+            :templates="templates"
+            :template-mode="templateMode"
             label="Innhold"
             @input="page.data = $event"
           />
@@ -81,9 +83,10 @@
 import nprogress from 'nprogress'
 import showError from 'kurtz/lib/utils/showError'
 import { pageFragmentAPI } from 'kurtz/lib/api/pageFragment'
+import { alertError } from 'kurtz/lib/utils/alerts'
+import { mapGetters } from 'vuex'
 
 export default {
-
   props: {
     pageId: {
       type: [String, Number],
@@ -98,23 +101,32 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters('config', [
+      'templateMode', 'templates'
+    ])
+  },
+
   inject: [
     'adminChannel'
   ],
 
   async created () {
     const p = await pageFragmentAPI.getPageFragment(this.pageId)
-    this.page = {...p}
+    this.page = { ...p }
   },
 
   methods: {
     validate () {
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then(result => {
+        if (!result) {
+          alertError('Feil i skjema', 'Vennligst se over og rett feil i rødt')
+          this.loading = false
+          return
+        }
         this.save()
       }).catch(err => {
         console.log(err)
-        alert('Feil i skjema', 'Vennligst se over og rett feil i rødt')
-        this.loading = false
       })
     },
 
@@ -123,7 +135,7 @@ export default {
         nprogress.start()
         await pageFragmentAPI.updatePageFragment(this.pageId, this.page)
         nprogress.done()
-        this.$toast.success({message: 'Fragment oppdatert'})
+        this.$toast.success({ message: 'Fragment oppdatert' })
         this.$router.push({ name: 'pagefragments' })
       } catch (err) {
         showError(err)

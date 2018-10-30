@@ -17,7 +17,7 @@
       :id="id"
       :rows="rows"
       :name="name"
-      class="form-control form-control-danger"/>
+      class="form-control form-control-danger"></textarea>
   </div>
 </template>
 

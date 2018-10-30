@@ -27,6 +27,8 @@ module.exports = {
     // vuejs screws up this anyways
     'no-use-before-define': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    "vue/html-end-tags": 0,
+    "vue/html-self-closing": 0
   }
 }
