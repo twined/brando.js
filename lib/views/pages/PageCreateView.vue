@@ -1,128 +1,142 @@
 <template>
   <div class="create-post">
     <div class="container">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="section mb-0">Opprett side</h5>
-        </div>
-        <div class="card-body">
-          <KInputSelect
-            v-model="page.parent_id"
-            :value="page.parent_id"
-            :options="parents"
-            :has-error="errors.has('page[parent_id]')"
-            :error-text="errors.first('page[parent_id]')"
-            name="page[parent_id]"
-            label="Tilhørende side"
-            data-vv-name="page[parent_id]"
-            data-vv-value-path="innerValue"
-          />
-          <KInputSelect
-            v-validate="'required'"
-            v-model="page.language"
-            :value="page.language"
-            :options="[
-              { name: 'English', value: 'en' },
-              { name: 'Norsk', value: 'no' }
-            ]"
-            :has-error="errors.has('page[language]')"
-            :error-text="errors.first('page[language]')"
-            name="page[language]"
-            label="Språk"
-            data-vv-name="page[language]"
-            data-vv-value-path="innerValue"
-          />
-
-          <KInput
-            v-validate="'required'"
-            v-model="page.key"
-            :value="page.key"
-            :has-error="errors.has('page[key]')"
-            :error-text="errors.first('page[key]')"
-            name="page[key]"
-            type="text"
-            label="Nøkkel"
-            placeholder="Nøkkel"
-            data-vv-name="page[key]"
-            data-vv-value-path="innerValue"
-          />
-
-          <KInput
-            v-validate="'required'"
-            v-model="page.title"
-            :value="page.title"
-            :has-error="errors.has('page[title]')"
-            :error-text="errors.first('page[title]')"
-            name="page[title]"
-            type="text"
-            label="Tittel"
-            placeholder="Tittel"
-            data-vv-name="page[title]"
-            data-vv-value-path="innerValue"
-          />
-
-          <Villain
-            :value="page.data"
-            :templates="templates"
-            :template-mode="templateMode"
-            label="Innhold"
-            @input="page.data = $event"
-          />
-
-          <div class="row">
-            <div class="col">
-              <KInputTextarea
-                v-model="page.meta_description"
-                :rows="2"
-                :has-error="errors.has('page[meta_description]')"
-                :error-text="errors.first('page[meta_description]')"
-                name="page[meta_description]"
-                type="text"
-                label="META beskrivelse (for søkemotorer)"
-                data-vv-name="page[meta_description]"
-                data-vv-value-path="innerValue"
-              />
-
-              <KInputTextarea
-                v-model="page.meta_keywords"
-                :rows="1"
-                :has-error="errors.has('page[meta_keywords]')"
-                :error-text="errors.first('page[meta_keywords]')"
-                name="page[meta_keywords]"
-                type="text"
-                label="META nøkkelord (for søkemotorer)"
-                data-vv-name="page[meta_keywords]"
-                data-vv-value-path="innerValue"
+      <div class="row">
+        <div class="col-md-9">
+          <div class="card h-100">
+            <div class="card-header">
+              <h5 class="section mb-0">Opprett side — Innhold</h5>
+            </div>
+            <div class="card-body">
+              <Villain
+                :value="page.data"
+                :templates="templates"
+                :template-mode="templateMode"
+                label="Innhold"
+                @input="page.data = $event"
               />
             </div>
           </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="section mb-0">Opprett side — attributter</h5>
+            </div>
+            <div class="card-body">
+              <KInputSelect
+                v-model="page.parent_id"
+                :value="page.parent_id"
+                :options="parents"
+                :has-error="errors.has('page[parent_id]')"
+                :error-text="errors.first('page[parent_id]')"
+                name="page[parent_id]"
+                label="Tilhørende side"
+                data-vv-name="page[parent_id]"
+                data-vv-value-path="innerValue"
+              />
+              <KInputSelect
+                v-validate="'required'"
+                v-model="page.language"
+                :value="page.language"
+                :options="[
+                  { name: 'English', value: 'en' },
+                  { name: 'Norsk', value: 'no' }
+                ]"
+                :has-error="errors.has('page[language]')"
+                :error-text="errors.first('page[language]')"
+                name="page[language]"
+                label="Språk"
+                data-vv-name="page[language]"
+                data-vv-value-path="innerValue"
+              />
 
-          <KInput
-            v-model="page.css_classes"
-            :value="page.css_classes"
-            :has-error="errors.has('page[css_classes]')"
-            :error-text="errors.first('page[css_classes]')"
-            name="page[css_classes]"
-            type="text"
-            label="Ekstra CSS klasser"
-            placeholder="Ekstra CSS klasser"
-            data-vv-name="page[css_classes]"
-            data-vv-value-path="innerValue"
-          />
+              <KInput
+                v-validate="'required'"
+                v-model="page.key"
+                :value="page.key"
+                :has-error="errors.has('page[key]')"
+                :error-text="errors.first('page[key]')"
+                name="page[key]"
+                type="text"
+                label="Nøkkel"
+                placeholder="Nøkkel"
+                data-vv-name="page[key]"
+                data-vv-value-path="innerValue"
+              />
 
-          <button
-            :disabled="!!loading"
-            class="btn btn-secondary"
-            @click="validate">
-            Lagre side
-          </button>
+              <KInput
+                v-validate="'required'"
+                v-model="page.title"
+                :value="page.title"
+                :has-error="errors.has('page[title]')"
+                :error-text="errors.first('page[title]')"
+                name="page[title]"
+                type="text"
+                label="Tittel"
+                placeholder="Tittel"
+                data-vv-name="page[title]"
+                data-vv-value-path="innerValue"
+              />
 
-          <router-link
-            :disabled="!!loading"
-            :to="{ name: 'pages' }"
-            class="btn btn-outline-secondary">
-            Tilbake til oversikten
-          </router-link>
+              <div class="row">
+                <div class="col">
+                  <KInputTextarea
+                    v-model="page.meta_description"
+                    :rows="2"
+                    :has-error="errors.has('page[meta_description]')"
+                    :error-text="errors.first('page[meta_description]')"
+                    name="page[meta_description]"
+                    type="text"
+                    label="META beskrivelse (for søkemotorer)"
+                    data-vv-name="page[meta_description]"
+                    data-vv-value-path="innerValue"
+                  />
+
+                  <KInputTextarea
+                    v-model="page.meta_keywords"
+                    :rows="1"
+                    :has-error="errors.has('page[meta_keywords]')"
+                    :error-text="errors.first('page[meta_keywords]')"
+                    name="page[meta_keywords]"
+                    type="text"
+                    label="META nøkkelord (for søkemotorer)"
+                    data-vv-name="page[meta_keywords]"
+                    data-vv-value-path="innerValue"
+                  />
+                </div>
+              </div>
+
+              <KInput
+                v-model="page.css_classes"
+                :value="page.css_classes"
+                :has-error="errors.has('page[css_classes]')"
+                :error-text="errors.first('page[css_classes]')"
+                name="page[css_classes]"
+                type="text"
+                label="Ekstra CSS klasser"
+                placeholder="Ekstra CSS klasser"
+                data-vv-name="page[css_classes]"
+                data-vv-value-path="innerValue"
+              />
+
+              <div class="mt-4">
+                <button
+                  :disabled="!!loading"
+                  class="btn btn-secondary btn-block"
+                  @click="validate">
+                  Lagre side
+                </button>
+              </div>
+
+              <router-link
+                :disabled="!!loading"
+                :to="{ name: 'pages' }"
+                class="btn btn-outline-secondary btn-block mt-2">
+                Tilbake til oversikten
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -143,6 +157,7 @@ export default {
       loading: 0,
       parents: [],
       page: {
+        parent_id: null,
         key: '',
         title: '',
         slug: '',
