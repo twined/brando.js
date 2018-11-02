@@ -126,7 +126,7 @@ export default {
       this.adminChannel.channel
         .push('role:set', { employee_id: e.id, role: 'user' })
         .receive('ok', payload => {
-          this.setEmployeeRole({employee: e, role: 'user'})
+          this.setEmployeeRole({ employee: e, role: 'user' })
         })
     },
 
@@ -138,7 +138,7 @@ export default {
       this.adminChannel.channel
         .push('role:set', { employee_id: e.id, role: 'staff' })
         .receive('ok', payload => {
-          this.setEmployeeRole({employee: e, role: 'staff'})
+          this.setEmployeeRole({ employee: e, role: 'staff' })
         })
     },
 
@@ -150,7 +150,7 @@ export default {
       this.adminChannel.channel
         .push('role:set', { employee_id: e.id, role: 'admin' })
         .receive('ok', payload => {
-          this.setEmployeeRole({employee: e, role: 'admin'})
+          this.setEmployeeRole({ employee: e, role: 'admin' })
         })
     },
 
@@ -166,7 +166,7 @@ export default {
       this.adminChannel.channel
         .push('role:set', { employee_id: e.id, role: 'owner' })
         .receive('ok', payload => {
-          this.setEmployeeRole({employee: e, role: 'owner'})
+          this.setEmployeeRole({ employee: e, role: 'owner' })
         })
     },
 
