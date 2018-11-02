@@ -1,13 +1,13 @@
 {
   "name": "kurtz",
-  "version": "0.0.4",
-  "description": "Brando frontend",
+  "version": "1.0.0-alpha.0",
+  "description": "KURTZ frontend",
   "main": "dist/kurtz.esm.js",
   "web": "dist/kurtz.esm.js",
   "module": "dist/kurtz.esm.js",
   "jsnext:main": "dist/kurtz.esm.js",
   "style": "dist/kurtz.css",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "homepage": "https://kurtz.github.io",
   "contributors": [
     {
