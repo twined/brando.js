@@ -8,7 +8,7 @@
         id="content"
         class="container">
         <div class="cards">
-          <div class="card w-50 mx-auto">
+          <div class="card w-50">
             <div class="card-header">
               <h5 class="section mb-0">Endre bruker</h5>
             </div>
@@ -150,7 +150,7 @@ export default {
         'full_name', 'email', 'password', 'role', 'language', 'username'
       )
       try {
-        await this.updateUser({userId: this.user.id, userParams: params})
+        await this.updateUser({ userId: this.user.id, userParams: params })
         this.$toast.success({ message: 'Bruker oppdatert' })
         this.$router.push({ name: 'users' })
       } catch (err) {

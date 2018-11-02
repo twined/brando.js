@@ -13,7 +13,12 @@ body {
 }
 
 #content {
-  padding-bottom: 1.5rem;
+  padding-bottom: 25px;
+}
+
+.container {
+  margin-left: 22px;
+  padding-right: 50px;
 }
 
 h5 {
@@ -34,6 +39,7 @@ h5 {
 
 .jumbotron {
   padding: 2.5rem 2rem;
+  background-color: #f5f5f5;
 }
 
 .twined-versioning {
@@ -102,6 +108,14 @@ dd {
 .table th {
   vertical-align: middle;
 }
+
+// .table td {
+//   border-top: 10px solid $kurtz-bg;
+// }
+
+// .table tr {
+//   background-color: #fff;
+// }
 
 body#login,
 body#registration {}

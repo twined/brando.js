@@ -90,8 +90,8 @@
                     <td class="fit">
                       <Flag :value="subpage.language" />
                     </td>
-                    <td class="text-mono text-sm text-left">
-                      {{ subpage.key }}
+                    <td class="text-mono text-sm text-left fit">
+                      {{ page.key }} / {{ subpage.key }}
                     </td>
                     <td class="text-sm text-strong">
                       <router-link

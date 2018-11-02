@@ -30,13 +30,9 @@
       <transition
         name="slide-fade-top-slow"
         appear>
-        <Hamburger />
-      </transition>
-      <transition
-        name="slide-fade-top-slow"
-        appear>
         <nav class="navbar navbar-toggleable-xxl">
-          <div class="logo-wrapper">
+          <Hamburger />
+          <div class="logo-wrapper mr-auto">
             {{ siteName }}
           </div>
 

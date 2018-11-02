@@ -2,15 +2,15 @@
   &.fullscreen {
     header {
       .container {
-        padding-left: 35px;
         max-width: 100%;
+        padding-right: 35px;
       }
     }
 
     #content {
       .container {
         max-width: 100%;
-        padding-left: 35px;
+        padding-right: 35px;
       }
 
       .main {

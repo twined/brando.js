@@ -74,7 +74,7 @@ $theme-colors: (
   warning: $yellow
 );
 
-$hover-color: mix(map-get($theme-colors, "primary"), white, 25%);
+$hover-color: mix($kurtz-bg, white, 5%);
 
 $font-family-sans-serif: "Robotox", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
 $font-family-monospace: "SF Mono", "Menlo", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
@@ -102,3 +102,66 @@ $form-check-input-margin-x: 0.25rem;
 
 // DROPDOWN
 $dropdown-link-hover-bg: #fff;
+
+$grid-gutter-width: 15px;
+
+$gutters: (
+  xs: 25px,
+  sm: 35px,
+  md: 40px,
+  lg: 75px
+);
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 768px,
+  md: 1000px,
+  lg: 1900px
+);
+
+$container-max-widths: (
+  xs: 750px,
+  sm: 995px,
+  md: 1150px,
+  lg: 1900px
+);
+
+$hamburger-layer-color: $kurtz_purple;
+$hamburger-layer-width: 32px;
+$hamburger-padding-x: 0px;
+$hamburger-padding-y: 0px;
+$hamburger-layer-height: 5px;
+$hamburger-layer-spacing: 5px;
+$hamburger-layer-border-radius: 0px;
+$hamburger-hover-opacity: 1;
+
+$hamburger-config: (
+  xs: (
+    layer-color: $kurtz_purple,
+    layer-width: 25px,
+    layer-height: 4px,
+    layer-spacing: 4px,
+    layer-radius: 0px,
+    padding-x: 0px,
+    padding-y: 0px,
+    margin-top: 0,
+    top: -24px,
+    right: 13px
+  ),
+  sm: (
+    layer-color: $kurtz_purple,
+    layer-width: 32px,
+    layer-height: 5px,
+    layer-spacing: 5px,
+    layer-radius: 0px,
+    padding-x: 0px,
+    padding-y: 0px,
+    margin-top: 0,
+    top: -26px,
+    right: 18px
+  )
+);
+
+$hamburger-types: (
+  spin
+);

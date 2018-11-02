@@ -20,7 +20,7 @@
             class="rounded-circle avatar-xs"
             alt="Avatar">
         </div>
-        <div class="userinfo hidden-sm-down">
+        <div class="userinfo d-none d-sm-block">
           {{ user.full_name }}
           <span>
             administrator

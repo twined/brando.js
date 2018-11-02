@@ -1,14 +1,15 @@
 header {
-  margin: 0 0 1rem;
+  margin: 1rem 0 1rem;
   padding: 0.4rem 0;
 }
 
 .logo-wrapper {
   font-weight: bold;
-  height: 34px;
   margin-bottom: 0;
-  margin-left: 50px;
-  margin-top: 13px;
+  margin-left: 25px;
+  font-size: 34px;
+  color: $kurtz_purple;
+  margin-top: -2px;
 }
 
 .current-company-wrapper {

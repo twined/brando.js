@@ -3,10 +3,11 @@
 $sidenav-font-size: 0.85rem;
 $sidenav-menu-padding: 1rem;
 $sidenav-menu-bg-color: transparent;
-$sidenav-main-color: mix(map-get($theme-colors, 'secondary'), black, 70%);
-$sidenav-submenu-bg-color: mix($sidenav-main-color, black, 70%);
-$sidenav-submenu-bg-hover-color: mix($sidenav-main-color, black, 60%);
-$sidenav-menu-bg-hover-color: mix($sidenav-main-color, white, 90%);
+$sidenav-menu-fg: map-get($theme-colors, "secondary");
+$sidenav-main-color: #f5f5f5;
+$sidenav-submenu-bg-color: #e8e8e8;
+$sidenav-submenu-bg-hover-color: #fff;
+$sidenav-menu-bg-hover-color: #fff;
 
 $pull-ease-type: ease;
 
@@ -14,7 +15,7 @@ $pull-ease-type: ease;
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-@include scrollbars(0.75rem, mix($sidenav-main-color, white, 50%));
+// @include scrollbars(0.75rem, mix($sidenav-main-color, white, 50%));
 
 #app {
   height: 100%;
@@ -34,43 +35,39 @@ $pull-ease-type: ease;
 
 .menu-content h6 a {
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: $sidenav-menu-fg;
   transition: border 1200ms ease;
 
   &:hover {
     border-bottom: 2px solid rgba(255, 255, 255, 0.8);
-    color: #fff;
+    color: $sidenav-menu-fg;
     text-decoration: none;
     transition: border 200ms ease;
   }
 }
 
 .toggle-button {
-  color: $sidenav-main-color;
+  color: map-get($theme-colors, "secondary");
   position: fixed;
   width: 90px;
   z-index: 2050;
 }
 
 .menu-open .toggle-button {
-  color: #fff;
+  color: $sidenav-menu-fg;
 }
 
 .menu-backdrop {
   background-color: $sidenav-main-color;
   height: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   position: fixed;
   top: 0;
-  transform: translateX(-300px);
+  transform: translateX(-100%);
   transition: all 500ms $pull-ease-type;
   width: 300px;
   z-index: 2000;
-
-  @include media-breakpoint-down(xs) {
-    width: 100%;
-  }
 
   .avatar {
     margin-bottom: 1.5rem;
@@ -89,7 +86,7 @@ $pull-ease-type: ease;
       h4 {
         a {
           border-bottom: 2px solid transparent;
-          color: #fff;
+          color: $sidenav-menu-fg;
 
           &:hover {
             border-bottom: 2px solid rgba(255, 255, 255, 0.25);
@@ -116,7 +113,7 @@ $pull-ease-type: ease;
       a,
       span {
         border-bottom: none;
-        color: #fff;
+        color: $sidenav-menu-fg;
         display: block;
         font-size: $sidenav-font-size;
         letter-spacing: 1px;
@@ -131,7 +128,7 @@ $pull-ease-type: ease;
       }
 
       span.nav-icon {
-        color: rgba(255, 255, 255, 0.22);
+        color: rgba(0, 0, 0, 0.22);
         display: block;
         font-size: 1rem;
         left: 27px;
@@ -168,7 +165,7 @@ $pull-ease-type: ease;
 
       &:after {
         -webkit-font-smoothing: antialiased;
-        color: rgba(255, 255, 255, 0.22);
+        color: rgba(0, 0, 0, 0.22);
         content: "\F343";
         font-family: "Font Awesome 5 light";
         font-size: $sidenav-font-size;
@@ -192,7 +189,7 @@ $pull-ease-type: ease;
         a {
           background-color: $sidenav-submenu-bg-color;
           border-bottom: 0 solid $sidenav-menu-bg-color;
-          color: #fff;
+          color: $sidenav-menu-fg;
           display: block;
           font-size: 0.8rem;
           font-weight: 200;
@@ -207,7 +204,7 @@ $pull-ease-type: ease;
 
           &:hover {
             background-color: $sidenav-submenu-bg-hover-color;
-            color: #fff;
+            color: $sidenav-menu-fg;
             text-decoration: none;
             transition: background 250ms ease;
           }
@@ -220,7 +217,7 @@ $pull-ease-type: ease;
 
       div.caption {
         background-color: $sidenav-menu-bg-color;
-        color: #fff;
+        color: $sidenav-menu-fg;
         cursor: pointer;
         display: block;
         font-size: $sidenav-font-size;
@@ -233,7 +230,7 @@ $pull-ease-type: ease;
         text-transform: uppercase;
 
         span.nav-icon {
-          color: rgba(255, 255, 255, 0.22);
+          color: rgba(0, 0, 0, 0.22);
           display: block;
           font-size: 1rem;
           left: 27px;
@@ -260,7 +257,7 @@ $pull-ease-type: ease;
     flex-direction: column;
 
     li a {
-      background-color: #fff;
+      background-color: $sidenav-menu-fg;
       display: block;
       margin: 3px !important;
       padding: 5px 15px !important;

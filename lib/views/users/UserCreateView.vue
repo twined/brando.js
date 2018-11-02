@@ -8,7 +8,7 @@
         id="content"
         class="container">
         <div class="cards">
-          <div class="card w-50 mx-auto">
+          <div class="card w-50">
             <div class="card-header">
               <h5 class="section mb-0">Ny bruker</h5>
             </div>
