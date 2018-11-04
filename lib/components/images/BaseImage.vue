@@ -27,7 +27,7 @@
           <div class="row">
             <div class="col-6">
               <img
-                :src="img.image.path"
+                :src="'/media/' + img.image.path"
                 class="img-fluid" >
 
               <div class="row mt-4">

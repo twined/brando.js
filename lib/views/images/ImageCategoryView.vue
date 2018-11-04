@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="centered-link-list mt-5">
+    <div class="container centered-link-list mt-5">
       <router-link
         v-for="c in allImageCategories"
         :key="c.id"
