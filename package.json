@@ -1,6 +1,6 @@
 {
   "name": "kurtz",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "KURTZ frontend",
   "main": "dist/kurtz.esm.js",
   "web": "dist/kurtz.esm.js",
