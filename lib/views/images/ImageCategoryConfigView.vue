@@ -68,9 +68,9 @@ export default {
   methods: {
     save (config) {
       this.adminChannel.channel
-        .push('images:update_category_config', {category_id: this.currentImageCategory.id, config: config})
+        .push('images:update_category_config', { category_id: this.currentImageCategory.id, config: config })
         .receive('ok', payload => {
-          this.$toast.success({message: 'Konfigurasjon oppdatert'})
+          this.$toast.success({ message: 'Konfigurasjon oppdatert' })
           this.$router.push({ name: 'image-category-detail', params: { categoryId: this.currentImageCategory.id } })
         })
     },
@@ -78,7 +78,7 @@ export default {
     async getData () {
       this.loading++
       nprogress.start()
-      await this.fetchImageCategory({categoryId: this.categoryId, queryVars: this.queryVars})
+      await this.fetchImageCategory({ categoryId: this.categoryId, queryVars: this.queryVars })
       this.loading--
       nprogress.done()
     },

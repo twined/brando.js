@@ -71,6 +71,12 @@
                         </button>
                         <button
                           :class="{'dropdown-item': true}"
+                          @click.prevent="rerenderPageFragment(page)">
+                          <i class="fal fa-sync fa-fw mr-2"/>
+                          Gjenoppfrisk fragment
+                        </button>
+                        <button
+                          :class="{'dropdown-item': true}"
                           @click.prevent="deletePageFragment(page)">
                           <i class="fal fa-trash fa-fw mr-2"/>
                           Slett fragment
@@ -134,6 +140,14 @@ export default {
         .push('page_fragment:duplicate', { id: page.id })
         .receive('ok', payload => {
           this.$store.commit('pageFragments/ADD_PAGE_FRAGMENT', payload.page_fragment)
+        })
+    },
+
+    rerenderPageFragment (page) {
+      this.adminChannel.channel
+        .push('page_fragment:rerender', { id: page.id })
+        .receive('ok', payload => {
+          this.$toast.success({ message: 'Fragmentet ble gjengitt på nytt' })
         })
     },
 

@@ -68,11 +68,11 @@ export default {
 
   methods: {
     save (config) {
-      this.$toast.success({message: 'Lagrer konfigurasjon. Dette kan ta litt tid.'})
+      this.$toast.success({ message: 'Lagrer konfigurasjon. Dette kan ta litt tid.' })
       this.adminChannel.channel
-        .push('images:update_series_config', {series_id: this.seriesId, config: config})
+        .push('images:update_series_config', { series_id: this.seriesId, config: config })
         .receive('ok', payload => {
-          this.$toast.success({message: 'Konfigurasjon oppdatert'})
+          this.$toast.success({ message: 'Konfigurasjon oppdatert' })
           this.$router.push({ name: 'image-category-detail', params: { categoryId: this.currentImageCategory.id } })
         })
     },

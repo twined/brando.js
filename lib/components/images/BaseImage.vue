@@ -141,7 +141,6 @@ export default {
 
   created () {
     this.img = clone(this.image)
-    console.log(this.img)
   },
 
   methods: {

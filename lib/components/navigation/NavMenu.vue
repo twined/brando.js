@@ -35,6 +35,18 @@
         </router-link>
       </div>
 
+      <div class="menu-line-main">
+        <router-link
+          :to="{ name: 'config' }"
+          exact
+          @click.stop.native="close">
+          <span class="nav-icon">
+            <i class="fal fa-cog"/>
+          </span>
+          Konfigurasjon
+        </router-link>
+      </div>
+
       <NavMenuItem
         text="Brukere"
         icon="fal fa-fw fa-user-circle"
