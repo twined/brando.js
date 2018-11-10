@@ -10,8 +10,8 @@
             <div class="card-body">
               <Villain
                 :value="page.data"
-                :templates="templates"
-                :template-mode="templateMode"
+                :templates="settings.templates"
+                :template-mode="settings.templateMode"
                 label="Innhold"
                 @input="page.data = $event"
               />
@@ -115,7 +115,7 @@ export default {
 
   computed: {
     ...mapGetters('config', [
-      'templateMode', 'templates'
+      'settings'
     ])
   },
 

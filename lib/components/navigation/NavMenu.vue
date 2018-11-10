@@ -77,28 +77,33 @@
       </NavMenuItem>
 
       <NavMenuItem
+        v-if="showPages"
         text="Sider"
         icon="fal fa-fw fa-file-alt"
         @expanding="expanding">
         <router-link
+          v-if="settings.pages"
           key="1"
           :to="{ name: 'pages' }"
           data-index="1"
           exact
           @click.native="close">Oversikt</router-link>
         <router-link
+          v-if="settings.pages"
           key="2"
           :to="{ name: 'page-create' }"
           data-index="2"
           exact
           @click.native="close">Opprett ny side</router-link>
         <router-link
+          v-if="settings.pageFragments"
           key="3"
           :to="{ name: 'pagefragments' }"
           data-index="3"
           exact
           @click.native="close">Sidefragmenter</router-link>
         <router-link
+          v-if="settings.pageFragments"
           key="4"
           :to="{ name: 'pagefragment-create' }"
           data-index="4"
@@ -137,11 +142,21 @@ export default {
   },
 
   computed: {
+    showPages () {
+      if (!this.settings.pages && !this.settings.pageFragments) {
+        return false
+      }
+      return true
+    },
+
     ...mapGetters('menu', [
       'entries', 'status'
     ]),
     ...mapGetters('users', [
       'me'
+    ]),
+    ...mapGetters('config', [
+      'settings'
     ])
   },
 
