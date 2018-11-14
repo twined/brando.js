@@ -40,7 +40,7 @@
               <button
                 class="dropdown-item"
                 disabled>
-                <i class="fal fa-fw mr-3 subtle fa-refresh"/>
+                <i class="fal fa-fw mr-3 subtle fa-sync"/>
                 Gjenskap bilder i kategorien
               </button>
               <router-link
@@ -50,6 +50,12 @@
                 <i class="fal fa-fw mr-3 subtle fa-cog"/>
                 Konfigurér bildekategorien
               </router-link>
+              <button
+                class="dropdown-item"
+                @click.prevent="duplicateImageCategory">
+                <i class="fal fa-fw mr-3 subtle fa-clone"/>
+                Dupliser bildekategori
+              </button>
               <button
                 class="dropdown-item"
                 @click.prevent="deleteCategory">
@@ -67,6 +73,11 @@
           <ModalCreateImageCategory
             :show-modal="showModalImageCreateCategory"
             @close="closeCreateImageCategoryModal"
+          />
+          <ModalDuplicateImageCategory
+            :show-modal="showModalImageDuplicateCategory"
+            :cat="currentImageCategory"
+            @close="closeDuplicateImageCategoryModal"
           />
         </div>
       </div>
@@ -113,6 +124,7 @@ import ImageSeries from '../../components/images/ImageSeries'
 import ImageSelection from '../../components/images/ImageSelection'
 import ModalCreateImageSeries from '../../components/images/modals/ModalCreateImageSeries'
 import ModalCreateImageCategory from '../../components/images/modals/ModalCreateImageCategory'
+import ModalDuplicateImageCategory from '../../components/images/modals/ModalDuplicateImageCategory'
 
 export default {
   components: {
@@ -120,7 +132,8 @@ export default {
     ImageSelection,
     ImageSeries,
     ModalCreateImageSeries,
-    ModalCreateImageCategory
+    ModalCreateImageCategory,
+    ModalDuplicateImageCategory
   },
 
   props: {
@@ -135,6 +148,7 @@ export default {
     return {
       showModalImageCreateSeries: false,
       showModalImageCreateCategory: false,
+      showModalImageDuplicateCategory: false,
       selectedImages: [],
       loading: 0,
       queryVars: {
@@ -163,6 +177,10 @@ export default {
       this.showModalImageCreateCategory = true
     },
 
+    duplicateImageCategory (cat) {
+      this.showModalImageDuplicateCategory = true
+    },
+
     closeCreateImageSeriesModal () {
       this.showModalImageCreateSeries = false
     },
@@ -171,10 +189,14 @@ export default {
       this.showModalImageCreateCategory = false
     },
 
+    closeDuplicateImageCategoryModal () {
+      this.showModalImageDuplicateCategory = false
+    },
+
     async getData () {
       this.loading++
       nprogress.start()
-      await this.fetchImageCategory({categoryId: this.categoryId, queryVars: this.queryVars})
+      await this.fetchImageCategory({ categoryId: this.categoryId, queryVars: this.queryVars })
       this.loading--
       nprogress.done()
     },
