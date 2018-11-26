@@ -9,7 +9,7 @@
         class="card mt-5">
         <div class="card-header">
           <h5 class="section mb-0">
-            Konfigurer bildeserie
+            Konfigurer bildeserie (id: {{ seriesId }})
           </h5>
         </div>
         <div class="card-body">

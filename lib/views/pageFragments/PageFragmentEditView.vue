@@ -1,5 +1,7 @@
 <template>
-  <div class="create-post">
+  <div
+    v-if="!loading"
+    class="create-post">
     <div class="container">
       <div class="row">
         <div class="col-md-9">
@@ -107,7 +109,7 @@ export default {
   },
   data () {
     return {
-      loading: 0,
+      loading: true,
       parents: [],
       page: null
     }
@@ -126,6 +128,7 @@ export default {
   async created () {
     const p = await pageFragmentAPI.getPageFragment(this.pageId)
     this.page = { ...p }
+    this.loading = false
   },
 
   methods: {
@@ -133,7 +136,6 @@ export default {
       this.$validator.validateAll().then(result => {
         if (!result) {
           alertError('Feil i skjema', 'Vennligst se over og rett feil i rødt')
-          this.loading = false
           return
         }
         this.save()
