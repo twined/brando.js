@@ -94,7 +94,7 @@
     </modal>
 
     <img
-      :src="img.image.thumb"
+      :src="img.image.sizes.thumb"
       class="img-fluid"
       @click.stop.prevent="click">
   </div>

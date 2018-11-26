@@ -22,7 +22,7 @@
             :data-id="i.id"
             :key="i.id"
             class="sort-handle">
-            <img :src="i.image.thumb" >
+            <img :src="i.image.sizes.thumb" >
           </div>
         </transition-group>
         <div class="mt-4">

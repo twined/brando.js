@@ -22,7 +22,7 @@
             :key="i.id"
             class="float-left"
             @click="selectImage(i)">
-            <img :src="i.image.thumb">
+            <img :src="i.image.sizes.thumb">
           </div>
         </transition-group>
       </div>
