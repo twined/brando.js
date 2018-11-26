@@ -3,8 +3,7 @@
     :class="{selected: selected}"
     class="image-wrapper float-left m-1"
     @mouseover="mouseOver"
-    @mouseout="mouseOut"
-    @click.prevent="click">
+    @mouseout="mouseOut">
     <div
       v-show="showOverlay"
       class="overlay"
@@ -96,7 +95,8 @@
 
     <img
       :src="img.image.thumb"
-      class="img-fluid" >
+      class="img-fluid"
+      @click.stop.prevent="click">
   </div>
 </template>
 
@@ -171,7 +171,7 @@ export default {
       this.showOverlay = false
     },
 
-    click (img) {
+    click (ev) {
       // don't select if modal is open.
       if (!this.showEdit) {
         this.selected = !this.selected
