@@ -48,7 +48,7 @@ export default {
     },
 
     value: {
-      type: String,
+      type: [String, Array],
       default: '[]'
     },
 
