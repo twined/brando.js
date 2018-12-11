@@ -13,6 +13,7 @@ query ImageSeries ($seriesId: ID!) {
         optimized
         width
         height
+        sizes
         thumb: url(size: "thumb")
         medium: url(size: "medium")
       }
