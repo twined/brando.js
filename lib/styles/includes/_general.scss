@@ -16,6 +16,10 @@ body {
   padding-bottom: 25px;
 }
 
+a.clean {
+  border-bottom: none;
+}
+
 h5 {
   &.section {
     border-bottom: 0;
