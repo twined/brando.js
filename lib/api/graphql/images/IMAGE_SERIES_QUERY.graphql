@@ -9,6 +9,7 @@ query ImageSeries ($seriesId: ID!) {
       image {
         path
         credits
+        focal
         title
         optimized
         width

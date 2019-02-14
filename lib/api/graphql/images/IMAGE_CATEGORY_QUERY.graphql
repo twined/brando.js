@@ -20,6 +20,7 @@ query ImageCategory ($categoryId: ID!, $imageSeriesLimit: Int, $imageSeriesOffse
           path
           credits
           title
+          focal
           optimized
           width
           height

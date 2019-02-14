@@ -25,9 +25,11 @@
         <div class="card-body">
           <div class="row">
             <div class="col-6">
-              <img
-                :src="'/media/' + img.image.path"
-                class="img-fluid" >
+              <FocusPoint v-model="img.image.focal">
+                <img
+                  :src="'/media/' + img.image.path"
+                  class="img-fluid">
+              </FocusPoint>
 
               <div class="row mt-4">
                 <div class="col-md-6">
@@ -104,12 +106,14 @@
 
 import CheckOrX from '../CheckOrX.vue'
 import Modal from '../Modal.vue'
+import FocusPoint from './FocusPoint.vue'
 
 import { clone } from '../../utils'
 
 export default {
   components: {
     CheckOrX,
+    FocusPoint,
     Modal
   },
 
