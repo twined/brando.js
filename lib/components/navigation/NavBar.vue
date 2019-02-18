@@ -2,25 +2,31 @@
   <header>
     <transition
       name="slide-fade-top-slow"
-      appear>
+      appear
+    >
       <div
         v-if="lobbyPresences !== {}"
-        class="presences">
+        class="presences"
+      >
         <span class="text-uppercase text-xs pr-2">online &rarr; </span>
         <transition-group
           class="d-inline-flex justify-content-center"
           tag="div"
-          name="fade">
+          name="fade"
+        >
           <div
             v-for="(p, id) in lobbyPresences"
-            :key="id"
-            class="user-presence">
+            :key="id + 1"
+            class="user-presence"
+          >
             <div
               v-b-popover.hover.right="userById(id).full_name"
-              class="avatar">
+              class="avatar"
+            >
               <img
                 :src="userById(id).avatar"
-                class="rounded-circle avatar-xxs">
+                class="rounded-circle avatar-xxs"
+              >
             </div>
           </div>
         </transition-group>
@@ -29,7 +35,8 @@
     <section class="container">
       <transition
         name="slide-fade-top-slow"
-        appear>
+        appear
+      >
         <nav class="navbar navbar-toggleable-xxl">
           <Hamburger />
           <div class="logo-wrapper mr-auto">
@@ -38,7 +45,8 @@
 
           <div
             id="navbar-collapse"
-            class="align-items-center">
+            class="align-items-center"
+          >
             <ul class="nav navbar-right ml-auto">
               <CurrentUser :user="me" />
             </ul>

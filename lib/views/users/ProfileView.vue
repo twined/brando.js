@@ -4,15 +4,19 @@
     <div class="container">
       <div
         v-show="!loading"
-        class="row">
+        class="row"
+      >
         <div class="col-md-3">
           <div class="card p-4">
             <img
               :src="me.avatar_medium"
               class="card-img-top img-fluid"
-              alt="Avatar">
+              alt="Avatar"
+            >
             <div class="card-body text-center p-0 pt-3">
-              <h4 class="card-title mb-3">{{ me.full_name }}</h4>
+              <h4 class="card-title mb-3">
+                {{ me.full_name }}
+              </h4>
               <span class="badge badge-outline-primary badge-sm text-uppercase">administrator</span>
             </div>
           </div>
@@ -21,12 +25,14 @@
         <div class="col-md-9">
           <div class="card">
             <div class="card-header">
-              <h5 class="section mb-0">Endre brukerinformasjon</h5>
+              <h5 class="section mb-0">
+                Endre brukerinformasjon
+              </h5>
             </div>
             <div class="card-body">
               <KInput
-                v-validate="'required'"
                 v-model="profile.full_name"
+                v-validate="'required'"
                 :value="profile.full_name"
                 :has-error="errors.has('profile[full_name]')"
                 :error-text="errors.first('profile[full_name]')"
@@ -38,8 +44,8 @@
               />
 
               <KInputEmail
-                v-validate="'required|email'"
                 v-model="profile.email"
+                v-validate="'required|email'"
                 :value="profile.email"
                 :has-error="errors.has('profile[email]')"
                 :error-text="errors.first('profile[email]')"
@@ -51,8 +57,8 @@
               />
 
               <KInputSelect
-                v-validate="'required'"
                 v-model="profile.language"
+                v-validate="'required'"
                 :value="profile.language"
                 :options="[
                   { name: 'Norsk', value: 'nb' },
@@ -67,8 +73,8 @@
               />
 
               <KInputPassword
-                v-validate="'min:6|confirmed:profile[password_confirm]'"
                 v-model="profile.password"
+                v-validate="'min:6|confirmed:profile[password_confirm]'"
                 :value="profile.password"
                 :has-error="errors.has('profile[password]')"
                 :error-text="errors.first('profile[password]')"
@@ -91,8 +97,8 @@
               />
 
               <KInputImage
-                v-validate="'required'"
                 v-model="profile.avatar"
+                v-validate="'required'"
                 :value="profile.avatar"
                 :width="100"
                 :height="100"
@@ -107,13 +113,15 @@
               <button
                 class="btn btn-outline-secondary"
                 type="submit"
-                @click.prevent="validate">
+                @click.prevent="validate"
+              >
                 Lagre
               </button>
               <router-link
                 :to="{ name: 'dashboard' }"
                 class="btn btn-outline-secondary"
-                exact>
+                exact
+              >
                 Tilbake
               </router-link>
             </div>
@@ -132,21 +140,15 @@ import { userAPI } from '../../api/user'
 import showError from '../../utils/showError'
 import { pick } from '../../utils'
 
-import VueCoreImageUpload from 'vue-core-image-upload'
-
 export default {
-  components: {
-    VueCoreImageUpload
-  },
-
   data () {
     return {
       loading: true,
       profile: {
-        'name': '',
-        'email': '',
-        'language': '',
-        'avatar': ''
+        name: '',
+        email: '',
+        language: '',
+        avatar: ''
       }
     }
   },
@@ -176,10 +178,6 @@ export default {
   },
 
   methods: {
-    uploading (res) {
-      console.info('uploading')
-    },
-
     validate (e) {
       this.$validator.validateAll().then(() => {
         this.submitForm()
@@ -200,7 +198,7 @@ export default {
       try {
         await userAPI.updateUser(this.me.id, params)
         this.storeMe()
-        this.$toast.success({message: 'Lagret profilinformasjon'})
+        this.$toast.success({ message: 'Lagret profilinformasjon' })
         nprogress.done()
       } catch (err) {
         showError(err)

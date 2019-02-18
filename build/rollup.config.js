@@ -8,9 +8,7 @@ const json = require('rollup-plugin-json')
 const graphql = require('rollup-plugin-graphql')
 const resolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
-const CleanCSS = require('clean-css')
-const { camelCase } = require('lodash')
-const { name, dependencies } = require('../package.json')
+const { name } = require('../package.json')
 
 const base = path.resolve(__dirname, '..')
 const nodeModules = path.resolve(base, 'node_modules')
@@ -48,13 +46,7 @@ export default {
       '@': lib,
       '~': nodeModules
     }),
-    scss({
-      output: path.resolve(dist, name + '.css'),
-      insert: true,
-      include: '**/*.scss',
-      exclude: [],
-      includePaths: ['node_modules']
-    }),
+    scss(),
     VuePlugin(),
     graphql({ sourceMap: true }),
     resolve({

@@ -2,14 +2,17 @@
   <div
     id="picture-input"
     ref="container"
-    class="picture-input">
+    class="picture-input"
+  >
     <div
       v-if="!supportsUpload"
-      v-html="strings.upload"/>
+      v-html="strings.upload"
+    />
     <div v-else-if="supportsPreview">
       <div
         :style="{maxWidth: previewWidth + 'px', height: previewHeight + 'px', borderRadius: radius + '%'}"
-        class="preview-container">
+        class="preview-container"
+      >
         <canvas
           ref="previewCanvas"
           :class="computedClasses"
@@ -22,61 +25,87 @@
           @dragend.stop.prevent="onDragStop"
           @dragleave.stop.prevent="onDragStop"
           @drop.stop.prevent="onFileDrop"
-          @click.prevent="onClick"/>
+          @click.prevent="onClick"
+        />
         <div
           v-if="!imageSelected && !plain"
           :style="{top: -previewHeight + 'px', marginBottom: -previewHeight + 'px', fontSize: fontSize, borderRadius: radius + '%', zIndex: zIndex + 2}"
-          class="picture-inner">
+          class="picture-inner"
+        >
           <span
             v-if="supportsDragAndDrop"
             class="picture-inner-text"
-            v-html="strings.drag"/>
+            v-html="strings.drag"
+          />
           <span
             v-else
             class="picture-inner-text"
-            v-html="strings.tap"/>
+            v-html="strings.tap"
+          />
         </div>
       </div>
       <button
         v-if="imageSelected"
         :class="buttonClass"
-        @click.prevent="selectImage">{{ strings.change }}</button>
+        @click.prevent="selectImage"
+      >
+        {{ strings.change }}
+      </button>
       <button
         v-if="imageSelected && removable"
         :class="removeButtonClass"
-        @click.prevent="removeImage">{{ strings.remove }}</button>
+        @click.prevent="removeImage"
+      >
+        {{ strings.remove }}
+      </button>
       <button
         v-if="imageSelected && toggleAspectRatio && width !== height"
         :class="aspectButtonClass"
-        @click.prevent="rotateImage">{{ strings.aspect }}</button>
+        @click.prevent="rotateImage"
+      >
+        {{ strings.aspect }}
+      </button>
     </div>
     <div v-else>
       <button
         v-if="!imageSelected"
         :class="buttonClass"
-        @click.prevent="selectImage">{{ strings.select }}</button>
+        @click.prevent="selectImage"
+      >
+        {{ strings.select }}
+      </button>
       <div v-else>
-        <div v-html="strings.selected"/>
+        <div v-html="strings.selected" />
         <button
           :class="buttonClass"
-          @click.prevent="selectImage">{{ strings.change }}</button>
+          @click.prevent="selectImage"
+        >
+          {{ strings.change }}
+        </button>
         <button
           v-if="removable"
           :class="removeButtonClass"
-          @click.prevent="removeImage">{{ strings.remove }}</button>
+          @click.prevent="removeImage"
+        >
+          {{ strings.remove }}
+        </button>
       </div>
     </div>
     <input
+      :id="id"
       ref="fileInput"
       :name="name"
-      :id="id"
       :accept="accept"
       type="file"
-      @change="onFileChange">
+      @change="onFileChange"
+    >
   </div>
 </template>
 
 <script>
+
+/* eslint no-callback-literal: 0 */
+
 export default {
   name: 'PictureInput',
   props: {
