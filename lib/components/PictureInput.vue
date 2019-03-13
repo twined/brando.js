@@ -215,7 +215,7 @@ export default {
       this.preloadImage(this.prefill, this.prefillOptions)
     }
 
-    if (this.focal) {
+    if (this.focal && this.prefill) {
       this.focus = this.focal
     }
 
@@ -334,16 +334,8 @@ export default {
       this.image = ''
       if (this.supportsPreview) {
         this.loadImage(files[0])
-        if (!prefill) {
-          // reset focal
-          this.focus = {x: 50, y: 50}
-        }
       } else {
-        if (prefill) {
-          this.$emit('prefill')
-        } else {
-          this.$emit('change', this.image)
-        }
+        this.$emit('change', this.image)
       }
     },
     onError (error) {
