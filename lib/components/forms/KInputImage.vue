@@ -18,6 +18,7 @@
     <div class="image-preview-wrapper">
       <PictureInput
         ref="pictureInput"
+        :focal="focal"
         :crop="crop"
         :width="width"
         :height="height"
@@ -35,13 +36,14 @@
           fileSize: 'Fila er for stor!',
           fileType: 'Filtypen er ikke støttet'
         }"
-        margin="16"
+        margin="0"
         accept="image/jpeg,image/jpg,image/png,image/gif"
         size="10"
         button-class="btn btn-outline-secondary"
         @change="onChange"
         @click="onClick"
         @remove="onRemove"
+        @focalChanged="onFocalChanged"
       />
     </div>
   </div>
@@ -73,17 +75,17 @@ export default {
 
     crop: {
       type: Boolean,
-      default: true
+      default: false
     },
 
     width: {
       type: Number,
-      default: 300
+      default: 450
     },
 
     height: {
       type: Number,
-      default: 300
+      default: 450
     },
 
     label: {
@@ -105,6 +107,7 @@ export default {
 
   data () {
     return {
+      focal: null,
       loading: 0,
       preCheck: false,
       innerValue: '',
@@ -134,12 +137,16 @@ export default {
       this.prefill = this.value
     } else {
       this.prefill = this.value ? this.value[this.previewKey] : null
+      if (this.value) {
+        this.focal = this.value['focal'] ? this.value['focal'] : null
+      } else {
+        this.focal = {x: 50, y: 50}
+      }
     }
   },
 
   methods: {
     onClick (a) {
-      console.log('clicked. does this mean it changed??')
     },
 
     onChange (a) {
@@ -155,6 +162,22 @@ export default {
 
     onRemove (a) {
       this.innerValue = null
+    },
+
+    onFocalChanged (f) {
+      if (this.innerValue instanceof File) {
+        // remove any focal key
+        let filename = this.innerValue.name.replace(/\%\%\%(.*)\%\%\%/, '')
+        // change the filename to include focal info
+        filename = filename + `%%%${f.x}:${f.y}%%%`
+        const newFile = new File([this.innerValue], filename, {type: this.innerValue.type})
+        this.innerValue = newFile
+      } else {
+        this.innerValue = {
+          ...this.innerValue,
+          focal: f
+        }
+      }
     }
   }
 }

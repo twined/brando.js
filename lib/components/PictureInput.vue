@@ -1,113 +1,76 @@
 <template>
-  <div
-    id="picture-input"
-    ref="container"
-    class="picture-input"
-  >
-    <div
-      v-if="!supportsUpload"
-      v-html="strings.upload"
-    />
+  <div ref="container" id="picture-input" class="picture-input">
+    <div v-if="!supportsUpload" v-html="strings.upload"></div>
     <div v-else-if="supportsPreview">
-      <div
-        :style="{maxWidth: previewWidth + 'px', height: previewHeight + 'px', borderRadius: radius + '%'}"
-        class="preview-container"
-      >
-        <canvas
-          ref="previewCanvas"
-          :class="computedClasses"
-          :style="{height: previewHeight + 'px', zIndex: zIndex + 1 }"
-          class="picture-preview"
-          @drag.stop.prevent=""
-          @dragover.stop.prevent=""
-          @dragstart.stop.prevent="onDragStart"
-          @dragenter.stop.prevent="onDragStart"
-          @dragend.stop.prevent="onDragStop"
-          @dragleave.stop.prevent="onDragStop"
-          @drop.stop.prevent="onFileDrop"
-          @click.prevent="onClick"
-        />
-        <div
-          v-if="!imageSelected && !plain"
-          :style="{top: -previewHeight + 'px', marginBottom: -previewHeight + 'px', fontSize: fontSize, borderRadius: radius + '%', zIndex: zIndex + 2}"
-          class="picture-inner"
-        >
-          <span
-            v-if="supportsDragAndDrop"
-            class="picture-inner-text"
-            v-html="strings.drag"
-          />
-          <span
-            v-else
-            class="picture-inner-text"
-            v-html="strings.tap"
-          />
-        </div>
+      <div class="preview-container"
+        :style="{maxWidth: previewWidth + 'px', height: previewHeight + 'px', borderRadius: radius + '%'}">
+        <template v-show="!imageSelected && !plain">
+          <canvas ref="grayCanvas"
+            class="picture-preview"
+            tabindex="0"
+            :class="computedClasses"
+            @drag.stop.prevent=""
+            @dragover.stop.prevent=""
+            @dragstart.stop.prevent=""
+            @dragend.stop.prevent=""
+            @dragenter.stop.prevent="onDragEnter"
+            @dragleave.stop.prevent="onDragLeave"
+            @drop.stop.prevent="onFileDrop"
+            @click.prevent="onClick"
+            @keyup.enter="onClick"
+            :style="{height: previewHeight + 'px', zIndex: zIndex + 1, display: imageSelected ? 'none' : 'block' }">
+          </canvas>
+          <div v-if="!imageSelected && !plain"
+            class="picture-inner"
+              :style="{top: -previewHeight + 'px', marginBottom: -previewHeight + 'px', fontSize: fontSize, borderRadius: radius + '%', zIndex: zIndex + 2}">
+            <span v-if="supportsDragAndDrop" class="picture-inner-text" v-html="strings.drag"></span>
+            <span v-else class="picture-inner-text" v-html="strings.tap"></span>
+          </div>
+        </template>
+        <template v-show="imageSelected">
+          <FocusPoint v-model="focus">
+            <canvas ref="previewCanvas"
+              class="picture-preview"
+              tabindex="0"
+              :class="computedClasses"
+              @drag.stop.prevent=""
+              @dragover.stop.prevent=""
+              @dragstart.stop.prevent=""
+              @dragend.stop.prevent=""
+              @dragenter.stop.prevent="onDragEnter"
+              @dragleave.stop.prevent="onDragLeave"
+              @drop.stop.prevent="onFileDrop"
+              @click.prevent="onClick"
+              @keyup.enter="onClick"
+              :style="{height: previewHeight + 'px', zIndex: zIndex + 1 }">
+            </canvas>
+          </FocusPoint>
+        </template>
       </div>
-      <button
-        v-if="imageSelected"
-        :class="buttonClass"
-        @click.prevent="selectImage"
-      >
-        {{ strings.change }}
-      </button>
-      <button
-        v-if="imageSelected && removable"
-        :class="removeButtonClass"
-        @click.prevent="removeImage"
-      >
-        {{ strings.remove }}
-      </button>
-      <button
-        v-if="imageSelected && toggleAspectRatio && width !== height"
-        :class="aspectButtonClass"
-        @click.prevent="rotateImage"
-      >
-        {{ strings.aspect }}
-      </button>
+      <button v-if="imageSelected && !hideChangeButton" @click.prevent="selectImage" :class="buttonClass">{{ strings.change }}</button>
+      <button v-if="imageSelected && removable" @click.prevent="removeImage" :class="removeButtonClass">{{ strings.remove }}</button>
+      <button v-if="imageSelected && toggleAspectRatio && width !== height" @click.prevent="rotateImage" :class="aspectButtonClass">{{ strings.aspect }}</button>
     </div>
     <div v-else>
-      <button
-        v-if="!imageSelected"
-        :class="buttonClass"
-        @click.prevent="selectImage"
-      >
-        {{ strings.select }}
-      </button>
+      <button v-if="!imageSelected" @click.prevent="selectImage" :class="buttonClass">{{ strings.select }}</button>
       <div v-else>
-        <div v-html="strings.selected" />
-        <button
-          :class="buttonClass"
-          @click.prevent="selectImage"
-        >
-          {{ strings.change }}
-        </button>
-        <button
-          v-if="removable"
-          :class="removeButtonClass"
-          @click.prevent="removeImage"
-        >
-          {{ strings.remove }}
-        </button>
+        <div v-html="strings.selected"></div>
+        <button v-if="!hideChangeButton" @click.prevent="selectImage" :class="buttonClass">{{ strings.change }}</button>
+        <button v-if="removable" @click.prevent="removeImage" :class="removeButtonClass">{{ strings.remove }}</button>
       </div>
     </div>
-    <input
-      :id="id"
-      ref="fileInput"
-      :name="name"
-      :accept="accept"
-      type="file"
-      @change="onFileChange"
-    >
+    <input ref="fileInput" type="file" :name="name" :id="id" :accept="accept" @change="onFileChange">
   </div>
 </template>
 
 <script>
-
-/* eslint no-callback-literal: 0 */
+import FocusPoint from './images/FocusPoint.vue'
 
 export default {
-  name: 'PictureInput',
+  name: 'picture-input',
+  components: {
+    FocusPoint
+  },
   props: {
     width: {
       type: [String, Number],
@@ -135,6 +98,10 @@ export default {
     },
     id: {
       type: [String, Number],
+      default: null
+    },
+    focal: {
+      type: Object,
       default: null
     },
     buttonClass: {
@@ -171,6 +138,10 @@ export default {
       type: Boolean,
       default: false
     },
+    hideChangeButton: {
+      type: Boolean,
+      default: false
+    },
     autoToggleAspectRatio: {
       type: Boolean,
       default: false
@@ -191,6 +162,10 @@ export default {
       type: Number,
       default: 10000
     },
+    alertOnError: {
+      type: Boolean,
+      default: true
+    },
     customStrings: {
       type: Object,
       default: () => {
@@ -198,8 +173,22 @@ export default {
       }
     }
   },
+  watch: {
+    prefill () {
+      if (this.prefill) {
+        this.preloadImage(this.prefill, this.prefillOptions)
+      } else {
+        this.removeImage()
+      }
+    },
+
+    focus (f) {
+      this.$emit('focalChanged', f)
+    }
+  },
   data () {
     return {
+      focus: null,
       imageSelected: false,
       previewHeight: 0,
       previewWidth: 0,
@@ -220,44 +209,14 @@ export default {
       }
     }
   },
-  computed: {
-    supportsUpload () {
-      if (navigator.userAgent.match(/(Android (1.0|1.1|1.5|1.6|2.0|2.1))|(Windows Phone (OS 7|8.0))|(XBLWP)|(ZuneWP)|(w(eb)?OSBrowser)|(webOS)|(Kindle\/(1.0|2.0|2.5|3.0))/)) {
-        return false
-      }
-      const el = document.createElement('input')
-      el.type = 'file'
-      return !el.disabled
-    },
-    supportsPreview () {
-      return window.FileReader && !!window.CanvasRenderingContext2D
-    },
-    supportsDragAndDrop () {
-      const div = document.createElement('div')
-      return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && !('ontouchstart' in window || navigator.msMaxTouchPoints)
-    },
-    computedClasses () {
-      const classObject = {}
-      classObject['dragging-over'] = this.draggingOver
-      return classObject
-    },
-    fontSize () {
-      return Math.min(0.04 * this.previewWidth, 21) + 'px'
-    }
-  },
-  watch: {
-    prefill () {
-      if (this.prefill) {
-        this.preloadImage(this.prefill, this.prefillOptions)
-      } else {
-        this.removeImage()
-      }
-    }
-  },
   mounted () {
     this.updateStrings()
     if (this.prefill) {
       this.preloadImage(this.prefill, this.prefillOptions)
+    }
+
+    if (this.focal) {
+      this.focus = this.focal
     }
 
     this.$nextTick(() => {
@@ -279,9 +238,12 @@ export default {
 
     this.canvasWidth = this.width
     this.canvasHeight = this.height
+
+    this.$on('error', this.onError)
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize)
+    this.$off('error', this.onError)
   },
   methods: {
     updateStrings () {
@@ -310,29 +272,35 @@ export default {
         this.drawImage(this.imageObject)
       }
     },
-    onDragStart () {
+    onDragEnter () {
       if (!this.supportsDragAndDrop) {
         return
       }
       this.draggingOver = true
     },
-    onDragStop () {
+    onDragLeave () {
       if (!this.supportsDragAndDrop) {
         return
       }
       this.draggingOver = false
     },
     onFileDrop (e) {
-      this.onDragStop()
+      this.onDragLeave()
       this.onFileChange(e)
     },
-    onFileChange (e) {
+    onFileChange (e, prefill) {
       let files = e.target.files || e.dataTransfer.files
       if (!files.length) {
         return
       }
       if (files[0].size <= 0 || files[0].size > this.size * 1024 * 1024) {
-        alert(this.strings.fileSize + ' (' + this.size + 'MB)')
+        this.$emit('error', {
+          type: 'fileSize',
+          fileSize: files[0].size,
+          fileType: files[0].type,
+          fileName: files[0].name,
+          message: this.strings.fileSize + ' (' + this.size + 'MB)'
+        })
         return
       }
       if (files[0].name === this.fileName && files[0].size === this.fileSize && this.fileModified === files[0].lastModified) {
@@ -344,24 +312,43 @@ export default {
       this.fileSize = files[0].size
       this.fileModified = files[0].lastModified
       this.fileType = files[0].type
+
       if (this.accept === 'image/*') {
         if (files[0].type.substr(0, 6) !== 'image/') {
           return
         }
       } else {
         if (this.fileTypes.indexOf(files[0].type) === -1) {
-          console.log(this.fileTypes)
-          console.log(files)
-          alert(this.strings.fileType)
+          this.$emit('error', {
+            type: 'fileType',
+            fileSize: files[0].size,
+            fileType: files[0].type,
+            fileName: files[0].name,
+            message: this.strings.fileType
+          })
           return
         }
       }
+
       this.imageSelected = true
       this.image = ''
       if (this.supportsPreview) {
         this.loadImage(files[0])
+        if (!prefill) {
+          // reset focal
+          this.focus = {x: 50, y: 50}
+        }
       } else {
-        this.$emit('change')
+        if (prefill) {
+          this.$emit('prefill')
+        } else {
+          this.$emit('change', this.image)
+        }
+      }
+    },
+    onError (error) {
+      if (this.alertOnError) {
+        alert(error.message)
       }
     },
     loadImage (file) {
@@ -370,18 +357,16 @@ export default {
         let reader = new FileReader()
         reader.onload = e => {
           this.image = e.target.result
-          this.$emit('change')
+          this.$emit('change', this.image)
           this.imageObject = new Image()
           this.imageObject.onload = () => {
             if (this.autoToggleAspectRatio) {
               let canvasOrientation = this.getOrientation(this.canvasWidth, this.canvasHeight)
               let imageOrientation = this.getOrientation(this.imageObject.width, this.imageObject.height)
-
               if (canvasOrientation !== imageOrientation) {
                 this.rotateCanvas()
               }
             }
-
             this.drawImage(this.imageObject)
           }
           this.imageObject.src = this.image
@@ -395,10 +380,24 @@ export default {
       this.imageRatio = image.width / image.height
       let offsetX = 0
       let offsetY = 0
-      let scaledWidth = this.previewWidth
-      let scaledHeight = this.previewHeight
+      let scaledWidth = 450
+      let scaledHeight = 450
+      this.previewWidth = 450
+      this.previewHeight = 450
+      //const previewRatio = this.previewWidth / this.previewHeight
+      const previewRatio = this.imageRatio
+      let orientation = this.getOrientation(image.width, image.height)
+      switch (orientation) {
+        case 'portrait':
+          this.previewWidth = this.previewWidth * this.imageRatio
+          break
+        case 'landscape':
+          this.previewHeight = this.previewHeight / this.imageRatio
+          break
+      }
+
       if (this.crop) {
-        if (this.imageRatio > 1) {
+        if (this.imageRatio >= previewRatio) {
           scaledWidth = scaledHeight * this.imageRatio
           offsetX = (this.previewWidth - scaledWidth) / 2
         } else {
@@ -406,7 +405,7 @@ export default {
           offsetY = (this.previewHeight - scaledHeight) / 2
         }
       } else {
-        if (this.imageRatio > 1) {
+        if (this.imageRatio >= previewRatio) {
           scaledHeight = scaledWidth / this.imageRatio
           offsetY = (this.previewHeight - scaledHeight) / 2
         } else {
@@ -433,6 +432,7 @@ export default {
         scaledWidth * this.pixelRatio,
         scaledHeight * this.pixelRatio)
     },
+
     selectImage () {
       this.$refs.fileInput.click()
     },
@@ -540,6 +540,20 @@ export default {
       reader.readAsArrayBuffer(file.slice(0, 65536))
     },
     preloadImage (source, options) {
+      // ie 11 support
+      let File = window.File
+      try {
+        new File([], '') // eslint-disable-line
+      } catch (e) {
+        File = class File extends Blob {
+          constructor (chunks, filename, opts = {}) {
+            super(chunks, opts)
+            this.lastModifiedDate = new Date()
+            this.lastModified = +this.lastModifiedDate
+            this.name = filename
+          }
+        }
+      }
       options = Object.assign({}, options)
       if (typeof source === 'object') {
         this.imageSelected = true
@@ -547,7 +561,7 @@ export default {
         if (this.supportsPreview) {
           this.loadImage(source)
         } else {
-          this.$emit('change')
+          this.$emit('prefill')
         }
         return
       }
@@ -560,18 +574,99 @@ export default {
       }).then(response => {
         return response.blob()
       })
-        .then(imageBlob => {
-          let e = { target: { files: [] } }
-          const fileName = options.fileName || source.split('/').slice(-1)[0]
-          let mediaType = options.mediaType || ('image/' + (options.fileType || fileName.split('.').slice(-1)[0]))
-          mediaType = mediaType.replace('jpg', 'jpeg')
-          e.target.files[0] = new File([imageBlob], fileName, { type: mediaType })
-          this.onFileChange(e)
+      .then(imageBlob => {
+        let e = { target: { files: [] } }
+        const fileName = options.fileName || source.split('/').slice(-1)[0]
+        let mediaType = options.mediaType || ('image/' + (options.fileType || fileName.split('.').slice(-1)[0]))
+        mediaType = mediaType.replace('jpg', 'jpeg')
+        e.target.files[0] = new File([imageBlob], fileName, { type: mediaType })
+        this.onFileChange(e, true)
+      })
+      .catch(err => {
+        this.$emit('error', {
+          type: 'failedPrefill',
+          message: 'Failed loading prefill image: ' + err
         })
-        .catch(err => {
-          console.log('Failed loading prefill image: ' + err.message)
-        })
+      })
+    }
+  },
+  computed: {
+    supportsUpload () {
+      if (navigator.userAgent.match(/(Android (1.0|1.1|1.5|1.6|2.0|2.1))|(Windows Phone (OS 7|8.0))|(XBLWP)|(ZuneWP)|(w(eb)?OSBrowser)|(webOS)|(Kindle\/(1.0|2.0|2.5|3.0))/)) {
+        return false
+      }
+      const el = document.createElement('input')
+      el.type = 'file'
+      return !el.disabled
+    },
+    supportsPreview () {
+      return window.FileReader && !!window.CanvasRenderingContext2D
+    },
+    supportsDragAndDrop () {
+      const div = document.createElement('div')
+      return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && !('ontouchstart' in window || navigator.msMaxTouchPoints)
+    },
+    computedClasses () {
+      const classObject = {}
+      classObject['dragging-over'] = this.draggingOver
+      return classObject
+    },
+    fontSize () {
+      return Math.min(0.04 * this.previewWidth, 21) + 'px'
     }
   }
 }
 </script>
+
+<style scoped>
+.picture-input {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.preview-container {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  cursor: pointer;
+  overflow: hidden;
+}
+.picture-preview {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 10001;
+  box-sizing: border-box;
+  background-color: rgba(200,200,200,.25);
+}
+.picture-preview.dragging-over {
+  filter: brightness(0.5);
+}
+.picture-inner {
+  position: relative;
+  z-index: 10002;
+  pointer-events: none;
+  box-sizing: border-box;
+  margin: 1em auto;
+  padding: 0.5em;
+  border: .3em dashed rgba(66,66,66,.15);
+  border-radius: 8px;
+  width: calc(100% - 2.5em);
+  height: calc(100% - 2.5em);
+  display: table;
+}
+.picture-inner .picture-inner-text {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 2em;
+  line-height: 1.5;
+}
+button {
+  margin: 1em .25em;
+  cursor: pointer;
+}
+input[type=file] {
+  display: none;
+}
+</style>
