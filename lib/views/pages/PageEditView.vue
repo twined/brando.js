@@ -1,5 +1,5 @@
 <template>
-  <div class="create-post">
+  <div class="create-post" v-if="!loading">
     <div class="container">
       <div class="row">
         <div class="col-md-9">
@@ -160,7 +160,7 @@ export default {
   },
   data () {
     return {
-      loading: 0,
+      loading: true,
       page: null,
       parents: []
     }
@@ -180,6 +180,7 @@ export default {
     this.getParents()
     const p = await pageAPI.getPage(this.pageId)
     this.page = { ...p }
+    this.loading = false
   },
 
   methods: {
