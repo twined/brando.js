@@ -21,6 +21,12 @@
                   exact>
                   Ny side
                 </router-link>
+                <button
+                  class="btn btn-secondary"
+                  @click.prevent="rerenderPages()"
+                >
+                  Reprosessér alle sider
+                </button>
               </p>
             </div>
             <div class="page-list">
@@ -65,6 +71,13 @@
                           <i class="fal fa-pencil fa-fw mr-2" />
                           Endre side
                         </router-link>
+                        <button
+                          :class="{'dropdown-item': true}"
+                          @click.prevent="rerenderPage(page)"
+                        >
+                          <i class="fal fa-sync fa-fw mr-2" />
+                          Reprosessér side
+                        </button>
                         <button
                           :class="{'dropdown-item': true}"
                           @click.prevent="duplicatePage(page)">
@@ -182,6 +195,22 @@ export default {
         .push('page:duplicate', { id: page.id })
         .receive('ok', payload => {
           this.$store.commit('pages/ADD_PAGE', payload.page)
+        })
+    },
+
+    rerenderPage (page) {
+      this.adminChannel.channel
+        .push('page:rerender', { id: page.id })
+        .receive('ok', payload => {
+          this.$toast.success({ message: 'Siden ble gjengitt på nytt' })
+        })
+    },
+
+    rerenderPages () {
+      this.adminChannel.channel
+        .push('page:rerender_all')
+        .receive('ok', payload => {
+          this.$toast.success({ message: 'Sidene ble gjengitt på nytt' })
         })
     },
 

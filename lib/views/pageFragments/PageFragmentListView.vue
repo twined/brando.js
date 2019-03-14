@@ -29,6 +29,13 @@
                 >
                   Nytt sidefragment
                 </router-link>
+                <br>
+                <button
+                  class="btn btn-danger mt-2"
+                  @click.prevent="rerenderPageFragments()"
+                >
+                  (!) Reprosessér alle fragmenter
+                </button>
               </p>
             </div>
             <div class="page-list">
@@ -88,7 +95,7 @@
                           @click.prevent="rerenderPageFragment(page)"
                         >
                           <i class="fal fa-sync fa-fw mr-2" />
-                          Gjenoppfrisk fragment
+                          Reprosessér fragment
                         </button>
                         <button
                           :class="{'dropdown-item': true}"
@@ -164,6 +171,14 @@ export default {
         .push('page_fragment:rerender', { id: page.id })
         .receive('ok', payload => {
           this.$toast.success({ message: 'Fragmentet ble gjengitt på nytt' })
+        })
+    },
+
+    rerenderPageFragments () {
+      this.adminChannel.channel
+        .push('page_fragment:rerender_all')
+        .receive('ok', payload => {
+          this.$toast.success({ message: 'Fragmentene ble gjengitt på nytt' })
         })
     },
 
