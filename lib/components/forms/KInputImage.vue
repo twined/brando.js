@@ -141,7 +141,7 @@ export default {
       if (this.value) {
         this.focal = this.value['focal'] ? this.value['focal'] : null
       } else {
-        this.focal = {x: 50, y: 50}
+        this.focal = { x: 50, y: 50 }
       }
     }
   },
@@ -171,7 +171,7 @@ export default {
         let filename = this.innerValue.name.replace(/\%\%\%(.*)\%\%\%/, '')
         // change the filename to include focal info
         filename = filename + `%%%${f.x}:${f.y}%%%`
-        const newFile = new File([this.innerValue], filename, {type: this.innerValue.type})
+        const newFile = new File([this.innerValue], filename, { type: this.innerValue.type })
         this.innerValue = newFile
       } else {
         this.innerValue = {
