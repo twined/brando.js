@@ -133,6 +133,20 @@
   color: #999;
 }
 
+ul.tags-list {
+  @extend .list-unstyled;
+  margin-top: 8px;
+
+  li {
+    display: inline-block;
+    margin: 0 5px 0 0;
+    font-size: 10px;
+    text-transform: uppercase;
+    background-color: beige;
+    padding: 3px 13px;
+  }
+}
+
 .form-group {
   margin-bottom: 1rem;
   margin-left: -0.5rem;

@@ -1,7 +1,8 @@
 <template>
   <div
     v-if="!loading"
-    :class="{'form-group': true, 'has-danger': hasError }">
+    :class="{'form-group': true, 'has-danger': hasError }"
+  >
     <div class="label-wrapper">
       <label
         :for="id"
@@ -10,13 +11,14 @@
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
 
     <div class="image-preview-wrapper">
       <PictureInput
+        :id="id"
         ref="pictureInput"
         :focal="focal"
         :crop="crop"
@@ -24,7 +26,6 @@
         :height="height"
         :prefill="prefill"
         :removable="true"
-        :id="id"
         :name="name"
         :custom-strings="{
           upload: 'Dingsen du bruker støtter ikke filopplasting :(',

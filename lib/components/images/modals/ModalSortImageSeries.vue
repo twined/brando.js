@@ -9,31 +9,37 @@
   >
     <div class="card mb-3">
       <div class="card-header text-center">
-        <h5 class="section mb-0">Sortér bildeserie</h5>
+        <h5 class="section mb-0">
+          Sortér bildeserie
+        </h5>
       </div>
       <div class="card-body">
         <transition-group
           v-sortable="{handle: '.sort-handle', animation: 0, store: {get: getOrder, set: storeOrder}}"
           name="fade-move"
           tag="div"
-          class="sort-container">
+          class="sort-container"
+        >
           <div
             v-for="i in imageSeries.images"
-            :data-id="i.id"
             :key="i.id"
-            class="sort-handle">
-            <img :src="i.image.sizes.thumb" >
+            :data-id="i.id"
+            class="sort-handle"
+          >
+            <img :src="i.image.sizes.thumb">
           </div>
         </transition-group>
         <div class="mt-4">
           <button
             class="btn btn-secondary"
-            @click.prevent="save">
+            @click.prevent="save"
+          >
             Lagre rekkefølge
           </button>
           <button
             class="btn"
-            @click.prevent="closeModal">
+            @click.prevent="closeModal"
+          >
             Avbryt
           </button>
         </div>

@@ -2,17 +2,18 @@
   <div
     v-if="token && !loading"
     id="app"
-    :class="{'loaded': !loading, 'menu-open': status, 'fullscreen': fullScreen}">
+    :class="{'loaded': !loading, 'menu-open': status, 'fullscreen': fullScreen}"
+  >
     <NProgress />
     <NavMenu />
     <NavBar />
     <transition
       name="fade"
-      appear>
+      appear
+    >
       <KProgress
         v-show="showProgress"
         :status="progressStatus"
-        :percent="progressPercent"
       />
     </transition>
     <div id="content">
@@ -20,8 +21,9 @@
         name="fade"
         mode="out-in"
         appear
-        @after-leave="afterLeave">
-        <router-view class="view"/>
+        @after-leave="afterLeave"
+      >
+        <router-view class="view" />
       </transition>
     </div>
   </div>
@@ -31,8 +33,9 @@
         name="fade"
         mode="out-in"
         appear
-        @after-leave="afterLeave">
-        <router-view class="view"/>
+        @after-leave="afterLeave"
+      >
+        <router-view class="view" />
       </transition>
     </div>
   </div>
@@ -60,7 +63,7 @@ export default {
       loading: 1,
       fullScreen: false,
       showProgress: false,
-      progressStatus: '',
+      progressStatus: {},
       progressPercent: null
     }
   },
@@ -183,11 +186,13 @@ export default {
       })
       this.userChannel.on('progress:hide', payload => {
         this.showProgress = false
+        this.progressStatus = {}
       })
       this.userChannel.on('progress:update', payload => {
-        this.progressStatus = payload.status
-        if (payload.hasOwnProperty('percent')) {
-          this.progressPercent = payload.percent
+        if (payload.hasOwnProperty('key')) {
+          this.$set(this.progressStatus, payload.key, { content: payload.status, percent: payload.percent || 0 })
+        } else {
+          this.$set(this.progressStatus, 'default', { content: payload.status, percent: payload.percent || 0 })
         }
       })
     },

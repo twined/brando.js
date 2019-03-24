@@ -3,21 +3,23 @@
     <div class="label-wrapper">
       <label
         :for="id"
-        class="control-label">
+        class="control-label"
+>
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
 
     <textarea
-      v-model="innerValue"
       :id="id"
+      v-model="innerValue"
       :rows="rows"
       :name="name"
-      class="form-control form-control-danger"></textarea>
+      class="form-control form-control-danger"
+></textarea>
   </div>
 </template>
 
