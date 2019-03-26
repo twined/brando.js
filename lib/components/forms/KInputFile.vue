@@ -5,21 +5,20 @@
     <div class="label-wrapper">
       <label
         :for="id"
-        class="control-label"
-      >
+        class="control-label">
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
 
     <div class="file-wrapper">
       <FileInput
+        :id="id"
         ref="fileInput"
         :prefill="prefill"
-        :id="id"
         :name="name"
         :custom-strings="{
           upload: 'Dingsen du bruker støtter ikke filopplasting :(',
@@ -35,8 +34,7 @@
         size="10"
         button-class="btn btn-outline-secondary"
         @change="onChange"
-        @click="onClick"
-      />
+        @click="onClick" />
     </div>
   </div>
 </template>

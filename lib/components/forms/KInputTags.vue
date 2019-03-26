@@ -3,8 +3,7 @@
     <div class="label-wrapper">
       <label
         :for="id"
-        class="control-label"
-      >
+        class="control-label">
         {{ label }} ({{ separator === ' ' ? 'separér med mellomrom' : 'separér med komma' }})
       </label>
       <span>
@@ -19,16 +18,13 @@
       :name="name"
       placeholder="tags"
       class="form-control form-control-danger text-mono"
-      type="text"
-    >
+      type="text">
     <ul
       v-if="value && value.length"
-      class="tags-list"
-    >
+      class="tags-list">
       <li
         v-for="(t, idx) in value"
-        :key="idx"
-      >
+        :key="idx">
         {{ t }}
       </li>
     </ul>

@@ -7,20 +7,20 @@
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
 
     <select
-      v-model="innerValue"
       :id="id"
+      v-model="innerValue"
       :name="name"
       class="form-control">
       <option
         v-for="o in options"
-        :value="o.value"
-        :key="o.value">
+        :key="o.value"
+        :value="o.value">
         {{ o.name }}
       </option>
     </select>

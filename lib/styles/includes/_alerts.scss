@@ -6,16 +6,16 @@
   height: 100%;
   background-color: #000000cf;
   z-index: 10005;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   .kprogress {
-    position: absolute;
-    margin: 0 auto;
-    top: 50%;
-    left: 50%;
     z-index: 999999;
     background-color: white;
     padding: 4rem;
-    transform: translateX(-50%) translateY(-50%);
+    transition: height 0.15s ease-out;
 
     .kprogress-percent {
       font-size: 2.5rem;

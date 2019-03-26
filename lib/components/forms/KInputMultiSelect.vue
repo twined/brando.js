@@ -5,7 +5,7 @@
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
@@ -15,8 +15,7 @@
       :options="options"
       :track-by="optionValueKey"
       :label="optionLabelKey"
-      :multiple="multiple"
-    />
+      :multiple="multiple" />
   </div>
 </template>
 

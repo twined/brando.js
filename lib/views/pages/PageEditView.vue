@@ -1,11 +1,16 @@
 <template>
-  <div class="create-post" v-if="!loading">
+  <div
+    v-if="!loading"
+    class="create-post"
+  >
     <div class="container">
       <div class="row">
         <div class="col-md-9">
           <div class="card h-100">
             <div class="card-header">
-              <h5 class="section mb-0">Oppdatér side — Innhold</h5>
+              <h5 class="section mb-0">
+                Oppdatér side — Innhold
+              </h5>
             </div>
             <div class="card-body">
               <Villain
@@ -21,7 +26,9 @@
         <div class="col-md-3">
           <div class="card">
             <div class="card-header">
-              <h5 class="section mb-0">Oppdatér side — attributter</h5>
+              <h5 class="section mb-0">
+                Oppdatér side — attributter
+              </h5>
             </div>
             <div class="card-body">
               <KInputSelect
@@ -35,9 +42,10 @@
                 data-vv-name="page[parent_id]"
                 data-vv-value-path="innerValue"
               />
+
               <KInputSelect
-                v-validate="'required'"
                 v-model="page.language"
+                v-validate="'required'"
                 :value="page.language"
                 :options="[
                   { name: 'English', value: 'en' },
@@ -52,8 +60,8 @@
               />
 
               <KInput
-                v-validate="'required'"
                 v-model="page.key"
+                v-validate="'required'"
                 :value="page.key"
                 :has-error="errors.has('page[key]')"
                 :error-text="errors.first('page[key]')"
@@ -66,8 +74,8 @@
               />
 
               <KInput
-                v-validate="'required'"
                 v-model="page.title"
+                v-validate="'required'"
                 :value="page.title"
                 :has-error="errors.has('page[title]')"
                 :error-text="errors.first('page[title]')"
@@ -124,7 +132,8 @@
                 <button
                   :disabled="!!loading"
                   class="btn btn-secondary btn-block"
-                  @click="validate">
+                  @click="validate"
+                >
                   Lagre oppdatert side
                 </button>
               </div>
@@ -132,7 +141,8 @@
               <router-link
                 :disabled="!!loading"
                 :to="{ name: 'pages' }"
-                class="btn btn-outline-secondary btn-block mt-2">
+                class="btn btn-outline-secondary btn-block mt-2"
+              >
                 Tilbake til oversikten
               </router-link>
             </div>

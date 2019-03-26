@@ -1,13 +1,11 @@
 <template>
   <div
     v-if="!loading"
-    :class="{'form-group': true, 'has-danger': hasError }"
-  >
+    :class="{'form-group': true, 'has-danger': hasError }">
     <div class="label-wrapper">
       <label
         :for="id"
-        class="control-label"
-      >
+        class="control-label">
         {{ label }}
       </label>
       <span>
@@ -44,8 +42,7 @@
         @change="onChange"
         @click="onClick"
         @remove="onRemove"
-        @focalChanged="onFocalChanged"
-      />
+        @focalChanged="onFocalChanged" />
     </div>
   </div>
 </template>
@@ -168,7 +165,7 @@ export default {
     onFocalChanged (f) {
       if (this.innerValue instanceof File) {
         // remove any focal key
-        let filename = this.innerValue.name.replace(/\%\%\%(.*)\%\%\%/, '')
+        let filename = this.innerValue.name.replace(/%%%(.*)%%%/, '')
         // change the filename to include focal info
         filename = filename + `%%%${f.x}:${f.y}%%%`
         const newFile = new File([this.innerValue], filename, { type: this.innerValue.type })

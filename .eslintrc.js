@@ -28,7 +28,12 @@ module.exports = {
     'no-use-before-define': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    "vue/html-end-tags": 0,
-    "vue/html-self-closing": 0
+    "vue/no-v-html": 0,
+    "vue/html-end-tags": 1,
+    "vue/html-self-closing": 0,
+    "vue/html-closing-bracket-newline": ["error", {
+      "singleline": "never",
+      "multiline": "never"
+    }]
   }
 }

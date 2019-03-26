@@ -7,7 +7,7 @@
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
@@ -22,8 +22,7 @@
           :name="name"
           :value="o.value"
           class="form-check-input"
-          type="radio"
-        >
+          type="radio">
         {{ o.name }}
       </label>
     </div>

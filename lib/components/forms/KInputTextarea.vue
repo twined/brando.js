@@ -3,8 +3,7 @@
     <div class="label-wrapper">
       <label
         :for="id"
-        class="control-label"
->
+        class="control-label">
         {{ label }}
       </label>
       <span>
@@ -18,8 +17,7 @@
       v-model="innerValue"
       :rows="rows"
       :name="name"
-      class="form-control form-control-danger"
-></textarea>
+      class="form-control form-control-danger"></textarea>
   </div>
 </template>
 

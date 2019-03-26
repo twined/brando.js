@@ -2,7 +2,9 @@
   <div
     class="alert-backdrop"
   >
-    <div class="kprogress">
+    <div
+      class="kprogress"
+    >
       <div
         v-if="percent"
         class="kprogress-percent"
@@ -11,7 +13,7 @@
       </div>
       <div class="kprogress-content">
         <transition-group
-          name="fade"
+          name="slide-fade"
           appear
         >
           <div

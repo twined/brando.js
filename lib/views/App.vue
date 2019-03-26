@@ -189,10 +189,19 @@ export default {
         this.progressStatus = {}
       })
       this.userChannel.on('progress:update', payload => {
+        let percent = 0
+        if (payload.hasOwnProperty('percent')) {
+          percent = payload.percent
+          if (percent === 100) {
+            setTimeout(() => {
+              this.$delete(this.progressStatus, payload.key)
+            }, 1200)
+          }
+        }
         if (payload.hasOwnProperty('key')) {
-          this.$set(this.progressStatus, payload.key, { content: payload.status, percent: payload.percent || 0 })
+          this.$set(this.progressStatus, payload.key, { content: payload.status, percent: percent })
         } else {
-          this.$set(this.progressStatus, 'default', { content: payload.status, percent: payload.percent || 0 })
+          this.$set(this.progressStatus, 'default', { content: payload.status, percent: percent })
         }
       })
     },

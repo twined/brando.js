@@ -7,19 +7,18 @@
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
 
     <input
-      v-model="innerValue"
       :id="id"
+      v-model="innerValue"
       :name="name"
       placeholder="url"
       class="form-control form-control-danger text-mono"
-      type="text"
-    >
+      type="text">
   </div>
 </template>
 
