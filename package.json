@@ -32,6 +32,7 @@
     "lodash": "^4.17.5",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.23",
+    "nprogress": "^0.2.0",
     "phoenix": "^1.4.1",
     "progressbar.js": "^1.0.1",
     "sortablejs": "^1.8.3",
@@ -39,6 +40,7 @@
     "v-click-outside": "^2.0.2",
     "vee-validate": "^2.0.0-rc.19",
     "vex-js": "^4.1.0",
+    "villain-editor": "twined/villain-editor",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",
     "vue-core-image-upload": "^2.3.9",
@@ -50,6 +52,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.2",
+    "@vue/eslint-config-standard": "^4.0.0",
     "autoprefixer": "^9.5.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-external-helpers": "^6.22.0",
