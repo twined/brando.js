@@ -1,17 +1,14 @@
 <template>
   <div
     class="focus-point"
-    @click="click"
-  >
-    <slot/>
+    @click="click">
+    <slot />
     <div
       ref="pin"
       :style="pinStyle"
-      class="focus-point-pin"
-    >
+      class="focus-point-pin">
       <slot
-        name="pin"
-      />
+        name="pin" />
     </div>
   </div>
 </template>

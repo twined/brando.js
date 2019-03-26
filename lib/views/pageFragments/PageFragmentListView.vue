@@ -2,8 +2,7 @@
   <div
     v-if="!loading"
     class="pages container"
-    appear
-  >
+    appear>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -25,15 +24,13 @@
                 <router-link
                   :to="{ name: 'pagefragment-create' }"
                   class="btn btn-secondary"
-                  exact
-                >
+                  exact>
                   Nytt sidefragment
                 </router-link>
                 <br>
                 <button
                   class="btn btn-danger mt-2"
-                  @click.prevent="rerenderPageFragments()"
-                >
+                  @click.prevent="rerenderPageFragments()">
                   (!) Reprosessér alle fragmenter
                 </button>
               </p>
@@ -42,12 +39,10 @@
               <table class="table table-airy">
                 <tbody
                   is="transition-group"
-                  name="slide-fade-top-slow"
-                >
+                  name="slide-fade-top-slow">
                   <tr
                     v-for="page in allPageFragments"
-                    :key="page.id"
-                  >
+                    :key="page.id">
                     <td class="fit">
                       <i class="fa fa-fw fa-angle-right" />
                     </td>
@@ -58,8 +53,7 @@
                       {{ page.parent_key }} /
                       <router-link
                         :to="{ name: 'pagefragment-edit', params: { pageId: page.id } }"
-                        exact
-                      >
+                        exact>
                         {{ page.key }}
                       </router-link>
                     </td>
@@ -69,8 +63,7 @@
                     <td class="fit">
                       <b-dropdown
                         variant="white"
-                        no-caret
-                      >
+                        no-caret>
                         <template slot="button-content">
                           <i class="k-dropdown-icon" />
                         </template>
@@ -78,29 +71,25 @@
                           :to="{ name: 'pagefragment-edit', params: { pageId: page.id } }"
                           :class="{'dropdown-item': true}"
                           tag="button"
-                          exact
-                        >
+                          exact>
                           <i class="fal fa-pencil fa-fw mr-2" />
                           Endre fragment
                         </router-link>
                         <button
                           :class="{'dropdown-item': true}"
-                          @click.prevent="duplicatePageFragment(page)"
-                        >
+                          @click.prevent="duplicatePageFragment(page)">
                           <i class="fal fa-copy fa-fw mr-2" />
                           Duplisér fragment
                         </button>
                         <button
                           :class="{'dropdown-item': true}"
-                          @click.prevent="rerenderPageFragment(page)"
-                        >
+                          @click.prevent="rerenderPageFragment(page)">
                           <i class="fal fa-sync fa-fw mr-2" />
                           Reprosessér fragment
                         </button>
                         <button
                           :class="{'dropdown-item': true}"
-                          @click.prevent="deletePageFragment(page)"
-                        >
+                          @click.prevent="deletePageFragment(page)">
                           <i class="fal fa-trash fa-fw mr-2" />
                           Slett fragment
                         </button>

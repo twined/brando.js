@@ -5,7 +5,7 @@
         :class="{'logging-in': loggingIn}"
         class="container-fluid fixed-full-content">
         <div class="twined-versioning">
-          <i class="fa fa-fw fa-adjust"/> KURTZ V &copy; TWINED 2007 - 2017
+          <i class="fa fa-fw fa-adjust" /> KURTZ V &copy; TWINED 2007 - 2017
         </div>
         <div
           class="d-flex justify-content-center flex-wrap align-items-center text-center"
@@ -16,7 +16,7 @@
             <div class="login-box">
               <img
                 src="/images/logo.svg"
-                class="rounded-circle avatar-sm mb-5" >
+                class="rounded-circle avatar-sm mb-5">
               <div v-if="!loading">
                 <div class="text-center">
                   <input

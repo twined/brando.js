@@ -4,7 +4,7 @@
       <div class="label-wrapper">
         <label
           :for="name"
-          class="control-label" >
+          class="control-label">
           {{ label }}
         </label>
       </div>
@@ -15,8 +15,7 @@
         :template-mode="templateMode"
         :json="innerValue"
         :extra-headers="{'authorization': `Bearer ${token}`}"
-        @input="$emit('input', $event)"
-      />
+        @input="$emit('input', $event)" />
     </div>
   </div>
 </template>

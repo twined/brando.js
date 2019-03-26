@@ -1,16 +1,16 @@
 <template>
   <div class="search-input">
-    <i class="fal fa-search search-icon"/>
+    <i class="fal fa-search search-icon" />
     <input
       v-model="innerValue"
       class="form-control"
       type="text"
       @keyup.prevent.enter="perform"
-      @input="onInput" >
+      @input="onInput">
     <i
       v-if="filtered"
       class="fal fa-window-close close-icon text-danger"
-      @click="reset"/>
+      @click="reset" />
   </div>
 </template>
 

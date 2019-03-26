@@ -1,45 +1,36 @@
 <template>
   <div
-    class="alert-backdrop"
-  >
+    class="alert-backdrop">
     <div
-      class="kprogress"
-    >
+      class="kprogress">
       <div
         v-if="percent"
-        class="kprogress-percent"
-      >
+        class="kprogress-percent">
         {{ percent }}%
       </div>
       <div class="kprogress-content">
         <transition-group
           name="slide-fade"
-          appear
-        >
+          appear>
           <div
             v-for="k in Object.keys(status)"
-            :key="k"
-          >
+            :key="k">
             <transition
               name="fade"
               mode="out-in"
-              :duration="250"
-            >
+              :duration="250">
               <i
                 v-if="status[k].percent !== 100"
                 key="working"
-                :class="'fal fa-fw mr-3 fa-cog fa-spin'"
-              />
+                :class="'fal fa-fw mr-3 fa-cog fa-spin'" />
               <i
                 v-else
                 key="done"
-                :class="'fal fa-fw mr-3 fa-check text-success'"
-              />
+                :class="'fal fa-fw mr-3 fa-check text-success'" />
             </transition>
             <div
               class="d-inline-block"
-              v-html="status[k].content"
-            />
+              v-html="status[k].content" />
           </div>
         </transition-group>
       </div>

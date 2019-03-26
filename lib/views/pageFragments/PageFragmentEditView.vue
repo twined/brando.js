@@ -7,7 +7,9 @@
         <div class="col-md-9">
           <div class="card h-100">
             <div class="card-header">
-              <h5 class="section mb-0">Oppdatér fragment — Innhold</h5>
+              <h5 class="section mb-0">
+                Oppdatér fragment — Innhold
+              </h5>
             </div>
             <div class="card-body">
               <Villain
@@ -15,20 +17,21 @@
                 :templates="settings.templates"
                 :template-mode="settings.templateMode"
                 label="Innhold"
-                @input="page.data = $event"
-              />
+                @input="page.data = $event" />
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card">
             <div class="card-header">
-              <h5 class="section mb-0">Oppdatér fragment — attributter</h5>
+              <h5 class="section mb-0">
+                Oppdatér fragment — attributter
+              </h5>
             </div>
             <div class="card-body">
               <KInputSelect
-                v-validate="'required'"
                 v-model="page.language"
+                v-validate="'required'"
                 :value="page.language"
                 :options="[
                   { name: 'English', value: 'en' },
@@ -39,12 +42,11 @@
                 name="page[language]"
                 label="Språk"
                 data-vv-name="page[language]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInput
-                v-validate="'required'"
                 v-model="page.parent_key"
+                v-validate="'required'"
                 :value="page.parent_key"
                 :has-error="errors.has('page[parent_key]')"
                 :error-text="errors.first('page[parent_key]')"
@@ -53,12 +55,11 @@
                 label="Hovednøkkel"
                 placeholder="Hovednøkkel"
                 data-vv-name="page[parent_key]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInput
-                v-validate="'required'"
                 v-model="page.key"
+                v-validate="'required'"
                 :value="page.key"
                 :has-error="errors.has('page[key]')"
                 :error-text="errors.first('page[key]')"
@@ -67,8 +68,7 @@
                 label="Nøkkel"
                 placeholder="Nøkkel"
                 data-vv-name="page[key]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <div class="mt-4">
                 <button

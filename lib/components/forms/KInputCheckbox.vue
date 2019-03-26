@@ -7,8 +7,7 @@
             v-model="innerValue"
             :name="name"
             class="form-check-input"
-            type="checkbox"
-          >
+            type="checkbox">
           {{ label }}
         </label>
       </div>

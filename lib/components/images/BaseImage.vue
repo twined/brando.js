@@ -8,7 +8,7 @@
       v-show="showOverlay"
       class="overlay"
       @click.stop.prevent="editImage">
-      <i class="fa fa-search fa-fw"/>
+      <i class="fa fa-search fa-fw" />
     </div>
     <modal
       v-if="showEdit"
@@ -16,8 +16,7 @@
       :large="true"
       :show="true"
       @cancel="closeEdit"
-      @ok="closeEdit"
-    >
+      @ok="closeEdit">
       <div class="card">
         <div class="card-header">
           Bildedetaljer
@@ -63,8 +62,7 @@
                 label="Evt. beskrivelse"
                 placeholder="Evt. beskrivelse"
                 data-vv-name="img.image[title]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
               <KInput
                 v-model="img.image.credits"
                 :value="img.image.credits"
@@ -74,8 +72,7 @@
                 label="Evt. kreditering"
                 placeholder="Evt. kreditering"
                 data-vv-name="img.image[credits]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
               <dt>
                 Filnavn
               </dt>
@@ -85,10 +82,14 @@
 
               <button
                 class="btn btn-outline-secondary btn-block"
-                @click.prevent="saveEdit">Lagre</button>
+                @click.prevent="saveEdit">
+                Lagre
+              </button>
               <button
                 class="btn btn-outline-secondary btn-block"
-                @click.prevent="closeEdit">Lukk</button>
+                @click.prevent="closeEdit">
+                Lukk
+              </button>
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@
       type="button"
       @click.prevent.stop="toggleMenu">
       <span class="hamburger-box">
-        <span class="hamburger-inner"/>
+        <span class="hamburger-inner" />
       </span>
     </button>
   </div>

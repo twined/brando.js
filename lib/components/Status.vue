@@ -2,7 +2,7 @@
   <button class="btn btn-white">
     <i
       :class="getColor()"
-      class="fa fa-circle"/>
+      class="fa fa-circle" />
   </button>
 </template>
 

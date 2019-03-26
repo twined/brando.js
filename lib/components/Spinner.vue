@@ -5,11 +5,13 @@
     <div :class="{'vue-simple-spinner-container': overlay ? true : false, 'vue-simple-spinner-container-transparent': transparent ? true : false}">
       <div
         :style="spinner_style"
-        class="vue-simple-spinner"/>
+        class="vue-simple-spinner" />
       <div
         v-if="message.length > 0"
         :style="text_style"
-        class="vue-simple-spinner-text">{{ message }}</div>
+        class="vue-simple-spinner-text">
+        {{ message }}
+      </div>
     </div>
   </transition>
 </template>
@@ -38,15 +40,15 @@ export default {
       type: Number,
       default: 32
     },
-    'line-size': {
+    'lineSize': {
       type: Number,
       default: 7
     },
-    'line-bg-color': {
+    'lineBgColor': {
       type: String,
       default: '#eee'
     },
-    'line-fg-color': {
+    'lineFgColor': {
       type: String,
       default: '#2196f3' // match .blue color to Material Design's 'Blue 500' color
     },
@@ -62,11 +64,11 @@ export default {
       type: String,
       default: ''
     },
-    'font-size': {
+    'fontSize': {
       type: Number,
       default: 13
     },
-    'text-fg-color': {
+    'textFgColor': {
       type: String,
       default: '#555'
     }

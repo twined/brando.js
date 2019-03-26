@@ -7,8 +7,7 @@
       v-if="!loading"
       class="image-category-detail">
       <ImageSelection
-        :selected-images="selectedImages"
-      />
+        :selected-images="selectedImages" />
       <div class="row">
         <div class="col-md-12">
           <h1 class="wide text-center">
@@ -17,49 +16,49 @@
               variant="white btn-lg ml-3"
               no-caret>
               <template slot="button-content">
-                <i class="k-dropdown-icon"/>
+                <i class="k-dropdown-icon" />
               </template>
               <button
                 class="dropdown-item"
                 @click.prevent="createImageCategory">
-                <i class="fal fa-fw mr-3 subtle fa-plus-circle"/>
+                <i class="fal fa-fw mr-3 subtle fa-plus-circle" />
                 Opprett ny bildekategori
               </button>
               <button
                 class="dropdown-item"
                 @click.prevent="createImageSeries">
-                <i class="fal fa-fw mr-3 subtle fa-plus"/>
+                <i class="fal fa-fw mr-3 subtle fa-plus" />
                 Opprett ny bildeserie
               </button>
               <button
                 class="dropdown-item"
                 disabled>
-                <i class="fal fa-fw mr-3 subtle fa-sort-amount-down"/>
+                <i class="fal fa-fw mr-3 subtle fa-sort-amount-down" />
                 Sortér bildeserier i kategorien
               </button>
               <button
                 class="dropdown-item"
                 disabled>
-                <i class="fal fa-fw mr-3 subtle fa-sync"/>
+                <i class="fal fa-fw mr-3 subtle fa-sync" />
                 Gjenskap bilder i kategorien
               </button>
               <router-link
                 :to="{ name: 'image-category-config', params: { categoryId: currentImageCategory.id } }"
                 tag="button"
                 class="dropdown-item">
-                <i class="fal fa-fw mr-3 subtle fa-cog"/>
+                <i class="fal fa-fw mr-3 subtle fa-cog" />
                 Konfigurér bildekategorien
               </router-link>
               <button
                 class="dropdown-item"
                 @click.prevent="duplicateImageCategory">
-                <i class="fal fa-fw mr-3 subtle fa-clone"/>
+                <i class="fal fa-fw mr-3 subtle fa-clone" />
                 Dupliser bildekategori
               </button>
               <button
                 class="dropdown-item"
                 @click.prevent="deleteCategory">
-                <i class="fal fa-fw mr-3 subtle fa-trash"/>
+                <i class="fal fa-fw mr-3 subtle fa-trash" />
                 Slett bildekategori
               </button>
             </b-dropdown>
@@ -68,17 +67,14 @@
           <ModalCreateImageSeries
             v-if="showModalImageCreateSeries"
             :image-category="currentImageCategory"
-            @close="closeCreateImageSeriesModal"
-          />
+            @close="closeCreateImageSeriesModal" />
           <ModalCreateImageCategory
             :show-modal="showModalImageCreateCategory"
-            @close="closeCreateImageCategoryModal"
-          />
+            @close="closeCreateImageCategoryModal" />
           <ModalDuplicateImageCategory
             :show-modal="showModalImageDuplicateCategory"
             :cat="currentImageCategory"
-            @close="closeDuplicateImageCategoryModal"
-          />
+            @close="closeDuplicateImageCategoryModal" />
         </div>
       </div>
 
@@ -91,8 +87,7 @@
               v-for="s in currentImageCategory.image_series"
               :key="s.id"
               :image-series="s"
-              :selected-images="selectedImages"
-            />
+              :selected-images="selectedImages" />
           </transition-group>
           <div v-if="currentImageCategory.image_series.length">
             <button
@@ -119,7 +114,6 @@ import { mapActions, mapGetters } from 'vuex'
 import nprogress from 'nprogress'
 import { alertConfirm } from '../../utils/alerts'
 
-import BaseImage from '../../components/images/BaseImage'
 import ImageSeries from '../../components/images/ImageSeries'
 import ImageSelection from '../../components/images/ImageSelection'
 import ModalCreateImageSeries from '../../components/images/modals/ModalCreateImageSeries'
@@ -128,7 +122,6 @@ import ModalDuplicateImageCategory from '../../components/images/modals/ModalDup
 
 export default {
   components: {
-    BaseImage,
     ImageSelection,
     ImageSeries,
     ModalCreateImageSeries,

@@ -5,8 +5,7 @@
     :show="true"
     :large="true"
     @cancel="closeModal"
-    @ok="closeModal"
-  >
+    @ok="closeModal">
     <ImageSeries
       :image-series="imageSeries"
       :selected-images="selectedImages"
@@ -14,8 +13,7 @@
       :upload-callback="uploadCallback"
       :delete-callback="deleteCallback"
       :modal="true"
-      @close="closeModal"
-    />
+      @close="closeModal" />
   </modal>
 </template>
 

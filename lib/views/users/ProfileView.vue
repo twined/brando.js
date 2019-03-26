@@ -4,15 +4,13 @@
     <div class="container">
       <div
         v-show="!loading"
-        class="row"
-      >
+        class="row">
         <div class="col-md-3">
           <div class="card p-4">
             <img
               :src="me.avatar_medium"
               class="card-img-top img-fluid"
-              alt="Avatar"
-            >
+              alt="Avatar">
             <div class="card-body text-center p-0 pt-3">
               <h4 class="card-title mb-3">
                 {{ me.full_name }}
@@ -40,8 +38,7 @@
                 label="Navn"
                 placeholder="Navn"
                 data-vv-name="profile[full_name]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInputEmail
                 v-model="profile.email"
@@ -53,8 +50,7 @@
                 label="Epost"
                 placeholder="Epost"
                 data-vv-name="profile[email]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInputSelect
                 v-model="profile.language"
@@ -69,8 +65,7 @@
                 name="profile[language]"
                 label="Språk"
                 data-vv-name="profile[language]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInputPassword
                 v-model="profile.password"
@@ -82,8 +77,7 @@
                 label="Passord"
                 placeholder="Passord"
                 data-vv-name="profile[password]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
               <KInputPassword
                 v-model="profile.password_confirm"
                 :value="profile.password_confirm"
@@ -93,8 +87,7 @@
                 label="Bekreft passord"
                 placeholder="Bekreft passord"
                 data-vv-name="profile[password_confirm]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInputImage
                 v-model="profile.avatar"
@@ -107,21 +100,18 @@
                 name="profile[avatar]"
                 label="Profilbilde"
                 data-vv-name="profile[avatar]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <button
                 class="btn btn-outline-secondary"
                 type="submit"
-                @click.prevent="validate"
-              >
+                @click.prevent="validate">
                 Lagre
               </button>
               <router-link
                 :to="{ name: 'dashboard' }"
                 class="btn btn-outline-secondary"
-                exact
-              >
+                exact>
                 Tilbake
               </router-link>
             </div>

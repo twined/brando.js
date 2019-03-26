@@ -7,22 +7,22 @@
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
 
     <input
+      :id="id"
       v-model="innerValue"
       :placeholder="placeholder"
-      :id="id"
       :name="name"
       class="form-control form-control-danger"
       type="text">
     <p
       v-if="helpText"
       class="help-text">
-      <i class="fa fa-fw fa-arrow-alt-circle-up mr-1"/>
+      <i class="fa fa-fw fa-arrow-alt-circle-up mr-1" />
       <span v-html="helpText" />
     </p>
   </div>

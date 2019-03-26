@@ -5,7 +5,9 @@
         <div class="col-md-9">
           <div class="card h-100">
             <div class="card-header">
-              <h5 class="section mb-0">Opprett side — Innhold</h5>
+              <h5 class="section mb-0">
+                Opprett side — Innhold
+              </h5>
             </div>
             <div class="card-body">
               <Villain
@@ -13,15 +15,16 @@
                 :templates="settings.templates"
                 :template-mode="settings.templateMode"
                 label="Innhold"
-                @input="page.data = $event"
-              />
+                @input="page.data = $event" />
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card">
             <div class="card-header">
-              <h5 class="section mb-0">Opprett side — attributter</h5>
+              <h5 class="section mb-0">
+                Opprett side — attributter
+              </h5>
             </div>
             <div class="card-body">
               <KInputSelect
@@ -33,11 +36,10 @@
                 name="page[parent_id]"
                 label="Tilhørende side"
                 data-vv-name="page[parent_id]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
               <KInputSelect
-                v-validate="'required'"
                 v-model="page.language"
+                v-validate="'required'"
                 :value="page.language"
                 :options="[
                   { name: 'English', value: 'en' },
@@ -48,12 +50,11 @@
                 name="page[language]"
                 label="Språk"
                 data-vv-name="page[language]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInput
-                v-validate="'required'"
                 v-model="page.key"
+                v-validate="'required'"
                 :value="page.key"
                 :has-error="errors.has('page[key]')"
                 :error-text="errors.first('page[key]')"
@@ -62,12 +63,11 @@
                 label="Nøkkel"
                 placeholder="Nøkkel"
                 data-vv-name="page[key]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInput
-                v-validate="'required'"
                 v-model="page.title"
+                v-validate="'required'"
                 :value="page.title"
                 :has-error="errors.has('page[title]')"
                 :error-text="errors.first('page[title]')"
@@ -76,8 +76,7 @@
                 label="Tittel"
                 placeholder="Tittel"
                 data-vv-name="page[title]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <div class="row">
                 <div class="col">
@@ -90,8 +89,7 @@
                     type="text"
                     label="META beskrivelse (for søkemotorer)"
                     data-vv-name="page[meta_description]"
-                    data-vv-value-path="innerValue"
-                  />
+                    data-vv-value-path="innerValue" />
 
                   <KInputTextarea
                     v-model="page.meta_keywords"
@@ -102,8 +100,7 @@
                     type="text"
                     label="META nøkkelord (for søkemotorer)"
                     data-vv-name="page[meta_keywords]"
-                    data-vv-value-path="innerValue"
-                  />
+                    data-vv-value-path="innerValue" />
                 </div>
               </div>
 
@@ -117,8 +114,7 @@
                 label="Ekstra CSS klasser"
                 placeholder="Ekstra CSS klasser"
                 data-vv-name="page[css_classes]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <div class="mt-4">
                 <button

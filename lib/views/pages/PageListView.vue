@@ -2,8 +2,7 @@
   <div
     v-if="!loading"
     class="pages container"
-    appear
-  >
+    appear>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -25,14 +24,12 @@
                 <router-link
                   :to="{ name: 'page-create' }"
                   class="btn btn-secondary"
-                  exact
-                >
+                  exact>
                   Ny side
                 </router-link>
                 <button
                   class="btn btn-secondary"
-                  @click.prevent="rerenderPages()"
-                >
+                  @click.prevent="rerenderPages()">
                   Reprosessér alle sider
                 </button>
               </p>
@@ -43,8 +40,7 @@
                   is="transition-group"
                   v-for="page in allPages"
                   :key="page.id"
-                  name="slide-fade-top-slow"
-                >
+                  name="slide-fade-top-slow">
                   <tr :key="page.id">
                     <td class="fit">
                       <i class="fa fa-fw fa-angle-right" />
@@ -58,8 +54,7 @@
                     <td class="text-sm text-strong">
                       <router-link
                         :to="{ name: 'page-edit', params: { pageId: page.id } }"
-                        exact
-                      >
+                        exact>
                         {{ page.title }}
                       </router-link>
                     </td>
@@ -69,8 +64,7 @@
                     <td class="fit">
                       <b-dropdown
                         variant="white"
-                        no-caret
-                      >
+                        no-caret>
                         <template slot="button-content">
                           <i class="k-dropdown-icon" />
                         </template>
@@ -78,29 +72,25 @@
                           :to="{ name: 'page-edit', params: { pageId: page.id } }"
                           :class="{'dropdown-item': true}"
                           tag="button"
-                          exact
-                        >
+                          exact>
                           <i class="fal fa-pencil fa-fw mr-2" />
                           Endre side
                         </router-link>
                         <button
                           :class="{'dropdown-item': true}"
-                          @click.prevent="rerenderPage(page)"
-                        >
+                          @click.prevent="rerenderPage(page)">
                           <i class="fal fa-sync fa-fw mr-2" />
                           Reprosessér side
                         </button>
                         <button
                           :class="{'dropdown-item': true}"
-                          @click.prevent="duplicatePage(page)"
-                        >
+                          @click.prevent="duplicatePage(page)">
                           <i class="fal fa-copy fa-fw mr-2" />
                           Duplisér side
                         </button>
                         <button
                           :class="{'dropdown-item': true}"
-                          @click.prevent="deletePage(page)"
-                        >
+                          @click.prevent="deletePage(page)">
                           <i class="fal fa-trash fa-fw mr-2" />
                           Slett side
                         </button>
@@ -110,8 +100,7 @@
                   <tr
                     v-for="subpage in page.children"
                     :key="subpage.id"
-                    class="page-subrow"
-                  >
+                    class="page-subrow">
                     <td class="">
                       <i class="fa fa-fw fa-angle-double-right" />
                     </td>
@@ -124,8 +113,7 @@
                     <td class="text-sm text-strong">
                       <router-link
                         :to="{ name: 'page-edit', params: { pageId: subpage.id } }"
-                        exact
-                      >
+                        exact>
                         {{ subpage.title }}
                       </router-link>
                     </td>
@@ -135,8 +123,7 @@
                     <td>
                       <b-dropdown
                         variant="white"
-                        no-caret
-                      >
+                        no-caret>
                         <template slot="button-content">
                           <i class="k-dropdown-icon" />
                         </template>
@@ -144,15 +131,13 @@
                           :to="{ name: 'page-edit', params: { subpageId: subpage.id } }"
                           :class="{'dropdown-item': true}"
                           tag="button"
-                          exact
-                        >
+                          exact>
                           <i class="fal fa-pencil fa-fw mr-2" />
                           Endre subpage
                         </router-link>
                         <button
                           :class="{'dropdown-item': true}"
-                          @click.prevent="deletePage(subpage)"
-                        >
+                          @click.prevent="deletePage(subpage)">
                           <i class="fal fa-trash fa-fw mr-2" />
                           Slett subpage
                         </button>

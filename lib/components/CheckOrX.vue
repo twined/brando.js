@@ -2,11 +2,11 @@
   <i
     v-if="val"
     class="fal fa-check-circle"
-    aria-hidden="true"/>
+    aria-hidden="true" />
   <i
     v-else-if="!val && !blankIfFalse"
     class="fal fa-times-circle"
-    aria-hidden="true"/>
+    aria-hidden="true" />
 </template>
 <script>
 export default {

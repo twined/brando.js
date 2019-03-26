@@ -7,13 +7,13 @@
         class="caption"
         @click.stop.prevent="toggle">
         <span class="nav-icon">
-          <i :class="icon ? icon : ''"/>
+          <i :class="icon ? icon : ''" />
         </span>
         {{ text }}
       </div>
     </div>
     <div class="menu-line-sub">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>

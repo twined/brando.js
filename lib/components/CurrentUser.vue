@@ -4,16 +4,15 @@
     mode="out-in"
     appear>
     <li
-      v-click-outside="onClickOutside"
       id="nav-profile-dropdown"
+      v-click-outside="onClickOutside"
       class="dropdown">
       <a
         id="profile-dropdown-button"
         :class="(showDropdown ? 'active' : '')"
         class="d-inline-flex align-items-center dropdown-toggle user-box"
         aria-haspopup="true"
-        @click.stop="toggle"
-      >
+        @click.stop="toggle">
         <div class="avatar">
           <img
             :src="user.avatar"
@@ -35,12 +34,12 @@
           class="dropdown-item"
           exact
           @click.native="showDropdown = false">
-          <i class="fal fa-fw mr-2 fa-user"/><span>Min profil</span>
+          <i class="fal fa-fw mr-2 fa-user" /><span>Min profil</span>
         </router-link>
         <button
           class="dropdown-item"
           @click.prevent="logout">
-          <i class="fal fa-fw mr-2 fa-sign-out"/><span>Logg ut</span>
+          <i class="fal fa-fw mr-2 fa-sign-out" /><span>Logg ut</span>
         </button>
       </div>
     </li>

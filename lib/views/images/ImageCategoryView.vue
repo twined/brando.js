@@ -4,8 +4,12 @@
       <div class="card">
         <div class="card-body">
           <div class="jumbotron mb-0 text-center">
-            <h1 class="display-1 text-uppercase text-strong">BILDER</h1>
-            <p class="lead">Administrér nettsidens bildebibliotek</p>
+            <h1 class="display-1 text-uppercase text-strong">
+              BILDER
+            </h1>
+            <p class="lead">
+              Administrér nettsidens bildebibliotek
+            </p>
           </div>
         </div>
       </div>
@@ -27,7 +31,7 @@
         mode="out-in">
         <router-view
           :key="categoryId"
-          class="mt-3 view"/>
+          class="mt-3 view" />
       </transition>
     </div>
   </div>

@@ -9,7 +9,7 @@
       <div
         key="backdrop"
         class="modal-backdrop"
-        @click.stop="cancel"/>
+        @click.stop="cancel" />
       <div
         v-if="chrome === true"
         ref="dialog"
@@ -25,7 +25,7 @@
             </h5>
           </div>
           <div class="modal-body">
-            <slot/>
+            <slot />
           </div>
           <div class="modal-footer">
             <slot name="footer">
@@ -34,12 +34,16 @@
                 type="button"
                 class="btn btn-outline-primary"
                 data-dismiss="modal"
-                @click="cancel">{{ cancelText }}</button>
+                @click="cancel">
+                {{ cancelText }}
+              </button>
               <button
                 type="button"
                 class="btn btn-primary"
                 data-dismiss="modal"
-                @click="ok">{{ okText }}</button>
+                @click="ok">
+                {{ okText }}
+              </button>
             </slot>
           </div>
         </div>
@@ -52,7 +56,7 @@
           ref="dialog"
           class="modal-no-chrome-content"
           role="document">
-          <slot/>
+          <slot />
         </div>
       </div>
     </div>

@@ -5,11 +5,12 @@
     :show="show"
     :large="true"
     @cancel="closeModal"
-    @ok="closeModal"
-  >
+    @ok="closeModal">
     <div class="card mb-3">
       <div class="card-header text-center">
-        <h5 class="section mb-0">Velg bilde</h5>
+        <h5 class="section mb-0">
+          Velg bilde
+        </h5>
       </div>
       <div class="card-body">
         <transition-group
@@ -18,8 +19,8 @@
           tag="div">
           <div
             v-for="i in imageSeries.images"
-            :data-id="i.id"
             :key="i.id"
+            :data-id="i.id"
             class="float-left"
             @click="selectImage(i)">
             <img :src="i.image.sizes.thumb">

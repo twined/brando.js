@@ -5,7 +5,9 @@
         id="content"
         class="container">
         <div class="text-center">
-          <h2 class="lead mt-5 text-upper text-strong">Konfigurasjon</h2>
+          <h2 class="lead mt-5 text-upper text-strong">
+            Konfigurasjon
+          </h2>
           <hr class="my-4">
           <div
             v-if="cfg"
@@ -23,8 +25,7 @@
                   name="c[value]"
                   placeholder=""
                   data-vv-name="c[value]"
-                  data-vv-value-path="innerValue"
-                />
+                  data-vv-value-path="innerValue" />
               </template>
               <template v-else-if="c.type === 'image'">
                 <div class="form-group text-left">
@@ -46,8 +47,7 @@
                     :value="c.value"
                     :image-series-id="c.image_series_id"
                     @change="c.value = $event"
-                    @close="showModal = false"
-                  />
+                    @close="showModal = false" />
                 </div>
               </template>
             </div>

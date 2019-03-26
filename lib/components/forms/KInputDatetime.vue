@@ -7,18 +7,17 @@
         {{ label }}
       </label>
       <span>
-        <i class="fa fa-exclamation-circle text-danger"/>
+        <i class="fa fa-exclamation-circle text-danger" />
         {{ errorText }}
       </span>
     </div>
 
     <VueFlatpickr
+      :id="id"
       v-model="innerValue"
       :placeholder="placeholder"
-      :id="id"
       :options="dateTimeOptions"
-      class="form-control"
-    />
+      class="form-control" />
   </div>
 </template>
 

@@ -1,8 +1,7 @@
 <template>
   <div
     v-if="!loading"
-    class="create-post"
-  >
+    class="create-post">
     <div class="container">
       <div class="row">
         <div class="col-md-9">
@@ -18,8 +17,7 @@
                 :templates="settings.templates"
                 :template-mode="settings.templateMode"
                 label="Innhold"
-                @input="page.data = $event"
-              />
+                @input="page.data = $event" />
             </div>
           </div>
         </div>
@@ -40,8 +38,7 @@
                 name="page[parent_id]"
                 label="Tilhørende side"
                 data-vv-name="page[parent_id]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInputSelect
                 v-model="page.language"
@@ -56,8 +53,7 @@
                 name="page[language]"
                 label="Språk"
                 data-vv-name="page[language]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInput
                 v-model="page.key"
@@ -70,8 +66,7 @@
                 label="Nøkkel"
                 placeholder="Nøkkel"
                 data-vv-name="page[key]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <KInput
                 v-model="page.title"
@@ -84,8 +79,7 @@
                 label="Tittel"
                 placeholder="Tittel"
                 data-vv-name="page[title]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <div class="row">
                 <div class="col">
@@ -98,8 +92,7 @@
                     type="text"
                     label="META beskrivelse (for søkemotorer)"
                     data-vv-name="page[meta_description]"
-                    data-vv-value-path="innerValue"
-                  />
+                    data-vv-value-path="innerValue" />
 
                   <KInputTextarea
                     v-model="page.meta_keywords"
@@ -110,8 +103,7 @@
                     type="text"
                     label="META nøkkelord (for søkemotorer)"
                     data-vv-name="page[meta_keywords]"
-                    data-vv-value-path="innerValue"
-                  />
+                    data-vv-value-path="innerValue" />
                 </div>
               </div>
 
@@ -125,15 +117,13 @@
                 label="Ekstra CSS klasser"
                 placeholder="Ekstra CSS klasser"
                 data-vv-name="page[css_classes]"
-                data-vv-value-path="innerValue"
-              />
+                data-vv-value-path="innerValue" />
 
               <div class="mt-4">
                 <button
                   :disabled="!!loading"
                   class="btn btn-secondary btn-block"
-                  @click="validate"
-                >
+                  @click="validate">
                   Lagre oppdatert side
                 </button>
               </div>
@@ -141,8 +131,7 @@
               <router-link
                 :disabled="!!loading"
                 :to="{ name: 'pages' }"
-                class="btn btn-outline-secondary btn-block mt-2"
-              >
+                class="btn btn-outline-secondary btn-block mt-2">
                 Tilbake til oversikten
               </router-link>
             </div>

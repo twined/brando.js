@@ -5,7 +5,7 @@
     class="file-input">
     <div
       v-if="!supportsUpload"
-      v-html="strings.upload"/>
+      v-html="strings.upload" />
     <div>
       <button
         v-if="!fileSelected && !existingFile"
@@ -18,7 +18,7 @@
         v-if="!fileSelected && existingFile"
         class="ml-2">
         <small>
-          <i class="fa fa-file mr-2"/> <strong>{{ existingFile }}</strong>
+          <i class="fa fa-file mr-2" /> <strong>{{ existingFile }}</strong>
         </small>
         <br>
         <button
@@ -33,7 +33,7 @@
         class="ml-2">
         <template v-if="fileName">
           <small>
-            <i class="fa fa-file mr-2"/> <strong>{{ fileName }}</strong> - {{ fileSize }}
+            <i class="fa fa-file mr-2" /> <strong>{{ fileName }}</strong> - {{ fileSize }}
           </small>
           <br>
           <button
@@ -52,9 +52,9 @@
       </div>
     </div>
     <input
+      :id="id"
       ref="fileInput"
       :name="name"
-      :id="id"
       type="file"
       style="display:none;"
       @change="onFileChange">

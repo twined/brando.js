@@ -7,12 +7,18 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="section mb-0">Brukere</h5>
+            <h5 class="section mb-0">
+              Brukere
+            </h5>
           </div>
           <div class="card-body">
             <div class="jumbotron text-center">
-              <h1 class="display-1 text-uppercase text-strong">Brukere</h1>
-              <p class="lead">Administrér brukere i backenden.</p>
+              <h1 class="display-1 text-uppercase text-strong">
+                Brukere
+              </h1>
+              <p class="lead">
+                Administrér brukere i backenden.
+              </p>
               <hr class="my-4">
               <p class="lead">
                 <router-link
@@ -64,18 +70,18 @@
                       variant="white"
                       no-caret>
                       <template slot="button-content">
-                        <i class="k-dropdown-icon"/>
+                        <i class="k-dropdown-icon" />
                       </template>
                       <button
                         :class="{'dropdown-item': true, 'disabled': ['superuser'].includes(me.role)}"
                         @click.prevent="setDeactivated(user)">
-                        <i class="fal fa-fw fa-window-close mr-4"/>Deaktivér bruker
+                        <i class="fal fa-fw fa-window-close mr-4" />Deaktivér bruker
                       </button>
                       <router-link
                         :to="{ name: 'user-edit', params: { userId: user.id } }"
                         :class="{'dropdown-item': true}"
                         tag="button">
-                        <i class="fal fa-fw fa-pencil mr-4"/>Endre brukerdata
+                        <i class="fal fa-fw fa-pencil mr-4" />Endre brukerdata
                       </router-link>
                     </b-dropdown>
                   </td>

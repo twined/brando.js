@@ -3,16 +3,17 @@
     :chrome="false"
     :show="true"
     @cancel="closeModal"
-    @ok="closeModal"
-  >
+    @ok="closeModal">
     <div class="card mb-3">
       <div class="card-header text-center">
-        <h5 class="section mb-0">Ny bildeserie</h5>
+        <h5 class="section mb-0">
+          Ny bildeserie
+        </h5>
       </div>
       <div class="card-body">
         <KInput
-          v-validate="'required'"
           v-model="series.name"
+          v-validate="'required'"
           :value="series.name"
           :has-error="errors.has('series[name]')"
           :error-text="errors.first('series[name]')"
@@ -20,8 +21,7 @@
           label="Seriens navn"
           placeholder="Seriens navn"
           data-vv-name="series[name]"
-          data-vv-value-path="innerValue"
-        />
+          data-vv-value-path="innerValue" />
         <KInput
           v-model="series.credits"
           :value="series.credits"
@@ -31,8 +31,7 @@
           label="Evt. krediteringer"
           placeholder="Evt. krediteringer"
           data-vv-name="series[credits]"
-          data-vv-value-path="innerValue"
-        />
+          data-vv-value-path="innerValue" />
 
         <button
           class="btn btn-secondary"

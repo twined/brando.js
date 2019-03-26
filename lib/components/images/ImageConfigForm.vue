@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h5 class="pull-out">Hovedkonfigurasjon</h5>
+    <h5 class="pull-out">
+      Hovedkonfigurasjon
+    </h5>
     <KInput
-      v-validate="'required'"
       v-model="config.upload_path"
+      v-validate="'required'"
       :value="config.upload_path"
       :has-error="errors.has('config[upload_path]')"
       :error-text="errors.first('config[upload_path]')"
@@ -11,11 +13,10 @@
       label="Opplastingsbane"
       placeholder="Opplastingsbane"
       data-vv-name="config[upload_path]"
-      data-vv-value-path="innerValue"
-    />
+      data-vv-value-path="innerValue" />
     <KInput
-      v-validate="'required'"
       v-model="config.size_limit"
+      v-validate="'required'"
       :value="config.size_limit"
       :has-error="errors.has('config[size_limit]')"
       :error-text="errors.first('config[size_limit]')"
@@ -23,8 +24,7 @@
       label="Størrelsesbegrensing (i bytes)"
       placeholder="Størrelsesbegrensing (i bytes)"
       data-vv-name="config[size_limit]"
-      data-vv-value-path="innerValue"
-    />
+      data-vv-value-path="innerValue" />
     <KInputCheckbox
       v-model="config.random_filename"
       :value="config.random_filename"
@@ -33,10 +33,11 @@
       name="config[random_filename]"
       label="Vilkårlig filnavn"
       data-vv-name="config[random_filename]"
-      data-vv-value-path="innerValue"
-    />
+      data-vv-value-path="innerValue" />
 
-    <h5 class="pull-out">Størrelsesnøkler</h5>
+    <h5 class="pull-out">
+      Størrelsesnøkler
+    </h5>
 
     <button
       class="btn btn-primary"
@@ -71,8 +72,8 @@
         <div class="row">
           <div class="col">
             <KInput
-              v-validate="'required'"
               v-model="size.portrait.size"
+              v-validate="'required'"
               :value="size.portrait.size"
               :has-error="errors.has('size[portrait][size]')"
               :error-text="errors.first('size[portrait][size]')"
@@ -80,13 +81,12 @@
               label="Stående størrelsesgeometri (WxH)"
               placeholder="WxH"
               data-vv-name="size[portrait][size]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
           <div class="col">
             <KInput
-              v-validate="'required'"
               v-model="size.portrait.quality"
+              v-validate="'required'"
               :value="size.portrait.quality"
               :has-error="errors.has('size[portrait][quality]')"
               :error-text="errors.first('size[portrait][quality]')"
@@ -94,8 +94,7 @@
               label="Kvalitetsprosent (0-100)"
               placeholder="Kvalitetsprosent (0-100)"
               data-vv-name="size[portrait][quality]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
           <div class="col">
             <KInputCheckbox
@@ -106,15 +105,14 @@
               name="size[portrait][crop]"
               label="Bildebeskjæring"
               data-vv-name="size[portrait][crop]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
         </div>
         <div class="row">
           <div class="col">
             <KInput
-              v-validate="'required'"
               v-model="size.landscape.size"
+              v-validate="'required'"
               :value="size.landscape.size"
               :has-error="errors.has('size[landscape][size]')"
               :error-text="errors.first('size[landscape][size]')"
@@ -122,13 +120,12 @@
               label="Liggende størrelsesgeometri (WxH)"
               placeholder="WxH"
               data-vv-name="size[landscape][size]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
           <div class="col">
             <KInput
-              v-validate="'required'"
               v-model="size.landscape.quality"
+              v-validate="'required'"
               :value="size.landscape.quality"
               :has-error="errors.has('size[landscape][quality]')"
               :error-text="errors.first('size[landscape][quality]')"
@@ -136,8 +133,7 @@
               label="Kvalitetsprosent (0-100)"
               placeholder="Kvalitetsprosent (0-100)"
               data-vv-name="size[landscape][quality]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
           <div class="col">
             <KInputCheckbox
@@ -148,8 +144,7 @@
               name="size[landscape][crop]"
               label="Bildebeskjæring"
               data-vv-name="size[landscape][crop]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
         </div>
       </template>
@@ -157,8 +152,8 @@
         <div class="row">
           <div class="col">
             <KInput
-              v-validate="'required'"
               v-model="size.size"
+              v-validate="'required'"
               :value="size.size"
               :has-error="errors.has('size[size]')"
               :error-text="errors.first('size[size]')"
@@ -166,13 +161,12 @@
               label="Størrelsesgeometri (WxH)"
               placeholder="Beskrivelse"
               data-vv-name="size[size]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
           <div class="col">
             <KInput
-              v-validate="'required'"
               v-model="size.quality"
+              v-validate="'required'"
               :value="size.quality"
               :has-error="errors.has('size[quality]')"
               :error-text="errors.first('size[quality]')"
@@ -180,8 +174,7 @@
               label="Kvalitetsprosent (0-100)"
               placeholder="Kvalitetsprosent (0-100)"
               data-vv-name="size[quality]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
           <div class="col">
             <KInputCheckbox
@@ -192,13 +185,14 @@
               name="size[crop]"
               label="Bildebeskjæring"
               data-vv-name="size[crop]"
-              data-vv-value-path="innerValue"
-            />
+              data-vv-value-path="innerValue" />
           </div>
         </div>
         <button
           class="btn btn-outline-secondary"
-          @click.prevent="delKey(key)">Slett nøkkel</button>
+          @click.prevent="delKey(key)">
+          Slett nøkkel
+        </button>
       </template>
     </div>
     <hr>

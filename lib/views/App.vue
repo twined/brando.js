@@ -2,27 +2,23 @@
   <div
     v-if="token && !loading"
     id="app"
-    :class="{'loaded': !loading, 'menu-open': status, 'fullscreen': fullScreen}"
-  >
+    :class="{'loaded': !loading, 'menu-open': status, 'fullscreen': fullScreen}">
     <NProgress />
     <NavMenu />
     <NavBar />
     <transition
       name="fade"
-      appear
-    >
+      appear>
       <KProgress
         v-show="showProgress"
-        :status="progressStatus"
-      />
+        :status="progressStatus" />
     </transition>
     <div id="content">
       <transition
         name="fade"
         mode="out-in"
         appear
-        @after-leave="afterLeave"
-      >
+        @after-leave="afterLeave">
         <router-view class="view" />
       </transition>
     </div>
@@ -33,8 +29,7 @@
         name="fade"
         mode="out-in"
         appear
-        @after-leave="afterLeave"
-      >
+        @after-leave="afterLeave">
         <router-view class="view" />
       </transition>
     </div>

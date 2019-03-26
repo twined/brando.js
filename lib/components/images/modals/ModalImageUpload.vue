@@ -5,8 +5,7 @@
     :large="true"
     :show="showModal"
     @cancel="closeModal"
-    @ok="closeModal"
-  >
+    @ok="closeModal">
     <div class="card mb-3">
       <div class="card-header text-center">
         <h5 class="section mb-0">
@@ -18,19 +17,16 @@
           <div class="upload">
             <table
               v-if="files.length"
-              class="table table-bordered text-sm"
-            >
+              class="table table-bordered text-sm">
               <tr
                 v-for="file in files"
-                :key="file.id"
-              >
+                :key="file.id">
                 <td class="fit">
                   <img
                     v-if="file.thumb"
                     :src="file.thumb"
                     width="40"
-                    height="auto"
-                  >
+                    height="auto">
                 </td>
                 <td class="ws-normal">
                   {{ file.name }}
@@ -40,34 +36,29 @@
                 </td>
                 <transition
                   type="fade"
-                  mode="out-in"
-                >
+                  mode="out-in">
                   <td
                     v-if="file.error === 'denied'"
                     key="denied"
-                    class="fit"
-                  >
+                    class="fit">
                     <i class="fal fa-fw fa-exclamation-circle text-danger" /> 404
                   </td>
                   <td
                     v-else-if="file.success"
                     key="success"
-                    class="fit"
-                  >
+                    class="fit">
                     <i class="fal fa-fw fa-check text-success" />
                   </td>
                   <td
                     v-else-if="file.active"
                     key="active"
-                    class="fit"
-                  >
+                    class="fit">
                     <i class="fal fa-fw fa-cog fa-spin" />
                   </td>
                   <td
                     v-else
                     key="other"
-                    class="fit"
-                  >
+                    class="fit">
                     —
                   </td>
                 </transition>
@@ -75,8 +66,7 @@
             </table>
             <div
               v-else
-              class="d-flex justify-content-center p-5 mt-0 mb-4 bg-light"
-            >
+              class="d-flex justify-content-center p-5 mt-0 mb-4 bg-light">
               <h5 class="text-center">
                 Slipp filene dine her for å laste opp<br><br>eller
               </h5>
@@ -94,8 +84,7 @@
                   name="image"
                   accept="image/*"
                   @input-filter="inputFilter"
-                  @input-file="inputFile"
-                >
+                  @input-file="inputFile">
                   <i class="fa fa-plus" />
                   Velg filer
                 </FileUpload>
@@ -104,36 +93,30 @@
                   :disabled="!files.length"
                   type="button"
                   class="btn btn-success"
-                  @click.prevent="$refs.upload.active = true"
-                >
+                  @click.prevent="$refs.upload.active = true">
                   <i
                     class="fa fa-arrow-up"
-                    aria-hidden="true"
-                  />
+                    aria-hidden="true" />
                   Start opplasting
                 </button>
                 <button
                   v-else
                   type="button"
                   class="btn btn-danger"
-                  @click.prevent="$refs.upload.active = false"
-                >
+                  @click.prevent="$refs.upload.active = false">
                   <i
                     class="fa fa-stop"
-                    aria-hidden="true"
-                  />
+                    aria-hidden="true" />
                   Stopp opplasting
                 </button>
                 <button
                   :disabled="$refs.upload && $refs.upload.active"
                   type="button"
                   class="btn btn-primary"
-                  @click.prevent="closeModal"
-                >
+                  @click.prevent="closeModal">
                   <i
                     class="fa fa-window-close"
-                    aria-hidden="true"
-                  />
+                    aria-hidden="true" />
                   Lukk vindu
                 </button>
               </div>
@@ -141,8 +124,7 @@
 
             <div
               v-show="$refs.upload && $refs.upload.dropActive"
-              class="drop-active"
-            >
+              class="drop-active">
               <h3>Slipp filene her for å laste opp</h3>
             </div>
           </div>

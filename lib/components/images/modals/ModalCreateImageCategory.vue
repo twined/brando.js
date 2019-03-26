@@ -4,16 +4,17 @@
     :chrome="false"
     :show="showModal"
     @cancel="closeModal"
-    @ok="closeModal"
-  >
+    @ok="closeModal">
     <div class="card mb-3">
       <div class="card-header text-center">
-        <h5 class="section mb-0">Ny bildekategori</h5>
+        <h5 class="section mb-0">
+          Ny bildekategori
+        </h5>
       </div>
       <div class="card-body">
         <KInput
-          v-validate="'required'"
           v-model="category.name"
+          v-validate="'required'"
           :value="category.name"
           :has-error="errors.has('category[name]')"
           :error-text="errors.first('category[name]')"
@@ -21,8 +22,7 @@
           label="Kategoriens navn"
           placeholder="Kategoriens navn"
           data-vv-name="category[name]"
-          data-vv-value-path="innerValue"
-        />
+          data-vv-value-path="innerValue" />
         <button
           class="btn btn-secondary"
           @click.prevent="save">

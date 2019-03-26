@@ -29,7 +29,7 @@
           exact
           @click.stop.native="close">
           <span class="nav-icon">
-            <i class="fal fa-tachometer-alt"/>
+            <i class="fal fa-tachometer-alt" />
           </span>
           Mitt dashboard
         </router-link>
@@ -41,7 +41,7 @@
           exact
           @click.stop.native="close">
           <span class="nav-icon">
-            <i class="fal fa-cog"/>
+            <i class="fal fa-cog" />
           </span>
           Konfigurasjon
         </router-link>
@@ -56,12 +56,16 @@
           :to="{ name: 'users' }"
           data-index="1"
           exact
-          @click.native="close">Oversikt</router-link>
+          @click.native="close">
+          Oversikt
+        </router-link>
         <router-link
           key="2"
           :to="{ name: 'user-create' }"
           data-index="2"
-          @click.native="close">Opprett ny bruker</router-link>
+          @click.native="close">
+          Opprett ny bruker
+        </router-link>
       </NavMenuItem>
 
       <NavMenuItem
@@ -73,7 +77,9 @@
           :to="{ name: 'images' }"
           data-index="1"
           exact
-          @click.native="close">Oversikt</router-link>
+          @click.native="close">
+          Oversikt
+        </router-link>
       </NavMenuItem>
 
       <NavMenuItem
@@ -87,28 +93,36 @@
           :to="{ name: 'pages' }"
           data-index="1"
           exact
-          @click.native="close">Oversikt</router-link>
+          @click.native="close">
+          Oversikt
+        </router-link>
         <router-link
           v-if="settings.pages"
           key="2"
           :to="{ name: 'page-create' }"
           data-index="2"
           exact
-          @click.native="close">Opprett ny side</router-link>
+          @click.native="close">
+          Opprett ny side
+        </router-link>
         <router-link
           v-if="settings.pageFragments"
           key="3"
           :to="{ name: 'pagefragments' }"
           data-index="3"
           exact
-          @click.native="close">Sidefragmenter</router-link>
+          @click.native="close">
+          Sidefragmenter
+        </router-link>
         <router-link
           v-if="settings.pageFragments"
           key="4"
           :to="{ name: 'pagefragment-create' }"
           data-index="4"
           exact
-          @click.native="close">Opprett nytt fragment</router-link>
+          @click.native="close">
+          Opprett nytt fragment
+        </router-link>
       </NavMenuItem>
 
       <template v-for="(entry, idx) in entries">
@@ -118,8 +132,8 @@
           :icon="entry.icon"
           @expanding="expanding">
           <router-link
-            v-for="(child, idx) in entry.children"
-            :key="idx"
+            v-for="(child, cIdx) in entry.children"
+            :key="cIdx"
             :to="child.to"
             exact
             @click.native="close">
