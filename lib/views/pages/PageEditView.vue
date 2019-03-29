@@ -212,7 +212,7 @@ export default {
         nprogress.start()
         await pageAPI.updatePage(this.pageId, this.page)
         nprogress.done()
-        this.$toast.success({ message: 'Side opprettet' })
+        this.$toast.success({ message: 'Side oppdatert' })
         this.$router.push({ name: 'pages' })
       } catch (err) {
         showError(err)

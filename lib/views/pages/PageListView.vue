@@ -233,8 +233,7 @@ export default {
     },
 
     ...mapActions('pages', [
-      'getPages',
-      'getPage'
+      'getPages'
     ])
   }
 }
