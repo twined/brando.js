@@ -8,26 +8,9 @@ query Page ($pageId: ID!) {
     data
     status
     css_classes
-    creator {
-      id
-      full_name
-    }
-    parent_id
-    parent {
-      id
-      key
-      language
-      title
-      slug
-    }
 
-    children {
-      id
-      key
-      language
-      title
-      slug
-    }
+    parent_id
+
     meta_description
     meta_keywords
 
