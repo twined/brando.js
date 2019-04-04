@@ -143,7 +143,7 @@ export default {
           password: '',
           password_confirm: ''
         }
-        this.$validator.clean()
+        this.$validator.reset()
         this.$router.push({ name: 'users' })
       } catch (err) {
         throw err
