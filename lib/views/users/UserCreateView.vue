@@ -71,7 +71,8 @@
                 data-vv-value-path="innerValue" />
               <KInputPassword
                 v-model="user.password"
-                v-validate="'min:6|confirmed:user[password_confirm]'"
+                v-validate="'min:6'"
+                ref="password"
                 :value="user.password"
                 :has-error="errors.has('user[password]')"
                 :error-text="errors.first('user[password]')"
@@ -82,6 +83,7 @@
                 data-vv-value-path="innerValue" />
               <KInputPassword
                 v-model="user.password_confirm"
+                v-validate="'confirmed:password'"
                 :value="user.password_confirm"
                 :has-error="errors.has('user[password_confirm]')"
                 :error-text="errors.first('user[password_confirm]')"
@@ -152,10 +154,13 @@ export default {
 
     validateBeforeSubmit (e) {
       this.loading = true
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then(result => {
+        if (!result) {
+          alertError('Feil i skjema', 'Vennligst se over og rett feil i rødt')
+          this.loading = false
+          return
+        }
         this.submitForm()
-      }).catch(() => {
-        alertError('Feil i skjema', 'Vennligst se over og rett feil i rødt')
         this.loading = false
       })
     },
