@@ -50,7 +50,12 @@
                   </td>
                   <td>
                     <router-link :to="{ name: 'user-edit', params: { userId: user.id } }">
-                      {{ user.full_name }}<br>
+                      <del v-if="!user.active">
+                        {{ user.full_name }}<br>
+                      </del>
+                      <template v-else>
+                        {{ user.full_name }}<br>
+                      </template>
                     </router-link>
                     <span class="text-muted text-sm">{{ user.email }}</span>
                   </td>
@@ -73,9 +78,16 @@
                         <i class="k-dropdown-icon" />
                       </template>
                       <button
-                        :class="{'dropdown-item': true, 'disabled': ['superuser'].includes(me.role)}"
+                        v-if="user.active"
+                        :class="{'dropdown-item': true, 'disabled': !['superuser'].includes(me.role)}"
                         @click.prevent="setDeactivated(user)">
                         <i class="fal fa-fw fa-window-close mr-4" />Deaktivér bruker
+                      </button>
+                      <button
+                        v-else
+                        :class="{'dropdown-item': true, 'disabled': !['superuser'].includes(me.role)}"
+                        @click.prevent="setActivated(user)">
+                        <i class="fal fa-fw fa-window-close mr-4" />Aktivér bruker
                       </button>
                       <router-link
                         :to="{ name: 'user-edit', params: { userId: user.id } }"
@@ -176,25 +188,26 @@ export default {
         })
     },
 
-    setDeactivated (e) {
-      if (e.role === 'owner') {
+    setDeactivated (u) {
+      if (u.role === 'superuser') {
+        this.$toast.error({ message: 'Brukeren er superbruker — kan ikke deaktiveres' })
         return
       }
 
       this.adminChannel.channel
-        .push('user:deactivate', { employee_id: e.id })
+        .push('user:deactivate', { user_id: u.id })
         .receive('ok', payload => {
-          this.decActiveEmployeeCount()
-          this.setEmployeeStatus({ employee: e, status: 'deactivated' })
+          u.active = false
+          this.$toast.success({ message: 'Brukeren ble deaktivert' })
         })
     },
 
-    setActivated (e) {
+    setActivated (u) {
       this.adminChannel.channel
-        .push('user:activate', { employee_id: e.id })
+        .push('user:activate', { user_id: u.id })
         .receive('ok', payload => {
-          this.incActiveEmployeeCount()
-          this.setEmployeeStatus({ employee: e, status: 'active' })
+          u.active = true
+          this.$toast.success({ message: 'Brukeren ble aktivert' })
         })
     },
 
