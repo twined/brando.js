@@ -19,19 +19,23 @@
                 class="rounded-circle avatar-sm mb-5">
               <div v-if="!loading">
                 <div class="text-center">
-                  <input
-                    v-model="user.email"
-                    class="form-control text-center mb-4"
-                    name="email"
-                    type="email"
-                    placeholder="Epost">
-                  <input
-                    v-model="user.password"
-                    class="form-control text-center mb-5"
-                    name="password"
-                    type="password"
-                    placeholder="Passord"
-                    @keyup.13="login">
+                  <form>
+                    <input
+                      v-model="user.email"
+                      class="form-control text-center mb-4"
+                      name="email"
+                      type="email"
+                      placeholder="Epost"
+                      data-cy-email>
+                    <input
+                      v-model="user.password"
+                      class="form-control text-center mb-5"
+                      name="password"
+                      type="password"
+                      placeholder="Passord"
+                      data-cy-password
+                      @keyup.13="login">
+                    </form>
                 </div>
                 <div>
                   <button
