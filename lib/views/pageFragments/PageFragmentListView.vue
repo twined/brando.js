@@ -164,11 +164,16 @@ export default {
     },
 
     rerenderPageFragments () {
-      this.adminChannel.channel
-        .push('page_fragment:rerender_all')
-        .receive('ok', payload => {
-          this.$toast.success({ message: 'Fragmentene ble gjengitt på nytt' })
-        })
+      alertConfirm('OBS', 'Er du sikker på at du vil gjengi ALLE fragmenter på nytt?', async (data) => {
+        if (!data) {
+          return
+        }
+        this.adminChannel.channel
+          .push('page_fragment:rerender_all')
+          .receive('ok', payload => {
+            this.$toast.success({ message: 'Fragmentene ble gjengitt på nytt' })
+          })
+      })
     },
 
     deletePageFragment (page) {
