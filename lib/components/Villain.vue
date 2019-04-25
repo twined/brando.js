@@ -1,12 +1,16 @@
 <template>
   <div class="villain-component">
-    <div :class="{'form-group': true}">
+    <div :class="{'form-group': true, 'has-danger': hasError}">
       <div class="label-wrapper">
         <label
           :for="name"
           class="control-label">
           {{ label }}
         </label>
+        <span>
+          <i class="fa fa-exclamation-circle text-danger" />
+          {{ errorText }}
+        </span>
       </div>
 
       <VillainEditor
@@ -30,6 +34,15 @@ export default {
   },
 
   props: {
+    hasError: {
+      type: Boolean,
+      default: false
+    },
+    errorText: {
+      type: String,
+      default: ''
+    },
+
     label: {
       type: String,
       required: false,
@@ -48,7 +61,12 @@ export default {
 
     value: {
       type: [String, Array],
-      default: '[]'
+      default: null
+    },
+
+    name: {
+      type: String,
+      required: true
     },
 
     templateMode: {
@@ -69,12 +87,13 @@ export default {
   },
 
   computed: {
-    name () {
-      const randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26))
-      const uniqid = randLetter + Date.now()
-      return 'villain' + uniqid
-    },
     ...mapGetters('users', ['token'])
+  },
+
+  $_veeValidate: {
+    name () {
+      return this.name
+    }
   },
 
   watch: {
