@@ -27,10 +27,11 @@
                   exact>
                   Ny side
                 </router-link>
+                <br>
                 <button
-                  class="btn btn-secondary"
+                  class="btn btn-danger mt-2"
                   @click.prevent="rerenderPages()">
-                  Reprosessér alle sider
+                  (!) Reprosessér alle sider
                 </button>
               </p>
             </div>
@@ -211,11 +212,16 @@ export default {
     },
 
     rerenderPages () {
-      this.adminChannel.channel
-        .push('page:rerender_all')
-        .receive('ok', payload => {
-          this.$toast.success({ message: 'Sidene ble gjengitt på nytt' })
-        })
+      alertConfirm('OBS', 'Er du sikker på at du vil gjengi ALLE sider på nytt?', async (data) => {
+        if (!data) {
+          return
+        }
+        this.adminChannel.channel
+          .push('page:rerender_all')
+          .receive('ok', payload => {
+            this.$toast.success({ message: 'Sidene ble gjengitt på nytt' })
+          })
+      })
     },
 
     deletePage (page) {
