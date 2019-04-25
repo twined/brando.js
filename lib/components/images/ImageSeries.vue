@@ -23,12 +23,6 @@
           <i class="fal fa-fw mr-3 subtle fa-cloud" />
           Last opp bilder til denne bildeserien
         </button>
-        <button
-          class="dropdown-item"
-          @click.prevent="sortSeries(imageSeries)">
-          <i class="fal fa-fw mr-3 subtle fa-sort-amount-down" />
-          Sortér bilder i serien
-        </button>
         <router-link
           :to="{ name: 'image-series-config', params: { seriesId: imageSeries.id } }"
           tag="button"
@@ -49,10 +43,16 @@
       <div
         v-if="images.length"
         class="card-body">
-        <transition-group name="fade-move">
+        <transition-group
+          v-sortable="{handle: '.sort-handle', animation: 0, store: {get: getOrder, set: storeOrder}}"
+          name="fade-move"
+          tag="div"
+          class="sort-container">
           <template v-for="i in images">
             <BaseImage
               :key="i.id"
+              :data-id="i.id"
+              class="sort-handle"
               :image="i"
               :selected-images="selectedImages" />
           </template>
@@ -151,6 +151,7 @@ export default {
 
   data () {
     return {
+      sortedArray: [],
       selectedImageSeriesForUpload: null,
       selectedImageSeriesForSorting: null
     }
@@ -158,11 +159,29 @@ export default {
 
   computed: {
     images () {
-      return [...this.imageSeries.images].sort((a, b) => parseInt(a.sequence) - parseInt(b.sequence))
+      return this.imageSeries.images
     }
   },
 
+  inject: [
+    'adminChannel'
+  ],
+
   methods: {
+    getOrder (sortable) {
+      return this.images
+    },
+
+    storeOrder (sortable) {
+      this.sortedArray = sortable.toArray()
+
+      this.adminChannel.channel
+        .push('images:sequence_images', { ids: this.sortedArray })
+        .receive('ok', payload => {
+          this.$toast.success({ message: 'Rekkefølge oppdatert' })
+        })
+    },
+
     uploadToSeries (series) {
       this.selectedImageSeriesForUpload = series.id
     },

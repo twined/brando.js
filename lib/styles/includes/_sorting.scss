@@ -1,15 +1,4 @@
 .sort-container {
   display: flex;
   flex-wrap: wrap;
-
-  .sort-handle {
-    img {
-      border: 1px solid #000;
-      height: 119px;
-      margin: 0.2rem;
-      transition: all 500ms ease;
-      width: 119px;
-    }
-  }
-
 }
