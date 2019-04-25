@@ -158,9 +158,11 @@
 .vex.vex-theme-kurtz {
   padding-bottom: 160px;
   padding-top: 160px;
+  z-index: 100000 !important;
 }
 
 .vex-overlay {
+  z-index: 9999 !important;
   background-color: map-get($theme-colors, "secondary");
 }
 
