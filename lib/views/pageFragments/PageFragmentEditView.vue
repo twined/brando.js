@@ -16,6 +16,7 @@
                 :value="page.data"
                 :templates="settings.templates"
                 :template-mode="settings.templateMode"
+                name="page[data]"
                 label="Innhold"
                 @input="page.data = $event" />
             </div>

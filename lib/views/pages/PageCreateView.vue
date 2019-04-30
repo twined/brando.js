@@ -12,8 +12,10 @@
             <div class="card-body">
               <Villain
                 :value="page.data"
-                :templates="settings.templates"
+                templates="all"
                 :template-mode="settings.templateMode"
+                :template-namespace="settings.templateNamespace"
+                name="page[data]"
                 label="Innhold"
                 @input="page.data = $event" />
             </div>

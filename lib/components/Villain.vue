@@ -49,11 +49,6 @@ export default {
       default: ''
     },
 
-    baseURL: {
-      type: String,
-      default: '/admin/api/villain/'
-    },
-
     imageSeries: {
       type: String,
       default: 'post'
@@ -75,8 +70,8 @@ export default {
     },
 
     templates: {
-      type: Array,
-      default: () => []
+      type: String,
+      default: 'all'
     }
   },
 

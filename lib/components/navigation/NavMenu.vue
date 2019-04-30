@@ -125,6 +125,20 @@
         </router-link>
       </NavMenuItem>
 
+      <NavMenuItem
+        text="Maler"
+        icon="fal fa-fw fa-map"
+        @expanding="expanding">
+        <router-link
+          key="1"
+          :to="{ name: 'templates' }"
+          data-index="1"
+          exact
+          @click.native="close">
+          Editor (avansert)
+        </router-link>
+      </NavMenuItem>
+
       <template v-for="(entry, idx) in entries">
         <NavMenuItem
           :key="idx"
