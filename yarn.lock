@@ -6028,7 +6028,7 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-sortablejs@^1.8.4, sortablejs@^1.9.0:
+sortablejs@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.9.0.tgz#2d1e74ae6bac2cb4ad0622908f340848969eb88d"
   integrity sha512-Ot6bYJ6PoqPmpsqQYXjn1+RKrY2NWQvQt/o4jfd/UYwVWndyO5EPO8YHbnm5HIykf8ENsm4JUrdAvolPT86yYA==
@@ -6696,13 +6696,13 @@ vex-js@^4.1.0:
 
 villain-editor@twined/villain-editor:
   version "2.0.0-alpha.2"
-  resolved "https://codeload.github.com/twined/villain-editor/tar.gz/2d1956fa4ae6bb0bab614ac1120fbb01ba3599fd"
+  resolved "https://codeload.github.com/twined/villain-editor/tar.gz/094cb29e1e2d91e3e1c5f86f26afa69473f06b96"
   dependencies:
     autosize "^4.0.2"
     codeflask "^1.4.0"
     lodash.clonedeep "^4.5.0"
     markdown-it "^8.4.2"
-    sortablejs "^1.8.4"
+    sortablejs "^1.9.0"
     vex-dialog "^1.1.0"
     vex-js "^4.1.0"
     vue "^2.6.10"
