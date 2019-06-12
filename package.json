@@ -1,6 +1,6 @@
 {
   "name": "kurtz",
-  "version": "1.0.0-alpha.14",
+  "version": "1.0.0-alpha.15",
   "description": "KURTZ frontend",
   "main": "lib/index.js",
   "license": "UNLICENSED",
@@ -36,7 +36,6 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.25",
     "nprogress": "^0.2.0",
-    "phoenix": "^1.4.7",
     "progressbar.js": "^1.0.1",
     "sortablejs": "^1.10.0-rc2",
     "url-slug": "^2.1.1",
