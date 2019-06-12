@@ -5,11 +5,6 @@
       :image-series="imageSeries"
       :upload-callback="uploadCallback"
       @close="closeUploadModal" />
-    <ModalSortImageSeries
-      :show-modal="selectedImageSeriesForSorting === imageSeries.id"
-      :image-series="imageSeries"
-      :sequence-callback="sequenceCallback"
-      @close="closeImageSeriesSortModal" />
     <div class="card-header-tab">
       <b-dropdown
         variant="white"
@@ -76,12 +71,6 @@
           </button>
           <button
             class="btn btn-outline-secondary text-left"
-            @click.prevent="sortSeries(imageSeries)">
-            <i class="fal fa-fw mr-3 subtle fa-sort-amount-down" />
-            Sortér bilder
-          </button>
-          <button
-            class="btn btn-outline-secondary text-left"
             @click.prevent="deleteSeries(imageSeries)">
             <i class="fal fa-fw mr-3 subtle fa-trash" />
             Slett bildeserie
@@ -103,15 +92,13 @@
 import { mapActions } from 'vuex'
 import BaseImage from './BaseImage.vue'
 import ModalImageUpload from './modals/ModalImageUpload.vue'
-import ModalSortImageSeries from './modals/ModalSortImageSeries.vue'
 import { alertConfirm } from '../../utils/alerts'
 import { imageAPI } from '../../api/image'
 
 export default {
   components: {
     BaseImage,
-    ModalImageUpload,
-    ModalSortImageSeries
+    ModalImageUpload
   },
 
   props: {
@@ -123,11 +110,6 @@ export default {
     selectedImages: {
       required: true,
       type: Array
-    },
-
-    sequenceCallback: {
-      type: Function,
-      default: null
     },
 
     uploadCallback: {
@@ -152,8 +134,7 @@ export default {
   data () {
     return {
       sortedArray: [],
-      selectedImageSeriesForUpload: null,
-      selectedImageSeriesForSorting: null
+      selectedImageSeriesForUpload: null
     }
   },
 
@@ -186,16 +167,8 @@ export default {
       this.selectedImageSeriesForUpload = series.id
     },
 
-    sortSeries (series) {
-      this.selectedImageSeriesForSorting = series.id
-    },
-
     closeUploadModal () {
       this.selectedImageSeriesForUpload = null
-    },
-
-    closeImageSeriesSortModal () {
-      this.selectedImageSeriesForSorting = null
     },
 
     deleteSeries (series) {
