@@ -1,6 +1,6 @@
 {
   "name": "kurtz",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.17",
   "description": "KURTZ frontend",
   "main": "lib/index.js",
   "license": "UNLICENSED",
