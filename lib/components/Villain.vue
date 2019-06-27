@@ -18,6 +18,7 @@
         :templates="templates"
         :template-mode="templateMode"
         :json="innerValue"
+        :visible-blocks="visibleBlocks"
         :extra-headers="{'authorization': `Bearer ${token}`}"
         @input="$emit('input', $event)" />
     </div>
@@ -72,6 +73,11 @@ export default {
     templates: {
       type: String,
       default: 'all'
+    },
+
+    visibleBlocks: {
+      type: Array,
+      default: () => []
     }
   },
 
