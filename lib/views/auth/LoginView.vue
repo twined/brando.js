@@ -16,7 +16,7 @@
             <div class="login-box">
               <img
                 src="/images/logo.svg"
-                class="rounded-circle avatar-sm mb-5">
+                class="avatar-sm mb-5">
               <div v-if="!loading">
                 <div class="text-center">
                   <form>
@@ -35,7 +35,7 @@
                       placeholder="Passord"
                       data-cy-password
                       @keyup.13="login">
-                    </form>
+                  </form>
                 </div>
                 <div>
                   <button
