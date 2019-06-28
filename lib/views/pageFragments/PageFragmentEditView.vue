@@ -31,6 +31,16 @@
             </div>
             <div class="card-body">
               <KInputSelect
+                v-model="page.page_id"
+                :value="page.page_id"
+                :options="parents"
+                :has-error="errors.has('page[page_id]')"
+                :error-text="errors.first('page[page_id]')"
+                name="page[page_id]"
+                label="Tilhørende side"
+                data-vv-name="page[page_id]"
+                data-vv-value-path="innerValue" />
+              <KInputSelect
                 v-model="page.language"
                 v-validate="'required'"
                 :value="page.language"
@@ -82,7 +92,7 @@
 
               <router-link
                 :disabled="!!loading"
-                :to="{ name: 'pagefragments' }"
+                :to="{ name: 'pages' }"
                 class="btn btn-outline-secondary btn-block mt-2">
                 Tilbake til oversikten
               </router-link>
@@ -127,12 +137,24 @@ export default {
   ],
 
   async created () {
+    this.getParents()
     const p = await pageFragmentAPI.getPageFragment(this.pageId)
     this.page = { ...p }
     this.loading = false
   },
 
   methods: {
+    getParents () {
+      this.adminChannel.channel
+        .push('pages:list_parents')
+        .receive('ok', payload => {
+          this.parents = payload.parents
+        })
+        .receive('error', err => {
+          console.log(err)
+        })
+    },
+
     validate () {
       this.$validator.validateAll().then(result => {
         if (!result) {
@@ -148,10 +170,11 @@ export default {
     async save () {
       try {
         nprogress.start()
+        console.log(this.page)
         await pageFragmentAPI.updatePageFragment(this.pageId, this.page)
         nprogress.done()
         this.$toast.success({ message: 'Fragment oppdatert' })
-        this.$router.push({ name: 'pagefragments' })
+        this.$router.push({ name: 'pages' })
       } catch (err) {
         showError(err)
       }

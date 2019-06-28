@@ -19,6 +19,14 @@ query Pages {
       title
       slug
     }
+    fragments {
+      id
+      key
+      parent_key
+      language
+      updated_at
+      page_id
+    }
     inserted_at
     updated_at
   }

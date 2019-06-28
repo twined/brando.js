@@ -30,8 +30,8 @@
                 <br>
                 <button
                   class="btn btn-danger mt-2"
-                  @click.prevent="rerenderPages()">
-                  (!) Reprosessér alle sider
+                  @click.prevent="rerenderPagesAndFragments()">
+                  (!) Reprosessér alle sider og fragmenter
                 </button>
               </p>
             </div>
@@ -40,9 +40,9 @@
                 <tbody
                   is="transition-group"
                   v-for="page in allPages"
-                  :key="page.id"
+                  :key="'page'+page.id"
                   name="slide-fade-top-slow">
-                  <tr :key="page.id">
+                  <tr :key="'page'+page.id">
                     <td class="fit">
                       <i class="fa fa-fw fa-angle-right" />
                     </td>
@@ -69,6 +69,7 @@
                         <template slot="button-content">
                           <i class="k-dropdown-icon" />
                         </template>
+
                         <router-link
                           :to="{ name: 'page-edit', params: { pageId: page.id } }"
                           :class="{'dropdown-item': true}"
@@ -89,11 +90,76 @@
                           <i class="fal fa-copy fa-fw mr-2" />
                           Duplisér side
                         </button>
+                        <router-link
+                          :to="{ name: 'pagefragment-create', params: { pageId: page.id } }"
+                          :class="{'dropdown-item': true}"
+                          tag="button"
+                          exact>
+                          <i class="fal fa-star fa-fw mr-2" />
+                          Opprett fragment
+                        </router-link>
                         <button
                           :class="{'dropdown-item': true}"
                           @click.prevent="deletePage(page)">
                           <i class="fal fa-trash fa-fw mr-2" />
                           Slett side
+                        </button>
+                      </b-dropdown>
+                    </td>
+                  </tr>
+                  <tr
+                    v-for="fragment in page.fragments"
+                    :key="fragment.id"
+                    class="page-subrow">
+                    <td class="fit">
+                    </td>
+                    <td class="fit">
+                    </td>
+                    <td class="fit text-center">
+                      ↳
+                    </td>
+                    <td class="text-sm text-strong">
+                      <router-link
+                        :to="{ name: 'pagefragment-edit', params: { pageId: fragment.id } }"
+                        exact>
+                        <code>{{ fragment.parent_key }}</code> / <code>{{ fragment.key }}</code>
+                      </router-link>
+                    </td>
+                    <td class="fit text-xs">
+                      {{ fragment.updated_at | datetime }}
+                    </td>
+                    <td>
+                      <b-dropdown
+                        variant="white"
+                        no-caret>
+                        <template slot="button-content">
+                          <i class="k-dropdown-icon" />
+                        </template>
+                        <router-link
+                          :to="{ name: 'pagefragment-edit', params: { pageId: fragment.id } }"
+                          :class="{'dropdown-item': true}"
+                          tag="button"
+                          exact>
+                          <i class="fal fa-pencil fa-fw mr-2" />
+                          Endre fragment
+                        </router-link>
+                        <button
+                          :class="{'dropdown-item': true}"
+                          @click.prevent="duplicatePageFragment(fragment, page.id)">
+                          <i class="fal fa-copy fa-fw mr-2" />
+                          Duplisér fragment
+                        </button>
+                        <button
+                          :class="{'dropdown-item': true}"
+                          @click.prevent="rerenderPageFragment(fragment)">
+                          <i class="fal fa-sync fa-fw mr-2" />
+                          Reprosessér fragment
+                        </button>
+                        <button
+                          :class="{'dropdown-item': true}"
+                          @click.prevent="deletePageFragment(fragment)">
+                          <i class="fal fa-trash fa-fw mr-2" />
+                          Slett fragment
                         </button>
                       </b-dropdown>
                     </td>
@@ -158,6 +224,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { alertConfirm } from 'kurtz/lib/utils/alerts'
+import { pageFragmentAPI } from 'kurtz/lib/api/pageFragment'
 
 export default {
   components: {
@@ -211,6 +278,11 @@ export default {
         })
     },
 
+    rerenderPagesAndFragments () {
+      this.rerenderPages()
+      this.rerenderPageFragments()
+    },
+
     rerenderPages () {
       alertConfirm('OBS', 'Er du sikker på at du vil gjengi ALLE sider på nytt?', async (data) => {
         if (!data) {
@@ -235,6 +307,48 @@ export default {
           .receive('ok', payload => {
             this.$store.commit('pages/DELETE_PAGE', page.id)
           })
+      })
+    },
+
+    async duplicatePageFragment (srcFragment, pageId) {
+      this.adminChannel.channel
+        .push('page_fragment:duplicate', { id: srcFragment.id })
+        .receive('ok', payload => {
+          this.$store.commit('pages/ADD_PAGE_FRAGMENT', { pageFragment: payload.page_fragment, pageId: pageId })
+        })
+    },
+
+    rerenderPageFragment (page) {
+      this.adminChannel.channel
+        .push('page_fragment:rerender', { id: page.id })
+        .receive('ok', payload => {
+          this.$toast.success({ message: 'Fragmentet ble gjengitt på nytt' })
+        })
+    },
+
+    rerenderPageFragments () {
+      alertConfirm('OBS', 'Er du sikker på at du vil gjengi ALLE fragmenter på nytt?', async (data) => {
+        if (!data) {
+          return
+        }
+        this.adminChannel.channel
+          .push('page_fragment:rerender_all')
+          .receive('ok', payload => {
+            this.$toast.success({ message: 'Fragmentene ble gjengitt på nytt' })
+          })
+      })
+    },
+
+    deletePageFragment (page) {
+      alertConfirm('OBS', 'Er du sikker på at du vil slette dette fragmentet?', async (data) => {
+        if (!data) {
+          return
+        }
+
+        console.log(page)
+
+        await pageFragmentAPI.deletePageFragment(page.id)
+        this.$store.commit('pages/DELETE_PAGE_FRAGMENT', { pageFragmentId: page.id, pageId: page.page_id })
       })
     },
 

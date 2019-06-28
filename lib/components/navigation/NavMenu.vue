@@ -105,24 +105,6 @@
           @click.native="close">
           Opprett ny side
         </router-link>
-        <router-link
-          v-if="settings.pageFragments"
-          key="3"
-          :to="{ name: 'pagefragments' }"
-          data-index="3"
-          exact
-          @click.native="close">
-          Sidefragmenter
-        </router-link>
-        <router-link
-          v-if="settings.pageFragments"
-          key="4"
-          :to="{ name: 'pagefragment-create' }"
-          data-index="4"
-          exact
-          @click.native="close">
-          Opprett nytt fragment
-        </router-link>
       </NavMenuItem>
 
       <NavMenuItem
