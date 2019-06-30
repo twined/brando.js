@@ -43,7 +43,7 @@
           <span class="nav-icon">
             <i class="fal fa-cog" />
           </span>
-          Konfigurasjon
+          Konfigurasjon/META
         </router-link>
       </div>
 
