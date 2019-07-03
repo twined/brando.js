@@ -6976,8 +6976,8 @@ vex-js@^4.1.0:
     vex-dialog "1.1.0"
 
 villain-editor@twined/villain-editor:
-  version "2.0.0-alpha.8"
-  resolved "https://codeload.github.com/twined/villain-editor/tar.gz/6db6aa49b7dcfceef38fcc42e43dc702643310f2"
+  version "2.0.0-alpha.10"
+  resolved "https://codeload.github.com/twined/villain-editor/tar.gz/dc0dd0c00be97ad1690db81d9c1e77adda629a75"
   dependencies:
     autosize "^4.0.2"
     codeflask "^1.4.1"
