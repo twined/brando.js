@@ -8,12 +8,8 @@ query Page ($pageId: ID!) {
     data
     status
     css_classes
-
     parent_id
-
     meta_description
-    meta_keywords
-
     inserted_at
   }
 }

@@ -92,17 +92,6 @@
                     label="META beskrivelse (for søkemotorer)"
                     data-vv-name="page[meta_description]"
                     data-vv-value-path="innerValue" />
-
-                  <KInputTextarea
-                    v-model="page.meta_keywords"
-                    :rows="1"
-                    :has-error="errors.has('page[meta_keywords]')"
-                    :error-text="errors.first('page[meta_keywords]')"
-                    name="page[meta_keywords]"
-                    type="text"
-                    label="META nøkkelord (for søkemotorer)"
-                    data-vv-name="page[meta_keywords]"
-                    data-vv-value-path="innerValue" />
                 </div>
               </div>
 
@@ -163,8 +152,7 @@ export default {
 
         status: 'published',
         language: 'en',
-        meta_description: '',
-        meta_keywords: ''
+        meta_description: ''
       }
     }
   },
