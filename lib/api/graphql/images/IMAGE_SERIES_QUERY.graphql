@@ -20,6 +20,7 @@ query ImageSeries ($seriesId: ID!) {
       }
       image_series_id
       sequence
+      updated_at
     }
   }
 }

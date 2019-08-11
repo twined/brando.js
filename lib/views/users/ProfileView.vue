@@ -8,7 +8,7 @@
         <div class="col-md-3">
           <div class="card p-4">
             <img
-              :src="me.avatar_medium"
+              :src="me.avatar.medium"
               class="card-img-top img-fluid"
               alt="Avatar">
             <div class="card-body text-center p-0 pt-3">
@@ -93,8 +93,6 @@
                 v-model="profile.avatar"
                 v-validate="'required'"
                 :value="profile.avatar"
-                :width="100"
-                :height="100"
                 :has-error="errors.has('profile[avatar]')"
                 :error-text="errors.first('profile[avatar]')"
                 name="profile[avatar]"
@@ -127,8 +125,7 @@ import nprogress from 'nprogress'
 import { mapActions, mapGetters } from 'vuex'
 import { alertError } from '../../utils/alerts.js'
 import { userAPI } from '../../api/user'
-import showError from '../../utils/showError'
-import { pick } from '../../utils'
+import { showError, validateImageParams, stripParams } from '../../utils'
 
 export default {
   data () {
@@ -138,7 +135,7 @@ export default {
         name: '',
         email: '',
         language: '',
-        avatar: ''
+        avatar: {}
       }
     }
   },
@@ -179,11 +176,9 @@ export default {
 
     async submitForm () {
       nprogress.start()
-      console.log('-- submitForm()')
-      const params = pick(
-        this.profile,
-        'full_name', 'email', 'password', 'role', 'language', 'username', 'avatar'
-      )
+      let params = { ...this.profile }
+      stripParams(params, ['__typename', 'id'])
+      validateImageParams(params, ['avatar'])
 
       try {
         await userAPI.updateUser(this.me.id, params)

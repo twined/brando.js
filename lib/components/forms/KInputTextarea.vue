@@ -15,9 +15,15 @@
     <textarea
       :id="id"
       v-model="innerValue"
+      :maxlength="maxlength"
       :rows="rows"
       :name="name"
       class="form-control form-control-danger"></textarea>
+    <p
+      v-if="maxlength"
+      class="maxLength">
+      {{ maxlength - innerValue.length }}
+    </p>
   </div>
 </template>
 
@@ -37,6 +43,11 @@ export default {
     label: {
       type: String,
       required: true
+    },
+
+    maxlength: {
+      type: Number,
+      default: null
     },
 
     rows: {

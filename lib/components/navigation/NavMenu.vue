@@ -6,7 +6,7 @@
       <div class="top">
         <div class="avatar mx-auto">
           <img
-            :src="me.avatar_medium"
+            :src="me.avatar.medium"
             alt="Profilbilde"
             class="rounded-circle img-fluid">
         </div>

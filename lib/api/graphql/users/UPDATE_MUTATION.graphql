@@ -7,7 +7,10 @@ mutation UpdateUser($user_id: ID!, $user_params: UpdateUserParams) {
     language
     full_name
     email
-    avatar
+    avatar {
+      focal
+      thumb: url(size: "original")
+    }
     role
   }
 }

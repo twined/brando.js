@@ -16,9 +16,15 @@
       :id="id"
       v-model="innerValue"
       :placeholder="placeholder"
+      :maxlength="maxlength"
       :name="name"
       class="form-control form-control-danger"
       type="text">
+    <p
+      v-if="maxlength"
+      class="maxLength">
+      {{ maxlength - innerValue.length }}
+    </p>
     <p
       v-if="helpText"
       class="help-text">
@@ -49,6 +55,11 @@ export default {
     label: {
       type: String,
       required: true
+    },
+
+    maxlength: {
+      type: Number,
+      default: null
     },
 
     placeholder: {

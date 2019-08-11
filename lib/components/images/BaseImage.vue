@@ -97,7 +97,7 @@
     </modal>
 
     <img
-      :src="img.image.sizes.thumb"
+      :src="img.image.sizes.thumb + '?' + timestamp"
       class="img-fluid"
       @click.stop.prevent="click">
   </div>
@@ -105,6 +105,7 @@
 
 <script>
 
+import moment from 'moment-timezone'
 import CheckOrX from '../CheckOrX.vue'
 import Modal from '../Modal.vue'
 import FocusPoint from './FocusPoint.vue'
@@ -140,12 +141,19 @@ export default {
     }
   },
 
+  computed: {
+    timestamp () {
+      return moment(this.img.updated_at)
+    }
+  },
+
   inject: [
     'adminChannel'
   ],
 
   created () {
     this.img = clone(this.image)
+    console.log(this.img)
   },
 
   methods: {

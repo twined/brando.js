@@ -3,8 +3,11 @@ query Me {
     id
     full_name
     email
-    avatar
-    avatar_medium: avatar(type: "medium")
+    avatar {
+      focal
+      thumb: url(size: "original")
+      medium: url(size: "medium")
+    }
     role
     language
     active

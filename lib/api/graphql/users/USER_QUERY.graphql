@@ -3,7 +3,10 @@ query User ($userId: ID!) {
     id
     full_name
     email
-    avatar
+    avatar {
+      focal
+      thumb: url(size: "original")
+    }
     role
     language
     active

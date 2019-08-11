@@ -6,7 +6,10 @@ mutation CreateUser($user_params: CreateUserParams) {
     language
     full_name
     email
-    avatar
+    avatar {
+      focal
+      thumb: url(size: "original")
+    }
     role
   }
 }

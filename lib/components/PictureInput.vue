@@ -446,15 +446,10 @@ export default {
       this.imageWidth = image.width
       this.imageHeight = image.height
       this.imageRatio = image.width / image.height
-      let offsetX = 0
-      let offsetY = 0
-      let scaledWidth = 450
-      let scaledHeight = 450
       this.previewWidth = 450
       this.previewHeight = 450
-      // const previewRatio = this.previewWidth / this.previewHeight
-      const previewRatio = this.imageRatio
       let orientation = this.getOrientation(image.width, image.height)
+
       switch (orientation) {
         case 'portrait':
           this.previewWidth = this.previewWidth * this.imageRatio
@@ -464,46 +459,26 @@ export default {
           break
       }
 
-      if (this.crop) {
-        if (this.imageRatio >= previewRatio) {
-          scaledWidth = scaledHeight * this.imageRatio
-          offsetX = (this.previewWidth - scaledWidth) / 2
-        } else {
-          scaledHeight = scaledWidth / this.imageRatio
-          offsetY = (this.previewHeight - scaledHeight) / 2
-        }
-      } else {
-        if (this.imageRatio >= previewRatio) {
-          scaledHeight = scaledWidth / this.imageRatio
-          offsetY = (this.previewHeight - scaledHeight) / 2
-        } else {
-          scaledWidth = scaledHeight * this.imageRatio
-          offsetX = (this.previewWidth - scaledWidth) / 2
-        }
-      }
       const canvas = this.$refs.previewCanvas
       canvas.style.background = 'none'
       canvas.width = this.previewWidth * this.pixelRatio
       canvas.height = this.previewHeight * this.pixelRatio
       this.context.setTransform(1, 0, 0, 1, 0, 0)
       this.context.clearRect(0, 0, canvas.width, canvas.height)
-      if (this.rotate) {
-        this.context.translate(offsetX * this.pixelRatio, offsetY * this.pixelRatio)
-        this.context.translate(scaledWidth / 2 * this.pixelRatio, scaledHeight / 2 * this.pixelRatio)
-        this.context.rotate(this.rotate)
-        offsetX = -scaledWidth / 2
-        offsetY = -scaledHeight / 2
-      }
-      this.context.drawImage(image,
-        offsetX * this.pixelRatio,
-        offsetY * this.pixelRatio,
-        scaledWidth * this.pixelRatio,
-        scaledHeight * this.pixelRatio)
+
+      this.context.drawImage(
+        image,
+        0,
+        0,
+        this.previewWidth * this.pixelRatio,
+        this.previewHeight * this.pixelRatio
+      )
     },
 
     selectImage () {
       this.$refs.fileInput.click()
     },
+
     removeImage () {
       this.$refs.fileInput.value = ''
       this.$refs.fileInput.type = ''
@@ -520,6 +495,7 @@ export default {
       this.$refs.previewCanvas.width = this.previewWidth * this.pixelRatio
       this.$emit('remove')
     },
+
     rotateImage () {
       this.rotateCanvas()
 
@@ -530,6 +506,7 @@ export default {
       let newOrientation = this.getOrientation(this.canvasWidth, this.canvasHeight)
       this.$emit('aspectratiochange', newOrientation)
     },
+
     resizeCanvas () {
       let previewRatio = this.canvasWidth / this.canvasHeight
       let newWidth = this.$refs.container.clientWidth

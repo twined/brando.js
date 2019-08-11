@@ -3,7 +3,10 @@ query Users {
     id
     full_name
     email
-    avatar
+    avatar {
+      focal
+      thumb: url(size: "thumb")
+    }
     role
     language
     active
