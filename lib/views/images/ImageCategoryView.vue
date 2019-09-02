@@ -1,20 +1,13 @@
 <template>
   <div class="image-categories">
-    <div class="container">
-      <div class="card">
-        <div class="card-body">
-          <div class="jumbotron mb-0 text-center">
-            <h1 class="display-1 text-uppercase text-strong">
-              BILDER
-            </h1>
-            <p class="lead">
-              Administrér nettsidens bildebibliotek
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <Hero>
+      <template v-slot:heading>
+        Bilder
+      </template>
+      <template v-slot:lead>
+        Administrér nettsidens bildebibliotek
+      </template>
+    </Hero>
     <div class="container centered-link-list mt-5">
       <router-link
         v-for="c in allImageCategories"

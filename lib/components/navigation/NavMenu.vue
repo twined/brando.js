@@ -35,17 +35,19 @@
         </router-link>
       </div>
 
-      <div class="menu-line-main">
+      <NavMenuItem
+        text="Konfigurasjon"
+        icon="fal fa-fw fa-cog"
+        @expanding="expanding">
         <router-link
+          key="1"
           :to="{ name: 'config' }"
+          data-index="1"
           exact
-          @click.stop.native="close">
-          <span class="nav-icon">
-            <i class="fal fa-cog" />
-          </span>
-          Konfigurasjon/META
+          @click.native="close">
+          Organisasjon
         </router-link>
-      </div>
+      </NavMenuItem>
 
       <NavMenuItem
         text="Brukere"
