@@ -19,7 +19,7 @@
               v-b-popover.hover.right="userById(id).full_name"
               class="avatar">
               <img
-                :src="userById(id).avatar.thumb"
+                :src="userById(id).avatar ? userById(id).avatar.thumb : '/images/admin/avatar.png'"
                 class="rounded-circle avatar-xxs">
             </div>
           </div>

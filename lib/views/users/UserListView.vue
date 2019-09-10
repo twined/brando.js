@@ -43,7 +43,7 @@
                   <td class="fit">
                     <div class="avatar">
                       <img
-                        :src="user.avatar"
+                        :src="user.avatar ? user.avatar.thumb : '/images/admin/avatar.png'"
                         class="rounded-circle avatar-xs"
                         alt="Avatar">
                     </div>

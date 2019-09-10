@@ -80,6 +80,19 @@
                 data-vv-name="page[key]"
                 data-vv-value-path="innerValue" />
 
+              <KInputTextarea
+                v-model="page.wrapper"
+                help-text="f.eks `<div>${CONTENT}</div>`"
+                class="text-mono"
+                :value="page.wrapper"
+                :has-error="errors.has('page[wrapper]')"
+                :error-text="errors.first('page[wrapper]')"
+                name="page[wrapper]"
+                type="text"
+                label="HTML wrapper for ${CONTENT} (avansert)"
+                data-vv-name="page[wrapper]"
+                data-vv-value-path="innerValue"></KInputTextarea>
+
               <div class="mt-4">
                 <button
                   :disabled="!!loading"
@@ -127,7 +140,8 @@ export default {
         page_id: null,
         key: '',
         data: '',
-        language: 'en'
+        language: 'en',
+        wrapper: ''
       }
     }
   },

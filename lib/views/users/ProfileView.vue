@@ -8,7 +8,7 @@
         <div class="col-md-3">
           <div class="card p-4">
             <img
-              :src="me.avatar.medium"
+              :src="me.avatar ? me.avatar.medium : '/images/admin/avatar.png'"
               class="card-img-top img-fluid"
               alt="Avatar">
             <div class="card-body text-center p-0 pt-3">

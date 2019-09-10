@@ -31,6 +31,14 @@ a {
   text-decoration: none;
   transition: border-bottom 250ms ease;
 
+  &.plain {
+    border-bottom: none;
+
+    &:hover {
+      border-bottom: none;
+    }
+  }
+
   &:hover {
     border-bottom: 2px solid map-get($theme-colors, "secondary");
     color: inherit;

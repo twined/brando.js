@@ -62,6 +62,10 @@
   }
 }
 
+.col + .col {
+  margin-left: 15px;
+}
+
 .has-danger .label-wrapper span {
   border-bottom: 2px solid #f00;
   color: gray;

@@ -49,8 +49,24 @@
                     <td class="fit">
                       <Flag :value="page.language" />
                     </td>
-                    <td class="text-mono text-sm text-left">
+                    <td class="text-mono text-sm text-left fit">
                       {{ page.key }}
+                    </td>
+                    <td class="fit">
+                      <span
+                        v-if="page.fragments.length > 0 && !pageFragmentsShown.includes(page.id)"
+                        class="badge badge-outline-primary badge-sm text-uppercase"
+                        style="cursor: pointer;"
+                        @click="showFragmentsFor(page.id)">
+                        + <strong>{{ page.fragments.length }}</strong> fragmenter
+                      </span>
+                      <span
+                        v-else-if="pageFragmentsShown.includes(page.id)"
+                        class="badge badge-outline-primary badge-sm text-uppercase"
+                        style="cursor: pointer;"
+                        @click="hideFragmentsFor(page.id)">
+                        - <strong>{{ page.fragments.length }}</strong> fragmenter
+                      </span>
                     </td>
                     <td class="text-sm text-strong">
                       <router-link
@@ -109,8 +125,11 @@
                   </tr>
                   <tr
                     v-for="fragment in page.fragments"
+                    v-if="shouldShowFragments(page.id)"
                     :key="fragment.id"
                     class="page-subrow">
+                    <td class="fit">
+                    </td>
                     <td class="fit">
                     </td>
                     <td class="fit">
@@ -120,9 +139,10 @@
                     </td>
                     <td class="text-sm text-strong">
                       <router-link
+                        class="plain"
                         :to="{ name: 'pagefragment-edit', params: { pageId: fragment.id } }"
                         exact>
-                        <code>{{ fragment.parent_key }}</code> / <code>{{ fragment.key }}</code>
+                        <code>{{ fragment.parent_key }}</code> <span class="ml-3 mr-3">&rarr;</span> <span class="badge badge-outline-primary badge-sm text-uppercase">{{ fragment.key }}</span>
                       </router-link>
                     </td>
                     <td class="fit text-xs">
@@ -233,7 +253,8 @@ export default {
 
   data () {
     return {
-      loading: 0
+      loading: 0,
+      pageFragmentsShown: []
     }
   },
 
@@ -256,6 +277,23 @@ export default {
   },
 
   methods: {
+    shouldShowFragments (pageId) {
+      if (this.pageFragmentsShown.includes(pageId)) {
+        return true
+      }
+      return false
+    },
+
+    showFragmentsFor (pageId) {
+      this.pageFragmentsShown.push(pageId)
+    },
+
+    hideFragmentsFor (pageId) {
+      this.pageFragmentsShown = this.pageFragmentsShown.filter(function (value, index, arr) {
+        return value > pageId
+      })
+    },
+
     async getData () {
       this.loading++
       await this.getPages()

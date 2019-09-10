@@ -4,6 +4,7 @@ query PageFragments {
     parent_key
     key
     language
+    wrapper
     data
     creator {
       id

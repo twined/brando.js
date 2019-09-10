@@ -15,7 +15,7 @@
         @click.stop="toggle">
         <div class="avatar">
           <img
-            :src="user.avatar.medium"
+            :src="user.avatar ? user.avatar.medium : '/images/admin/avatar.png'"
             class="rounded-circle avatar-xs"
             alt="Avatar">
         </div>

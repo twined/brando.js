@@ -5,6 +5,7 @@ query PageFragment ($pageFragmentId: ID!) {
     page_id
     key
     language
+    wrapper
     data
     creator {
       id
