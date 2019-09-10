@@ -42,14 +42,6 @@
                     Ingen dimensjoner
                   </dd>
                 </div>
-                <div class="col-md-6">
-                  <dt>
-                    Optimalisert
-                  </dt>
-                  <dd>
-                    <CheckOrX :val="img.image.optimized" />
-                  </dd>
-                </div>
               </div>
             </div>
             <div class="col-6">

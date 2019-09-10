@@ -12,7 +12,6 @@ mutation CreateImageSeries($image_series_params: CreateImageSeriesParams) {
         path
         credits
         title
-        optimized
         width
         height
         sizes

@@ -21,7 +21,6 @@ query ImageCategory ($categoryId: ID!, $imageSeriesLimit: Int, $imageSeriesOffse
           credits
           title
           focal
-          optimized
           width
           height
           sizes
