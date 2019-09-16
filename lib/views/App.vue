@@ -39,11 +39,11 @@
 <script>
 
 import { mapActions, mapGetters } from 'vuex'
-import apollo from 'kurtz/lib/api/apolloClient'
-import NavBar from 'kurtz/lib/components/navigation/NavBar.vue'
-import NavMenu from 'kurtz/lib/components/navigation/NavMenu.vue'
-import NProgress from 'kurtz/lib/components/navigation/NProgress.vue'
-import KProgress from 'kurtz/lib/components/navigation/KProgress.vue'
+import apollo from '@univers-agency/kurtz/lib/api/apolloClient'
+import NavBar from '@univers-agency/kurtz/lib/components/navigation/NavBar.vue'
+import NavMenu from '@univers-agency/kurtz/lib/components/navigation/NavMenu.vue'
+import NProgress from '@univers-agency/kurtz/lib/components/navigation/NProgress.vue'
+import KProgress from '@univers-agency/kurtz/lib/components/navigation/KProgress.vue'
 
 export default {
   components: {

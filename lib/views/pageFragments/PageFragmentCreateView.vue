@@ -120,9 +120,9 @@
 
 import { mapGetters } from 'vuex'
 import nprogress from 'nprogress'
-import showError from 'kurtz/lib/utils/showError'
-import { pageFragmentAPI } from 'kurtz/lib/api/pageFragment'
-import { alertError } from 'kurtz/lib/utils/alerts'
+import showError from '@univers-agency/kurtz/lib/utils/showError'
+import { pageFragmentAPI } from '@univers-agency/kurtz/lib/api/pageFragment'
+import { alertError } from '@univers-agency/kurtz/lib/utils/alerts'
 
 export default {
   props: {

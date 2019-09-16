@@ -243,8 +243,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { alertConfirm } from 'kurtz/lib/utils/alerts'
-import { pageFragmentAPI } from 'kurtz/lib/api/pageFragment'
+import { alertConfirm } from '@univers-agency/kurtz/lib/utils/alerts'
+import { pageFragmentAPI } from '@univers-agency/kurtz/lib/api/pageFragment'
 
 export default {
   components: {

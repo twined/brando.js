@@ -22,8 +22,8 @@
 <script>
 
 import nprogress from 'nprogress'
-import showError from 'kurtz/lib/utils/showError'
-import { alertError } from 'kurtz/lib/utils/alerts'
+import showError from '@univers-agency/kurtz/lib/utils/showError'
+import { alertError } from '@univers-agency/kurtz/lib/utils/alerts'
 import { mapGetters } from 'vuex'
 
 export default {
