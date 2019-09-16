@@ -10,7 +10,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import VillainEditor from 'villain-editor'
+import VillainEditor from '@univers-agency/villain-editor'
 
 export default {
   components: {
