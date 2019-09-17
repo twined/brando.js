@@ -29,6 +29,7 @@
                 </router-link>
                 <br>
                 <button
+                  v-b-popover.hover.bottom="'Brukes kun ved manuelle backend-endringer!'"
                   class="btn btn-danger mt-2"
                   @click.prevent="rerenderPagesAndFragments()">
                   (!) Reprosessér alle sider og fragmenter
@@ -39,7 +40,7 @@
               <table class="table table-airy">
                 <tbody
                   is="transition-group"
-                  v-for="page in allPages"
+                  v-for="page in orderedPages"
                   :key="'page'+page.id"
                   name="slide-fade-top-slow">
                   <tr :key="'page'+page.id">
@@ -55,6 +56,7 @@
                     <td class="fit">
                       <span
                         v-if="page.fragments.length > 0 && !pageFragmentsShown.includes(page.id)"
+                        v-b-popover.hover.top="'Vis sidens fragmenter'"
                         class="badge badge-outline-primary badge-sm text-uppercase"
                         style="cursor: pointer;"
                         @click="showFragmentsFor(page.id)">
@@ -70,6 +72,7 @@
                     </td>
                     <td class="text-sm text-strong">
                       <router-link
+                        v-b-popover.hover.top="'Vis sidens hovedmal'"
                         :to="{ name: 'page-edit', params: { pageId: page.id } }"
                         exact>
                         {{ page.title }}
@@ -259,6 +262,21 @@ export default {
   },
 
   computed: {
+    orderedPages () {
+      // set index first, then the others in alphabetical order
+      const index = this.allPages.find(p => p.key === 'index')
+      if (index) {
+        let indexIdx = this.allPages.indexOf(index)
+        return [
+          index,
+          ...this.allPages.slice(0, indexIdx),
+          ...this.allPages.slice(indexIdx + 1)
+        ]
+      }
+
+      return this.allPages
+    },
+
     ...mapGetters('users', [
       'me'
     ]),

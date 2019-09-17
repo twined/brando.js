@@ -182,7 +182,6 @@ export default {
     async save () {
       try {
         nprogress.start()
-        console.log(this.page)
         await pageFragmentAPI.updatePageFragment(this.pageId, this.page)
         nprogress.done()
         this.$toast.success({ message: 'Fragment oppdatert' })
