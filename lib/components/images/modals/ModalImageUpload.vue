@@ -191,7 +191,7 @@ export default {
         }
         // Upload error
         if (newFile.error !== oldFile.error) {
-          console.log('error', newFile.error, newFile)
+          console.error('error', newFile.error, newFile)
         }
       }
     },

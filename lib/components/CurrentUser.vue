@@ -66,7 +66,7 @@ export default {
   },
 
   created () {
-    console.log('created <CurrentUser />')
+    console.debug('created <CurrentUser />')
   },
 
   methods: {

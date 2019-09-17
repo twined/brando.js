@@ -290,7 +290,7 @@ export default {
   ],
 
   created () {
-    console.log('created <PageListView />')
+    console.debug('created <PageListView />')
     this.getData()
   },
 

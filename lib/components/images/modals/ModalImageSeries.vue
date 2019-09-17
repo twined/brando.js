@@ -55,7 +55,7 @@ export default {
   },
 
   created () {
-    console.log('created <ModalImageSeries />')
+    console.debug('created <ModalImageSeries />')
     this.getData()
   },
 
@@ -74,7 +74,6 @@ export default {
     },
 
     sortCallback ({ imageSeries, ids }) {
-      console.log('my callback', ids, imageSeries)
       for (let i = 0; i < ids.length; i++) {
         let imageId = ids[i]
         const img = imageSeries.images.find(i => parseInt(i.id) === parseInt(imageId))

@@ -33,8 +33,7 @@
         accept="*"
         size="10"
         button-class="btn btn-outline-secondary"
-        @change="onChange"
-        @click="onClick" />
+        @change="onChange" />
     </div>
   </div>
 </template>
@@ -102,7 +101,6 @@ export default {
 
   created () {
     this.innerValue = this.value
-    console.log(this.value)
     if (typeof this.value === 'string') {
       this.prefill = this.value
     } else {
@@ -111,19 +109,13 @@ export default {
   },
 
   methods: {
-    onClick (a) {
-      console.log('clicked. does this mean it changed??')
-    },
-
     onChange (a) {
       // we have a prefill, and preCheck is false
       if (this.value && !this.preCheck) {
-        console.log('we have prefill and preCheck is false')
         // do nothing except, set preCheck to true
         this.preCheck = true
         return
       }
-      console.log('theres been a change, and we either have no prefill, or we have triggered the prefill check:')
       // there's been a change, and we either have no prefill, or we've triggered the prefill check:
       this.innerValue = this.$refs.fileInput.file
     }

@@ -169,7 +169,7 @@ export default {
       this.$validator.validateAll().then(() => {
         this.submitForm()
       }).catch((e) => {
-        console.log(e)
+        console.error(e)
         alertError('Feil i skjema', 'Vennligst se over og rett feil i rødt')
       })
     },

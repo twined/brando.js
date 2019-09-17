@@ -221,10 +221,6 @@ export default {
     }
   },
 
-  created () {
-    console.log('--', this.config)
-  },
-
   methods: {
     addKey () {
       this.$set(this.config.sizes, 'navn', {

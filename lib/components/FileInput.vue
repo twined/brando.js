@@ -196,7 +196,6 @@ export default {
   },
   mounted () {
     this.updateStrings()
-    console.log('mounted', this.prefill)
     if (this.prefill) {
       this.existingFile = this.prefill
     }

@@ -159,7 +159,6 @@ export default {
     validateBeforeSubmit (e) {
       this.loading = true
       this.$validator.validateAll().then(result => {
-        console.log(result)
         if (!result) {
           alertError('Feil i skjema', 'Vennligst se over og rett feil i rødt')
           this.loading = false
