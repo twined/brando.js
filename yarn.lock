@@ -1057,7 +1057,7 @@
 
 "@univers-agency/villain-editor@univers-agency/villain-editor":
   version "2.0.0-alpha.23"
-  resolved "https://codeload.github.com/univers-agency/villain-editor/tar.gz/bf00a469e3efd4d4606ff82b1f26cf4060403042"
+  resolved "https://codeload.github.com/univers-agency/villain-editor/tar.gz/fbb8e08c5b46ed635b5375977ce8cc59ad89032a"
   dependencies:
     autosize "^4.0.2"
     codemirror "^5.48.4"
