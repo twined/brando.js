@@ -73,6 +73,7 @@
                 v-model="page.title"
                 v-validate="'required'"
                 :value="page.title"
+                :maxlength="60"
                 :has-error="errors.has('page[title]')"
                 :error-text="errors.first('page[title]')"
                 name="page[title]"
@@ -86,7 +87,8 @@
                 <div class="col">
                   <KInputTextarea
                     v-model="page.meta_description"
-                    :rows="2"
+                    :rows="3"
+                    :maxlength="155"
                     :has-error="errors.has('page[meta_description]')"
                     :error-text="errors.first('page[meta_description]')"
                     name="page[meta_description]"
