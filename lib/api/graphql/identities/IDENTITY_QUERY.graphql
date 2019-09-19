@@ -1,6 +1,7 @@
-query Organization {
-  organization {
+query Identity {
+  identity {
     id
+    type
     name
     alternate_name
     email
@@ -31,6 +32,12 @@ query Organization {
     }
 
     metas {
+      id
+      key
+      value
+    }
+
+    configs {
       id
       key
       value

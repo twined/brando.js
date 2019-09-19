@@ -1,7 +1,0 @@
-mutation UpdateOrganization($organizationParams: OrganizationParams) {
-  update_organization(
-    organizationParams: $organizationParams,
-  ) {
-    id
-  }
-}

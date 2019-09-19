@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="!loading"
-    class="create-organization">
+    class="create-identity">
     <div class="container">
       <div class="card">
         <div class="card-header">
@@ -10,26 +10,41 @@
           </h5>
         </div>
         <div class="card-body">
+          <KInputSelect
+            v-model="identity.type"
+            v-validate="'required'"
+            :value="identity.type"
+            :options="[
+              { name: 'Organisasjon', value: 'organization' },
+              { name: 'Bedrift', value: 'corporation' }
+            ]"
+            :has-error="errors.has('identity[type]')"
+            :error-text="errors.first('identity[type]')"
+            name="identity[type]"
+            label="Type"
+            data-vv-name="identity[type]"
+            data-vv-value-path="innerValue" />
+
           <div class="row">
             <div class="col">
               <KInput
-                v-model="organization.name"
+                v-model="identity.name"
                 v-validate="'required'"
-                :value="organization.name"
-                :has-error="errors.has('organization[name]')"
-                :error-text="errors.first('organization[name]')"
-                name="organization[name]"
+                :value="identity.name"
+                :has-error="errors.has('identity[name]')"
+                :error-text="errors.first('identity[name]')"
+                name="identity[name]"
                 label="Navn"
                 placeholder="Navn" />
             </div>
 
             <div class="col">
               <KInput
-                v-model="organization.alternate_name"
-                :value="organization.alternate_name"
-                :has-error="errors.has('organization[alternate_name]')"
-                :error-text="errors.first('organization[alternate_name]')"
-                name="organization[alternate_name]"
+                v-model="identity.alternate_name"
+                :value="identity.alternate_name"
+                :has-error="errors.has('identity[alternate_name]')"
+                :error-text="errors.first('identity[alternate_name]')"
+                name="identity[alternate_name]"
                 label="Kortere form av navnet"
                 placeholder="AB" />
             </div>
@@ -38,107 +53,107 @@
           <div class="row">
             <div class="col">
               <KInput
-                v-model="organization.email"
-                :value="organization.email"
-                :has-error="errors.has('organization[email]')"
-                :error-text="errors.first('organization[email]')"
-                name="organization[email]"
+                v-model="identity.email"
+                :value="identity.email"
+                :has-error="errors.has('identity[email]')"
+                :error-text="errors.first('identity[email]')"
+                name="identity[email]"
                 label="Epost"
                 placeholder="Epost" />
             </div>
             <div class="col">
               <KInput
-                v-model="organization.phone"
-                :value="organization.phone"
-                :has-error="errors.has('organization[phone]')"
-                :error-text="errors.first('organization[phone]')"
-                name="organization[phone]"
+                v-model="identity.phone"
+                :value="identity.phone"
+                :has-error="errors.has('identity[phone]')"
+                :error-text="errors.first('identity[phone]')"
+                name="identity[phone]"
                 label="Telefon"
                 placeholder="Telefon" />
             </div>
           </div>
 
           <KInput
-            v-model="organization.address"
-            :value="organization.address"
-            :has-error="errors.has('organization[address]')"
-            :error-text="errors.first('organization[address]')"
-            name="organization[address]"
+            v-model="identity.address"
+            :value="identity.address"
+            :has-error="errors.has('identity[address]')"
+            :error-text="errors.first('identity[address]')"
+            name="identity[address]"
             label="Adresse"
             placeholder="Adresse" />
 
           <div class="row">
             <div class="col">
               <KInput
-                v-model="organization.zipcode"
-                :value="organization.zipcode"
-                :has-error="errors.has('organization[zipcode]')"
-                :error-text="errors.first('organization[zipcode]')"
-                name="organization[zipcode]"
+                v-model="identity.zipcode"
+                :value="identity.zipcode"
+                :has-error="errors.has('identity[zipcode]')"
+                :error-text="errors.first('identity[zipcode]')"
+                name="identity[zipcode]"
                 label="Postnr"
                 placeholder="Postnr" />
             </div>
             <div class="col">
               <KInput
-                v-model="organization.city"
-                :value="organization.city"
-                :has-error="errors.has('organization[city]')"
-                :error-text="errors.first('organization[city]')"
-                name="organization[city]"
+                v-model="identity.city"
+                :value="identity.city"
+                :has-error="errors.has('identity[city]')"
+                :error-text="errors.first('identity[city]')"
+                name="identity[city]"
                 label="By"
                 placeholder="By" />
             </div>
           </div>
 
           <KInput
-            v-model="organization.country"
-            :value="organization.country"
-            :has-error="errors.has('organization[country]')"
-            :error-text="errors.first('organization[country]')"
-            name="organization[country]"
+            v-model="identity.country"
+            :value="identity.country"
+            :has-error="errors.has('identity[country]')"
+            :error-text="errors.first('identity[country]')"
+            name="identity[country]"
             label="Land"
             placeholder="NO" />
 
           <KInput
-            v-model="organization.description"
+            v-model="identity.description"
             v-validate="'required'"
             :maxlength="155"
-            :value="organization.description"
-            :has-error="errors.has('organization[description]')"
-            :error-text="errors.first('organization[description]')"
-            name="organization[description]"
+            :value="identity.description"
+            :has-error="errors.has('identity[description]')"
+            :error-text="errors.first('identity[description]')"
+            name="identity[description]"
             label="Beskrivelse"
             placeholder="Beskrivelse" />
 
           <div class="row">
             <div class="col">
               <KInput
-                v-model="organization.title_prefix"
-                :value="organization.title_prefix"
-                :has-error="errors.has('organization[title_prefix]')"
-                :error-text="errors.first('organization[title_prefix]')"
-                name="organization[title_prefix]"
+                v-model="identity.title_prefix"
+                :value="identity.title_prefix"
+                :has-error="errors.has('identity[title_prefix]')"
+                :error-text="errors.first('identity[title_prefix]')"
+                name="identity[title_prefix]"
                 label="Tittel prefiks"
                 placeholder="AB | " />
             </div>
             <div class="col">
               <KInput
-                v-model="organization.title"
-                :value="organization.title"
+                v-model="identity.title"
+                :value="identity.title"
                 :maxlength="60"
-                :has-error="errors.has('organization[title]')"
-                :error-text="errors.first('organization[title]')"
-                name="organization[title]"
+                :has-error="errors.has('identity[title]')"
+                :error-text="errors.first('identity[title]')"
+                name="identity[title]"
                 label="Hovedtittel (fallback)"
                 placeholder="Tittel" />
             </div>
             <div class="col">
               <KInput
-                v-model="organization.title_postfix"
-                :value="organization.title_postfix"
-                :has-error="errors.has('organization[title_postfix]')"
-                :error-text="errors.first('organization[title_postfix]')"
-                name="organization[title_postfix]"
+                v-model="identity.title_postfix"
+                :value="identity.title_postfix"
+                :has-error="errors.has('identity[title_postfix]')"
+                :error-text="errors.first('identity[title_postfix]')"
+                name="identity[title_postfix]"
                 label="Tittel postfiks"
                 placeholder=" | AB" />
             </div>
@@ -147,31 +162,31 @@
           <div class="row">
             <div class="col">
               <KInputImage
-                v-model="organization.image"
-                :value="organization.image"
-                :has-error="errors.has('organization[image]')"
-                :error-text="errors.first('organization[image]')"
-                name="organization[image]"
+                v-model="identity.image"
+                :value="identity.image"
+                :has-error="errors.has('identity[image]')"
+                :error-text="errors.first('identity[image]')"
+                name="identity[image]"
                 label="Bilde" />
             </div>
             <div class="col">
               <KInputImage
-                v-model="organization.logo"
-                :value="organization.logo"
-                :has-error="errors.has('organization[logo]')"
-                :error-text="errors.first('organization[logo]')"
-                name="organization[logo]"
+                v-model="identity.logo"
+                :value="identity.logo"
+                :has-error="errors.has('identity[logo]')"
+                :error-text="errors.first('identity[logo]')"
+                name="identity[logo]"
                 label="Logo" />
             </div>
           </div>
 
           <KInput
-            v-model="organization.url"
+            v-model="identity.url"
             v-validate="'required'"
-            :value="organization.url"
-            :has-error="errors.has('organization[url]')"
-            :error-text="errors.first('organization[url]')"
-            name="organization[url]"
+            :value="identity.url"
+            :has-error="errors.has('identity[url]')"
+            :error-text="errors.first('identity[url]')"
+            name="identity[url]"
             label="URL"
             placeholder="URL" />
 
@@ -184,7 +199,7 @@
             </div>
             <table class="table">
               <tr
-                v-for="meta in organization.metas"
+                v-for="meta in identity.metas"
                 :key="meta.id">
                 <td>
                   {{ meta.key }}
@@ -235,7 +250,7 @@
             </div>
             <table class="table">
               <tr
-                v-for="link in organization.links"
+                v-for="link in identity.links"
                 :key="link.id">
                 <td>
                   {{ link.name }}
@@ -287,7 +302,6 @@
       </div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
@@ -295,13 +309,13 @@
 import nprogress from 'nprogress'
 import { showError, validateImageParams, stripParams } from '../../utils'
 import { alertError } from '../../utils/alerts'
-import { organizationAPI } from '../../api/organization'
+import { identityAPI } from '../../api/identity'
 
 export default {
   data () {
     return {
       loading: 0,
-      organization: null,
+      identity: null,
       newlink: {
         name: '',
         url: ''
@@ -319,14 +333,14 @@ export default {
 
   async created () {
     this.loading++
-    const v = await organizationAPI.getOrganization()
-    this.organization = { ...v }
+    const v = await identityAPI.getIdentity()
+    this.identity = { ...v }
     this.loading--
   },
 
   methods: {
     addlink () {
-      this.organization.links.push({
+      this.identity.links.push({
         name: this.newlink.name,
         url: this.newlink.url
       })
@@ -335,16 +349,16 @@ export default {
     },
 
     deletelink (link) {
-      const l = this.organization.links.find(l => l.id === link.id)
-      const idx = this.organization.links.indexOf(l)
-      this.organization.links = [
-        ...this.organization.links.slice(0, idx),
-        ...this.organization.links.slice(idx + 1)
+      const l = this.identity.links.find(l => l.id === link.id)
+      const idx = this.identity.links.indexOf(l)
+      this.identity.links = [
+        ...this.identity.links.slice(0, idx),
+        ...this.identity.links.slice(idx + 1)
       ]
     },
 
     addmeta () {
-      this.organization.metas.push({
+      this.identity.metas.push({
         key: this.newmeta.key,
         value: this.newmeta.value
       })
@@ -353,11 +367,11 @@ export default {
     },
 
     deletemeta (meta) {
-      const l = this.organization.metas.find(l => l.id === meta.id)
-      const idx = this.organization.metas.indexOf(l)
-      this.organization.metas = [
-        ...this.organization.metas.slice(0, idx),
-        ...this.organization.metas.slice(idx + 1)
+      const l = this.identity.metas.find(l => l.id === meta.id)
+      const idx = this.identity.metas.indexOf(l)
+      this.identity.metas = [
+        ...this.identity.metas.slice(0, idx),
+        ...this.identity.metas.slice(idx + 1)
       ]
     },
 
@@ -376,7 +390,7 @@ export default {
 
     async save () {
       this.loading = false
-      let params = { ...this.organization }
+      let params = { ...this.identity }
 
       // strip out params we don't want sent in the mutation
       stripParams(params, ['__typename', 'id'])
@@ -394,7 +408,7 @@ export default {
 
       try {
         nprogress.start()
-        await organizationAPI.updateOrganization(params)
+        await identityAPI.updateIdentity(params)
         nprogress.done()
         this.$toast.success({ message: 'Objekt endret' })
       } catch (err) {

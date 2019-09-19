@@ -45,7 +45,7 @@
           data-index="1"
           exact
           @click.native="close">
-          Organisasjon
+          Identitet
         </router-link>
       </NavMenuItem>
 

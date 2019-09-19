@@ -1,5 +1,0 @@
-mutation DeleteOrganization {
-  delete_organization {
-    id
-  }
-}
