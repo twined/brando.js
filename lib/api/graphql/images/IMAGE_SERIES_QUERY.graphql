@@ -3,6 +3,7 @@ query ImageSeries ($seriesId: ID!) {
     id
     name
     slug
+    deleted_at
 
     images {
       id
@@ -20,6 +21,7 @@ query ImageSeries ($seriesId: ID!) {
       image_series_id
       sequence
       updated_at
+      deleted_at
     }
   }
 }

@@ -12,5 +12,6 @@ query PageFragments {
     }
     inserted_at
     updated_at
+    deleted_at
   }
 }

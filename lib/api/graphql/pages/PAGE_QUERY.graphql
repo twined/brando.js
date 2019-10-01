@@ -11,5 +11,6 @@ query Page ($pageId: ID!) {
     parent_id
     meta_description
     inserted_at
+    deleted_at
   }
 }

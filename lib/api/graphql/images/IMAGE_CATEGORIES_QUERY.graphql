@@ -10,5 +10,6 @@ query ImageCategories {
       id
       full_name
     }
+    deleted_at
   }
 }

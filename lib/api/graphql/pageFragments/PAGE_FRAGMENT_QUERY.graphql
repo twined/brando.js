@@ -12,5 +12,6 @@ query PageFragment ($pageFragmentId: ID!) {
       full_name
     }
     inserted_at
+    deleted_at
   }
 }

@@ -30,6 +30,7 @@ query ImageCategory ($categoryId: ID!, $imageSeriesLimit: Int, $imageSeriesOffse
         image_series_id
         sequence
         updated_at
+        deleted_at
       }
     }
   }
