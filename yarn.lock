@@ -1065,8 +1065,8 @@
   integrity sha512-te5lMAWii1uEJ4FwLjzdlbw3+n0FZNOvFXHxQDKeT0dilh7HOzdMzV2TrJVUzq8ep7J4Na8OUYPRLSQkJHAlrg==
 
 "@univers-agency/villain-editor@univers-agency/villain-editor":
-  version "2.0.0-alpha.24"
-  resolved "https://codeload.github.com/univers-agency/villain-editor/tar.gz/987433e33bedd12253b32b93d700c56d3d5c7f92"
+  version "2.0.0-alpha.25"
+  resolved "https://codeload.github.com/univers-agency/villain-editor/tar.gz/4f372285b2117ad006e1daa187d11030dc5ab62c"
   dependencies:
     autosize "^4.0.2"
     codemirror "^5.49.0"
