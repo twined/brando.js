@@ -140,7 +140,6 @@
               <KInput
                 v-model="identity.title"
                 :value="identity.title"
-                :maxlength="60"
                 :has-error="errors.has('identity[title]')"
                 :error-text="errors.first('identity[title]')"
                 name="identity[title]"
