@@ -117,7 +117,6 @@
           <KInput
             v-model="identity.description"
             v-validate="'required'"
-            :maxlength="155"
             :value="identity.description"
             :has-error="errors.has('identity[description]')"
             :error-text="errors.first('identity[description]')"
