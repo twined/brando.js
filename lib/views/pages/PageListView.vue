@@ -55,7 +55,7 @@
                     </td>
                     <td class="fit">
                       <span
-                        v-if="page.fragments.length > 0 && !pageFragmentsShown.includes(page.id)"
+                        v-if="page.fragments && page.fragments.length > 0 && !pageFragmentsShown.includes(page.id)"
                         v-b-popover.hover.top="'Vis sidens fragmenter'"
                         class="badge badge-outline-primary badge-sm text-uppercase"
                         style="cursor: pointer;"
@@ -63,7 +63,7 @@
                         + <strong>{{ page.fragments.length }}</strong> fragmenter
                       </span>
                       <span
-                        v-else-if="pageFragmentsShown.includes(page.id)"
+                        v-else-if="pageFragmentsShown.includes(page.id) && page.fragments.length > 0"
                         class="badge badge-outline-primary badge-sm text-uppercase"
                         style="cursor: pointer;"
                         @click="hideFragmentsFor(page.id)">
@@ -88,41 +88,42 @@
                         <template slot="button-content">
                           <i class="k-dropdown-icon" />
                         </template>
-
-                        <router-link
-                          :to="{ name: 'page-edit', params: { pageId: page.id } }"
-                          :class="{'dropdown-item': true}"
-                          tag="button"
-                          exact>
-                          <i class="fal fa-pencil fa-fw mr-2" />
-                          Endre side
-                        </router-link>
-                        <button
-                          :class="{'dropdown-item': true}"
-                          @click.prevent="rerenderPage(page)">
-                          <i class="fal fa-sync fa-fw mr-2" />
-                          Reprosessér side
-                        </button>
-                        <button
-                          :class="{'dropdown-item': true}"
-                          @click.prevent="duplicatePage(page)">
-                          <i class="fal fa-copy fa-fw mr-2" />
-                          Duplisér side
-                        </button>
-                        <router-link
-                          :to="{ name: 'pagefragment-create', params: { pageId: page.id } }"
-                          :class="{'dropdown-item': true}"
-                          tag="button"
-                          exact>
-                          <i class="fal fa-star fa-fw mr-2" />
-                          Opprett fragment
-                        </router-link>
-                        <button
-                          :class="{'dropdown-item': true}"
-                          @click.prevent="deletePage(page)">
-                          <i class="fal fa-trash fa-fw mr-2" />
-                          Slett side
-                        </button>
+                        <template v-slot:default="{ hide }">
+                          <router-link
+                            :to="{ name: 'page-edit', params: { pageId: page.id } }"
+                            :class="{'dropdown-item': true}"
+                            tag="button"
+                            exact>
+                            <i class="fal fa-pencil fa-fw mr-2" />
+                            Endre side
+                          </router-link>
+                          <button
+                            :class="{'dropdown-item': true}"
+                            @click.prevent="rerenderPage(page); hide()">
+                            <i class="fal fa-sync fa-fw mr-2" />
+                            Reprosessér side
+                          </button>
+                          <button
+                            :class="{'dropdown-item': true}"
+                            @click.prevent="duplicatePage(page); hide()">
+                            <i class="fal fa-copy fa-fw mr-2" />
+                            Duplisér side
+                          </button>
+                          <router-link
+                            :to="{ name: 'pagefragment-create', params: { pageId: page.id } }"
+                            :class="{'dropdown-item': true}"
+                            tag="button"
+                            exact>
+                            <i class="fal fa-star fa-fw mr-2" />
+                            Opprett fragment
+                          </router-link>
+                          <button
+                            :class="{'dropdown-item': true}"
+                            @click.prevent="deletePage(page)">
+                            <i class="fal fa-trash fa-fw mr-2" />
+                            Slett side
+                          </button>
+                        </template>
                       </b-dropdown>
                     </td>
                   </tr>
@@ -131,12 +132,9 @@
                     v-if="shouldShowFragments(page.id)"
                     :key="fragment.id"
                     class="page-subrow">
-                    <td class="fit">
-                    </td>
-                    <td class="fit">
-                    </td>
-                    <td class="fit">
-                    </td>
+                    <td class="fit"></td>
+                    <td class="fit"></td>
+                    <td class="fit"></td>
                     <td class="fit text-center">
                       ↳
                     </td>
@@ -158,32 +156,34 @@
                         <template slot="button-content">
                           <i class="k-dropdown-icon" />
                         </template>
-                        <router-link
-                          :to="{ name: 'pagefragment-edit', params: { pageId: fragment.id } }"
-                          :class="{'dropdown-item': true}"
-                          tag="button"
-                          exact>
-                          <i class="fal fa-pencil fa-fw mr-2" />
-                          Endre fragment
-                        </router-link>
-                        <button
-                          :class="{'dropdown-item': true}"
-                          @click.prevent="duplicatePageFragment(fragment, page.id)">
-                          <i class="fal fa-copy fa-fw mr-2" />
-                          Duplisér fragment
-                        </button>
-                        <button
-                          :class="{'dropdown-item': true}"
-                          @click.prevent="rerenderPageFragment(fragment)">
-                          <i class="fal fa-sync fa-fw mr-2" />
-                          Reprosessér fragment
-                        </button>
-                        <button
-                          :class="{'dropdown-item': true}"
-                          @click.prevent="deletePageFragment(fragment)">
-                          <i class="fal fa-trash fa-fw mr-2" />
-                          Slett fragment
-                        </button>
+                        <template v-slot:default="{ hide }">
+                          <router-link
+                            :to="{ name: 'pagefragment-edit', params: { pageId: fragment.id } }"
+                            :class="{'dropdown-item': true}"
+                            tag="button"
+                            exact>
+                            <i class="fal fa-pencil fa-fw mr-2" />
+                            Endre fragment
+                          </router-link>
+                          <button
+                            :class="{'dropdown-item': true}"
+                            @click.prevent="duplicatePageFragment(fragment, page.id); hide()">
+                            <i class="fal fa-copy fa-fw mr-2" />
+                            Duplisér fragment
+                          </button>
+                          <button
+                            :class="{'dropdown-item': true}"
+                            @click.prevent="rerenderPageFragment(fragment); hide()">
+                            <i class="fal fa-sync fa-fw mr-2" />
+                            Reprosessér fragment
+                          </button>
+                          <button
+                            :class="{'dropdown-item': true}"
+                            @click.prevent="deletePageFragment(fragment)">
+                            <i class="fal fa-trash fa-fw mr-2" />
+                            Slett fragment
+                          </button>
+                        </template>
                       </b-dropdown>
                     </td>
                   </tr>
@@ -318,7 +318,7 @@ export default {
       this.loading--
     },
 
-    async duplicatePage (page) {
+    duplicatePage (page) {
       this.adminChannel.channel
         .push('page:duplicate', { id: page.id })
         .receive('ok', payload => {
@@ -362,11 +362,12 @@ export default {
           .push('page:delete', { id: page.id })
           .receive('ok', payload => {
             this.$store.commit('pages/DELETE_PAGE', page.id)
+            this.$toast.success({ message: 'Siden ble slettet' })
           })
       })
     },
 
-    async duplicatePageFragment (srcFragment, pageId) {
+    duplicatePageFragment (srcFragment, pageId) {
       this.adminChannel.channel
         .push('page_fragment:duplicate', { id: srcFragment.id })
         .receive('ok', payload => {
@@ -401,10 +402,9 @@ export default {
           return
         }
 
-        console.log(page)
-
         await pageFragmentAPI.deletePageFragment(page.id)
         this.$store.commit('pages/DELETE_PAGE_FRAGMENT', { pageFragmentId: page.id, pageId: page.page_id })
+        this.$toast.success({ message: 'Fragmentet ble slettet' })
       })
     },
 
