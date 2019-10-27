@@ -24,6 +24,12 @@
       class="maxLength">
       {{ maxlength - innerValue.length }}
     </p>
+    <p
+      v-if="helpText"
+      class="help-text">
+      <i class="fa fa-fw fa-arrow-alt-circle-up mr-1" />
+      <span v-html="helpText" />
+    </p>
   </div>
 </template>
 
@@ -47,6 +53,11 @@ export default {
 
     maxlength: {
       type: Number,
+      default: null
+    },
+
+    helpText: {
+      type: String,
       default: null
     },
 
