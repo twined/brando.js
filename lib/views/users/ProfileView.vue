@@ -177,7 +177,7 @@ export default {
     async submitForm () {
       nprogress.start()
       let params = { ...this.profile }
-      stripParams(params, ['__typename', 'id'])
+      stripParams(params, ['__typename', 'id', 'password_confirm'])
       validateImageParams(params, ['avatar'])
 
       try {
