@@ -89,7 +89,8 @@
                 :error-text="errors.first('page[wrapper]')"
                 name="page[wrapper]"
                 type="text"
-                label="HTML wrapper for ${CONTENT} (avansert)"
+                label="HTML wrapper (avansert)"
+                help-text="bruk ${CONTENT} for å hente ut fragmentets verdi"
                 data-vv-name="page[wrapper]"
                 data-vv-value-path="innerValue"></KInputTextarea>
 
