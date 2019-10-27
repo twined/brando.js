@@ -91,7 +91,6 @@
 
               <KInputImage
                 v-model="profile.avatar"
-                v-validate="'required'"
                 :value="profile.avatar"
                 :has-error="errors.has('profile[avatar]')"
                 :error-text="errors.first('profile[avatar]')"
