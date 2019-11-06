@@ -48,8 +48,6 @@
               <KInput
                 v-model="img.image.title"
                 :value="img.image.title"
-                :has-error="errors.has('img.image[title]')"
-                :error-text="errors.first('img.image[title]')"
                 name="img.image[title]"
                 label="Evt. beskrivelse"
                 placeholder="Evt. beskrivelse"
@@ -58,8 +56,6 @@
               <KInput
                 v-model="img.image.credits"
                 :value="img.image.credits"
-                :has-error="errors.has('img.image[credits]')"
-                :error-text="errors.first('img.image[credits]')"
                 name="img.image[credits]"
                 label="Evt. kreditering"
                 placeholder="Evt. kreditering"
@@ -98,7 +94,6 @@
 <script>
 
 import moment from 'moment-timezone'
-import CheckOrX from '../CheckOrX.vue'
 import Modal from '../Modal.vue'
 import FocusPoint from './FocusPoint.vue'
 
@@ -106,7 +101,6 @@ import { clone } from '../../utils'
 
 export default {
   components: {
-    CheckOrX,
     FocusPoint,
     Modal
   },

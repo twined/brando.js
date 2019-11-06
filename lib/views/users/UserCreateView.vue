@@ -17,15 +17,13 @@
             <div class="card-body">
               <KInputRadios
                 v-model="user.role"
-                v-validate="'required'"
+                rules="required"
                 :value="user.role"
                 :options="[
                   { name: 'Superbruker', value: 'superuser' },
                   { name: 'Admin', value: 'admin' },
                   { name: 'Stab', value: 'staff' }
                 ]"
-                :has-error="errors.has('user[role]')"
-                :error-text="errors.first('user[role]')"
                 name="user[role]"
                 label="Rolle"
                 data-vv-name="user[role]"
@@ -33,14 +31,12 @@
 
               <KInputSelect
                 v-model="user.language"
-                v-validate="'required'"
+                rules="required"
                 :value="user.language"
                 :options="[
                   { name: 'Norsk', value: 'nb' },
                   { name: 'Engelsk', value: 'en' }
                 ]"
-                :has-error="errors.has('user[language]')"
-                :error-text="errors.first('user[language]')"
                 name="user[language]"
                 label="Språk"
                 data-vv-name="user[language]"
@@ -48,10 +44,8 @@
 
               <KInput
                 v-model="user.full_name"
-                v-validate="'required'"
+                rules="required"
                 :value="user.full_name"
-                :has-error="errors.has('user[full_name]')"
-                :error-text="errors.first('user[full_name]')"
                 name="user[full_name]"
                 label="Navn"
                 placeholder="Navn"
@@ -60,22 +54,18 @@
 
               <KInputEmail
                 v-model="user.email"
-                v-validate="'required'"
+                rules="required"
                 :value="user.email"
-                :has-error="errors.has('user[email]')"
-                :error-text="errors.first('user[email]')"
                 name="user[email]"
                 label="Epost"
                 placeholder="Epost"
                 data-vv-name="user[email]"
                 data-vv-value-path="innerValue" />
               <KInputPassword
-                v-model="user.password"
-                v-validate="'min:6'"
                 ref="password"
+                v-model="user.password"
+                rules="min:6|confirmed:profile[password_confirm]"
                 :value="user.password"
-                :has-error="errors.has('user[password]')"
-                :error-text="errors.first('user[password]')"
                 name="user[password]"
                 label="Passord"
                 placeholder="Passord"
@@ -83,10 +73,7 @@
                 data-vv-value-path="innerValue" />
               <KInputPassword
                 v-model="user.password_confirm"
-                v-validate="'confirmed:password'"
                 :value="user.password_confirm"
-                :has-error="errors.has('user[password_confirm]')"
-                :error-text="errors.first('user[password_confirm]')"
                 name="user[password_confirm]"
                 label="Bekreft passord"
                 placeholder="Bekreft passord"

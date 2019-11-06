@@ -14,10 +14,8 @@
       <div class="card-body">
         <KInput
           v-model="category.name"
-          v-validate="'required'"
+          rules="required"
           :value="category.name"
-          :has-error="errors.has('category[name]')"
-          :error-text="errors.first('category[name]')"
           name="category[name]"
           label="Kategoriens navn"
           placeholder="Kategoriens navn"

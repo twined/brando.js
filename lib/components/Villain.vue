@@ -39,6 +39,7 @@ export default {
       type: Boolean,
       default: false
     },
+
     errorText: {
       type: String,
       default: ''

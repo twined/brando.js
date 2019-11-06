@@ -1,50 +1,52 @@
 <template>
-  <div :class="{'form-group': true, 'has-danger': hasError }">
-    <div class="label-wrapper">
-      <label
-        :for="id"
-        class="control-label">
-        {{ label }}
-      </label>
-      <span>
-        <i class="fa fa-exclamation-circle text-danger" />
-        {{ errorText }}
-      </span>
-    </div>
+  <ValidationProvider
+    v-slot="{ errors, invalid }"
+    :name="name"
+    :immediate="true"
+    :rules="rules">
+    <div :class="{'form-group': true, 'has-danger': invalid }">
+      <div class="label-wrapper">
+        <label
+          :for="id"
+          class="control-label">
+          {{ label }}
+        </label>
+        <span v-if="invalid">
+          <i class="fa fa-exclamation-circle text-danger" />
+          {{ errors[0] }}
+        </span>
+      </div>
 
-    <input
-      :id="id"
-      v-model="innerValue"
-      :placeholder="placeholder"
-      :maxlength="maxlength"
-      :name="name"
-      class="form-control form-control-danger"
-      type="text">
-    <p
-      v-if="maxlength"
-      class="maxLength">
-      {{ maxlength - innerValue.length }}
-    </p>
-    <p
-      v-if="helpText"
-      class="help-text">
-      <i class="fa fa-fw fa-arrow-alt-circle-up mr-1" />
-      <span v-html="helpText" />
-    </p>
-  </div>
+      <input
+        :id="id"
+        v-model="innerValue"
+        :placeholder="placeholder"
+        :maxlength="maxlength"
+        :name="name"
+        :disabled="disabled"
+        class="form-control form-control-danger"
+        type="text">
+      <p
+        v-if="maxlength"
+        class="maxLength">
+        {{ maxlength - innerValue.length }}
+      </p>
+      <p
+        v-if="helpText"
+        class="help-text">
+        <i class="fa fa-fw fa-arrow-alt-circle-up mr-1" />
+        <span v-html="helpText" />
+      </p>
+    </div>
+  </ValidationProvider>
 </template>
 
 <script>
 export default {
   props: {
-    hasError: {
+    disabled: {
       type: Boolean,
       default: false
-    },
-
-    errorText: {
-      type: String,
-      default: null
     },
 
     helpText: {
@@ -68,6 +70,11 @@ export default {
       default: null
     },
 
+    rules: {
+      type: String,
+      default: null
+    },
+
     name: {
       type: String,
       required: true
@@ -81,28 +88,24 @@ export default {
 
   data () {
     return {
-      innerValue: ''
     }
   },
 
   computed: {
     id () {
       return this.name.replace('[', '_').replace(']', '_')
-    }
-  },
-
-  watch: {
-    innerValue (value) {
-      this.$emit('input', value)
     },
 
-    value (value) {
-      this.innerValue = value
+    innerValue: {
+      get () { return this.value },
+      set (innerValue) { this.$emit('input', innerValue) }
     }
   },
 
   created () {
-    this.innerValue = this.value
+    if (this.value) {
+      this.innerValue = this.value
+    }
   }
 }
 </script>

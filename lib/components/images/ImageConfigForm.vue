@@ -5,10 +5,8 @@
     </h5>
     <KInput
       v-model="config.upload_path"
-      v-validate="'required'"
+      rules="required"
       :value="config.upload_path"
-      :has-error="errors.has('config[upload_path]')"
-      :error-text="errors.first('config[upload_path]')"
       name="config[upload_path]"
       label="Opplastingsbane"
       placeholder="Opplastingsbane"
@@ -16,10 +14,8 @@
       data-vv-value-path="innerValue" />
     <KInput
       v-model="config.size_limit"
-      v-validate="'required'"
+      rules="required"
       :value="config.size_limit"
-      :has-error="errors.has('config[size_limit]')"
-      :error-text="errors.first('config[size_limit]')"
       name="config[size_limit]"
       label="Størrelsesbegrensing (i bytes)"
       placeholder="Størrelsesbegrensing (i bytes)"
@@ -28,8 +24,6 @@
     <KInputCheckbox
       v-model="config.random_filename"
       :value="config.random_filename"
-      :has-error="errors.has('config[random_filename]')"
-      :error-text="errors.first('config[random_filename]')"
       name="config[random_filename]"
       label="Vilkårlig filnavn"
       data-vv-name="config[random_filename]"
@@ -73,10 +67,8 @@
           <div class="col">
             <KInput
               v-model="size.portrait.size"
-              v-validate="'required'"
+              rules="required"
               :value="size.portrait.size"
-              :has-error="errors.has('size[portrait][size]')"
-              :error-text="errors.first('size[portrait][size]')"
               name="size[portrait][size]"
               label="Stående størrelsesgeometri (WxH)"
               placeholder="WxH"
@@ -86,10 +78,8 @@
           <div class="col">
             <KInput
               v-model="size.portrait.quality"
-              v-validate="'required'"
+              rules="required"
               :value="size.portrait.quality"
-              :has-error="errors.has('size[portrait][quality]')"
-              :error-text="errors.first('size[portrait][quality]')"
               name="size[portrait][quality]"
               label="Kvalitetsprosent (0-100)"
               placeholder="Kvalitetsprosent (0-100)"
@@ -100,8 +90,6 @@
             <KInputCheckbox
               v-model="size.portrait.crop"
               :value="size.portrait.crop"
-              :has-error="errors.has('size[portrait][crop]')"
-              :error-text="errors.first('size[portrait][crop]')"
               name="size[portrait][crop]"
               label="Bildebeskjæring"
               data-vv-name="size[portrait][crop]"
@@ -112,10 +100,8 @@
           <div class="col">
             <KInput
               v-model="size.landscape.size"
-              v-validate="'required'"
+              rules="required"
               :value="size.landscape.size"
-              :has-error="errors.has('size[landscape][size]')"
-              :error-text="errors.first('size[landscape][size]')"
               name="size[landscape][size]"
               label="Liggende størrelsesgeometri (WxH)"
               placeholder="WxH"
@@ -125,10 +111,8 @@
           <div class="col">
             <KInput
               v-model="size.landscape.quality"
-              v-validate="'required'"
+              rules="required"
               :value="size.landscape.quality"
-              :has-error="errors.has('size[landscape][quality]')"
-              :error-text="errors.first('size[landscape][quality]')"
               name="size[landscape][quality]"
               label="Kvalitetsprosent (0-100)"
               placeholder="Kvalitetsprosent (0-100)"
@@ -139,8 +123,6 @@
             <KInputCheckbox
               v-model="size.landscape.crop"
               :value="size.landscape.crop"
-              :has-error="errors.has('size[landscape][crop]')"
-              :error-text="errors.first('size[landscape][crop]')"
               name="size[landscape][crop]"
               label="Bildebeskjæring"
               data-vv-name="size[landscape][crop]"
@@ -153,10 +135,8 @@
           <div class="col">
             <KInput
               v-model="size.size"
-              v-validate="'required'"
+              rules="required"
               :value="size.size"
-              :has-error="errors.has('size[size]')"
-              :error-text="errors.first('size[size]')"
               name="size[size]"
               label="Størrelsesgeometri (WxH)"
               placeholder="Beskrivelse"
@@ -166,10 +146,8 @@
           <div class="col">
             <KInput
               v-model="size.quality"
-              v-validate="'required'"
+              rules="required"
               :value="size.quality"
-              :has-error="errors.has('size[quality]')"
-              :error-text="errors.first('size[quality]')"
               name="size[quality]"
               label="Kvalitetsprosent (0-100)"
               placeholder="Kvalitetsprosent (0-100)"
@@ -180,8 +158,6 @@
             <KInputCheckbox
               v-model="size.crop"
               :value="size.crop"
-              :has-error="errors.has('size[crop]')"
-              :error-text="errors.first('size[crop]')"
               name="size[crop]"
               label="Bildebeskjæring"
               data-vv-name="size[crop]"

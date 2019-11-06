@@ -14,10 +14,8 @@
       <div class="card-body">
         <KInput
           v-model="category.name"
-          v-validate="'required'"
+          rules="required"
           :value="category.name"
-          :has-error="errors.has('category[name]')"
-          :error-text="errors.first('category[name]')"
           name="category[name]"
           label="Kategoriens navn"
           placeholder="Kategoriens navn"
@@ -25,11 +23,9 @@
           data-vv-value-path="innerValue" />
         <KInputSlug
           v-model="category.slug"
-          v-validate="'required'"
+          rules="required"
           :from="category.name"
           :value="category.slug"
-          :has-error="errors.has('category[slug]')"
-          :error-text="errors.first('category[slug]')"
           name="category[slug]"
           label="Kategoriens URL-tamp"
           placeholder="Kategoriens URL-tamp"

@@ -1,50 +1,61 @@
 <template>
-  <div
+  <ValidationProvider
     v-if="!loading"
-    :class="{'form-group': true, 'has-danger': hasError }">
-    <div class="label-wrapper">
-      <label
-        :for="id"
-        class="control-label">
-        {{ label }}
-      </label>
-      <span>
-        <i class="fa fa-exclamation-circle text-danger" />
-        {{ errorText }}
-      </span>
-    </div>
+    v-slot="{ errors, invalid }"
+    :name="name"
+    :immediate="true"
+    :rules="rules">
+    <div :class="{'form-group': true, 'has-danger': invalid }">
+      <div class="label-wrapper">
+        <label
+          :for="id"
+          class="control-label">
+          {{ label }}
+        </label>
+        <span v-if="invalid">
+          <i class="fa fa-exclamation-circle text-danger" />
+          {{ errors[0] }}
+        </span>
+      </div>
 
-    <div class="image-preview-wrapper">
-      <PictureInput
-        :id="id"
-        ref="pictureInput"
-        :focal="focal"
-        :crop="crop"
-        :width="width"
-        :height="height"
-        :prefill="prefill"
-        :removable="true"
-        :name="name"
-        :custom-strings="{
-          upload: 'Dingsen du bruker støtter ikke filopplasting :(',
-          drag: 'Klikk eller slipp bildet ditt her',
-          tap: 'Tapp her for å velge et bilde fra galleriet ditt',
-          change: 'Skift bilde ↑',
-          remove: 'Fjern bilde ↑',
-          select: 'Velg et bilde',
-          fileSize: 'Fila er for stor!',
-          fileType: 'Filtypen er ikke støttet'
-        }"
-        margin="0"
-        accept="image/jpeg,image/jpg,image/png,image/gif"
-        size="10"
-        button-class="btn btn-outline-secondary"
-        @change="onChange"
-        @click="onClick"
-        @remove="onRemove"
-        @focalChanged="onFocalChanged" />
+      <div class="image-preview-wrapper">
+        <PictureInput
+          :id="id"
+          ref="pictureInput"
+          :focal="focal"
+          :crop="crop"
+          :width="width"
+          :height="height"
+          :prefill="prefill"
+          :removable="true"
+          :name="name"
+          :custom-strings="{
+            upload: 'Dingsen du bruker støtter ikke filopplasting :(',
+            drag: 'Klikk eller slipp bildet ditt her',
+            tap: 'Tapp her for å velge et bilde fra galleriet ditt',
+            change: 'Skift bilde ↑',
+            remove: 'Fjern bilde ↑',
+            select: 'Velg et bilde',
+            fileSize: 'Fila er for stor!',
+            fileType: 'Filtypen er ikke støttet'
+          }"
+          margin="0"
+          accept="image/jpeg,image/jpg,image/png,image/gif"
+          size="10"
+          button-class="btn btn-outline-secondary"
+          @change="onChange"
+          @click.prevent
+          @remove="onRemove"
+          @focalChanged="onFocalChanged" />
+      </div>
+      <p
+        v-if="helpText"
+        class="help-text">
+        <i class="fa fa-fw fa-arrow-alt-circle-up mr-1" />
+        <span v-html="helpText" />
+      </p>
     </div>
-  </div>
+  </ValidationProvider>
 </template>
 
 <script>
@@ -56,19 +67,14 @@ export default {
   },
 
   props: {
-    hasError: {
-      type: Boolean,
-      default: false
-    },
-
     previewKey: {
       type: String,
       default: 'thumb'
     },
 
-    errorText: {
+    helpText: {
       type: String,
-      default: ''
+      default: null
     },
 
     crop: {
@@ -133,6 +139,8 @@ export default {
     this.innerValue = this.value
     if (typeof this.value === 'string') {
       this.prefill = this.value
+    } else if (this.value instanceof File) {
+      this.prefill = this.value
     } else {
       this.prefill = this.value ? this.value[this.previewKey] : null
       if (this.value) {
@@ -144,9 +152,6 @@ export default {
   },
 
   methods: {
-    onClick (a) {
-    },
-
     onChange (a) {
       // we have a prefill, and preCheck is false
       if (this.value && !this.preCheck) {

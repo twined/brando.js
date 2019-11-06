@@ -110,6 +110,7 @@
       </NavMenuItem>
 
       <NavMenuItem
+        v-if="['admin'].includes(me.role)"
         text="Maler"
         icon="fal fa-fw fa-map"
         @expanding="expanding">

@@ -13,10 +13,8 @@
       <div class="card-body">
         <KInput
           v-model="series.name"
-          v-validate="'required'"
+          rules="required"
           :value="series.name"
-          :has-error="errors.has('series[name]')"
-          :error-text="errors.first('series[name]')"
           name="series[name]"
           label="Seriens navn"
           placeholder="Seriens navn"
@@ -25,8 +23,6 @@
         <KInput
           v-model="series.credits"
           :value="series.credits"
-          :has-error="errors.has('series[credits]')"
-          :error-text="errors.first('series[credits]')"
           name="series[credits]"
           label="Evt. krediteringer"
           placeholder="Evt. krediteringer"

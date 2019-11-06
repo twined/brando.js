@@ -94,13 +94,11 @@ export default {
       type: Object,
       default: () => {
         return {
-          enableTime: true,
-          minuteIncrement: 15,
-          time_24hr: true,
+          enableTime: false,
           locale: LOCALE_NO,
           altInput: true,
-          altFormat: 'l j F, Y @ H:i',
-          dateFormat: 'Z'
+          altFormat: 'l j F, Y',
+          dateFormat: 'Y-m-d'
         }
       }
     },

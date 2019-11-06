@@ -1,25 +1,31 @@
 <template>
-  <div :class="{'form-group': true, 'has-danger': hasError }">
-    <div class="label-wrapper">
-      <label
-        :for="id"
-        class="control-label">
-        {{ label }}
-      </label>
-      <span>
-        <i class="fa fa-exclamation-circle text-danger" />
-        {{ errorText }}
-      </span>
-    </div>
+  <ValidationProvider
+    v-slot="{ errors, invalid }"
+    :name="name"
+    :immediate="true"
+    :rules="rules">
+    <div :class="{'form-group': true, 'has-danger': invalid }">
+      <div class="label-wrapper">
+        <label
+          :for="id"
+          class="control-label">
+          {{ label }}
+        </label>
+        <span v-if="invalid">
+          <i class="fa fa-exclamation-circle text-danger" />
+          {{ errors[0] }}
+        </span>
+      </div>
 
-    <input
-      :id="id"
-      v-model="innerValue"
-      :name="name"
-      placeholder="url"
-      class="form-control form-control-danger text-mono"
-      type="text">
-  </div>
+      <input
+        :id="id"
+        v-model="innerValue"
+        :name="name"
+        placeholder="url"
+        class="form-control form-control-danger text-mono"
+        type="text">
+    </div>
+  </ValidationProvider>
 </template>
 
 <script>
@@ -27,14 +33,9 @@ import slug from 'url-slug'
 
 export default {
   props: {
-    hasError: {
-      type: Boolean,
-      default: false
-    },
-
-    errorText: {
+    rules: {
       type: String,
-      default: ''
+      default: null
     },
 
     label: {

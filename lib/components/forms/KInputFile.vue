@@ -1,41 +1,45 @@
 <template>
-  <div
-    v-if="!loading"
-    :class="{'form-group': true, 'has-danger': hasError }">
-    <div class="label-wrapper">
-      <label
-        :for="id"
-        class="control-label">
-        {{ label }}
-      </label>
-      <span>
-        <i class="fa fa-exclamation-circle text-danger" />
-        {{ errorText }}
-      </span>
-    </div>
+  <ValidationProvider
+    v-slot="{ errors, invalid }"
+    :name="name"
+    :immediate="true"
+    :rules="rules">
+    <div :class="{'form-group': true, 'has-danger': invalid }">
+      <div class="label-wrapper">
+        <label
+          :for="id"
+          class="control-label">
+          {{ label }}
+        </label>
+        <span v-if="invalid">
+          <i class="fa fa-exclamation-circle text-danger" />
+          {{ errors[0] }}
+        </span>
+      </div>
 
-    <div class="file-wrapper">
-      <FileInput
-        :id="id"
-        ref="fileInput"
-        :prefill="prefill"
-        :name="name"
-        :custom-strings="{
-          upload: 'Dingsen du bruker støtter ikke filopplasting :(',
-          drag: 'Klikk eller slipp filen ditt her',
-          tap: 'Tapp her for å velge en fil fra galleriet ditt',
-          change: 'Skift fil ↑',
-          remove: 'Fjern fil ↑',
-          select: 'Velg en fil',
-          fileSize: 'Fila er for stor!',
-          fileType: 'Filtypen er ikke støttet'
-        }"
-        accept="*"
-        size="10"
-        button-class="btn btn-outline-secondary"
-        @change="onChange" />
+      <div class="file-wrapper">
+        <FileInput
+          :id="id"
+          ref="fileInput"
+          :prefill="prefill"
+          :name="name"
+          :custom-strings="{
+            upload: 'Dingsen du bruker støtter ikke filopplasting :(',
+            drag: 'Klikk eller slipp filen ditt her',
+            tap: 'Tapp her for å velge en fil fra galleriet ditt',
+            change: 'Skift fil ↑',
+            remove: 'Fjern fil ↑',
+            select: 'Velg en fil',
+            fileSize: 'Fila er for stor!',
+            fileType: 'Filtypen er ikke støttet'
+          }"
+          accept="*"
+          size="10"
+          button-class="btn btn-outline-secondary"
+          @change="onChange" />
+      </div>
     </div>
-  </div>
+  </ValidationProvider>
 </template>
 
 <script>
@@ -47,14 +51,9 @@ export default {
   },
 
   props: {
-    hasError: {
-      type: Boolean,
-      default: false
-    },
-
-    errorText: {
+    rules: {
       type: String,
-      default: ''
+      default: null
     },
 
     label: {
