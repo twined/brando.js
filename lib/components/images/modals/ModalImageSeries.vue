@@ -99,8 +99,8 @@ export default {
     },
 
     deleteCallback (imageSeries) {
-      this.closeModal()
       this.$emit('delete', imageSeries)
+      this.closeModal()
     },
 
     closeModal () {
