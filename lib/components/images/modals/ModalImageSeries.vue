@@ -92,7 +92,10 @@ export default {
 
     uploadCallback (image) {
       this.imageSeries.images = [...this.imageSeries.images, image]
-      this.$emit('upload', [...this.imageSeries.images, image])
+      this.$emit('upload', {
+        id: this.imageSeries.id,
+        images: [...this.imageSeries.images, image]
+      })
     },
 
     deleteCallback (imageSeries) {
