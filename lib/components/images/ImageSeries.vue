@@ -166,7 +166,7 @@ export default {
     },
 
     storeOrder (sortable) {
-      this.sortedArray = sortable.toArray()
+      this.sortedArray = sortable.toArray().map(Number)
 
       this.adminChannel.channel
         .push('images:sequence_images', { ids: this.sortedArray })
